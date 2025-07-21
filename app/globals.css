@@ -1,0 +1,114 @@
+/* app/globals.css */
+@import "tailwindcss";
+
+@theme {
+  /* --- 공통 변수 --- */
+  --color-primary: #FFBFAB; /* Soft Coral - 디자인 컨셉과 일치 */
+  --color-secondary: #FAF0E6; /* 현재 바디 배경색 (Light Beige/Cream) - 컨셉의 Beige (#F5F5DC)와 유사 */
+  --rounded-button: 8px;
+  --warnning-red: #E72323; /* 신고 등 경고를 위한 색 */
+  --warnning-red-bg: #ffd3d3; /* 신고 등 경고 hover 색 */
+
+  /* --- 신규 서브 컬러 (디자인 컨셉) --- */
+  --color-sub-beige: #F5F5DC; /* 디자인 컨셉 Beige (필요시 --color-secondary 대체 또는 추가 사용) */
+  --color-sub-mint: #BEE8D0;  /* Pastel Mint */
+  --color-sub-light-gray: #D3D3D3; /* Light Gray */
+
+  /* --- 텍스트 컬러 (디자인 컨셉) --- */
+  --text-main: #333333;       /* Black (기존 text-[#333333] 대체) */
+  --text-subtle: #555555;     /* Dark Gray */
+
+  /* --- 기존 감정 색상 변수 (추후 파스텔톤 조정 검토) --- */
+  --emotion-happy: #FFD166;
+  --emotion-sad: #73A9D4;
+  --emotion-angry: #EF476F;
+  --emotion-calm: #06D6A0;
+  --emotion-anxious: #9381FF;
+  --emotion-neutral: #A0AEC0;
+
+  /* --- agit.html 특정 색상 변수 --- */
+  --agit-tab-active-border: var(--color-primary);
+  --agit-tab-active-text: var(--color-primary);
+  --agit-notice-badge-bg: #FFF5F2;
+
+  /* --- profile.html 특정 감정 오버레이 색상 변수 (rgba로 부드러운 표현) --- */
+  --profile-emotion-red: rgba(255, 99, 99, 0.3);
+  --profile-emotion-blue: rgba(99, 148, 255, 0.3);
+  --profile-emotion-green: rgba(99, 255, 132, 0.3);
+  --profile-emotion-yellow: rgba(255, 222, 99, 0.3);
+  --profile-emotion-purple: rgba(187, 99, 255, 0.3);
+}
+
+/* --- 전역 스타일 --- */
+body {
+  background-color: var(--color-secondary); /* 현재 #FAF0E6 사용 중 */
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  color: var(--text-main); /* 기본 텍스트 색상 설정 */
+}
+
+.font-pacifico {
+  font-family: 'Pacifico', cursive;
+}
+
+/* --- 페이지별 커스텀 클래스 (기존 내용 유지 및 필요시 수정) --- */
+/* ... (feed.html, myspace.html, agit.html, profile.html 관련 스타일) ... */
+.content-area { padding-top: 73px; padding-bottom: 16px; }
+.emotion-overlay-pink { background-color: rgba(255, 182, 193, 0.15); }
+.emotion-overlay-blue { background-color: rgba(173, 216, 230, 0.15); }
+.emotion-overlay-yellow { background-color: rgba(255, 255, 0, 0.15); }
+.emotion-overlay-green { background-color: rgba(144, 238, 144, 0.15); }
+.emotion-overlay-purple { background-color: rgba(221, 160, 221, 0.15); }
+
+.emotion-bar-happy { background-color: var(--emotion-happy); }
+.emotion-bar-sad { background-color: var(--emotion-sad); }
+.emotion-bar-angry { background-color: var(--emotion-angry); }
+.emotion-bar-calm { background-color: var(--emotion-calm); }
+.emotion-bar-anxious { background-color: var(--emotion-anxious); }
+.emotion-bar-neutral { background-color: var(--emotion-neutral); }
+
+.calendar-day { aspect-ratio: 1/1; position: relative; }
+.calendar-day.has-diary::after { content: ''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 5px; height: 5px; border-radius: 50%;}
+.calendar-day.has-diary-happy::after { background-color: var(--emotion-happy); }
+.calendar-day.has-diary-sad::after { background-color: var(--emotion-sad); }
+.calendar-day.has-diary-angry::after { background-color: var(--emotion-angry); }
+.calendar-day.has-diary-calm::after { background-color: var(--emotion-calm); }
+.calendar-day.has-diary-anxious::after { background-color: var(--emotion-anxious); }
+.calendar-day.has-diary-neutral::after { background-color: var(--emotion-neutral); }
+
+.agit-notice-badge { background-color: var(--agit-notice-badge-bg); }
+
+.profile-emotion-red { background-color: var(--profile-emotion-red); }
+.profile-emotion-blue { background-color: var(--profile-emotion-blue); }
+.profile-emotion-green { background-color: var(--profile-emotion-green); }
+.profile-emotion-yellow { background-color: var(--profile-emotion-yellow); }
+.profile-emotion-purple { background-color: var(--profile-emotion-purple); }
+
+
+/* --- 공통 애니메이션 --- */
+@keyframes slideInFromRight { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@keyframes slideOutToRight { from { transform: translateX(0); } to { transform: translateX(100%); } }
+.animate-slideInFromRight { animation: slideInFromRight 0.3s ease-out forwards; }
+.animate-slideOutToRight { animation: slideOutToRight 0.3s ease-out forwards; }
+
+@keyframes slideInFromBottom { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes slideOutToBottom { from { transform: translateY(0); } to { transform: translateY(100%); } }
+.animate-slideInFromBottom { animation: slideInFromBottom 0.3s ease-out forwards; }
+.animate-slideOutToBottom { animation: slideOutToBottom 0.3s ease-out forwards; }
+
+@keyframes modalShowUp { from { opacity: 0; transform: translateY(20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.animate-modalShowUp { animation: modalShowUp 0.3s ease-out forwards; }
+
+@keyframes modalShowFront { from {opacity: 0; transform: scale(0.8)} to { opacity: 1; transform: scale(1);}}
+.animate-modalShowFront {animation: modalShowFront 0.3s ease-out forwards; }
+
+/* --- @layer utilities --- */
+@layer utilities {
+  .border-l-emotion-happy { border-left-color: var(--emotion-happy); }
+  .border-l-emotion-sad { border-left-color: var(--emotion-sad); }
+  .border-l-emotion-angry { border-left-color: var(--emotion-angry); }
+  .border-l-emotion-calm { border-left-color: var(--emotion-calm); }
+  .border-l-emotion-anxious { border-left-color: var(--emotion-anxious); }
+  .border-l-emotion-neutral { border-left-color: var(--emotion-neutral); }
+  .scrollbar-hide::-webkit-scrollbar { display: none; }
+  .scrollbar-hide { -ms-overflow-style: none; /* IE and Edge */ scrollbar-width: none; /* Firefox */ }
+}
