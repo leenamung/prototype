@@ -2,6 +2,7 @@
 // ✨ 이 파일의 새 경로는 project-root/app/components/NavigationBar.tsx 입니다. ✨
 "use client";
 
+import Link from 'next/link';
 import React from 'react';
 
 interface NavigationBarProps {
@@ -27,13 +28,13 @@ const NavigationBar: React.FC<NavigationBarProps> = ({
             <i className="ri-notification-3-line ri-lg"></i>
             <span className="absolute -top-1 -right-1 w-4 h-4 bg-[var(--color-primary)] rounded-full flex items-center justify-center text-white text-xs">3</span>
           </div>
-          <div className="w-8 h-8 rounded-full overflow-hidden cursor-pointer">
+          <Link href="/profile" className="w-8 h-8 rounded-full overflow-hidden cursor-pointer">
             <img
               src={userProfileImage}
               alt="프로필"
               className="w-full h-full object-cover"
             />
-          </div>
+          </Link>
         </div>
       </div>
 

@@ -71,6 +71,11 @@ export default function ProfilePage() {
         {activeTab === 'diaries' && (
           <ProfileDiariesContent diaries={profileData.diaries} />
         )}
+        {activeTab === 'friends' && (
+          <div className="text-center text-gray-500 py-8 text-sm">
+            친구 목록이 여기에 표시됩니다.
+          </div>
+        )}
         {activeTab === 'agits' && (
           <ProfileAgitsContent agits={profileData.agits} />
         )}

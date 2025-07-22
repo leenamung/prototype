@@ -1,26 +1,24 @@
-// app/profile/components/ProfileTabs.tsx
+// app/agit/components/AgitListTabs.tsx
 "use client";
 
 import React from 'react';
 
-// ⬇️ 'friends' 타입을 추가합니다.
-export type ProfileTabKey = 'diaries' | 'friends' | 'agits';
+export type AgitListTabKey = 'myAgits' | 'explore';
 
-interface ProfileTabsProps {
-  activeTab: ProfileTabKey;
-  onTabChange: (tabKey: ProfileTabKey) => void;
+interface AgitListTabsProps {
+  activeTab: AgitListTabKey;
+  onTabChange: (tabKey: AgitListTabKey) => void;
 }
 
-const ProfileTabs: React.FC<ProfileTabsProps> = ({ activeTab, onTabChange }) => {
-  // ⬇️ tabs 배열에 '친구' 탭 객체를 추가합니다.
-  const tabs: { key: ProfileTabKey; label: string }[] = [
-    { key: 'diaries', label: '작성한 일기' },
-    { key: 'friends', label: '친구' },
-    { key: 'agits', label: '소속 아지트' },
+const AgitListTabs: React.FC<AgitListTabsProps> = ({ activeTab, onTabChange }) => {
+  const tabs: { key: AgitListTabKey; label: string }[] = [
+    { key: 'myAgits', label: '소속 아지트' },
+    { key: 'explore', label: '탐색' },
   ];
 
   return (
-    <div className="bg-white sticky top-14 z-10 border-b border-[var(--color-sub-light-gray)] shadow-sm">
+    // ⬇️ 앱 테마에 맞는 색상과 스타일로 수정
+    <div className="bg-white sticky top-14 z-10 border-b border-[var(--color-sub-light-gray)]">
       <div className="flex px-4">
         {tabs.map((tab) => (
           <button
@@ -41,4 +39,4 @@ const ProfileTabs: React.FC<ProfileTabsProps> = ({ activeTab, onTabChange }) => 
   );
 };
 
-export default ProfileTabs;
+export default AgitListTabs;

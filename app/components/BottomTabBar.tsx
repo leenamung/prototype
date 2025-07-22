@@ -50,7 +50,7 @@ const BottomTabBar: React.FC = () => {
             href={item.href}
             iconClass={item.iconClass}
             label={item.label}
-            isActive={pathname === item.href || (item.href === "/" && !pathname.startsWith('/myspace') && !pathname.startsWith('/explore') && !pathname.startsWith('/write') && !pathname.startsWith('/notifications'))}
+            isActive={pathname === item.href || (item.href === "/" && !pathname.startsWith('/agit') && !pathname.startsWith('/myspace') && !pathname.startsWith('/explore') && !pathname.startsWith('/write') && !pathname.startsWith('/notifications'))}
           />
         ))}
       </div>
