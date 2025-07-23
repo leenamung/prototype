@@ -3,9 +3,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
 
 // Helper to format date as "YYYY년 M월 D일"
-const formatDateDisplay = (date: Date): string => {
-  return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`;
-};
+// const formatDateDisplay = (date: Date): string => {
+//   return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`;
+// };
 
 // Helper to generate calendar days
 const getCalendarDays = (year: number, month: number) => {

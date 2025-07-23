@@ -2,6 +2,7 @@
 
 import React from 'react';
 import type { AgitMember } from '../data/agitSampleData';
+import Image from 'next/image';
 
 interface AgitMemberItemProps {
   member: AgitMember;
@@ -12,10 +13,12 @@ const AgitMemberItem: React.FC<AgitMemberItemProps> = ({ member }) => {
     // 호버 시 배경색 변경
     <div className="p-4 flex items-center border-b border-[var(--color-sub-light-gray)] hover:bg-[var(--color-sub-beige)]/50 transition-colors duration-150"> {/* 구분선 및 호버 배경 변경 */}
       <div className="w-10 h-10 rounded-full bg-[var(--color-sub-light-gray)] overflow-hidden mr-3 flex-shrink-0">
-        <img
+        <Image
           src={member.profileImage}
           alt={`${member.name} 프로필`}
           className="w-full h-full object-cover"
+          width={40}
+          height={40}
         />
       </div>
       <div className="flex-1">

@@ -205,7 +205,6 @@ export default function WritePage() {
 
   const [privacy, setPrivacy] = useState<PrivacyOption>("private");
   const [diaryDate, setDiaryDate] = useState(new Date());
-  const [selectedEmotion, setSelectedEmotion] = useState<string | null>(null);
   const [useLocation, setUseLocation] = useState(false);
   const [currentLocation, setCurrentLocation] = useState<string | null>(null);
   // ⭐️ 날씨 상태 추가 (기본값: '맑음')
@@ -223,7 +222,6 @@ export default function WritePage() {
       videoDescription,
       audioBlob,
       voiceDescription,
-      selectedEmotion,
       privacy,
       diaryDate,
       useLocation,

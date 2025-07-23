@@ -1,5 +1,6 @@
 "use client";
 
+import Image from 'next/image';
 import React from 'react';
 
 interface AgitInfoContentProps {
@@ -49,10 +50,12 @@ const AgitInfoContent: React.FC<AgitInfoContentProps> = ({
       <InfoSection title="관리자 정보">
         <div className="flex items-center">
           <div className="w-12 h-12 rounded-full bg-[var(--color-sub-light-gray)] overflow-hidden mr-4 flex-shrink-0">
-            <img
+            <Image
               src={admin.profileImage}
               alt={`${admin.name} 프로필`}
               className="w-full h-full object-cover"
+              width={48}
+              height={48}
             />
           </div>
           <div>

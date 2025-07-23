@@ -1,16 +1,19 @@
 // app/write/components/PhotoUploadTab.tsx
 "use client";
 
+import Image from 'next/image';
 import React, { useState, ChangeEvent, useRef } from 'react';
 
 interface PhotoUploadTabProps {
   description: string;
   onDescriptionChange: (description: string) => void;
-  onPhotoChange: (file: File | null) => void; // To notify parent about file change
+  onPhotoChange: (file: File | null) => void;
 }
 
 const PhotoUploadTab: React.FC<PhotoUploadTabProps> = ({ description, onDescriptionChange, onPhotoChange }) => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  // ⬇️ 1. 업로드된 이미지의 원본 크기를 저장할 state 추가
+  const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -18,22 +21,33 @@ const PhotoUploadTab: React.FC<PhotoUploadTabProps> = ({ description, onDescript
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setPreviewUrl(reader.result as string);
+        const resultUrl = reader.result as string;
+        setPreviewUrl(resultUrl);
+
+        // ⬇️ 2. 이미지 크기를 알아내는 로직 추가
+        const img = new window.Image();
+        img.onload = () => {
+          // 이미지의 실제 너비와 높이를 state에 저장
+          setImageSize({ width: img.naturalWidth, height: img.naturalHeight });
+        };
+        img.src = resultUrl;
       };
       reader.readAsDataURL(file);
       onPhotoChange(file);
     } else {
       setPreviewUrl(null);
       onPhotoChange(null);
+      setImageSize({ width: 0, height: 0 }); // 파일 선택 취소 시 크기 초기화
     }
   };
 
   const handleRemovePhoto = () => {
     setPreviewUrl(null);
     if (fileInputRef.current) {
-      fileInputRef.current.value = ""; // Reset file input
+      fileInputRef.current.value = "";
     }
     onPhotoChange(null);
+    setImageSize({ width: 0, height: 0 }); // 사진 제거 시 크기 초기화
   };
 
   const triggerFileInput = () => {
@@ -62,11 +76,19 @@ const PhotoUploadTab: React.FC<PhotoUploadTabProps> = ({ description, onDescript
       ) : (
         <div className="mb-4">
           <div className="relative group">
-            <img
-              src={previewUrl}
-              alt="업로드된 사진"
-              className="w-full h-auto max-h-[300px] object-contain rounded-lg"
-            />
+            {/* ⬇️ 3. imageSize.width가 있을 때만 렌더링하도록 조건 추가 */}
+            {imageSize.width > 0 && (
+              <Image
+                src={previewUrl}
+                alt="업로드된 사진"
+                // ⬇️ 4. state에 저장된 실제 이미지 크기를 width와 height에 전달
+                width={imageSize.width}
+                height={imageSize.height}
+                // ⬇️ 5. fill 속성을 제거하고, 반응형 및 높이 제한 클래스 적용
+                className="w-full h-auto max-h-[300px] object-contain rounded-lg"
+                sizes="(max-width: 640px) 100vw, 640px"
+              />
+            )}
             <button
               onClick={handleRemovePhoto}
               className="absolute top-2 right-2 bg-black/50 text-white rounded-full p-1 cursor-pointer opacity-0 group-hover:opacity-100 transition-opacity"

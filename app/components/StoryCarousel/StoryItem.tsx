@@ -1,5 +1,8 @@
 // components/StoryItem.tsx
 "use client";
+
+import Image from "next/image";
+
 interface StoryItemProps {
   userProfile: string;
   userName: string;
@@ -21,11 +24,13 @@ const StoryItem: React.FC<StoryItemProps> = ({ userProfile, userName }) => {
         <div className="w-full h-full bg-white rounded-full p-[1px]">
           {/* 3. 안쪽 Div: 실제 이미지 컨테이너 */}
           <div className="w-full h-full overflow-hidden rounded-full">
-            <img
+            <Image
               src={userProfile}
               alt={`${userName}의 스토리`}
               className="object-cover w-full h-full"
               onError={handleImageError}
+              width={64}
+              height={64}
             />
           </div>
         </div>

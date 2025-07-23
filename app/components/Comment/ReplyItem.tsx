@@ -1,5 +1,6 @@
 import { PropsWithChildren, useEffect, useState } from "react";
 import { CommentEntry } from "../../data/commentEntries";
+import Image from "next/image";
 
 interface Props {
   comment: CommentEntry;
@@ -40,11 +41,13 @@ const ReplyItem: React.FC<PropsWithChildren<Props>> = ({
       <div className="flex">
         <div className="w-10 h-10 rounded-full bg-[var(--color-sub-light-gray)] overflow-hidden mr-3 flex-shrink-0">
           {/* 프로필 이미지 없을 시 배경색 */}
-          <img
+          <Image
             src={comment.profileImage}
             alt={`${comment.author} 프로필`}
             className="w-full h-full object-cover"
             onError={handleImageError}
+            width={40}
+            height={40}
           />
         </div>
         <div className="flex-col">

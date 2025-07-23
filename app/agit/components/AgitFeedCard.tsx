@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import type { AgitFeedItem } from '../data/agitSampleData';
+import Image from 'next/image';
 
 interface AgitFeedCardProps {
   item: AgitFeedItem;
@@ -27,10 +28,12 @@ const AgitFeedCard: React.FC<AgitFeedCardProps> = ({ item }) => {
       <div className="p-4">
         <div className="flex items-center mb-3">
           <div className="w-10 h-10 rounded-full bg-[var(--color-sub-light-gray)] overflow-hidden mr-3 flex-shrink-0">
-            <img
+            <Image
               src={item.author.profileImage}
               alt={`${item.author.name} 프로필`}
               className="w-full h-full object-cover"
+              width={40}
+              height={40}
             />
           </div>
           <div>
@@ -48,11 +51,14 @@ const AgitFeedCard: React.FC<AgitFeedCardProps> = ({ item }) => {
         </div>
 
         {item.imageUrl && (
-          <div className="rounded-md overflow-hidden mb-3">
-            <img
+          <div className="mb-3 rounded-md overflow-hidden">
+            <Image
               src={item.imageUrl}
               alt="피드 이미지"
+              width={500} // ⭐️ 원본 이미지의 너비 (비율 계산용)
+              height={375} // ⭐️ 원본 이미지의 높이 (비율 계산용)
               className="w-full h-auto object-cover"
+              sizes="(max-width: 640px) 100vw, 640px"
             />
           </div>
         )}

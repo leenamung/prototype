@@ -3,6 +3,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 // ⬇️ 프로필 이미지를 받기 위한 prop 추가
 interface AgitMainNavigationBarProps {
@@ -23,10 +24,12 @@ const AgitMainNavigationBar: React.FC<AgitMainNavigationBarProps> = ({ userProfi
             <i className="ri-search-line ri-lg text-[var(--text-subtle)]"></i>
           </button>
           <Link href="/profile" className="w-8 h-8 rounded-full overflow-hidden cursor-pointer">
-            <img
+            <Image
               src={userProfileImage}
               alt="프로필"
               className="w-full h-full object-cover"
+              width={32}
+              height={32}
             />
           </Link>
         </div>

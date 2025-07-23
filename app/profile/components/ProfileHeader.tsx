@@ -1,5 +1,6 @@
 "use client";
 
+import Image from 'next/image';
 import React from 'react';
 
 interface ProfileHeaderProps {
@@ -21,10 +22,12 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
     <div className="pt-14 pb-4 px-4 bg-white"> 
       <div className="flex flex-col items-center mt-6">
         <div className="w-24 h-24 rounded-full overflow-hidden mb-4 shadow-md">
-          <img
+          <Image
             src={profileImage}
             alt={`${name} 프로필 사진`}
             className="w-full h-full object-cover"
+            width={96}
+            height={96}
           />
         </div>
         {/* 이름 텍스트 색상 변경 */}

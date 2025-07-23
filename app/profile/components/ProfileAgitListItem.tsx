@@ -4,6 +4,7 @@
 import React from 'react';
 import type { UserAgitSummary } from '../data/profileSampleData'; // 데이터 타입 임포트
 import Link from 'next/link'; // 아지트 상세 페이지로 이동하기 위해 Link 사용
+import Image from 'next/image';
 
 interface ProfileAgitListItemProps {
   agit: UserAgitSummary;
@@ -18,10 +19,12 @@ const ProfileAgitListItem: React.FC<ProfileAgitListItemProps> = ({ agit }) => {
       className="flex items-center py-3 border-b border-gray-200 cursor-pointer hover:bg-gray-50 transition-colors duration-150"
     >
       <div className="w-12 h-12 rounded-lg bg-gray-200 overflow-hidden mr-3 flex-shrink-0"> {/* Changed to rounded-lg */}
-        <img
+        <Image
           src={agit.coverImage}
           alt={`${agit.name} 아지트 이미지`}
           className="w-full h-full object-cover"
+          width={48}
+          height={48}
         />
       </div>
       <div className="flex-1 min-w-0"> {/* min-w-0 for proper truncation */}

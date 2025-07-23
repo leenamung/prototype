@@ -3,6 +3,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 interface AgitNavigationBarProps {
   onNotificationClick?: () => void;
@@ -32,10 +33,12 @@ const AgitNavigationBar: React.FC<AgitNavigationBarProps> = ({ onNotificationCli
           
           {/* ⬇️ '더보기' 버튼 대신 프로필 이미지 링크로 변경 */}
           <Link href="/profile" className="w-8 h-8 rounded-full overflow-hidden cursor-pointer">
-            <img
+            <Image
               src={userProfileImage}
               alt="프로필"
               className="w-full h-full object-cover"
+              width={32}
+              height={32}
             />
           </Link>
         </div>

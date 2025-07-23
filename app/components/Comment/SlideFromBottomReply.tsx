@@ -2,15 +2,11 @@
 
 // ⬇️ framer-motion 관련 훅들을 대부분 제거합니다.
 import { motion, AnimatePresence } from "framer-motion";
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useMemo,
-} from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 import { CommentEntry } from "../../data/commentEntries";
 import CommentItem from "./CommentItem";
 import { RemoveScroll } from "react-remove-scroll";
+import Image from "next/image";
 
 interface SlideFromBottomReplyProps {
   entry: CommentEntry[];
@@ -24,7 +20,7 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
   const placeholderImage = "https://placehold.co/40x40/E2E8F0/A0AEC0?text=U";
   const userProfile =
     "https://readdy.ai/api/search-image?query=portrait%20of%20a%20young%20asian%20woman%2C%20soft%20lighting%2C%20warm%20tones%2C%20natural%20look%2C%20gentle%20smile%2C%20high%20quality%2C%20professional%20photo&width=100&height=100&seq=1&orientation=squarish";
-  
+
   // 패널 높이 조절 관련 로직은 그대로 유지합니다.
   const [height, setHeight] = useState<number | null>(null);
   const [isHeightDragging, setIsHeightDragging] = useState(false);
@@ -71,7 +67,8 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
       const middleOfTopAndMiddle = (snapPoints.top + snapPoints.middle) / 2;
       const middleOfMiddleAndClose = snapPoints.middle / 2;
       if (currentHeight > middleOfTopAndMiddle) setHeight(snapPoints.top);
-      else if (currentHeight > middleOfMiddleAndClose) setHeight(snapPoints.middle);
+      else if (currentHeight > middleOfMiddleAndClose)
+        setHeight(snapPoints.middle);
       else onClose();
     };
     if (isHeightDragging) {
@@ -89,18 +86,27 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
   }, [isHeightDragging, height, snapPoints, onClose]);
 
   const clickStartPos = useRef({ x: 0, y: 0 });
-  const handleOverlayInteractionStart = (e: React.MouseEvent | React.TouchEvent) => {
+  const handleOverlayInteractionStart = (
+    e: React.MouseEvent | React.TouchEvent
+  ) => {
     const point = "touches" in e ? e.touches[0] : e;
     clickStartPos.current = { x: point.clientX, y: point.clientY };
   };
-  const handleOverlayInteractionEnd = (e: React.MouseEvent | React.TouchEvent) => {
+  const handleOverlayInteractionEnd = (
+    e: React.MouseEvent | React.TouchEvent
+  ) => {
     if (e.currentTarget !== e.target) return;
     const endPoint = "changedTouches" in e ? e.changedTouches[0] : e;
-    const distance = Math.sqrt(Math.pow(endPoint.clientX - clickStartPos.current.x, 2) + Math.pow(endPoint.clientY - clickStartPos.current.y, 2));
+    const distance = Math.sqrt(
+      Math.pow(endPoint.clientX - clickStartPos.current.x, 2) +
+        Math.pow(endPoint.clientY - clickStartPos.current.y, 2)
+    );
     if (distance < 10) onClose();
   };
 
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+  const handleImageError = (
+    e: React.SyntheticEvent<HTMLImageElement, Event>
+  ) => {
     const target = e.target as HTMLImageElement;
     target.onerror = null;
     target.src = placeholderImage;
@@ -124,7 +130,10 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
       >
         <div
           className="bg-white rounded-t-2xl w-full flex flex-col absolute bottom-0 animate-slideInFromBottom"
-          style={{ height: `${height}px`, transition: isHeightDragging ? 'none' : 'height 0.3s ease-out' }}
+          style={{
+            height: `${height}px`,
+            transition: isHeightDragging ? "none" : "height 0.3s ease-out",
+          }}
         >
           {/* 패널 높이 조절 핸들러 */}
           <div
@@ -150,7 +159,14 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
           {/* 댓글 입력창 */}
           <div className="flex items-end border-t border-gray-200 mx-3 mb-3 pt-3">
             <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden mr-3 flex-shrink-0">
-              <img src={userProfile} alt={`사용자프로필`} className="w-full h-full object-cover" onError={handleImageError} />
+              <Image
+                src={userProfile}
+                alt={`사용자프로필`}
+                className="w-full h-full object-cover"
+                onError={handleImageError}
+                width={40}
+                height={40}
+              />
             </div>
             <div className="flex-col flex-1 mr-1">
               <AnimatePresence>
@@ -163,17 +179,26 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
                     transition={{ duration: 0.2 }}
                   >
                     <div>
-                      <span className="text-sm text-gray-500">{replyUserName}</span>
-                      <span className="ml-2 text-sm">님에게 답글 남기는 중</span>
+                      <span className="text-sm text-gray-500">
+                        {replyUserName}
+                      </span>
+                      <span className="ml-2 text-sm">
+                        님에게 답글 남기는 중
+                      </span>
                     </div>
-                    <button className="cursor-pointer text-md" onClick={() => setReplyUserName(undefined)}>
+                    <button
+                      className="cursor-pointer text-md"
+                      onClick={() => setReplyUserName(undefined)}
+                    >
                       <i className="ri-close-line"></i>
                     </button>
                   </motion.div>
                 )}
               </AnimatePresence>
               <div
-                className={`border border-gray-200 ${replyUserName !== undefined ? "rounded-b-xl" : "rounded-xl"} px-5 py-1 focus-within:border-blue-500`}
+                className={`border border-gray-200 ${
+                  replyUserName !== undefined ? "rounded-b-xl" : "rounded-xl"
+                } px-5 py-1 focus-within:border-blue-500`}
               >
                 <input className="outline-0 w-full text-md"></input>
               </div>

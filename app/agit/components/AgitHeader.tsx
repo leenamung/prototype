@@ -1,5 +1,6 @@
 "use client";
 
+import Image from 'next/image';
 import React from 'react';
 
 interface AgitHeaderProps {
@@ -19,11 +20,15 @@ const AgitHeader: React.FC<AgitHeaderProps> = ({
 }) => {
   return (
     <div className="relative">
-      <img
-        src={coverImage}
-        alt={`${name} 아지트 커버 이미지`}
-        className="w-full h-[150px] object-cover"
-      />
+      <div className="relative w-full aspect-[10/3] overflow-hidden">
+        <Image
+          src={coverImage}
+          alt={`${name} 아지트 커버 이미지`}
+          fill
+          className="object-cover"
+          priority // 페이지 상단에 위치하므로 우선순위를 높여 빠르게 로드
+        />
+      </div>
       <div className="p-4 bg-white">
         <h1 className="text-2xl font-bold text-[var(--text-main)]">{name}</h1>
         <p className="text-[var(--text-subtle)] text-sm mt-1">멤버 {memberCount}명</p>
