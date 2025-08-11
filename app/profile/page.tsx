@@ -30,7 +30,6 @@ export default function ProfilePage() {
       <ProfileNavigationBar 
         onMoreOptionsClick={() => console.log("Profile more options clicked")}
       />
-      
       <ProfileHeader
         profileImage={profileData.profileImage}
         name={profileData.name}
@@ -38,9 +37,7 @@ export default function ProfilePage() {
         friendCount={profileData.friendCount}
         onEditProfileClick={() => console.log("Edit profile clicked")}
       />
-
       <ProfileTabs activeTab={activeTab} onTabChange={setActiveTab} />
-
       <div className="px-4 py-4">
         {activeTab === 'diaries' && (
           <ProfileDiariesContent diaries={profileData.diaries} />
