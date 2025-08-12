@@ -19,7 +19,8 @@ const NotificationItem: React.FC<NotificationItemProps> = ({ notification }) => 
       case 'like':
         return <>회원님의 게시물을 <b>좋아합니다.</b></>;
       case 'comment':
-        return <>회원님의 게시물에 댓글을 남겼습니다: <span className="text-gray-600">"{content}"</span></>;
+        // ⬇️ 따옴표 " 를 &quot; 로 변경하여 오류 해결
+        return <>회원님의 게시물에 댓글을 남겼습니다: <span className="text-gray-600">&quot;{content}&quot;</span></>;
       case 'follow':
         return <>회원님을 <b>팔로우하기 시작했습니다.</b></>;
       case 'agit_invite':
