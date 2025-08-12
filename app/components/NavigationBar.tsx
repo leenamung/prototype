@@ -16,8 +16,10 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ userProfileImage }) => {
         <div className="font-pacifico text-xl text-[var(--color-primary)] cursor-pointer">logo</div>
         <div className="flex items-center space-x-4">
           <div className="w-8 h-8 flex items-center justify-center cursor-pointer relative">
+            <Link href="/notifications">
             <i className="ri-notification-3-line ri-lg"></i>
             <span className="absolute -top-1 -right-1 w-4 h-4 bg-[var(--color-primary)] rounded-full flex items-center justify-center text-white text-xs">3</span>
+            </Link>
           </div>
           <div className="w-8 h-8 rounded-full overflow-hidden cursor-pointer">
             <Link href="/profile" className="w-8 h-8 rounded-full overflow-hidden cursor-pointer">
