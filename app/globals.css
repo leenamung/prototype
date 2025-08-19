@@ -2,70 +2,83 @@
 @import "tailwindcss";
 
 @theme {
-  /* --- 공통 변수 --- */
-  --color-primary: #FFBFAB; /* Soft Coral - 디자인 컨셉과 일치 */
-  --color-secondary: #FAF0E6; /* 현재 바디 배경색 (Light Beige/Cream) - 컨셉의 Beige (#F5F5DC)와 유사 */
+  /* --- 핵심 색상 --- */
+  --color-background: #F9F5F0;     /* 노이즈 베이지 (전체 배경) */
+  --color-primary: #FFC8B4;        /* 따스한 살구색 (주요 버튼, 아이콘) */
+  --color-primary-dark: #EAA994;   /* 깊은 살구색 (테두리, 강조) */
+  --color-component-bg: #FFFAF0;  /* 포근한 크림색 (카드, 모달) */
+
+  /* --- 보조 색상 --- */
+  --color-accent-mint: #BEE8D0;     /* 서정적인 민트 */
+  --color-accent-yellow: #FFF4BD;   /* 은은한 레몬색 */
+  --color-border: #EAE3D9;         /* 그림자 회색 (테두리/구분선) */
+  --color-subtle-bg: #F5F5F1;       /* 은은한 배경색 (호버, 탭 등) */
+
+  /* --- 텍스트 색상 --- */
+  --text-main: #4F4A45;            /* 차콜 브라운 (주요 텍스트) */
+  --text-subtle: #8D8D8D;          /* 안개 회색 (보조 텍스트, 아이콘) */
+  --text-on-primary: #FFFFFF;      /* Primary 색상 위의 텍스트 */
+
+  /* --- 기능 색상 --- */
+  --color-warning: #E57373;        /* 부드러운 장미색 (경고, 삭제) */
+  --color-warning-bg: #FAD2D2;
+  --agit-notice-badge-bg: #FFF5F2; /* 아지트 공지 뱃지 배경 */
+
+  /* --- 감정 색상 (파스텔 톤) --- */
+  --emotion-happy: #FFD6D6;
+  --emotion-sad: #B0C4DE;
+  --emotion-angry: #E57373; /* Warning 색상과 통일 */
+  --emotion-calm: #D4F0F0;
+  --emotion-anxious: #C7CEEA;
+  --emotion-neutral: #E0E0E0;
+
+  /* --- 프로필 그리드 뷰 전용 반투명 감정 색상 --- */
+  --profile-emotion-red: rgba(229, 115, 115, 0.3);
+  --profile-emotion-blue: rgba(176, 196, 222, 0.3);
+  --profile-emotion-green: rgba(212, 240, 240, 0.3);
+  --profile-emotion-yellow: rgba(255, 239, 186, 0.3);
+  --profile-emotion-purple: rgba(199, 206, 234, 0.3);
+
+  /* --- 기타 스타일 변수 --- */
   --rounded-button: 8px;
-  --warnning-red: #E72323; /* 신고 등 경고를 위한 색 */
-  --warnning-red-bg: #ffd3d3; /* 신고 등 경고 hover 색 */
-
-  /* --- 신규 서브 컬러 (디자인 컨셉) --- */
-  --color-sub-beige: #F5F5DC; /* 디자인 컨셉 Beige (필요시 --color-secondary 대체 또는 추가 사용) */
-  --color-sub-mint: #BEE8D0;  /* Pastel Mint */
-  --color-sub-light-gray: #D3D3D3; /* Light Gray */
-
-  /* --- 텍스트 컬러 (디자인 컨셉) --- */
-  --text-main: #333333;       /* Black (기존 text-[#333333] 대체) */
-  --text-subtle: #555555;     /* Dark Gray */
-
-  /* --- 기존 감정 색상 변수 (추후 파스텔톤 조정 검토) --- */
-  --emotion-happy: #FFD166;
-  --emotion-sad: #73A9D4;
-  --emotion-angry: #EF476F;
-  --emotion-calm: #06D6A0;
-  --emotion-anxious: #9381FF;
-  --emotion-neutral: #A0AEC0;
-
-  /* --- agit.html 특정 색상 변수 --- */
-  --agit-tab-active-border: var(--color-primary);
-  --agit-tab-active-text: var(--color-primary);
-  --agit-notice-badge-bg: #FFF5F2;
-
-  /* --- profile.html 특정 감정 오버레이 색상 변수 (rgba로 부드러운 표현) --- */
-  --profile-emotion-red: rgba(255, 99, 99, 0.3);
-  --profile-emotion-blue: rgba(99, 148, 255, 0.3);
-  --profile-emotion-green: rgba(99, 255, 132, 0.3);
-  --profile-emotion-yellow: rgba(255, 222, 99, 0.3);
-  --profile-emotion-purple: rgba(187, 99, 255, 0.3);
 }
 
 /* --- 전역 스타일 --- */
 body {
-  background-color: var(--color-secondary); /* 현재 #FAF0E6 사용 중 */
-  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-  color: var(--text-main); /* 기본 텍스트 색상 설정 */
+  background-color: transparent;
+  color: var(--text-main);
+  font-family: 'Pretendard', sans-serif;
+}
+
+.noise-background {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: -1;
+  pointer-events: none;
+  background-color: var(--color-background);
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgODAwIj48ZmlsdGVyIGlkPSJub2lzZUZpbHRlciI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuNjUiIG51bU9jdGF2ZXM9IjMiIHN0aXRjaFRpbGVzPSJzdGl0Y2giLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjbm9pc2VGaWx0ZXIpIi8+PC9zdmc+');
+  opacity: 0.3;
+}
+
+.content-wrapper {
+  position: relative;
+  z-index: 1;
 }
 
 .font-pacifico {
   font-family: 'Pacifico', cursive;
 }
 
-/* --- 페이지별 커스텀 클래스 (기존 내용 유지 및 필요시 수정) --- */
-/* ... (feed.html, myspace.html, agit.html, profile.html 관련 스타일) ... */
-.content-area { padding-top: 73px; padding-bottom: 16px; }
-.emotion-overlay-pink { background-color: rgba(255, 182, 193, 0.15); }
-.emotion-overlay-blue { background-color: rgba(173, 216, 230, 0.15); }
-.emotion-overlay-yellow { background-color: rgba(255, 255, 0, 0.15); }
-.emotion-overlay-green { background-color: rgba(144, 238, 144, 0.15); }
-.emotion-overlay-purple { background-color: rgba(221, 160, 221, 0.15); }
+/* --- 페이지별 커스텀 클래스 --- */
+.profile-emotion-red { background-color: var(--profile-emotion-red); }
+.profile-emotion-blue { background-color: var(--profile-emotion-blue); }
+.profile-emotion-green { background-color: var(--profile-emotion-green); }
+.profile-emotion-yellow { background-color: var(--profile-emotion-yellow); }
+.profile-emotion-purple { background-color: var(--profile-emotion-purple); }
 
-.emotion-bar-happy { background-color: var(--emotion-happy); }
-.emotion-bar-sad { background-color: var(--emotion-sad); }
-.emotion-bar-angry { background-color: var(--emotion-angry); }
-.emotion-bar-calm { background-color: var(--emotion-calm); }
-.emotion-bar-anxious { background-color: var(--emotion-anxious); }
-.emotion-bar-neutral { background-color: var(--emotion-neutral); }
-
+/* ✅ [추가] 캘린더 감정 점 스타일 */
 .calendar-day { aspect-ratio: 1/1; position: relative; }
 .calendar-day.has-diary::after { content: ''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 5px; height: 5px; border-radius: 50%;}
 .calendar-day.has-diary-happy::after { background-color: var(--emotion-happy); }
@@ -75,40 +88,15 @@ body {
 .calendar-day.has-diary-anxious::after { background-color: var(--emotion-anxious); }
 .calendar-day.has-diary-neutral::after { background-color: var(--emotion-neutral); }
 
-.agit-notice-badge { background-color: var(--agit-notice-badge-bg); }
-
-.profile-emotion-red { background-color: var(--profile-emotion-red); }
-.profile-emotion-blue { background-color: var(--profile-emotion-blue); }
-.profile-emotion-green { background-color: var(--profile-emotion-green); }
-.profile-emotion-yellow { background-color: var(--profile-emotion-yellow); }
-.profile-emotion-purple { background-color: var(--profile-emotion-purple); }
-
 
 /* --- 공통 애니메이션 --- */
-@keyframes slideInFromRight { from { transform: translateX(100%); } to { transform: translateX(0); } }
-@keyframes slideOutToRight { from { transform: translateX(0); } to { transform: translateX(100%); } }
-.animate-slideInFromRight { animation: slideInFromRight 0.3s ease-out forwards; }
-.animate-slideOutToRight { animation: slideOutToRight 0.3s ease-out forwards; }
-
 @keyframes slideInFromBottom { from { transform: translateY(100%); } to { transform: translateY(0); } }
-@keyframes slideOutToBottom { from { transform: translateY(0); } to { transform: translateY(100%); } }
 .animate-slideInFromBottom { animation: slideInFromBottom 0.3s ease-out forwards; }
-.animate-slideOutToBottom { animation: slideOutToBottom 0.3s ease-out forwards; }
-
-@keyframes modalShowUp { from { opacity: 0; transform: translateY(20px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
-.animate-modalShowUp { animation: modalShowUp 0.3s ease-out forwards; }
-
 @keyframes modalShowFront { from {opacity: 0; transform: scale(0.8)} to { opacity: 1; transform: scale(1);}}
 .animate-modalShowFront {animation: modalShowFront 0.3s ease-out forwards; }
 
-/* --- @layer utilities --- */
+/* --- 유틸리티 --- */
 @layer utilities {
-  .border-l-emotion-happy { border-left-color: var(--emotion-happy); }
-  .border-l-emotion-sad { border-left-color: var(--emotion-sad); }
-  .border-l-emotion-angry { border-left-color: var(--emotion-angry); }
-  .border-l-emotion-calm { border-left-color: var(--emotion-calm); }
-  .border-l-emotion-anxious { border-left-color: var(--emotion-anxious); }
-  .border-l-emotion-neutral { border-left-color: var(--emotion-neutral); }
   .scrollbar-hide::-webkit-scrollbar { display: none; }
-  .scrollbar-hide { -ms-overflow-style: none; /* IE and Edge */ scrollbar-width: none; /* Firefox */ }
+  .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 }

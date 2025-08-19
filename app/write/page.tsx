@@ -73,21 +73,18 @@ const PublishSettingsModal: React.FC<PublishSettingsModalProps> = ({
 
   return (
     <motion.div
-      className="fixed inset-0 bg-white z-50 flex flex-col"
+      className="fixed inset-0 bg-[var(--color-component-bg)] z-50 flex flex-col"
       initial={{ y: "100%" }}
       animate={{ y: 0 }}
       exit={{ y: "100%" }}
       transition={{ type: "tween", ease: "easeInOut", duration: 0.4 }}
     >
       {/* 모달 상단 네비게이션 */}
-      <div className="flex-shrink-0 flex items-center justify-between p-4 border-b border-gray-200 h-16">
-        <button
-          onClick={onClose}
-          className="p-2 -ml-2 text-gray-600 hover:text-gray-900"
-        >
+      <div className="flex-shrink-0 flex items-center justify-between p-4 border-b border-[var(--color-border)] h-16">
+        <button onClick={onClose} className="p-2 -ml-2 text-[var(--text-subtle)] hover:text-[var(--text-main)]">
           <i className="ri-arrow-left-s-line ri-xl"></i>
         </button>
-        <h2 className="font-semibold text-lg text-gray-800">게시물 설정</h2>
+        <h2 className="font-semibold text-lg text-[var(--text-main)]">게시물 설정</h2>
         <div className="w-8"></div> {/* 간격 맞추기용 빈 div */}
       </div>
 
@@ -98,20 +95,20 @@ const PublishSettingsModal: React.FC<PublishSettingsModalProps> = ({
           <div className="relative">
             <button
               onClick={() => setIsPrivacyDropdownOpen(!isPrivacyDropdownOpen)}
-              className="flex items-center bg-gray-100 px-3 py-1.5 rounded-full text-sm cursor-pointer hover:bg-gray-200"
+              className="flex items-center bg-[var(--color-subtle-bg)] px-3 py-1.5 rounded-full text-sm cursor-pointer hover:bg-[var(--color-border)]"
             >
               <i
-                className={`${privacyOptionsMap[privacy].icon} ri-sm mr-1.5 text-gray-500`}
+                className={`${privacyOptionsMap[privacy].icon} ri-sm mr-1.5 text-[var(--text-subtle)]`}
               ></i>
-              <span>{privacyOptionsMap[privacy].text}</span>
+              <span className="text-[var(--text-main)]">{privacyOptionsMap[privacy].text}</span>
               <i
-                className={`ri-arrow-down-s-line ml-1 text-gray-500 transition-transform ${
+                className={`ri-arrow-down-s-line ml-1 text-[var(--text-subtle)] transition-transform ${
                   isPrivacyDropdownOpen ? "rotate-180" : ""
                 }`}
               ></i>
             </button>
             {isPrivacyDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-44 bg-white rounded-lg shadow-lg z-20 border border-gray-100 py-1">
+              <div className="absolute right-0 mt-2 w-44 bg-[var(--color-component-bg)] rounded-lg shadow-lg z-20 border border-[var(--color-border)] py-1">
                 <ul>
                   {(Object.keys(privacyOptionsMap) as PrivacyOption[]).map(
                     (key) => (
@@ -121,12 +118,12 @@ const PublishSettingsModal: React.FC<PublishSettingsModalProps> = ({
                           setPrivacy(key);
                           setIsPrivacyDropdownOpen(false);
                         }}
-                        className="px-3 py-2 hover:bg-gray-50 cursor-pointer flex items-center text-sm"
+                        className="px-3 py-2 hover:bg-[var(--color-subtle-bg)] cursor-pointer flex items-center text-sm"
                       >
                         <i
-                          className={`${privacyOptionsMap[key].icon} ri-sm mr-2 text-gray-500`}
+                          className={`${privacyOptionsMap[key].icon} ri-sm mr-2 text-[var(--text-subtle)]`}
                         ></i>
-                        <span>{privacyOptionsMap[key].text}</span>
+                        <span className="text-[var(--text-main)]">{privacyOptionsMap[key].text}</span>
                       </li>
                     )
                   )}
@@ -141,15 +138,12 @@ const PublishSettingsModal: React.FC<PublishSettingsModalProps> = ({
         <SettingsSection iconClass="ri-calendar-line" title="날짜 및 날씨">
           <div className="flex items-center space-x-2">
             {/* ⭐️ 날씨 선택 버튼 UI 수정 */}
-            <button 
-              onClick={() => setIsWeatherModalOpen(true)}
-              className="flex items-center bg-gray-100 px-3 py-1.5 rounded-full text-sm cursor-pointer hover:bg-gray-200"
-            >
-                <i className={`${selectedWeather.icon} ri-sm mr-1.5 text-gray-500`}></i>
-                <span>{selectedWeather.label}</span>
+            <button onClick={() => setIsWeatherModalOpen(true)} className="flex items-center bg-[var(--color-subtle-bg)] px-3 py-1.5 rounded-full text-sm cursor-pointer hover:bg-[var(--color-border)]">
+                <i className={`${selectedWeather.icon} ri-sm mr-1.5 text-[var(--text-subtle)]`}></i>
+                <span className="text-[var(--text-main)]">{selectedWeather.label}</span>
             </button>
-            <button onClick={() => setIsDatePickerOpen(true)} className="flex items-center bg-gray-100 px-3 py-1.5 rounded-full text-sm cursor-pointer hover:bg-gray-200">
-                <span>{formatDateDisplay(diaryDate)}</span>
+            <button onClick={() => setIsDatePickerOpen(true)} className="flex items-center bg-[var(--color-subtle-bg)] px-3 py-1.5 rounded-full text-sm cursor-pointer hover:bg-[var(--color-border)]">
+                <span className="text-[var(--text-main)]">{formatDateDisplay(diaryDate)}</span>
             </button>
           </div>
         </SettingsSection>
@@ -175,10 +169,10 @@ const PublishSettingsModal: React.FC<PublishSettingsModalProps> = ({
       </div>
 
       {/* 모달 하단 발행하기 버튼 */}
-      <div className="flex-shrink-0 p-4 border-t border-gray-200">
+      <div className="flex-shrink-0 p-4 border-t border-[var(--color-border)]">
         <button
           onClick={onPublish}
-          className="w-full bg-blue-500 text-white py-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors"
+          className="w-full bg-[var(--color-primary)] text-[var(--text-on-primary)] py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity border border-[var(--color-primary-dark)]"
         >
           발행하기
         </button>

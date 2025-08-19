@@ -12,8 +12,8 @@ interface SettingsSectionProps {
 
 const SettingsSection: React.FC<SettingsSectionProps> = ({ iconClass, title, children, className, contentClassName }) => {
   return (
-    // 카드 배경색 변경 (예: bg-white 또는 bg-[var(--color-sub-beige)])
-    <div className={`bg-white rounded-lg shadow-sm p-4 ${className || ''}`}>
+    // 카드 배경색 변경 (예: bg-[var(--color-component-bg)] 또는 bg-[var(--color-sub-beige)])
+    <div className={`bg-[var(--color-component-bg)] rounded-lg shadow-sm p-4 border border-[var(--color-border)] ${className || ''}`}>
       <div className="flex justify-between items-center">
         <div className="flex items-center">
           {/* 아이콘 색상 변경 */}

@@ -55,14 +55,14 @@ const PhotoUploadTab: React.FC<PhotoUploadTabProps> = ({ description, onDescript
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-4">
+    <div className="bg-[var(--color-component-bg)] rounded-lg shadow-sm p-4 border border-[var(--color-border)]">
       {!previewUrl ? (
         <div
           onClick={triggerFileInput}
-          className="border-2 border-dashed border-gray-300 rounded-lg p-8 flex flex-col items-center justify-center cursor-pointer mb-4 hover:border-[var(--color-primary)] transition-colors"
+          className="border-2 border-dashed border-[var(--color-border)] rounded-lg p-8 flex flex-col items-center justify-center cursor-pointer mb-4 hover:border-[var(--color-primary)] transition-colors"
         >
-          <i className="ri-image-add-line ri-2x text-gray-400 mb-2 w-12 h-12 flex items-center justify-center"></i>
-          <p className="text-gray-500 text-sm text-center">
+          <i className="ri-image-add-line ri-2x text-[var(--color-border)] mb-2 w-12 h-12 flex items-center justify-center"></i>
+          <p className="text-[var(--text-subtle)] text-sm text-center">
             클릭 또는 드래그하여 사진 추가
           </p>
           <input
@@ -100,7 +100,7 @@ const PhotoUploadTab: React.FC<PhotoUploadTabProps> = ({ description, onDescript
         </div>
       )}
       <textarea
-        className="w-full bg-[#FFFAF0] p-3 rounded-lg border-none focus:ring-1 focus:ring-[var(--color-primary)] outline-none text-gray-800 text-sm h-24 resize-none"
+        className="w-full bg-[var(--color-subtle-bg)] p-3 rounded-lg border-none focus:ring-1 focus:ring-[var(--color-primary)] outline-none text-[var(--text-main)] text-sm h-24 resize-none"
         placeholder="사진에 대한 설명을 입력하세요"
         value={description}
         onChange={(e) => onDescriptionChange(e.target.value)}

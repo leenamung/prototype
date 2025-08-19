@@ -13,7 +13,7 @@ interface NotificationGroupProps {
 const NotificationGroup: React.FC<NotificationGroupProps> = ({ title, notifications }) => {
   return (
     <div className="px-4 py-3">
-      <h2 className="font-semibold text-gray-800 mb-3">{title}</h2>
+      <h2 className="font-semibold text-[var(--text-main)] mb-3">{title}</h2>
       <div className="space-y-3">
         {notifications.map(notification => (
           <NotificationItem key={notification.id} notification={notification} />

@@ -1,9 +1,7 @@
-// app/write/components/EmotionSelector.tsx
 "use client";
-
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import MixedEmotionIcon from './MixedEmotionIcon'; // 그라데이션 아이콘 컴포넌트
+import MixedEmotionIcon from './MixedEmotionIcon';
 
 export interface EmotionOption {
   name: string;
@@ -11,16 +9,11 @@ export interface EmotionOption {
 }
 
 export const emotions: EmotionOption[] = [
-    { name: "행복", color: "#FFD6D6" },
-    { name: "기쁨", color: "#FFEFBA" },
-    { name: "평온", color: "#D4F0F0" },
-    { name: "희망", color: "#E2F0CB" },
-    { name: "만족", color: "#B5EAD7" },
-    { name: "차분", color: "#C7CEEA" },
-    { name: "설렘", color: "#D8B5E0" },
-    { name: "사랑", color: "#F0D0D0" },
-    { name: "무기력", color: "#E0E0E0" },
-    { name: "슬픔", color: "#B0C4DE" },
+    { name: "행복", color: "#FFD6D6" }, { name: "기쁨", color: "#FFEFBA" },
+    { name: "평온", color: "#D4F0F0" }, { name: "희망", color: "#E2F0CB" },
+    { name: "만족", color: "#B5EAD7" }, { name: "차분", color: "#C7CEEA" },
+    { name: "설렘", color: "#D8B5E0" }, { name: "사랑", color: "#F0D0D0" },
+    { name: "무기력", color: "#E0E0E0" }, { name: "슬픔", color: "#B0C4DE" },
 ];
 
 interface EmotionSelectorProps {
@@ -29,7 +22,6 @@ interface EmotionSelectorProps {
 }
 
 const EmotionSelector: React.FC<EmotionSelectorProps> = ({ selectedEmotions, onEmotionChange }) => {
-
   const handleEmotionToggle = (emotion: EmotionOption) => {
     const isSelected = selectedEmotions.some(e => e.name === emotion.name);
     if (isSelected) {
@@ -45,18 +37,12 @@ const EmotionSelector: React.FC<EmotionSelectorProps> = ({ selectedEmotions, onE
 
   return (
     <div className="mb-6">
-      {/* 1. 선택된 감정 표시 영역 (개선된 UI) */}
       <div className="mb-4">
-        <h3 className="text-sm text-gray-500 mb-2">오늘의 감정 색</h3>
-        <div className="p-3 bg-gray-50 rounded-lg min-h-[60px] flex items-center space-x-3">
+        <h3 className="text-sm text-[var(--text-subtle)] mb-2">오늘의 감정 색</h3>
+        <div className="p-3 bg-[var(--color-subtle-bg)] rounded-lg min-h-[60px] flex items-center space-x-3 border border-[var(--color-border)]">
           <AnimatePresence>
             {selectedEmotions.length > 0 && (
-              <motion.div
-                layout
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.5 }}
-              >
+              <motion.div layout initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.5 }}>
                 <MixedEmotionIcon colors={selectedEmotions.map(e => e.color)} />
               </motion.div>
             )}
@@ -64,20 +50,18 @@ const EmotionSelector: React.FC<EmotionSelectorProps> = ({ selectedEmotions, onE
           <div className="flex flex-wrap gap-2">
             {selectedEmotions.length > 0 ? (
               selectedEmotions.map(emotion => (
-                <span key={emotion.name} className="px-3 py-1 text-sm font-medium text-gray-700 bg-white rounded-full shadow-sm">
+                <span key={emotion.name} className="px-3 py-1 text-sm font-medium text-[var(--text-main)] bg-[var(--color-component-bg)] rounded-full shadow-sm border border-[var(--color-border)]">
                   {emotion.name}
                 </span>
               ))
             ) : (
-              <p className="text-sm text-gray-400">아래에서 오늘 하루를 표현하는 색을 골라보세요.</p>
+              <p className="text-sm text-[var(--text-subtle)]">아래에서 오늘 하루를 표현하는 색을 골라보세요.</p>
             )}
           </div>
         </div>
       </div>
-
-      {/* 2. 감정 선택 그리드 (개선된 UI) */}
       <div>
-        <h3 className="text-sm text-gray-500 mb-2">감정 팔레트</h3>
+        <h3 className="text-sm text-[var(--text-subtle)] mb-2">감정 팔레트</h3>
         <div className="grid grid-cols-5 gap-x-3 gap-y-4">
           {emotions.map((emotion) => {
             const isSelected = selectedEmotions.some(e => e.name === emotion.name);
@@ -92,10 +76,7 @@ const EmotionSelector: React.FC<EmotionSelectorProps> = ({ selectedEmotions, onE
                   className="w-12 h-12 rounded-full cursor-pointer transition-all duration-200"
                   style={{ 
                     backgroundColor: emotion.color,
-                    // ⬇️ 선택 시 해당 감정의 색상으로 테두리 적용
-                    boxShadow: isSelected 
-                      ? `0 0 0 2px white, 0 0 0 4px ${emotion.color}` 
-                      : 'none'
+                    boxShadow: isSelected ? `0 0 0 2px var(--color-component-bg), 0 0 0 4px ${emotion.color}` : '0 1px 2px rgba(0,0,0,0.05)'
                   }}
                 >
                   {isSelected && (
@@ -104,7 +85,7 @@ const EmotionSelector: React.FC<EmotionSelectorProps> = ({ selectedEmotions, onE
                       </div>
                   )}
                 </div>
-                <span className={`mt-2 text-xs transition-colors ${isSelected ? `font-semibold` : 'text-gray-500'}`}
+                <span className={`mt-2 text-xs transition-colors ${isSelected ? `font-semibold` : 'text-[var(--text-subtle)]'}`}
                       style={{color: isSelected ? emotion.color : ''}}
                 >
                   {emotion.name}

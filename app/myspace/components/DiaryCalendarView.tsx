@@ -82,13 +82,13 @@ const DiaryCalendarView: React.FC<DiaryCalendarViewProps> = ({ diaries }) => {
   return (
     <div className="py-4">
       <div className="flex justify-between items-center mb-4">
-        <button onClick={goToPrevMonth} className="p-2 rounded-full hover:bg-[var(--color-sub-light-gray)] transition-colors" aria-label="이전 달">
+        <button onClick={goToPrevMonth} className="p-2 rounded-full hover:bg-[var(--color-subtle-bg)] transition-colors" aria-label="이전 달">
           {/* ✨ 아이콘 색상 text-[var(--text-subtle)] 적용 */}
           <i className="ri-arrow-left-s-line ri-lg text-[var(--text-subtle)]"></i>
         </button>
         {/* ✨ 월/년도 텍스트 색상 text-[var(--text-main)] 적용 */}
         <h2 className="text-base font-semibold text-[var(--text-main)]">{`${year}년 ${month + 1}월`}</h2>
-        <button onClick={goToNextMonth} className="p-2 rounded-full hover:bg-[var(--color-sub-light-gray)] transition-colors" aria-label="다음 달">
+        <button onClick={goToNextMonth} className="p-2 rounded-full hover:bg-[var(--color-subtle-bg)] transition-colors" aria-label="다음 달">
           {/* ✨ 아이콘 색상 text-[var(--text-subtle)] 적용 */}
           <i className="ri-arrow-right-s-line ri-lg text-[var(--text-subtle)]"></i>
         </button>
@@ -96,12 +96,12 @@ const DiaryCalendarView: React.FC<DiaryCalendarViewProps> = ({ diaries }) => {
       <div className="grid grid-cols-7 mb-1">
         {weekDays.map((day, index) => (
           // ✨ 요일 텍스트 색상 text-[var(--text-subtle)] 적용 (주말 제외)
-          <div key={day} className={`text-center text-xs font-medium ${index === 0 ? 'text-red-500' : index === 6 ? 'text-blue-500' : 'text-[var(--text-subtle)]'}`}>
+          <div key={day} className={`text-center text-xs font-medium ${index === 0 ? 'text-[var(--color-warning)]' : index === 6 ? 'text-blue-500' : 'text-[var(--text-subtle)]'}`}>
             {day}
           </div>
         ))}
       </div>
-      <div className="grid grid-cols-7 bg-[var(--color-sub-light-gray)] rounded-lg overflow-hidden shadow-sm border border-[var(--color-sub-light-gray)]">
+      <div className="grid grid-cols-7 bg-[var(--color-border)] rounded-lg overflow-hidden shadow-sm border border-[var(--color-border)]">
         {daysInMonth.map((dayData, index) => {
           const dateKey = getDateKey(dayData.fullDate);
           const dayDiaries = diariesByDate[dateKey] || [];
@@ -115,13 +115,11 @@ const DiaryCalendarView: React.FC<DiaryCalendarViewProps> = ({ diaries }) => {
             <div
               key={index}
               onClick={() => handleDateClick(dayData)}
-              className={`calendar-day text-center p-1 text-sm cursor-pointer bg-white hover:bg-gray-50 transition-colors relative border-t border-l border-[var(--color-sub-light-gray)] 
-                          ${index % 7 === 0 ? 'border-l-0' : ''}
-                          ${index < 7 ? 'border-t-0' : ''}
-                          ${!isCurrentMonth ? 'text-[var(--color-sub-light-gray)]' : 'text-[var(--text-main)]'} 
-                          ${isTodayInCalendar ? 'font-bold text-[var(--color-primary)]' : ''}
+              className={`calendar-day text-center p-1 text-sm cursor-pointer bg-[var(--color-component-bg)] hover:bg-[var(--color-subtle-bg)] transition-colors relative border-t border-l border-[var(--color-border)] 
+                          ${!isCurrentMonth ? 'text-[var(--color-border)]' : 'text-[var(--text-main)]'} 
+                          ${isTodayInCalendar ? 'font-bold text-[var(--color-primary-dark)]' : ''}
                           ${isSelected && isCurrentMonth ? 'ring-2 ring-[var(--color-primary)] ring-inset z-10' : ''}
-                          ${dayDiaries.length > 0 && isCurrentMonth ? `has-diary ${calendarEmotionClass}` : ''}`}
+                          ${dayDiaries.length > 0 && isCurrentMonth ? `has-diary has-diary-${representativeDiary.emotion}` : ''}`}
             >
               {dayData.day}
             </div>
@@ -137,12 +135,12 @@ const DiaryCalendarView: React.FC<DiaryCalendarViewProps> = ({ diaries }) => {
           {selectedDateDiaries.length > 0 ? (
             <div className="space-y-2">
               {selectedDateDiaries.map(diary => (
-                <div key={diary.id} className={`flex bg-white rounded-md overflow-hidden shadow-sm cursor-pointer border-l-4 border-l-emotion-${diary.emotion} hover:shadow transition-shadow`}>
+                <div key={diary.id} className={`flex bg-[var(--color-component-bg)] rounded-md overflow-hidden shadow-sm cursor-pointer border border-[var(--color-border)] border-l-4 border-l-[var(--emotion-${diary.emotion})] hover:shadow transition-shadow`}>
                   <div className="flex-1 p-2.5">
                     <div className="flex justify-between items-center">
                       {/* ✨ 시간/제목 텍스트 색상 text-[var(--text-subtle)] 적용 */}
                       <span className="text-xs text-[var(--text-subtle)]">{diary.time || diary.title}</span>
-                       <i className={`${diary.typeIcon} text-[var(--color-sub-light-gray)] ri-sm`} title={diary.type}></i>
+                       <i className={`${diary.typeIcon} text-[var(--color-border)] ri-sm`} title={diary.type}></i>
                     </div>
                     {/* ✨ 제목 텍스트 색상 text-[var(--text-main)] 적용 */}
                     {diary.time && <h4 className="font-medium text-xs text-[var(--text-main)] mt-0.5 truncate">{diary.title}</h4>}

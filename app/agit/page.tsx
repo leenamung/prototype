@@ -1,9 +1,6 @@
-// app/agit/page.tsx
 "use client";
-
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-// ⬇️ 수정된 AgitMainNavigationBar 임포트
 import AgitMainNavigationBar from './components/AgitMainNavigationBar'; 
 import AgitListTabs, { AgitListTabKey } from './components/AgitListTabs';
 import FloatingActionButton from '../components/FloatingActionButton';
@@ -19,22 +16,15 @@ const exploreAgitsData = [
 export default function AgitListPage() {
   const [activeTab, setActiveTab] = useState<AgitListTabKey>('myAgits');
   const router = useRouter();
-
   const myAgits = sampleUserProfileData.agits;
-
-  const handleCreateAgit = () => {
-    router.push('/agit/create');
-  };
+  const handleCreateAgit = () => router.push('/agit/create');
 
   return (
     <div className="pt-14">
-      {/* ⬇️ userProfileImage prop을 전달합니다 */}
       <AgitMainNavigationBar 
         userProfileImage="https://readdy.ai/api/search-image?query=portrait%20of%20a%20young%20asian%20woman%2C%20soft%20lighting%2C%20warm%20tones%2C%20natural%20look%2C%20gentle%20smile%2C%20high%20quality%2C%20professional%20photo&width=100&height=100&seq=1&orientation=squarish"
       />
-      
       <AgitListTabs activeTab={activeTab} onTabChange={setActiveTab} />
-
       <main className="px-4 py-4">
         {activeTab === 'myAgits' && (
           <div>
@@ -45,8 +35,7 @@ export default function AgitListPage() {
                 <p className="mb-4">아직 소속된 아지트가 없어요.</p>
                 <button 
                   onClick={() => setActiveTab('explore')}
-                  // ⬇️ 버튼 색상을 테마에 맞게 수정
-                  className="bg-[var(--color-primary)] text-white px-5 py-2 rounded-[var(--rounded-button)] text-sm font-semibold hover:opacity-80 transition-opacity"
+                  className="bg-[var(--color-primary)] text-[var(--text-on-primary)] px-5 py-2 rounded-[var(--rounded-button)] text-sm font-semibold hover:opacity-80 transition-opacity border border-[var(--color-primary-dark)]"
                 >
                   아지트 탐색하기
                 </button>
@@ -54,14 +43,12 @@ export default function AgitListPage() {
             )}
           </div>
         )}
-
         {activeTab === 'explore' && (
           <div>
             {exploreAgitsData.map(agit => <ProfileAgitListItem key={agit.id} agit={agit} />)}
           </div>
         )}
       </main>
-
       <FloatingActionButton onClick={handleCreateAgit} />
     </div>
   );

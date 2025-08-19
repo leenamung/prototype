@@ -44,17 +44,17 @@ const WeatherSelectionModal: React.FC<WeatherSelectionModalProps> = ({ isOpen, o
     >
       {/* 모달 컨텐츠 */}
       <div 
-        className="bg-white rounded-lg p-4 w-4/5 max-w-xs shadow-xl" 
+        className="bg-[var(--color-component-bg)] rounded-lg p-4 w-4/5 max-w-xs shadow-xl" 
         onClick={(e) => e.stopPropagation()}
       >
-        <h3 className="text-md font-semibold text-center mb-4 text-gray-800">오늘의 날씨</h3>
+        <h3 className="text-md font-semibold text-center mb-4 text-[var(--text-main)]">오늘의 날씨</h3>
         {/* 날씨 아이콘 그리드 */}
         <div className="grid grid-cols-3 gap-4">
           {weatherOptions.map((weather) => (
             <button
               key={weather.name}
               onClick={() => handleSelect(weather)}
-              className="flex flex-col items-center justify-center p-3 bg-gray-50 rounded-lg hover:bg-blue-100 hover:text-blue-600 transition-colors"
+              className="flex flex-col items-center justify-center p-3 bg-[var(--color-subtle-bg)] rounded-lg hover:bg-[var(--color-border)] transition-colors"
               aria-label={weather.label}
             >
               <i className={`${weather.icon} ri-2x mb-1`}></i>

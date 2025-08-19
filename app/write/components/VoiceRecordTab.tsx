@@ -94,30 +94,30 @@ const VoiceRecordTab: React.FC<VoiceRecordTabProps> = ({ description, onDescript
 
 
   return (
-    <div className="bg-white rounded-lg shadow-sm p-4">
+    <div className="bg-[var(--color-component-bg)] rounded-lg shadow-sm p-4 border border-[var(--color-border)]">
       {/* Show record button if not recording and no recording exists */}
       {!isRecording && !recordedAudioUrl && (
         <div
           onClick={startRecording}
-          className="border-2 border-dashed border-gray-300 rounded-lg p-8 flex flex-col items-center justify-center cursor-pointer mb-4 hover:border-[var(--color-primary)] transition-colors"
+          className="border-2 border-dashed border-[var(--color-border)] rounded-lg p-8 flex flex-col items-center justify-center cursor-pointer mb-4 hover:border-[var(--color-primary)] transition-colors"
           role="button" // Accessibility
           tabIndex={0} // Accessibility
           onKeyDown={(e) => e.key === 'Enter' && startRecording()} // Accessibility
         >
-          <i className="ri-mic-line ri-2x text-gray-400 mb-2 w-12 h-12 flex items-center justify-center"></i>
-          <p className="text-gray-500 text-sm text-center">클릭하여 녹음 시작</p>
+          <i className="ri-image-add-line ri-2x text-[var(--color-border)] mb-2 w-12 h-12 flex items-center justify-center"></i>
+          <p className="text-[var(--text-subtle)] text-sm text-center">클릭하여 녹음 시작</p>
         </div>
       )}
 
       {/* Show recording UI if currently recording */}
       {isRecording && (
         <div className="mb-4">
-          <div className="bg-[#FFFAF0] rounded-lg p-4">
+          <div className="bg-[var(--color-component-bg)] rounded-lg p-4">
             <div className="flex items-center justify-between mb-2">
               <span className="text-gray-600 text-sm font-mono" aria-live="polite">{formatTime(recordingTime)}</span>
               <button
                 onClick={stopRecording}
-                className="bg-red-500 text-white rounded-full p-2 cursor-pointer hover:bg-red-600 transition-colors"
+                className="bg-[var(--color-warning)] text-white rounded-full p-2 cursor-pointer hover:opacity-90 transition-opacity"
                 aria-label="녹음 중지"
               >
                 <i className="ri-stop-fill ri-lg w-5 h-5 flex items-center justify-center"></i>
@@ -128,7 +128,7 @@ const VoiceRecordTab: React.FC<VoiceRecordTabProps> = ({ description, onDescript
               <div className="flex items-end h-8 space-x-1 animate-pulse">
                 {/* Generating a few bars for visual effect */}
                 {[3,5,8,4,6,2,7,4,3,5,8,4,6,2,7,4,3,5,8,4,6,2,7,4,3,5,8,4,6,2,7,4].map((h, i) => (
-                  <div key={i} className={`w-1 bg-[var(--color-primary)] rounded-full`} style={{ height: `${h*3}px`, animationDelay: `${i*50}ms`}}></div>
+                  <div key={i} className={`w-1 bg-[var(--color-primary)] border border-[var(--color-primary-dark)] rounded-full`} style={{ height: `${h*3}px`, animationDelay: `${i*50}ms`}}></div>
                 ))}
               </div>
             </div>
@@ -139,7 +139,7 @@ const VoiceRecordTab: React.FC<VoiceRecordTabProps> = ({ description, onDescript
       {/* Show audio player if a recording exists and not currently recording */}
       {recordedAudioUrl && !isRecording && (
         <div className="mb-4">
-          <div className="bg-[#FFFAF0] rounded-lg p-4">
+          <div className="bg-[var(--color-component-bg)] rounded-lg p-4">
             <audio controls src={recordedAudioUrl} className="w-full mb-2">
                 Your browser does not support the audio element.
             </audio>
@@ -158,7 +158,7 @@ const VoiceRecordTab: React.FC<VoiceRecordTabProps> = ({ description, onDescript
 
       {/* Textarea for description */}
       <textarea
-        className="w-full bg-[#FFFAF0] p-3 rounded-lg border-none focus:ring-1 focus:ring-[var(--color-primary)] outline-none text-gray-800 text-sm h-24 resize-none"
+        className="w-full bg-[var(--color-subtle-bg)] p-3 rounded-lg border-none focus:ring-1 focus:ring-[var(--color-primary)] outline-none text-[var(--text-main)] text-sm h-24 resize-none"
         placeholder="음성 메모에 대한 설명을 입력하세요"
         value={description}
         onChange={(e) => onDescriptionChange(e.target.value)}

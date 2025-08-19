@@ -19,12 +19,10 @@ const StoryItem: React.FC<StoryItemProps> = ({ userProfile, userName }) => {
   return (
     <div className="flex flex-col items-center flex-shrink-0 w-20">
       {/* 1. 바깥 Div: 그라데이션 테두리 역할 */}
-      <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-yellow-400 to-fuchsia-600 p-0.5">
-        {/* 2. 중간 Div: 'offset' 즉, 간격 역할 (페이지 배경색과 동일하게 설정) */}
-        <div className="w-full h-full bg-white rounded-full p-[1px]">
-          {/* 3. 안쪽 Div: 실제 이미지 컨테이너 */}
+      <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[var(--color-accent-yellow)] to-[var(--color-primary)] p-0.5">
+        <div className="w-full h-full bg-[var(--color-component-bg)] rounded-full p-[2px]">
           <div className="w-full h-full overflow-hidden rounded-full">
-            <Image
+           <Image
               src={userProfile}
               alt={`${userName}의 스토리`}
               className="object-cover w-full h-full"

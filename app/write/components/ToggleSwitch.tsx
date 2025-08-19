@@ -1,5 +1,4 @@
 "use client";
-
 import React from 'react';
 
 interface ToggleSwitchProps {
@@ -15,21 +14,20 @@ const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ id, checked, onChange, aria
       <input
         type="checkbox"
         id={id}
-        className="sr-only peer" // Hide default checkbox but keep it accessible
+        className="sr-only peer"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
         aria-label={ariaLabel}
       />
-      {/* Custom styled toggle switch */}
       <div 
-        className="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-[var(--color-primary)]/50 
-                   rounded-full peer dark:bg-gray-700 
-                   peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full 
+        className="relative w-11 h-6 bg-[var(--color-border)] peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-[var(--color-primary)]/50 
+                   rounded-full
+                   peer-checked:after:translate-x-full
                    peer-checked:after:border-white after:content-[''] 
                    after:absolute after:top-[2px] after:start-[2px] 
-                   after:bg-white after:border-gray-300 after:border after:rounded-full 
+                   after:bg-white after:border-[var(--color-border)] after:border after:rounded-full 
                    after:h-5 after:w-5 after:transition-all 
-                   dark:border-gray-600 peer-checked:bg-[var(--color-primary)]"
+                   peer-checked:bg-[var(--color-primary)]"
       ></div>
     </label>
   );

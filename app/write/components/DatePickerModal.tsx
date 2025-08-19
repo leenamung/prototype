@@ -75,30 +75,27 @@ const DatePickerModal: React.FC<DatePickerModalProps> = ({ isOpen, onClose, curr
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center animate-modalShowUp" onClick={onClose} role="dialog" aria-modal="true" aria-labelledby="date-picker-title">
-      <div className="bg-white rounded-lg p-4 w-[320px] mx-4 shadow-xl" onClick={(e) => e.stopPropagation()}>
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center animate-modalShowUp" onClick={onClose}>
+      <div className="bg-[var(--color-component-bg)] rounded-lg p-4 w-[320px] mx-4 shadow-xl border border-[var(--color-border)]" onClick={(e) => e.stopPropagation()}>
         <div className="flex justify-between items-center mb-4">
-          {/* 모달 제목 텍스트 색상 적용 */}
-          <h3 id="date-picker-title" className="text-lg font-medium text-[var(--text-main)]">날짜 선택</h3>
-          <button onClick={onClose} className="text-[var(--text-subtle)] hover:text-[var(--text-main)] p-1 rounded-full hover:bg-[var(--color-sub-light-gray)]/50" aria-label="닫기">
+          <h3 className="text-lg font-medium text-[var(--text-main)]">날짜 선택</h3>
+          <button onClick={onClose} className="text-[var(--text-subtle)] hover:text-[var(--text-main)] p-1 rounded-full hover:bg-[var(--color-subtle-bg)]">
             <i className="ri-close-line ri-lg"></i>
           </button>
         </div>
         <div className="mb-4">
           <div className="flex justify-between items-center mb-4">
-            <button onClick={handlePrevMonth} className="p-1.5 rounded-full hover:bg-[var(--color-sub-light-gray)]/50" aria-label="이전 달">
+            <button onClick={handlePrevMonth} className="p-1.5 rounded-full hover:bg-[var(--color-subtle-bg)]">
               <i className="ri-arrow-left-s-line ri-lg text-[var(--text-subtle)]"></i>
             </button>
-            {/* 현재 월/년도 텍스트 색상 적용 */}
             <span className="text-[var(--text-main)] font-medium text-sm">{`${year}년 ${month + 1}월`}</span>
-            <button onClick={handleNextMonth} className="p-1.5 rounded-full hover:bg-[var(--color-sub-light-gray)]/50" aria-label="다음 달">
+            <button onClick={handleNextMonth} className="p-1.5 rounded-full hover:bg-[var(--color-subtle-bg)]">
               <i className="ri-arrow-right-s-line ri-lg text-[var(--text-subtle)]"></i>
             </button>
           </div>
           <div className="grid grid-cols-7 gap-1 text-center mb-2">
             {weekDays.map((day, index) => (
-              // 요일 텍스트 색상 적용
-              <div key={day} className={`text-xs font-medium ${index === 0 ? 'text-red-500' : index === 6 ? 'text-blue-500' : 'text-[var(--text-subtle)]'}`}>{day}</div>
+              <div key={day} className={`text-xs font-medium ${index === 0 ? 'text-[var(--color-warning)]' : index === 6 ? 'text-blue-500' : 'text-[var(--text-subtle)]'}`}>{day}</div>
             ))}
           </div>
           <div className="grid grid-cols-7 gap-1">
@@ -107,9 +104,9 @@ const DatePickerModal: React.FC<DatePickerModalProps> = ({ isOpen, onClose, curr
                 key={index}
                 onClick={() => handleDayClick(dayObj.fullDate)}
                 className={`w-10 h-10 rounded-full text-xs flex items-center justify-center transition-colors
-                            ${dayObj.monthOffset !== 'current' ? 'text-gray-300' : 'text-[var(--text-main)] hover:bg-[var(--color-sub-beige)]'}
-                            ${tempSelectedDate.toDateString() === dayObj.fullDate.toDateString() && dayObj.monthOffset === 'current' ? 'bg-[var(--color-primary)] text-white font-semibold' : ''}
-                            ${new Date().toDateString() === dayObj.fullDate.toDateString() && dayObj.monthOffset === 'current' ? 'ring-1 ring-[var(--color-primary)]' : ''}
+                            ${dayObj.monthOffset !== 'current' ? 'text-[var(--color-border)]' : 'text-[var(--text-main)] hover:bg-[var(--color-subtle-bg)]'}
+                            ${tempSelectedDate.toDateString() === dayObj.fullDate.toDateString() && dayObj.monthOffset === 'current' ? 'bg-[var(--color-primary)] text-[var(--text-on-primary)] font-semibold' : ''}
+                            ${new Date().toDateString() === dayObj.fullDate.toDateString() && dayObj.monthOffset === 'current' ? 'ring-1 ring-[var(--color-primary-dark)]' : ''}
                           `}
               >
                 {dayObj.day}
@@ -117,17 +114,16 @@ const DatePickerModal: React.FC<DatePickerModalProps> = ({ isOpen, onClose, curr
             ))}
           </div>
         </div>
-        <div className="flex justify-between pt-3 border-t border-[var(--color-sub-light-gray)]"> {/* 구분선 색상 변경 */}
+        <div className="flex justify-between pt-3 border-t border-[var(--color-border)]">
           <button
             onClick={handleTodayClick}
-            // 오늘 버튼 텍스트/배경 색상 변경
-            className="bg-[var(--color-sub-light-gray)]/70 text-[var(--text-subtle)] px-4 py-2 rounded-[var(--rounded-button)] text-xs font-medium hover:bg-[var(--color-sub-light-gray)] transition-colors"
+            className="bg-[var(--color-subtle-bg)] text-[var(--text-subtle)] px-4 py-2 rounded-[var(--rounded-button)] text-xs font-medium hover:bg-[var(--color-border)] transition-colors"
           >
             오늘
           </button>
           <button
             onClick={handleConfirm}
-            className="bg-[var(--color-primary)] text-white px-4 py-2 rounded-[var(--rounded-button)] text-xs font-medium hover:opacity-90 transition-opacity"
+            className="bg-[var(--color-primary)] text-[var(--text-on-primary)] px-4 py-2 rounded-[var(--rounded-button)] text-xs font-medium hover:opacity-90 transition-opacity border border-[var(--color-primary-dark)]"
           >
             확인
           </button>

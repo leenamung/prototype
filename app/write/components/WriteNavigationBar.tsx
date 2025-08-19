@@ -1,37 +1,29 @@
-// app/write/components/WriteNavigationBar.tsx
 "use client";
-
 import React from 'react';
-import { useRouter } from 'next/navigation'; // For cancel button functionality
+import { useRouter } from 'next/navigation';
 
 interface WriteNavigationBarProps {
-  onPublish: () => void; // Function to call when "발행하기" is clicked
-  isPublishDisabled?: boolean; // To disable publish button if content is empty etc.
+  onPublish: () => void;
+  isPublishDisabled?: boolean;
 }
 
 const WriteNavigationBar: React.FC<WriteNavigationBarProps> = ({ onPublish, isPublishDisabled }) => {
   const router = useRouter();
-
-  const handleCancel = () => {
-    // Navigate back or to a default page, e.g., home or previous page
-    router.back(); 
-    // Alternatively, router.push('/');
-  };
+  const handleCancel = () => router.back(); 
 
   return (
-    <nav className="fixed top-0 w-full bg-white shadow-sm z-20 px-4 py-3 flex justify-between items-center h-14"> {/* Explicit height */}
+    <nav className="fixed top-0 w-full bg-[var(--color-component-bg)] shadow-sm z-20 px-4 py-3 flex justify-between items-center h-14 border-b border-[var(--color-border)]">
       <button 
         onClick={handleCancel}
-        className="text-gray-600 hover:text-gray-800 font-medium text-sm transition-colors"
+        className="text-[var(--text-subtle)] hover:text-[var(--text-main)] font-medium text-sm transition-colors"
       >
         취소
       </button>
-      <h1 className="text-lg font-semibold text-gray-800">일기 쓰기</h1>
+      <h1 className="text-lg font-semibold text-[var(--text-main)]">일기 쓰기</h1>
       <button
         onClick={onPublish}
         disabled={isPublishDisabled}
-        className={`bg-[var(--color-primary)] text-white px-4 py-1.5 rounded-[var(--rounded-button)] font-medium text-sm transition-opacity
-                    ${isPublishDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-90'}`}
+        className={`bg-[var(--color-primary)] text-[var(--text-on-primary)] px-4 py-1.5 rounded-[var(--rounded-button)] font-medium text-sm transition-opacity border border-[var(--color-primary-dark)] ${isPublishDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-90'}`}
       >
         발행하기
       </button>

@@ -14,7 +14,7 @@ interface AgitNavigationBarProps {
 const AgitNavigationBar: React.FC<AgitNavigationBarProps> = ({ onNotificationClick, userProfileImage }) => {
   return (
     // ⬇️ nav 태그와 기본 페이지의 스타일 클래스를 적용하여 통일성 부여
-    <nav className="fixed top-0 w-full bg-[#FFFAF0] border-b border-[#E0E0E0] shadow-sm z-50">
+    <nav className="fixed top-0 w-full bg-[var(--color-component-bg)] border-b border-[#E0E0E0] shadow-sm z-50">
       <div className="flex justify-between items-center px-4 py-3 h-14">
         <Link href="/" className="font-pacifico text-xl text-[var(--color-primary)] cursor-pointer">
           logo
@@ -28,7 +28,7 @@ const AgitNavigationBar: React.FC<AgitNavigationBarProps> = ({ onNotificationCli
           >
             <i className="ri-notification-3-line ri-lg text-[var(--text-subtle)]"></i>
             {/* 예시 알림 뱃지 */}
-            <span className="absolute -top-1 -right-1 w-4 h-4 bg-[var(--color-primary)] rounded-full flex items-center justify-center text-white text-xs">1</span>
+            <span className="absolute -top-1 -right-1 w-4 h-4 bg-[var(--color-primary)] border border-[var(--color-primary-dark)] rounded-full flex items-center justify-center text-white text-xs">1</span>
           </button>
           
           {/* ⬇️ '더보기' 버튼 대신 프로필 이미지 링크로 변경 */}

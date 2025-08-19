@@ -17,28 +17,27 @@ const ProfileDiariesContent: React.FC<ProfileDiariesContentProps> = ({ diaries }
 
   return (
     <div>
-      {/* View Toggle Buttons */}
-      <div className="flex justify-end mb-4 mt-1"> {/* Added mt-1 for spacing */}
-        <div className="flex bg-gray-100 rounded-full p-0.5"> {/* Reduced padding */}
+      <div className="flex justify-end mb-4 mt-1">
+        <div className="flex bg-[var(--color-subtle-bg)] rounded-full p-0.5">
           <button
             onClick={() => setViewMode('grid')}
             className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors duration-150 ${
-              viewMode === 'grid' ? 'bg-[var(--color-primary)] shadow-sm' : 'hover:bg-gray-200'
+              viewMode === 'grid' ? 'bg-[var(--color-primary)] shadow-sm' : 'hover:bg-[var(--color-component-bg)]'
             }`}
             aria-pressed={viewMode === 'grid'}
             aria-label="그리드 뷰로 보기"
           >
-            <i className={`ri-grid-fill ri-sm ${viewMode === 'grid' ? 'text-white' : 'text-gray-500'}`}></i>
+            <i className={`ri-grid-fill ri-sm ${viewMode === 'grid' ? 'text-white' : 'text-[var(--text-subtle)]'}`}></i>
           </button>
           <button
             onClick={() => setViewMode('list')}
             className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors duration-150 ${
-              viewMode === 'list' ? 'bg-[var(--color-primary)] shadow-sm' : 'hover:bg-gray-200'
+              viewMode === 'list' ? 'bg-[var(--color-primary)] shadow-sm' : 'hover:bg-[var(--color-component-bg)]'
             }`}
             aria-pressed={viewMode === 'list'}
             aria-label="리스트 뷰로 보기"
           >
-            <i className={`ri-list-check ri-sm ${viewMode === 'list' ? 'text-white' : 'text-gray-500'}`}></i>
+            <i className={`ri-list-check ri-sm ${viewMode === 'list' ? 'text-white' : 'text-[var(--text-subtle)]'}`}></i>
           </button>
         </div>
       </div>
@@ -52,7 +51,7 @@ const ProfileDiariesContent: React.FC<ProfileDiariesContentProps> = ({ diaries }
             ))}
           </div>
         ) : (
-          <p className="text-center text-gray-500 py-8 text-sm">작성한 일기가 없습니다.</p>
+          <p className="text-center text-[var(--text-subtle)] py-8 text-sm">작성한 일기가 없습니다.</p>
         )
       ) : ( // List View
         diaries && diaries.length > 0 ? (
@@ -62,7 +61,7 @@ const ProfileDiariesContent: React.FC<ProfileDiariesContentProps> = ({ diaries }
             ))}
           </div>
         ) : (
-          <p className="text-center text-gray-500 py-8 text-sm">작성한 일기가 없습니다.</p>
+          <p className="text-center text-[var(--text-subtle)] py-8 text-sm">작성한 일기가 없습니다.</p>
         )
       )}
     </div>

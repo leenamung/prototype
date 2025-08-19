@@ -24,10 +24,10 @@ const AgitFeedCard: React.FC<AgitFeedCardProps> = ({ item }) => {
 
   return (
     // 카드 배경색 변경 (기본 #FFFAF0 사용 또는 --color-sub-beige 등 고려)
-    <div className="bg-[#FFFAF0] rounded-lg shadow-sm overflow-hidden"> 
+    <div className="bg-[var(--color-component-bg)] rounded-lg shadow-sm overflow-hidden border border-[var(--color-border)]">
       <div className="p-4">
         <div className="flex items-center mb-3">
-          <div className="w-10 h-10 rounded-full bg-[var(--color-sub-light-gray)] overflow-hidden mr-3 flex-shrink-0">
+          <div className="w-10 h-10 rounded-full bg-[var(--color-border)] overflow-hidden mr-3 flex-shrink-0">
             <Image
               src={item.author.profileImage}
               alt={`${item.author.name} 프로필`}

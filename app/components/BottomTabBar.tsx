@@ -40,8 +40,8 @@ const BottomTabBar: React.FC = () => {
 
 
   return (
-    <nav className="fixed bottom-0 w-full bg-white 
-                   border-t border-[var(--color-sub-light-gray)]  // 구분선 색상 변경
+    <nav className="fixed bottom-0 w-full bg-[var(--color-component-bg)] 
+                   border-t border-[var(--color-border)]
                    shadow-sm z-20 h-16">
       <div className="grid grid-cols-5 h-full">
         {navItems.map((item) => (

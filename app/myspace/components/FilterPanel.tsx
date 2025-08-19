@@ -1,6 +1,4 @@
-// app/myspace/components/FilterPanel.tsx
 "use client";
-
 import React, { useState } from 'react';
 
 // Define the props for the FilterPanel component
@@ -84,15 +82,11 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ isOpen, onClose, onApplyFilte
 
   return (
     // Main container for the filter panel, visibility controlled by `isOpen`
-    <div
-      className={`fixed top-0 left-0 w-full h-full bg-white z-30 transform transition-transform duration-300 ease-in-out
-                 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
-      aria-hidden={!isOpen} role="dialog" aria-modal="true" aria-labelledby="filter-panel-title"
-    >
+    <div className={`fixed top-0 left-0 w-full h-full bg-[var(--color-component-bg)] z-30 transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
       <div id="filterPanelContent" className="p-4 pt-16 h-full flex flex-col">
         <button 
           onClick={onClose} 
-          className="absolute top-4 right-4 text-[var(--text-subtle)] hover:text-[var(--text-main)] z-40 p-1 rounded-full hover:bg-[var(--color-sub-light-gray)]/[.5] transition-colors duration-150" // 배경색 변경
+          className="absolute top-4 right-4 text-[var(--text-subtle)] hover:text-[var(--text-main)] z-40 p-1 rounded-full hover:bg-[var(--color-subtle-bg)] transition-colors duration-150"
           aria-label="필터 닫기"
         >
           <i className="ri-close-line ri-xl"></i>
@@ -110,7 +104,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ isOpen, onClose, onApplyFilte
                   onClick={() => setSelectedDateRange(range)}
                   className={`whitespace-nowrap px-3 py-1.5 rounded-full text-xs transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[var(--color-primary)]
                               ${selectedDateRange === range 
-                                ? 'bg-[var(--color-primary)] text-white shadow-sm' 
+                                ? 'bg-[var(--color-primary)] border border-[var(--color-primary-dark)] text-white shadow-sm' 
                                 // 비활성 버튼 배경 및 텍스트 색상 변경
                                 : 'bg-[var(--color-sub-beige)] hover:bg-opacity-80 text-[var(--text-subtle)] hover:text-[var(--text-main)]'
                               }`}
@@ -122,7 +116,6 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ isOpen, onClose, onApplyFilte
             </div>
           </section>
 
-          {/* 감정, 공개 범위, 일기 타입 필터 버튼들도 유사하게 bg-gray-100 -> bg-[var(--color-sub-beige)] 또는 bg-[var(--color-sub-light-gray)] 등으로 변경 */}
           <section className="mb-6" aria-labelledby="emotion-filter-heading">
             <h3 id="emotion-filter-heading" className="text-sm font-semibold mb-2.5 text-[var(--text-main)]">감정</h3>
             <div className="flex space-x-3 items-center">
@@ -130,8 +123,8 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ isOpen, onClose, onApplyFilte
                 <button
                   key={emotion.name}
                   onClick={() => handleEmotionToggle(emotion.name)}
-                  className={`w-9 h-9 rounded-full transition-all duration-150 ease-in-out transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-black
-                              ${selectedEmotions.includes(emotion.name) ? 'ring-2 ring-offset-2 ring-black scale-105' : 'ring-1 ring-[var(--color-sub-light-gray)]'}`} // 테두리 색 변경
+                  className={`w-9 h-9 rounded-full transition-all duration-150 ease-in-out transform hover:scale-110 focus:outline-none
+                              ${selectedEmotions.includes(emotion.name) ? 'ring-2 ring-offset-2 ring-[var(--color-primary-dark)] scale-105' : 'ring-1 ring-[var(--color-border)]'}`}
                   style={{ backgroundColor: emotion.color }}
                   aria-pressed={selectedEmotions.includes(emotion.name)}
                   aria-label={emotion.label}
@@ -151,7 +144,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ isOpen, onClose, onApplyFilte
                   onClick={() => setSelectedPrivacy(option)}
                   className={`whitespace-nowrap px-3 py-1.5 rounded-full text-xs transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[var(--color-primary)]
                               ${selectedPrivacy === option 
-                                ? 'bg-[var(--color-primary)] text-white shadow-sm' 
+                                ? 'bg-[var(--color-primary)] border border-[var(--color-primary-dark)] text-white shadow-sm' 
                                 : 'bg-[var(--color-sub-beige)] hover:bg-opacity-80 text-[var(--text-subtle)] hover:text-[var(--text-main)]'
                               }`}
                   aria-pressed={selectedPrivacy === option}
@@ -171,7 +164,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ isOpen, onClose, onApplyFilte
                   onClick={() => handleDiaryTypeToggle(type.name)}
                   className={`whitespace-nowrap px-3 py-1.5 rounded-full text-xs flex items-center transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[var(--color-primary)]
                               ${selectedDiaryTypes.includes(type.name) 
-                                ? 'bg-[var(--color-primary)] text-white shadow-sm' 
+                                ? 'bg-[var(--color-primary)] border border-[var(--color-primary-dark)] text-white shadow-sm' 
                                 : 'bg-[var(--color-sub-beige)] hover:bg-opacity-80 text-[var(--text-subtle)] hover:text-[var(--text-main)]'
                               }`}
                   aria-pressed={selectedDiaryTypes.includes(type.name)}
@@ -183,16 +176,16 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ isOpen, onClose, onApplyFilte
           </section>
         </div>
         
-        <div className="flex space-x-3 pt-4 border-t border-[var(--color-sub-light-gray)] mt-auto"> {/* 구분선 색상 변경 */}
+        <div className="flex space-x-3 pt-4 border-t border-[var(--color-border)] mt-auto">
           <button 
             onClick={handleResetFilters}
-            className="flex-1 py-2.5 bg-[var(--color-sub-light-gray)] hover:bg-opacity-80 rounded-[var(--rounded-button)] text-sm text-[var(--text-subtle)] hover:text-[var(--text-main)] transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[var(--color-sub-light-gray)]"
+            className="flex-1 py-2.5 bg-[var(--color-subtle-bg)] hover:bg-[var(--color-border)] rounded-[var(--rounded-button)] text-sm text-[var(--text-subtle)] hover:text-[var(--text-main)] transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[var(--color-border)]"
           >
             초기화
           </button>
           <button
             onClick={handleSubmit}
-            className="flex-1 py-2.5 bg-[var(--color-primary)] text-white rounded-[var(--rounded-button)] text-sm hover:opacity-80 transition-opacity duration-150 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[var(--color-primary)]"
+            className="flex-1 py-2.5 bg-[var(--color-primary)] border border-[var(--color-primary-dark)] text-white rounded-[var(--rounded-button)] text-sm hover:opacity-80 transition-opacity duration-150 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[var(--color-primary)]"
           >
             적용하기
           </button>

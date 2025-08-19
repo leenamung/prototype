@@ -32,10 +32,10 @@ const ProfileDiaryGridItem: React.FC<ProfileDiaryGridItemProps> = ({ diary }) =>
     >
       {/* 타입 아이콘 (우측 상단) */}
       <div
-        className="absolute top-2 right-2 w-7 h-7 flex items-center justify-center bg-white/70 backdrop-blur-sm rounded-full shadow" // Tailwind v4 opacity
+        className="absolute top-2 right-2 w-7 h-7 flex items-center justify-center bg-[var(--color-component-bg)]/70 backdrop-blur-sm rounded-full shadow" // Tailwind v4 opacity
         title={getReadableDiaryType(diary.type)}
       >
-        <i className={`${diary.typeIcon} ri-sm text-gray-700`}></i>
+        <i className={`${diary.typeIcon} ri-sm text-[var(--text-subtle)]`}></i>
       </div>
       {/* 날짜 (하단) */}
       <div

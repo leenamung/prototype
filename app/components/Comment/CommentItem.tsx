@@ -46,55 +46,36 @@ const CommentItem: React.FC<PropsWithChildren<Props>> = ({
   return (
     <div className="flex mb-3 px-2 pt-2 w-full">
       <div className="flex">
-        <div className="w-10 h-10 rounded-full bg-[var(--color-sub-light-gray)] overflow-hidden mr-3 flex-shrink-0">
-          {/* 프로필 이미지 없을 시 배경색 */}
-          <Image
-            src={comment.profileImage}
-            alt={`${comment.author} 프로필`}
-            className="w-full h-full object-cover"
-            onError={handleImageError}
-            width={40}
-            height={40}
-          />
+        <div className="w-10 h-10 rounded-full bg-[var(--color-border)] overflow-hidden mr-3 flex-shrink-0">
+          <Image src={comment.profileImage} alt={`${comment.author} 프로필`} className="w-full h-full object-cover" width={40} height={40} />
         </div>
         <div className="flex-col">
           <div className="flex">
-            <p className="flex font-bold text-[var(--text-main)] text-sm">
-              {comment.author}
-            </p>
-            <p className="flex text-sm font-thin ml-2 text-[var(--text-subtle)]">
-              {comment.timestamp}
-            </p>
+            <p className="flex font-bold text-[var(--text-main)] text-sm">{comment.author}</p>
+            <p className="flex text-sm font-thin ml-2 text-[var(--text-subtle)]">{comment.timestamp}</p>
           </div>
           <div>
-            <p className={`text-sm ${isContentExpanded ? "" : "line-clamp-1"}`}>
-              {comment.content}
-            </p>
+            <p className={`text-sm ${isContentExpanded ? "" : "line-clamp-1"}`}>{comment.content}</p>
             {showReadMore && (
-              <p
-                onClick={toggleReadMore}
-                className="text-[var(--color-primary)] text-xs mt-1 cursor-pointer hover:underline"
-              >
+              <p onClick={toggleReadMore} className="text-[var(--color-primary-dark)] text-xs mt-1 cursor-pointer hover:underline">
                 {isContentExpanded ? "접기" : "더보기"}
               </p>
             )}
           </div>
           <div>
             <span
-              className="text-xs text-[var(--color-sub-light-gray)] cursor-pointer"
-              onClick={() => {
-                setReplyUerInfo(comment);
-              }}
+              className="text-xs text-[var(--text-subtle)] cursor-pointer hover:underline"
+              onClick={() => setReplyUerInfo(comment)}
             >
               댓글달기
             </span>
           </div>
           {comment.comments !== 0 && (
             <div
-              className="flex items-center w-fit text-xs text-[var(--color-sub-light-gray)] cursor-pointer"
-              onClick={()=>{toggleReplyExpanded()}}
+              className="flex items-center w-fit text-xs text-[var(--text-subtle)] cursor-pointer mt-1"
+              onClick={toggleReplyExpanded}
             >
-              <div className="w-4 h-[1px] bg-[var(--color-sub-light-gray)] ml-3 mr-1"></div>
+              <div className="w-4 h-[1px] bg-[var(--color-border)] ml-3 mr-1"></div>
               <span>답글 {comment.comments}개 더 보기</span>
             </div>
           )}

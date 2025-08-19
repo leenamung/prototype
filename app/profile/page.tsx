@@ -1,6 +1,4 @@
-// app/profile/page.tsx
 "use client";
-
 import React, { useState, useEffect } from 'react';
 import ProfileNavigationBar from './components/ProfileNavigationBar';
 import ProfileHeader from './components/ProfileHeader';
@@ -20,7 +18,7 @@ export default function ProfilePage() {
   if (!profileData) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <p>Loading profile...</p>
+        <p className="text-[var(--text-subtle)]">Loading profile...</p>
       </div>
     );
   }
@@ -43,7 +41,7 @@ export default function ProfilePage() {
           <ProfileDiariesContent diaries={profileData.diaries} />
         )}
         {activeTab === 'friends' && (
-          <div className="text-center text-gray-500 py-8 text-sm">
+          <div className="text-center text-[var(--text-subtle)] py-8 text-sm">
             친구 목록이 여기에 표시됩니다.
           </div>
         )}

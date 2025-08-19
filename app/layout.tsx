@@ -43,10 +43,14 @@ export default function RootLayout({
       </head>
       {/* Ensure no whitespace or comments between </head> and <body> */}
       {/* Apply padding-bottom to the body to prevent content from being hidden by the fixed BottomTabBar */}
-      <body className="pb-16">
-        {/* Render the page content */}
-        {children}
-        {/* Render the BottomTabBar globally */}
+      <body>
+        {/* ✅ [추가] 노이즈 배경을 위한 전용 div */}
+        <div className="noise-background" />
+        
+        {/* ✅ [수정] 콘텐츠를 감싸는 wrapper div 추가 */}
+        <div className="content-wrapper pb-16">
+          {children}
+        </div>
         <BottomTabBar />
       </body>
       {/* Ensure no whitespace or comments after </body> or before </html> */}

@@ -19,7 +19,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   onEditProfileClick,
 }) => {
   return (
-    <div className="pt-14 pb-4 px-4 bg-white"> 
+    <div className="pt-14 pb-4 px-4 bg-[var(--color-component-bg)]"> 
       <div className="flex flex-col items-center mt-6">
         <div className="w-24 h-24 rounded-full overflow-hidden mb-4 shadow-md">
           <Image
@@ -40,7 +40,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
         </div>
         <button
           onClick={onEditProfileClick}
-          className="bg-[var(--color-primary)] text-white px-6 py-2 rounded-[var(--rounded-button)] font-medium text-sm hover:opacity-90 transition-opacity"
+          className="bg-[var(--color-primary)] border border-[var(--color-primary-dark)] text-white px-6 py-2 rounded-[var(--rounded-button)] font-medium text-sm hover:opacity-90 transition-opacity"
         >
           프로필 편집
         </button>

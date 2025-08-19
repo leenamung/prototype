@@ -22,7 +22,7 @@ const AgitMembersContent: React.FC<AgitMembersContentProps> = ({ members, totalM
   return (
     <div>
       {/* 검색 및 필터 바 배경 및 구분선, 텍스트 색상 변경 */}
-      <div className="bg-white p-4 sticky top-[calc(theme(spacing.14)+theme(spacing.12)+1px)] z-10 border-b border-[var(--color-sub-light-gray)] shadow-sm">
+      <div className="bg-[var(--color-component-bg)] p-4 sticky top-[calc(theme(spacing.14)+theme(spacing.12)+1px)] z-10 border-b border-[var(--color-border)] shadow-sm">
         <div className="relative mb-4">
           <input
             type="text"
@@ -30,7 +30,7 @@ const AgitMembersContent: React.FC<AgitMembersContentProps> = ({ members, totalM
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             // 입력 필드 배경, 텍스트, placeholder 색상 변경
-            className="w-full py-3 px-10 bg-[var(--color-sub-beige)] rounded-full text-sm text-[var(--text-main)] placeholder:text-[var(--text-subtle)]/80 focus:ring-1 focus:ring-[var(--color-primary)] focus:border-[var(--color-primary)] outline-none transition-shadow"
+            className="w-full py-3 px-10 bg-[var(--color-subtle-bg)] rounded-full text-sm text-[var(--text-main)] placeholder:text-[var(--text-subtle)]/80 focus:ring-1 focus:ring-[var(--color-primary-dark)] outline-none transition-shadow"
           />
           <div className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center pointer-events-none">
             {/* 검색 아이콘 색상 변경 */}
@@ -51,12 +51,12 @@ const AgitMembersContent: React.FC<AgitMembersContentProps> = ({ members, totalM
             </button>
             {isSortDropdownOpen && (
               // 드롭다운 메뉴 배경 및 텍스트 색상 변경
-              <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg z-20 border border-[var(--color-sub-light-gray)]/50 py-1">
+              <div className="absolute right-0 mt-2 w-32 bg-[var(--color-component-bg)] rounded-md shadow-lg z-20 border border-[var(--color-border)]/50 py-1">
                 {['최신순', '이름순'].map(option => (
                   <button
                     key={option}
                     onClick={() => { setSortBy(option); setIsSortDropdownOpen(false); }}
-                    className="block w-full text-left px-3 py-2 text-xs text-[var(--text-main)] hover:bg-[var(--color-sub-beige)]/50"
+                    className="block w-full text-left px-3 py-2 text-xs text-[var(--text-main)] hover:bg-[var(--color-subtle-bg)]"
                   >
                     {option}
                   </button>
@@ -70,7 +70,7 @@ const AgitMembersContent: React.FC<AgitMembersContentProps> = ({ members, totalM
       <div className="p-4">
         {sortedMembers && sortedMembers.length > 0 ? (
           // 멤버 리스트 카드 배경 변경
-          <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+          <div className="bg-[var(--color-component-bg)] rounded-lg shadow-sm overflow-hidden">
             {sortedMembers.map((member) => (
               <AgitMemberItem key={member.id} member={member} />
             ))}

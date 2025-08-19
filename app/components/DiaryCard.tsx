@@ -78,25 +78,12 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
   const diaryTitleForAria = authorName + "의 일기";
 
   return (
-    <div
-      className={`bg-[#FFFAF0] rounded-lg shadow-sm mb-4 overflow-hidden ${
-        entry.emotionOverlayClass || ""
-      }`}
-    >
-      <div className="p-4">
+    <div className={`relative bg-[var(--color-component-bg)] rounded-lg shadow-sm mb-4 overflow-hidden border border-[var(--color-border)] ${entry.emotionOverlayClass || ""}`}>
+      <div className="relative z-10 p-4">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center">
-            <div className="w-10 h-10 rounded-full bg-[var(--color-sub-light-gray)] overflow-hidden mr-3 flex-shrink-0">
-              {" "}
-              {/* 프로필 이미지 없을 시 배경색 */}
-              <Image
-                src={authorProfileImage}
-                alt={`${authorName} 프로필`}
-                className="w-full h-full object-cover"
-                onError={handleImageError}
-                width={40}
-                height={40}
-              />
+            <div className="w-10 h-10 rounded-full bg-[var(--color-border)] overflow-hidden mr-3 flex-shrink-0">
+              <Image src={authorProfileImage} alt={`${authorName} 프로필`} className="w-full h-full object-cover" width={40} height={40} />
             </div>
             <div>
               <p className="font-bold text-[var(--text-main)] text-sm">
@@ -151,7 +138,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
                 sizes="(max-width: 640px) 100vw, 640px"
               />
               <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                <div className="w-14 h-14 flex items-center justify-center bg-white/80 rounded-full cursor-pointer">
+                <div className="w-14 h-14 flex items-center justify-center bg-[var(--color-component-bg)]/80 rounded-full cursor-pointer">
                   <i className="ri-play-fill ri-2x text-[var(--color-primary)]"></i>
                 </div>
               </div>
@@ -162,12 +149,12 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
           )}
 
           {entry.type === "audio" && entry.audioInfo && (
-            <div className="bg-white rounded-lg p-3 mb-3 shadow-sm">
+            <div className="bg-[var(--color-component-bg)] rounded-lg p-3 mb-3 shadow-sm border border-[var(--color-border)]">
               {" "}
               {/* 오디오 플레이어 배경 및 그림자 추가 */}
               <div className="flex items-center mb-2">
                 <button // div 대신 button 태그 사용
-                  className="w-8 h-8 flex items-center justify-center cursor-pointer bg-[var(--color-primary)] rounded-full mr-3 hover:opacity-80 transition-opacity"
+                  className="w-8 h-8 flex items-center justify-center cursor-pointer bg-[var(--color-primary)] border border-[var(--color-primary-dark)] rounded-full mr-3 hover:opacity-80 transition-opacity"
                   onClick={toggleAudioPlay}
                   aria-label={
                     isAudioPlaying ? "오디오 일시정지" : "오디오 재생"
@@ -180,12 +167,8 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
                   ></i>
                 </button>
                 <div className="flex-1 h-10 flex items-center">
-                  <div className="w-full bg-[var(--color-sub-light-gray)] h-1.5 rounded-full overflow-hidden">
-                    <div
-                      className={`bg-[var(--color-primary)] h-full ${
-                        entry.audioInfo.progressWidth || "w-0"
-                      } rounded-full transition-all duration-300`}
-                    ></div>
+                <div className="w-full bg-[var(--color-border)] h-1.5 rounded-full overflow-hidden">
+                  <div className={`bg-[var(--color-primary)] h-full ${entry.audioInfo.progressWidth || "w-0"} rounded-full transition-all duration-300`}></div>
                   </div>
                 </div>
                 <span className="text-xs text-[var(--text-subtle)] ml-3">

@@ -117,14 +117,14 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
   return (
     <RemoveScroll>
       <div
-        className="fixed inset-0 bg-black/50 flex flex-col-reverse z-[60]"
+        className="fixed inset-0 bg-[var(--text-main)]/50 flex flex-col-reverse z-[60]"
         onMouseDown={handleOverlayInteractionStart}
         onMouseUp={handleOverlayInteractionEnd}
         onTouchStart={handleOverlayInteractionStart}
         onTouchEnd={handleOverlayInteractionEnd}
       >
         <div
-          className="bg-white rounded-t-2xl w-full flex flex-col absolute bottom-0 animate-slideInFromBottom"
+          className="bg-[var(--color-component-bg)] rounded-t-2xl w-full flex flex-col absolute bottom-16 animate-slideInFromBottom"
           style={{ height: `${height}px`, transition: isHeightDragging ? 'none' : 'height 0.3s ease-out' }}
         >
           <div
@@ -132,8 +132,8 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
             onMouseDown={handleHeightDragStart}
             onTouchStart={handleHeightDragStart}
           >
-            <div className="w-10 h-1 bg-gray-300 rounded-full" />
-            <span className="font-bold text-base mt-2">댓글</span>
+            <div className="w-10 h-1 bg-[var(--color-border)] rounded-full" />
+            <span className="font-bold text-base mt-2 text-[var(--text-main)]">댓글</span>
           </div>
           <div className="h-full overflow-y-auto overscroll-contain">
             {entry.map((comment) => (
@@ -144,9 +144,9 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
               ></CommentItem>
             ))}
           </div>
-          <div className="flex items-end border-t border-gray-200 mx-3 mb-3 pt-3">
+          <div className="flex items-end border-t border-[var(--color-border)] mx-3 mb-3 pt-3">
             {/* ⬇️ 1. 부모 div에 'relative' 클래스 추가 */}
-            <div className="relative w-10 h-10 rounded-full bg-gray-200 overflow-hidden mr-3 flex-shrink-0">
+            <div className="relative w-10 h-10 rounded-full bg-[var(--color-border)] overflow-hidden mr-3 flex-shrink-0">
               {/* ⬇️ 2. img를 Image로 변경하고 fill 속성 적용 */}
               <Image 
                 src={userProfile} 
@@ -161,15 +161,15 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
               <AnimatePresence>
                 {replyUserName && (
                   <motion.div
-                    className="flex justify-between text-sm py-1 border-t border-x rounded-t-xl px-5 border-gray-200"
+                    className="flex justify-between text-sm py-1 border-t border-x rounded-t-xl px-5 border-[var(--color-border)]"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     transition={{ duration: 0.2 }}
                   >
                     <div>
-                      <span className="text-sm text-gray-500">{replyUserName}</span>
-                      <span className="ml-2 text-sm">님에게 답글 남기는 중</span>
+                      <span className="text-sm text-[var(--text-subtle)]">{replyUserName}</span>
+                      <span className="ml-2 text-sm text-[var(--text-subtle)]">님에게 답글 남기는 중</span>
                     </div>
                     <button className="cursor-pointer text-md" onClick={() => setReplyUserName(undefined)}>
                       <i className="ri-close-line"></i>
@@ -178,13 +178,13 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
                 )}
               </AnimatePresence>
               <div
-                className={`border border-gray-200 ${replyUserName !== undefined ? "rounded-b-xl" : "rounded-xl"} px-5 py-1 focus-within:border-blue-500`}
+                className={`border border-[var(--color-border)] ${replyUserName !== undefined ? "rounded-b-xl" : "rounded-xl"} px-5 py-1 focus-within:border-[var(--color-primary-dark)]`}
               >
-                <input className="outline-0 w-full text-md"></input>
+                <input className="outline-0 w-full text-md bg-transparent"></input>
               </div>
             </div>
             <div>
-              <button className="cursor-pointer text-md px-3 py-1 rounded-xl bg-gray-200 active:opacity-65">
+              <button className="cursor-pointer text-md px-3 py-1 rounded-xl bg-[var(--color-subtle-bg)] active:opacity-65">
                 <i className="ri-upload-line"></i>
               </button>
             </div>

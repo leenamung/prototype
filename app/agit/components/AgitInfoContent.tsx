@@ -17,7 +17,7 @@ interface AgitInfoContentProps {
 
 const InfoSection: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
   // 카드 배경색 변경 (또는 var(--color-sub-beige) 등 사용)
-  <div className="bg-white rounded-lg shadow-sm p-5 mb-4"> 
+  <div className="bg-[var(--color-component-bg)] rounded-lg shadow-sm p-5 mb-4 border border-[var(--color-border)]">
     {/* 섹션 제목 텍스트 색상 변경 */}
     <h3 className="text-base font-semibold text-[var(--text-main)] mb-3">{title}</h3>
     {children}
@@ -49,14 +49,8 @@ const AgitInfoContent: React.FC<AgitInfoContentProps> = ({
 
       <InfoSection title="관리자 정보">
         <div className="flex items-center">
-          <div className="w-12 h-12 rounded-full bg-[var(--color-sub-light-gray)] overflow-hidden mr-4 flex-shrink-0">
-            <Image
-              src={admin.profileImage}
-              alt={`${admin.name} 프로필`}
-              className="w-full h-full object-cover"
-              width={48}
-              height={48}
-            />
+          <div className="w-12 h-12 rounded-full bg-[var(--color-border)] overflow-hidden mr-4 flex-shrink-0">
+            <Image src={admin.profileImage} alt={`${admin.name} 프로필`} className="w-full h-full object-cover" width={48} height={48} />
           </div>
           <div>
             {/* 관리자 이름 텍스트 색상 변경 */}
@@ -69,16 +63,14 @@ const AgitInfoContent: React.FC<AgitInfoContentProps> = ({
 
       <InfoSection title="아지트 정보">
         <div className="space-y-2 text-sm">
-            <p className="flex justify-between py-1.5 border-b border-[var(--color-sub-light-gray)]"> {/* 구분선 색상 변경 */}
-                {/* 라벨 텍스트 색상 변경 */}
-                <span className="text-[var(--text-subtle)]">생성일</span>
-                {/* 값 텍스트 색상 변경 */}
-                <span className="text-[var(--text-main)]">{creationDate}</span>
-            </p>
-            <p className="flex justify-between py-1.5">
-                <span className="text-[var(--text-subtle)]">모임 주기</span>
-                <span className="text-[var(--text-main)]">{meetingCycle}</span>
-            </p>
+          <p className="flex justify-between py-1.5 border-b border-[var(--color-border)]">
+            <span className="text-[var(--text-subtle)]">생성일</span>
+            <span className="text-[var(--text-main)]">{creationDate}</span>
+          </p>
+          <p className="flex justify-between py-1.5">
+            <span className="text-[var(--text-subtle)]">모임 주기</span>
+            <span className="text-[var(--text-main)]">{meetingCycle}</span>
+          </p>
         </div>
       </InfoSection>
     </div>
