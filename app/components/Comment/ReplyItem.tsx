@@ -40,7 +40,7 @@ const ReplyItem: React.FC<PropsWithChildren<Props>> = ({
     <div className="flex mb-3 px-2 pt-2 w-full">
       <div className="flex">
         <div className="w-10 h-10 rounded-full bg-[var(--color-border)] overflow-hidden mr-3 flex-shrink-0">
-          <Image src={comment.profileImage} alt={`${comment.author} 프로필`} className="w-full h-full object-cover" width={40} height={40} />
+          <Image src={comment.profileImage} alt={`${comment.author} 프로필`} onError={handleImageError} className="w-full h-full object-cover" width={40} height={40} />
         </div>
         <div className="flex-col">
           <div className="flex">

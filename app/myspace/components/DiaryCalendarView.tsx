@@ -119,7 +119,7 @@ const DiaryCalendarView: React.FC<DiaryCalendarViewProps> = ({ diaries }) => {
                           ${!isCurrentMonth ? 'text-[var(--color-border)]' : 'text-[var(--text-main)]'} 
                           ${isTodayInCalendar ? 'font-bold text-[var(--color-primary-dark)]' : ''}
                           ${isSelected && isCurrentMonth ? 'ring-2 ring-[var(--color-primary)] ring-inset z-10' : ''}
-                          ${dayDiaries.length > 0 && isCurrentMonth ? `has-diary has-diary-${representativeDiary.emotion}` : ''}`}
+                          ${dayDiaries.length > 0 && isCurrentMonth ? `has-diary ${calendarEmotionClass}` : ''}`}
             >
               {dayData.day}
             </div>

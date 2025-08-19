@@ -83,7 +83,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center">
             <div className="w-10 h-10 rounded-full bg-[var(--color-border)] overflow-hidden mr-3 flex-shrink-0">
-              <Image src={authorProfileImage} alt={`${authorName} 프로필`} className="w-full h-full object-cover" width={40} height={40} />
+              <Image src={authorProfileImage} alt={`${authorName} 프로필`} onError={handleImageError} className="w-full h-full object-cover" width={40} height={40} />
             </div>
             <div>
               <p className="font-bold text-[var(--text-main)] text-sm">
