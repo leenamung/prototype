@@ -171,7 +171,7 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
                       <span className="text-sm text-[var(--text-subtle)]">{replyUserName}</span>
                       <span className="ml-2 text-sm text-[var(--text-subtle)]">님에게 답글 남기는 중</span>
                     </div>
-                    <button className="cursor-pointer text-md" onClick={() => setReplyUserName(undefined)}>
+                    <button className="cursor-pointer text-md text-[var(--text-subtle)] p-1 -m-1 rounded-full hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border-dark)]" onClick={() => setReplyUserName(undefined)}>
                       <i className="ri-close-line"></i>
                     </button>
                   </motion.div>
@@ -184,7 +184,7 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
               </div>
             </div>
             <div>
-              <button className="cursor-pointer text-md px-3 py-1 rounded-xl bg-[var(--color-subtle-bg)] active:opacity-65">
+              <button className="cursor-pointer text-md px-3 py-1 rounded-xl bg-[var(--color-subtle-bg)] hover:bg-[var(--color-border)] active:bg-[var(--color-border-dark)] transition-colors">
                 <i className="ri-upload-line"></i>
               </button>
             </div>

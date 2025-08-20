@@ -73,7 +73,7 @@ const StoryList: React.FC = () => {
       {canScrollLeft && (
         <button
           onClick={() => handleScroll("left")}
-          className="absolute left-0 z-10 w-8 h-8 my-auto transition-opacity duration-300 bg-[var(--color-component-bg)] rounded-full shadow-md opacity-75 top-1/2 -translate-y-1/2 hover:opacity-100"
+          className="absolute left-0 z-10 w-8 h-8 my-auto transition-all duration-300 bg-[var(--color-component-bg)] rounded-full shadow-md opacity-75 top-1/2 -translate-y-1/2 hover:opacity-100 active:scale-90"
         >
           &lt;
         </button>
@@ -93,7 +93,7 @@ const StoryList: React.FC = () => {
       {canScrollRight && (
         <button
           onClick={() => handleScroll("right")}
-          className="absolute right-0 z-10 w-8 h-8 my-auto transition-opacity duration-300 bg-[var(--color-component-bg)] rounded-full shadow-md opacity-75 top-1/2 -translate-y-1/2 hover:opacity-100"
+          className="absolute right-0 z-10 w-8 h-8 my-auto transition-all duration-300 bg-[var(--color-component-bg)] rounded-full shadow-md opacity-75 top-1/2 -translate-y-1/2 hover:opacity-100 active:scale-90"
         >
           &gt;
         </button>

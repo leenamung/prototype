@@ -22,11 +22,12 @@ const AgitTabs: React.FC<AgitTabsProps> = ({ activeTab, onTabChange }) => {
           <button
             key={tab.key}
             onClick={() => onTabChange(tab.key)}
-            className={`flex-1 py-3 text-center text-sm font-medium cursor-pointer transition-colors duration-150 hover:bg-[var(--color-subtle-bg)]
+            className={`flex-1 py-3 text-center text-sm font-medium cursor-pointer transition-colors duration-150 active:opacity-75
                         ${activeTab === tab.key 
                             ? 'text-[var(--color-primary-dark)] border-b-2 border-[var(--color-primary)]' 
-                            : 'text-[var(--text-subtle)] border-b-2 border-transparent hover:text-[var(--text-main)]'
+                            : 'text-[var(--text-subtle)] border-b-2 border-transparent hover:text-[var(--text-main)] hover:bg-[var(--color-subtle-bg)]'
                         }`}
+            aria-current={activeTab === tab.key ? 'page' : undefined}
           >
             {tab.label}
           </button>

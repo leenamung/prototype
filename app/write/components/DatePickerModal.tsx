@@ -117,13 +117,13 @@ const DatePickerModal: React.FC<DatePickerModalProps> = ({ isOpen, onClose, curr
         <div className="flex justify-between pt-3 border-t border-[var(--color-border)]">
           <button
             onClick={handleTodayClick}
-            className="bg-[var(--color-subtle-bg)] text-[var(--text-subtle)] px-4 py-2 rounded-[var(--rounded-button)] text-xs font-medium hover:bg-[var(--color-border)] transition-colors"
+            className="bg-[var(--color-subtle-bg)] text-[var(--text-subtle)] px-4 py-2 rounded-[var(--rounded-button)] text-xs font-medium hover:bg-[var(--color-border)] active:bg-[var(--color-border-dark)] transition-colors"
           >
             오늘
           </button>
           <button
             onClick={handleConfirm}
-            className="bg-[var(--color-primary)] text-[var(--text-on-primary)] px-4 py-2 rounded-[var(--rounded-button)] text-xs font-medium hover:opacity-90 transition-opacity border border-[var(--color-primary-dark)]"
+            className="bg-[var(--color-primary)] text-[var(--text-on-primary)] px-4 py-2 rounded-[var(--rounded-button)] text-xs font-medium hover:opacity-90 active:bg-[var(--color-primary-darker)] active:border-[var(--color-primary-darker)] transition-all border border-[var(--color-primary-dark)]"
           >
             확인
           </button>

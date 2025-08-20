@@ -29,7 +29,7 @@ const DiaryTypeModal: React.FC<DiaryTypeModalProps> = ({ isOpen, onClose }) => {
           {diaryTypes.map((item) => (
             <button
               key={item.label}
-              className="flex flex-col items-center justify-center p-4 bg-[var(--color-subtle-bg)] rounded-[var(--rounded-button)] hover:bg-[var(--color-border)] transition-colors"
+              className="flex flex-col items-center justify-center p-4 bg-[var(--color-subtle-bg)] rounded-[var(--rounded-button)] hover:bg-[var(--color-border)] active:bg-[var(--color-border-dark)] transition-colors"
             >
               <i className={`${item.icon} ri-2x mb-2 text-[var(--color-primary)]`}></i>
               <span className="text-[var(--text-main)]">{item.label}</span>
@@ -38,7 +38,7 @@ const DiaryTypeModal: React.FC<DiaryTypeModalProps> = ({ isOpen, onClose }) => {
         </div>
         <button
           onClick={onClose}
-          className="w-full py-2 bg-[var(--color-subtle-bg)] text-[var(--text-subtle)] rounded-[var(--rounded-button)] hover:bg-[var(--color-border)] transition-colors"
+          className="w-full py-2 bg-[var(--color-subtle-bg)] text-[var(--text-subtle)] rounded-[var(--rounded-button)] hover:bg-[var(--color-border)] active:bg-[var(--color-border-dark)] transition-colors"
         >
           취소
         </button>

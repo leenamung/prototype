@@ -21,7 +21,7 @@ const AgitListTabs: React.FC<AgitListTabsProps> = ({ activeTab, onTabChange }) =
           <button
             key={tab.key}
             onClick={() => onTabChange(tab.key)}
-            className={`py-3 px-2 mr-6 text-sm font-medium transition-colors duration-150
+            className={`py-3 px-2 mr-6 text-sm font-medium transition-colors duration-150 active:opacity-75
                         ${activeTab === tab.key 
                             ? 'text-[var(--text-main)] border-b-2 border-[var(--color-primary)]'
                             : 'text-[var(--text-subtle)] border-b-2 border-transparent hover:text-[var(--text-main)] hover:border-[var(--color-border)]'

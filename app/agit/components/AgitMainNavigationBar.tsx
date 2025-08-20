@@ -14,7 +14,7 @@ const AgitMainNavigationBar: React.FC<AgitMainNavigationBarProps> = ({ userProfi
         <h1 className="text-lg font-semibold text-[var(--text-main)]">아지트</h1>
         <div className="flex items-center space-x-4">
           <button 
-            className="w-8 h-8 flex items-center justify-center hover:bg-[var(--color-subtle-bg)] rounded-full transition-colors"
+            className="w-8 h-8 flex items-center justify-center hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] rounded-full transition-colors"
             aria-label="아지트 검색"
           >
             <i className="ri-search-line ri-lg text-[var(--text-subtle)]"></i>

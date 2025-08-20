@@ -25,7 +25,7 @@ const MySpaceNavigationBar: React.FC<MySpaceNavigationBarProps> = ({ currentView
         <div className="flex items-center space-x-2">
           <button
             onClick={onFilterToggle}
-            className="w-8 h-8 flex items-center justify-center rounded-full bg-[var(--color-subtle-bg)] hover:bg-[var(--color-border)] relative transition-colors duration-150"
+            className="w-8 h-8 flex items-center justify-center rounded-full bg-[var(--color-subtle-bg)] hover:bg-[var(--color-border)] active:bg-[var(--color-border-dark)] relative transition-colors"
             aria-label="필터 열기"
           >
             <i className="ri-filter-3-line ri-lg text-[var(--text-subtle)]"></i>
@@ -35,7 +35,7 @@ const MySpaceNavigationBar: React.FC<MySpaceNavigationBarProps> = ({ currentView
           </button>
           <button
             onClick={onNewDiaryClick}
-            className="bg-[var(--color-primary)] text-[var(--text-on-primary)] px-3 py-1.5 rounded-[var(--rounded-button)] flex items-center hover:opacity-80 transition-opacity duration-150 text-sm border border-[var(--color-primary-dark)]"
+            className="bg-[var(--color-primary)] text-[var(--text-on-primary)] px-3 py-1.5 rounded-[var(--rounded-button)] flex items-center hover:opacity-80 active:bg-[var(--color-primary-darker)] active:border-[var(--color-primary-darker)] transition-all text-sm border border-[var(--color-primary-dark)]"
           >
             <i className="ri-quill-pen-line ri-md mr-1"></i>
             <span>새 일기</span>
@@ -47,7 +47,7 @@ const MySpaceNavigationBar: React.FC<MySpaceNavigationBarProps> = ({ currentView
           <button
             key={tab.view}
             onClick={() => onViewChange(tab.view)}
-            className={`flex-1 py-2 text-center text-xs font-medium border-b-2 hover:bg-[var(--color-subtle-bg)] transition-colors duration-150 flex flex-col items-center justify-center ${ 
+            className={`flex-1 py-2 text-center text-xs font-medium border-b-2 hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] transition-colors flex flex-col items-center justify-center ${ 
               currentView === tab.view
                 ? 'border-[var(--color-primary)] text-[var(--color-primary-dark)]'
                 : 'border-transparent text-[var(--text-subtle)] hover:text-[var(--text-main)]'

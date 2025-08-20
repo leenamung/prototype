@@ -64,7 +64,11 @@ const ExchangeDiaryOptions: React.FC<ExchangeDiaryOptionsProps> = (props) => {
              <button 
                 key={cycle} 
                 onClick={() => setSelectedCycle(cycle)}
-                className={`py-2 px-1 text-xs border rounded-lg transition-colors duration-150 ${selectedCycle === cycle ? 'bg-[var(--color-primary)] text-[var(--text-on-primary)] border-[var(--color-primary-dark)]' : 'border-[var(--color-border)] text-[var(--text-subtle)] hover:border-[var(--color-primary-dark)] hover:text-[var(--text-main)]'}`}
+                className={`py-2 px-1 text-xs border rounded-lg transition-colors duration-150
+                            ${selectedCycle === cycle 
+                                ? 'bg-[var(--color-primary)] text-[var(--text-on-primary)] border-[var(--color-primary-dark)] active:bg-[var(--color-primary-darker)] active:border-[var(--color-primary-darker)]' 
+                                : 'border-[var(--color-border)] text-[var(--text-subtle)] hover:border-[var(--color-primary-dark)] hover:text-[var(--text-main)] active:bg-[var(--color-border-dark)]'
+                            }`}
               >
                {cycle}
              </button>

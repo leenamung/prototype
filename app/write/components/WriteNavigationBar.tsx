@@ -15,7 +15,7 @@ const WriteNavigationBar: React.FC<WriteNavigationBarProps> = ({ onPublish, isPu
     <nav className="fixed top-0 w-full bg-[var(--color-component-bg)] shadow-sm z-20 px-4 py-3 flex justify-between items-center h-14 border-b border-[var(--color-border)]">
       <button 
         onClick={handleCancel}
-        className="text-[var(--text-subtle)] hover:text-[var(--text-main)] font-medium text-sm transition-colors"
+        className="text-[var(--text-subtle)] hover:text-[var(--text-main)] active:opacity-70 font-medium text-sm transition-colors"
       >
         취소
       </button>
@@ -23,7 +23,7 @@ const WriteNavigationBar: React.FC<WriteNavigationBarProps> = ({ onPublish, isPu
       <button
         onClick={onPublish}
         disabled={isPublishDisabled}
-        className={`bg-[var(--color-primary)] text-[var(--text-on-primary)] px-4 py-1.5 rounded-[var(--rounded-button)] font-medium text-sm transition-opacity border border-[var(--color-primary-dark)] ${isPublishDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-90'}`}
+        className={`bg-[var(--color-primary)] text-[var(--text-on-primary)] px-4 py-1.5 rounded-[var(--rounded-button)] font-medium text-sm transition-opacity border border-[var(--color-primary-dark)] ${isPublishDisabled ? 'opacity-50 cursor-not-allowed' : 'hover:opacity-90 active:bg-[var(--color-primary-darker)] active:border-[var(--color-primary-darker)]'}`}
       >
         발행하기
       </button>

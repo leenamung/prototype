@@ -82,13 +82,13 @@ const DiaryCalendarView: React.FC<DiaryCalendarViewProps> = ({ diaries }) => {
   return (
     <div className="py-4">
       <div className="flex justify-between items-center mb-4">
-        <button onClick={goToPrevMonth} className="p-2 rounded-full hover:bg-[var(--color-subtle-bg)] transition-colors" aria-label="이전 달">
+        <button onClick={goToPrevMonth} className="p-2 rounded-full hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] transition-colors" aria-label="이전 달">
           {/* ✨ 아이콘 색상 text-[var(--text-subtle)] 적용 */}
           <i className="ri-arrow-left-s-line ri-lg text-[var(--text-subtle)]"></i>
         </button>
         {/* ✨ 월/년도 텍스트 색상 text-[var(--text-main)] 적용 */}
         <h2 className="text-base font-semibold text-[var(--text-main)]">{`${year}년 ${month + 1}월`}</h2>
-        <button onClick={goToNextMonth} className="p-2 rounded-full hover:bg-[var(--color-subtle-bg)] transition-colors" aria-label="다음 달">
+        <button onClick={goToNextMonth} className="p-2 rounded-full hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] transition-colors" aria-label="다음 달">
           {/* ✨ 아이콘 색상 text-[var(--text-subtle)] 적용 */}
           <i className="ri-arrow-right-s-line ri-lg text-[var(--text-subtle)]"></i>
         </button>

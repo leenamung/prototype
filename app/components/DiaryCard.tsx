@@ -98,7 +98,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
             {" "}
             {/* 팝업 메뉴의 위치 기준점 */}
             <button // div 대신 button 태그 사용 권장
-              className="w-8 h-8 flex items-center justify-center cursor-pointer rounded-full"
+              className="w-8 h-8 flex items-center justify-center cursor-pointer rounded-full hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] transition-colors"
               aria-haspopup="true"
               aria-expanded={isOptionsMenuOpen}
               aria-label={`${diaryTitleForAria} 더보기 옵션`}
@@ -138,9 +138,9 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
                 sizes="(max-width: 640px) 100vw, 640px"
               />
               <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                <div className="w-14 h-14 flex items-center justify-center bg-[var(--color-component-bg)]/80 rounded-full cursor-pointer">
+                <button className="w-14 h-14 flex items-center justify-center bg-[var(--color-component-bg)]/80 rounded-full cursor-pointer">
                   <i className="ri-play-fill ri-2x text-[var(--color-primary)]"></i>
-                </div>
+                </button>
               </div>
               <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded-md">
                 {entry.videoInfo.duration}
@@ -209,7 +209,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
         {/* 하단 액션: 좋아요, 댓글 */}
         <div className="flex items-center space-x-4 text-[var(--text-subtle)]">
           <button // div 대신 button 태그 사용
-            className="flex items-center cursor-pointer hover:text-[var(--color-primary)] transition-colors"
+            className="flex items-center cursor-pointer p-1 rounded-full hover:text-[var(--color-primary)] active:bg-[var(--color-subtle-bg)] transition-colors"
             onClick={handleLikeToggle}
             aria-label="좋아요 버튼"
           >
@@ -225,7 +225,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
             <span className="text-xs">{currentLikes}</span>
           </button>
           <button // div 대신 button 태그 사용
-            className="flex items-center cursor-pointer hover:text-[var(--color-primary)] transition-colors"
+            className="flex items-center cursor-pointer p-1 rounded-full hover:text-[var(--color-primary)] active:bg-[var(--color-subtle-bg)] transition-colors"
             aria-label="댓글 보기"
             onClick={() => {
               repliySlideHandle(entry.id);

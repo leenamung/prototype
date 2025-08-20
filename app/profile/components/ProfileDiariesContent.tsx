@@ -21,7 +21,7 @@ const ProfileDiariesContent: React.FC<ProfileDiariesContentProps> = ({ diaries }
         <div className="flex bg-[var(--color-subtle-bg)] rounded-full p-0.5">
           <button
             onClick={() => setViewMode('grid')}
-            className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors duration-150 ${
+            className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors duration-150 active:bg-[var(--color-border)] ${
               viewMode === 'grid' ? 'bg-[var(--color-primary)] shadow-sm' : 'hover:bg-[var(--color-component-bg)]'
             }`}
             aria-pressed={viewMode === 'grid'}
@@ -31,7 +31,7 @@ const ProfileDiariesContent: React.FC<ProfileDiariesContentProps> = ({ diaries }
           </button>
           <button
             onClick={() => setViewMode('list')}
-            className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors duration-150 ${
+            className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors duration-150 active:bg-[var(--color-border)] ${
               viewMode === 'list' ? 'bg-[var(--color-primary)] shadow-sm' : 'hover:bg-[var(--color-component-bg)]'
             }`}
             aria-pressed={viewMode === 'list'}

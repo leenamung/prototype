@@ -69,7 +69,7 @@ const EmotionSelector: React.FC<EmotionSelectorProps> = ({ selectedEmotions, onE
               <button
                 key={emotion.name}
                 onClick={() => handleEmotionToggle(emotion)}
-                className="flex flex-col items-center justify-center text-center transition-transform duration-200 ease-out transform hover:scale-110 focus:outline-none"
+                className="flex flex-col items-center justify-center text-center transition-transform duration-200 ease-out transform hover:scale-110 active:scale-95 focus:outline-none"
                 aria-pressed={isSelected}
               >
                 <div

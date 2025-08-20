@@ -44,7 +44,7 @@ const AgitMembersContent: React.FC<AgitMembersContentProps> = ({ members, totalM
             <button
               onClick={() => setIsSortDropdownOpen(!isSortDropdownOpen)}
               // 정렬 버튼 텍스트 색상 변경
-              className="text-xs text-[var(--text-subtle)] flex items-center cursor-pointer hover:text-[var(--text-main)]"
+              className="text-xs text-[var(--text-subtle)] flex items-center cursor-pointer hover:text-[var(--text-main)] p-1 rounded active:bg-[var(--color-subtle-bg)] transition-colors"
             >
               <span>{sortBy}</span>
               <i className={`ri-arrow-down-s-line ml-1 transition-transform ${isSortDropdownOpen ? 'rotate-180' : ''}`}></i>
@@ -56,7 +56,7 @@ const AgitMembersContent: React.FC<AgitMembersContentProps> = ({ members, totalM
                   <button
                     key={option}
                     onClick={() => { setSortBy(option); setIsSortDropdownOpen(false); }}
-                    className="block w-full text-left px-3 py-2 text-xs text-[var(--text-main)] hover:bg-[var(--color-subtle-bg)]"
+                    className="block w-full text-left px-3 py-2 text-xs text-[var(--text-main)] hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border-dark)]"
                   >
                     {option}
                   </button>

@@ -35,7 +35,7 @@ export default function AgitListPage() {
                 <p className="mb-4">아직 소속된 아지트가 없어요.</p>
                 <button 
                   onClick={() => setActiveTab('explore')}
-                  className="bg-[var(--color-primary)] text-[var(--text-on-primary)] px-5 py-2 rounded-[var(--rounded-button)] text-sm font-semibold hover:opacity-80 transition-opacity border border-[var(--color-primary-dark)]"
+                  className="bg-[var(--color-primary)] text-[var(--text-on-primary)] px-5 py-2 rounded-[var(--rounded-button)] text-sm font-semibold hover:opacity-80 active:bg-[var(--color-primary-darker)] active:border-[var(--color-primary-darker)] transition-all border border-[var(--color-primary-dark)]"
                 >
                   아지트 탐색하기
                 </button>

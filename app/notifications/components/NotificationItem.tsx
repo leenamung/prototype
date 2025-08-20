@@ -43,7 +43,7 @@ const NotificationItem: React.FC<NotificationItemProps> = ({ notification }) => 
         </div>
       )}
       {type === 'follow' && (
-         <button className="ml-3 px-4 py-1.5 bg-[var(--color-primary)] text-[var(--text-on-primary)] text-xs font-semibold rounded-md hover:opacity-90 transition-opacity border border-[var(--color-primary-dark)]">
+         <button className="ml-3 px-4 py-1.5 bg-[var(--color-primary)] text-[var(--text-on-primary)] text-xs font-semibold rounded-md hover:opacity-90 active:bg-[var(--color-primary-darker)] active:border-[var(--color-primary-darker)] transition-all border border-[var(--color-primary-dark)]">
            맞팔로우
          </button>
       )}

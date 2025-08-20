@@ -40,7 +40,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
         </div>
         <button
           onClick={onEditProfileClick}
-          className="bg-[var(--color-primary)] border border-[var(--color-primary-dark)] text-white px-6 py-2 rounded-[var(--rounded-button)] font-medium text-sm hover:opacity-90 transition-opacity"
+          className="bg-[var(--color-primary)] text-[var(--text-on-primary)] px-6 py-2 rounded-[var(--rounded-button)] font-medium text-sm hover:opacity-90 active:bg-[var(--color-primary-darker)] active:border-[var(--color-primary-darker)] transition-all border border-[var(--color-primary-dark)]"
         >
           프로필 편집
         </button>

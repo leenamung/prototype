@@ -9,7 +9,7 @@ const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({ onClick }) 
   return (
     <button
       onClick={onClick}
-      className="fixed bottom-20 right-6 w-14 h-14 bg-[var(--color-primary)] rounded-[var(--rounded-button)] shadow-lg flex items-center justify-center cursor-pointer z-50 hover:opacity-90 transition-all duration-150 ease-in-out border border-[var(--color-primary-dark)]"
+      className="fixed bottom-20 right-6 w-14 h-14 bg-[var(--color-primary)] rounded-[var(--rounded-button)] shadow-lg flex items-center justify-center cursor-pointer z-50 hover:opacity-90 active:bg-[var(--color-primary-darker)] active:border-[var(--color-primary-darker)] transition-all duration-150 ease-in-out border border-[var(--color-primary-dark)]"
       aria-label="새 일기 작성"
     >
       <i className="ri-add-line ri-xl text-[var(--text-on-primary)]"></i>

@@ -82,7 +82,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ isOpen, onClose, onApplyFilte
 
   return (
     // Main container for the filter panel, visibility controlled by `isOpen`
-    <div className={`fixed top-0 left-0 w-full h-full bg-[var(--color-component-bg)] z-30 transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+    <div className={`fixed top-0 left-0 w-full h-[calc(100%-4rem)] bg-[var(--color-component-bg)] z-30 transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
       <div id="filterPanelContent" className="p-4 pt-16 h-full flex flex-col">
         <button 
           onClick={onClose} 
@@ -179,13 +179,13 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ isOpen, onClose, onApplyFilte
         <div className="flex space-x-3 pt-4 border-t border-[var(--color-border)] mt-auto">
           <button 
             onClick={handleResetFilters}
-            className="flex-1 py-2.5 bg-[var(--color-subtle-bg)] hover:bg-[var(--color-border)] rounded-[var(--rounded-button)] text-sm text-[var(--text-subtle)] hover:text-[var(--text-main)] transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[var(--color-border)]"
+            className="flex-1 py-2.5 bg-[var(--color-subtle-bg)] hover:bg-[var(--color-border)] active:bg-[var(--color-border-dark)] rounded-[var(--rounded-button)] text-sm text-[var(--text-subtle)] hover:text-[var(--text-main)] transition-colors"
           >
             초기화
           </button>
           <button
             onClick={handleSubmit}
-            className="flex-1 py-2.5 bg-[var(--color-primary)] border border-[var(--color-primary-dark)] text-white rounded-[var(--rounded-button)] text-sm hover:opacity-80 transition-opacity duration-150 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[var(--color-primary)]"
+            className="flex-1 py-2.5 bg-[var(--color-primary)] text-[var(--text-on-primary)] rounded-[var(--rounded-button)] text-sm hover:opacity-90 active:bg-[var(--color-primary-darker)] active:border-[var(--color-primary-darker)] transition-all border border-[var(--color-primary-dark)]"
           >
             적용하기
           </button>

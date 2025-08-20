@@ -54,7 +54,7 @@ const WeatherSelectionModal: React.FC<WeatherSelectionModalProps> = ({ isOpen, o
             <button
               key={weather.name}
               onClick={() => handleSelect(weather)}
-              className="flex flex-col items-center justify-center p-3 bg-[var(--color-subtle-bg)] rounded-lg hover:bg-[var(--color-border)] transition-colors"
+              className="flex flex-col items-center justify-center p-3 bg-[var(--color-subtle-bg)] rounded-lg text-[var(--text-subtle)] hover:bg-[var(--color-border)] hover:text-[var(--color-primary-dark)] active:bg-[var(--color-border-dark)] transition-colors"
               aria-label={weather.label}
             >
               <i className={`${weather.icon} ri-2x mb-1`}></i>

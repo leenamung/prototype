@@ -38,7 +38,9 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ thread }) => {
     <div className="h-screen flex flex-col bg-[var(--color-component-bg)]">
       <header className="fixed top-0 w-full bg-[var(--color-component-bg)] shadow-sm z-20 border-b border-[var(--color-border)]">
         <div className="flex items-center px-4 py-3 h-14">
-            <button onClick={() => router.back()} className="p-2 -ml-2"><i className="ri-arrow-left-s-line ri-lg text-[var(--text-subtle)]"></i></button>
+            <button onClick={() => router.back()} className="p-2 -ml-2 rounded-full hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] transition-colors">
+              <i className="ri-arrow-left-s-line ri-lg text-[var(--text-subtle)]"></i>
+            </button>
             <div className="relative w-8 h-8 rounded-full overflow-hidden ml-2 mr-3">
                 <Image src={thread.participant.profileImage} alt={thread.participant.name} fill className="object-cover" />
             </div>
@@ -65,7 +67,9 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ thread }) => {
       </main>
       <footer className="fixed bottom-16 w-full bg-[var(--color-component-bg)] border-t border-[var(--color-border)] p-2">
         <div className="flex items-center">
-            <button className="p-2"><i className="ri-add-line ri-lg text-[var(--text-subtle)]"></i></button>
+            <button className="p-2 rounded-full hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] transition-colors">
+              <i className="ri-add-line ri-lg text-[var(--text-subtle)]"></i>
+            </button>
             <input 
                 type="text" 
                 placeholder="메시지 입력..."
@@ -74,7 +78,9 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ thread }) => {
                 onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
                 className="flex-1 bg-[var(--color-subtle-bg)] rounded-full px-4 py-2 text-sm outline-none focus:ring-1 focus:ring-[var(--color-primary)]"
             />
-            <button onClick={handleSendMessage} className="p-2"><i className="ri-send-plane-2-fill ri-lg text-[var(--color-primary-dark)]"></i></button>
+            <button onClick={handleSendMessage} className="p-2 rounded-full hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] transition-colors">
+              <i className="ri-send-plane-2-fill ri-lg text-[var(--color-primary-dark)]"></i>
+            </button>
         </div>
       </footer>
     </div>

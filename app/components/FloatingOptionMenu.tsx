@@ -33,7 +33,7 @@ const FloatingOptionMenu: React.FC<FloatingOptionMenuProps> = ({
     >
       <div className="bg-[var(--color-component-bg)] rounded-lg w-3/5 max-w-md flex-col animate-modalShowFront border border-[var(--color-border)]">
         {menu.map((item) => (
-          <button key={item.label} onClick={item.onClick ? item.onClick : () => { }} className={`flex py-4 px-2 w-full items-center justify-center cursor-pointer ${item.buttonStyle}`}>
+          <button key={item.label} onClick={item.onClick ? item.onClick : () => { }} className={`flex py-4 px-2 w-full items-center justify-center cursor-pointer transition-colors ${item.buttonStyle}`}>
             {item.label}
           </button>
         ))}

@@ -138,11 +138,17 @@ const PublishSettingsModal: React.FC<PublishSettingsModalProps> = ({
         <SettingsSection iconClass="ri-calendar-line" title="날짜 및 날씨">
           <div className="flex items-center space-x-2">
             {/* ⭐️ 날씨 선택 버튼 UI 수정 */}
-            <button onClick={() => setIsWeatherModalOpen(true)} className="flex items-center bg-[var(--color-subtle-bg)] px-3 py-1.5 rounded-full text-sm cursor-pointer hover:bg-[var(--color-border)]">
+            <button 
+              onClick={() => setIsWeatherModalOpen(true)}
+              className="flex items-center bg-[var(--color-subtle-bg)] px-3 py-1.5 rounded-full text-sm cursor-pointer hover:bg-[var(--color-border)] active:bg-[var(--color-border-dark)] transition-colors"
+            >
                 <i className={`${selectedWeather.icon} ri-sm mr-1.5 text-[var(--text-subtle)]`}></i>
                 <span className="text-[var(--text-main)]">{selectedWeather.label}</span>
             </button>
-            <button onClick={() => setIsDatePickerOpen(true)} className="flex items-center bg-[var(--color-subtle-bg)] px-3 py-1.5 rounded-full text-sm cursor-pointer hover:bg-[var(--color-border)]">
+            <button 
+              onClick={() => setIsDatePickerOpen(true)} 
+              className="flex items-center bg-[var(--color-subtle-bg)] px-3 py-1.5 rounded-full text-sm cursor-pointer hover:bg-[var(--color-border)] active:bg-[var(--color-border-dark)] transition-colors"
+            >
                 <span className="text-[var(--text-main)]">{formatDateDisplay(diaryDate)}</span>
             </button>
           </div>
@@ -172,7 +178,7 @@ const PublishSettingsModal: React.FC<PublishSettingsModalProps> = ({
       <div className="flex-shrink-0 p-4 border-t border-[var(--color-border)]">
         <button
           onClick={onPublish}
-          className="w-full bg-[var(--color-primary)] text-[var(--text-on-primary)] py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity border border-[var(--color-primary-dark)]"
+          className="w-full bg-[var(--color-primary)] text-[var(--text-on-primary)] py-3 rounded-lg font-semibold hover:opacity-90 active:bg-[var(--color-primary-darker)] active:border-[var(--color-primary-darker)] transition-all border border-[var(--color-primary-dark)]"
         >
           발행하기
         </button>

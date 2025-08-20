@@ -8,6 +8,9 @@
   --color-primary-dark: #EAA994;   /* 깊은 살구색 (테두리, 강조) */
   --color-component-bg: #FFFAF0;  /* 포근한 크림색 (카드, 모달) */
 
+  --color-primary-darker: #D48F7A; /* Primary 버튼 클릭 시 배경/테두리 색 */
+  --color-border-dark: #D5CABD;    /* Subtle 버튼 클릭 시 배경/테두리 색 */
+
   /* --- 보조 색상 --- */
   --color-accent-mint: #BEE8D0;     /* 서정적인 민트 */
   --color-accent-yellow: #FFF4BD;   /* 은은한 레몬색 */

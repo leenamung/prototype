@@ -23,7 +23,7 @@ const AgitNavigationBar: React.FC<AgitNavigationBarProps> = ({ onNotificationCli
           {/* ⬇️ 알림 아이콘과 뱃지 스타일을 기본 페이지와 동일하게 수정 */}
           <button 
             onClick={onNotificationClick} 
-            className="w-8 h-8 flex items-center justify-center cursor-pointer relative"
+            className="w-8 h-8 flex items-center justify-center cursor-pointer relative rounded-full hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] transition-colors"
             aria-label="알림"
           >
             <i className="ri-notification-3-line ri-lg text-[var(--text-subtle)]"></i>

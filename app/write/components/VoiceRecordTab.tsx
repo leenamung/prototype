@@ -117,7 +117,7 @@ const VoiceRecordTab: React.FC<VoiceRecordTabProps> = ({ description, onDescript
               <span className="text-gray-600 text-sm font-mono" aria-live="polite">{formatTime(recordingTime)}</span>
               <button
                 onClick={stopRecording}
-                className="bg-[var(--color-warning)] text-white rounded-full p-2 cursor-pointer hover:opacity-90 transition-opacity"
+                className="bg-[var(--color-warning)] text-white rounded-full p-2 cursor-pointer hover:opacity-90 active:opacity-75 transition-opacity"
                 aria-label="녹음 중지"
               >
                 <i className="ri-stop-fill ri-lg w-5 h-5 flex items-center justify-center"></i>
@@ -146,7 +146,7 @@ const VoiceRecordTab: React.FC<VoiceRecordTabProps> = ({ description, onDescript
             <div className="flex justify-end">
                 <button
                     onClick={handleDeleteRecording}
-                    className="bg-gray-200 text-gray-600 rounded-full p-2 cursor-pointer hover:bg-gray-300 transition-colors"
+                    className="bg-[var(--color-subtle-bg)] text-[var(--text-subtle)] rounded-full p-2 cursor-pointer hover:bg-[var(--color-border)] active:bg-[var(--color-border-dark)] transition-colors"
                     aria-label="녹음 삭제"
                 >
                     <i className="ri-delete-bin-line ri-lg w-5 h-5 flex items-center justify-center"></i>

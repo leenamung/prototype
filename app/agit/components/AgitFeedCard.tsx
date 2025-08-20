@@ -66,16 +66,27 @@ const AgitFeedCard: React.FC<AgitFeedCardProps> = ({ item }) => {
         {/* 아이콘 및 카운트 텍스트 색상 변경 */}
         <div className="flex justify-between items-center mt-3 text-[var(--text-subtle)]">
           <div className="flex items-center space-x-4">
-            <button onClick={handleLike} className="flex items-center hover:text-[var(--color-primary)] transition-colors" aria-label="좋아요">
+            <button 
+              onClick={handleLike} 
+              className="flex items-center p-1 rounded-full hover:text-[var(--color-primary)] active:bg-[var(--color-subtle-bg)] transition-colors" 
+              aria-label="좋아요"
+            >
               <i className={`${isLiked ? 'ri-heart-fill text-[var(--color-primary)]' : 'ri-heart-line'} ri-md`}></i>
               <span className="text-xs ml-1">{likes}</span>
             </button>
-            <button className="flex items-center hover:text-[var(--color-primary)] transition-colors" aria-label="댓글">
+            <button 
+              className="flex items-center p-1 rounded-full hover:text-[var(--color-primary)] active:bg-[var(--color-subtle-bg)] transition-colors" 
+              aria-label="댓글"
+            >
               <i className="ri-chat-1-line ri-md"></i>
               <span className="text-xs ml-1">{item.comments}</span>
             </button>
           </div>
-          <button onClick={handleBookmark} className="hover:text-[var(--color-primary)] transition-colors" aria-label="북마크">
+          <button 
+            onClick={handleBookmark} 
+            className="p-1 rounded-full hover:text-[var(--color-primary)] active:bg-[var(--color-subtle-bg)] transition-colors" 
+            aria-label="북마크"
+          >
             <i className={`${isBookmarked ? 'ri-bookmark-fill text-[var(--color-primary)]' : 'ri-bookmark-line'} ri-md`}></i>
           </button>
         </div>

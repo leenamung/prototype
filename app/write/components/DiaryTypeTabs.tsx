@@ -23,10 +23,10 @@ const DiaryTypeTabs: React.FC<DiaryTypeTabsProps> = ({ activeTab, onTabChange })
         <button
           key={tab.id}
           onClick={() => onTabChange(tab.id)}
-          className={`flex-1 py-2 px-3 rounded-full text-xs sm:text-sm font-medium flex items-center justify-center cursor-pointer transition-colors duration-150 ease-in-out
+          className={`flex-1 py-2 px-3 rounded-full text-xs sm:text-sm font-medium flex items-center justify-center cursor-pointer transition-all duration-150 ease-in-out
                       ${activeTab === tab.id 
                           ? 'bg-[var(--color-primary)] text-[var(--text-on-primary)] shadow-sm' 
-                          : 'text-[var(--text-subtle)] hover:bg-[var(--color-component-bg)]/60 hover:text-[var(--text-main)]' 
+                          : 'text-[var(--text-subtle)] hover:bg-[var(--color-component-bg)]/60 active:bg-[var(--color-border)]' 
                       }`}
         >
           <i className={`${tab.icon} ri-md mr-1 sm:mr-1.5 w-4 h-4 sm:w-5 sm:h-5`}></i>
