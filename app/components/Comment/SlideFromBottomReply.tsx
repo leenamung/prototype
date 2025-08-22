@@ -178,9 +178,17 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
                 )}
               </AnimatePresence>
               <div
-                className={`border border-[var(--color-border)] ${replyUserName !== undefined ? "rounded-b-xl" : "rounded-xl"} px-5 py-1 focus-within:border-[var(--color-primary-dark)]`}
+                className={`
+                  border border-[var(--color-border)] 
+                  ${replyUserName !== undefined ? "rounded-b-xl" : "rounded-xl"} 
+                  px-5 py-1 
+                  transition-all 
+                  focus-within:ring-2 
+                  focus-within:ring-[var(--color-primary)]/50 
+                  focus-within:border-transparent
+                `}
               >
-                <input className="outline-0 w-full text-md bg-transparent"></input>
+                <input className="outline-none w-full text-md bg-transparent"></input>
               </div>
             </div>
             <div>

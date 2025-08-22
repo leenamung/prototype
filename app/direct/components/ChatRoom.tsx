@@ -76,7 +76,7 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ thread }) => {
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                className="flex-1 bg-[var(--color-subtle-bg)] rounded-full px-4 py-2 text-sm outline-none focus:ring-1 focus:ring-[var(--color-primary)]"
+                className="flex-1 bg-[var(--color-subtle-bg)] rounded-full px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-[var(--color-primary)]/50 focus:border-[var(--color-primary-dark)] transition-all"
             />
             <button onClick={handleSendMessage} className="p-2 rounded-full hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] transition-colors">
               <i className="ri-send-plane-2-fill ri-lg text-[var(--color-primary-dark)]"></i>

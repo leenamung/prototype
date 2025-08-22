@@ -28,12 +28,13 @@ const ExchangeDiaryOptions: React.FC<ExchangeDiaryOptionsProps> = (props) => {
   return (
     <div className="bg-[var(--color-component-bg)] rounded-lg shadow-sm p-4 -mt-3 border-x border-b border-[var(--color-border)] animate-modalShowUp">
       <div className="relative mb-4">
-        <div className="flex items-center bg-[var(--color-subtle-bg)] rounded-lg px-3 py-2">
-          <i className="ri-search-line text-[var(--text-subtle)] mr-2 w-5 h-5"></i>
+        <div className="flex items-center bg-[var(--color-subtle-bg)] rounded-lg px-3 py-2 border border-transparent focus-within:ring-2 focus-within:ring-[var(--color-primary)]/50 transition-all">
+          <i className="ri-search-line text-[var(--text-subtle)] mr-2 w-5 h-5 flex items-center justify-center"></i>
           <input 
             type="text" 
             placeholder="친구 검색" 
             className="w-full bg-transparent text-sm outline-none text-[var(--text-main)] placeholder:text-[var(--text-subtle)]/70"
+            onChange={(e) => props.onFriendSearch && props.onFriendSearch(e.target.value)}
           />
         </div>
       </div>

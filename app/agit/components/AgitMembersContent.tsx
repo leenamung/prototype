@@ -30,7 +30,7 @@ const AgitMembersContent: React.FC<AgitMembersContentProps> = ({ members, totalM
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             // 입력 필드 배경, 텍스트, placeholder 색상 변경
-            className="w-full py-3 px-10 bg-[var(--color-subtle-bg)] rounded-full text-sm text-[var(--text-main)] placeholder:text-[var(--text-subtle)]/80 focus:ring-1 focus:ring-[var(--color-primary-dark)] outline-none transition-shadow"
+            className="w-full py-3 px-10 bg-[var(--color-subtle-bg)] rounded-full text-sm text-[var(--text-main)] placeholder:text-[var(--text-subtle)]/80 focus:ring-2 focus:ring-[var(--color-primary)]/50 focus:border-[var(--color-primary-dark)] outline-none transition-all"
           />
           <div className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center pointer-events-none">
             {/* 검색 아이콘 색상 변경 */}
