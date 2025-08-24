@@ -1,6 +1,4 @@
-// app/components/Comment/SlideFromBottomReply.tsx
 "use client";
-
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useState, useRef, useEffect, useMemo } from "react";
 import { CommentEntry } from "../../data/commentEntries";
@@ -33,15 +31,16 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
   const [isHeightDragging, setIsHeightDragging] = useState(false);
   const heightDragInfo = useRef({ startY: 0, startHeight: 0 });
   const [replyUserName, setReplyUserName] = useState<string>();
+  const TAB_BAR_HEIGHT = 64;
 
   const snapPoints = useMemo(() => {
     if (typeof window === "undefined") {
       return { top: 760, middle: 533, closed: 0 };
     }
-    const screenHeight = window.innerHeight;
+    const availableHeight = window.innerHeight - TAB_BAR_HEIGHT;
     return {
-      top: screenHeight * 0.95,
-      middle: screenHeight * (2 / 3),
+      top: availableHeight - 20,
+      middle: availableHeight * 0.6,
       closed: 0,
     };
   }, []);
@@ -64,7 +63,8 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
       const currentY = "touches" in e ? e.touches[0].clientY : e.clientY;
       const deltaY = currentY - heightDragInfo.current.startY;
       const newHeight = heightDragInfo.current.startHeight - deltaY;
-      setHeight(newHeight);
+      const constrainedHeight = Math.min(newHeight, snapPoints.top);
+      setHeight(constrainedHeight);
     };
     const handleHeightDragEnd = () => {
       if (!isHeightDragging) return;
@@ -128,7 +128,7 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
           style={{ height: `${height}px`, transition: isHeightDragging ? 'none' : 'height 0.3s ease-out' }}
         >
           <div
-            className="flex flex-col w-full items-center justify-center py-2 flex-shrink-0 cursor-ns-resize"
+            className="flex flex-col w-full items-center justify-center py-3 flex-shrink-0 cursor-ns-resize"
             onMouseDown={handleHeightDragStart}
             onTouchStart={handleHeightDragStart}
           >
@@ -144,9 +144,9 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
               ></CommentItem>
             ))}
           </div>
-          <div className="flex items-end border-t border-[var(--color-border)] mx-3 mb-3 pt-3">
+          <div className="flex items-end border-t border-[var(--color-border)] p-4 space-x-2">
             {/* ⬇️ 1. 부모 div에 'relative' 클래스 추가 */}
-            <div className="relative w-10 h-10 rounded-full bg-[var(--color-border)] overflow-hidden mr-3 flex-shrink-0">
+            <div className="relative w-10 h-10 rounded-full bg-[var(--color-border)] overflow-hidden flex-shrink-0">
               {/* ⬇️ 2. img를 Image로 변경하고 fill 속성 적용 */}
               <Image 
                 src={userProfile} 
@@ -157,42 +157,33 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
                 onError={handleImageError} 
               />
             </div>
-            <div className="flex-col flex-1 mr-1">
+            <div className="flex-1 flex flex-col bg-[var(--color-subtle-bg)] rounded-xl border border-transparent focus-within:ring-2 focus-within:ring-[var(--color-primary)]/50 transition-all p-2">
               <AnimatePresence>
                 {replyUserName && (
                   <motion.div
-                    className="flex justify-between text-sm py-1 border-t border-x rounded-t-xl px-5 border-[var(--color-border)]"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
+                    className="flex justify-between items-center text-sm px-2 pb-1"
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <div>
-                      <span className="text-sm text-[var(--text-subtle)]">{replyUserName}</span>
-                      <span className="ml-2 text-sm text-[var(--text-subtle)]">님에게 답글 남기는 중</span>
-                    </div>
-                    <button className="cursor-pointer text-md text-[var(--text-subtle)] p-1 -m-1 rounded-full hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border-dark)]" onClick={() => setReplyUserName(undefined)}>
+                    <p className="text-xs text-[var(--text-subtle)]">
+                      <span className="font-medium text-[var(--text-main)]">{replyUserName}</span>
+                      님에게 답글 남기는 중
+                    </p>
+                    <button className="cursor-pointer text-md text-[var(--text-subtle)] p-1 -m-1 rounded-full hover:bg-[var(--color-component-bg)] active:bg-[var(--color-border)]" onClick={() => setReplyUserName(undefined)}>
                       <i className="ri-close-line"></i>
                     </button>
                   </motion.div>
                 )}
               </AnimatePresence>
-              <div
-                className={`
-                  border border-[var(--color-border)] 
-                  ${replyUserName !== undefined ? "rounded-b-xl" : "rounded-xl"} 
-                  px-5 py-1 
-                  transition-all 
-                  focus-within:ring-2 
-                  focus-within:ring-[var(--color-primary)]/50 
-                  focus-within:border-transparent
-                `}
-              >
-                <input className="outline-none w-full text-md bg-transparent"></input>
-              </div>
+              <input 
+                className="outline-none w-full text-base bg-transparent px-2"
+                placeholder="댓글을 입력하세요..."
+              />
             </div>
             <div>
-              <button className="cursor-pointer text-md px-3 py-1 rounded-xl bg-[var(--color-subtle-bg)] hover:bg-[var(--color-border)] active:bg-[var(--color-border-dark)] transition-colors">
+              <button className="cursor-pointer text-md px-3 py-2 rounded-xl bg-[var(--color-subtle-bg)] hover:bg-[var(--color-border)] active:bg-[var(--color-border-dark)] transition-colors">
                 <i className="ri-upload-line"></i>
               </button>
             </div>

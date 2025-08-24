@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState, useEffect, useRef } from "react";
 // 경로 수정: app/components/ 에서 app/data/ 로 이동하려면 ../data/ 를 사용합니다.
 import type { DiaryEntry } from "../data/diaryEntries";
@@ -20,7 +19,6 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
   const [currentLikes, setCurrentLikes] = useState(entry.likes);
   const [isExpanded, setIsExpanded] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false); // 오디오 재생 상태
-
   const contentRef = useRef<HTMLParagraphElement>(null);
   const [showReadMore, setShowReadMore] = useState(false);
 
@@ -78,11 +76,11 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
   const diaryTitleForAria = authorName + "의 일기";
 
   return (
-    <div className={`relative bg-[var(--color-component-bg)] rounded-lg shadow-sm mb-4 overflow-hidden border border-[var(--color-border)] ${entry.emotionOverlayClass || ""}`}>
-      <div className="relative z-10 p-4">
-        <div className="flex items-center justify-between mb-3">
+    <div className={`relative bg-[var(--color-component-bg)] rounded-lg shadow-sm overflow-hidden border border-[var(--color-border)] ${entry.emotionOverlayClass || ""}`}>
+      <div className="relative z-10 p-5">
+        <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
-            <div className="w-10 h-10 rounded-full bg-[var(--color-border)] overflow-hidden mr-3 flex-shrink-0">
+            <div className="w-10 h-10 rounded-full bg-[var(--color-border)] overflow-hidden mr-4 flex-shrink-0">
               <Image src={authorProfileImage} alt={`${authorName} 프로필`} onError={handleImageError} className="w-full h-full object-cover" width={40} height={40} />
             </div>
             <div>
@@ -95,7 +93,6 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
             </div>
           </div>
           <div className="relative">
-            {" "}
             {/* 팝업 메뉴의 위치 기준점 */}
             <button // div 대신 button 태그 사용 권장
               className="w-8 h-8 flex items-center justify-center cursor-pointer rounded-full hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] transition-colors"
@@ -113,9 +110,9 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
         </div>
 
         {/* 일기 타입별 콘텐츠 렌더링 */}
-        <div className="mb-3">
+        <div className="mb-4">
           {entry.type === "image" && entry.imageUrl && (
-            <div className="mb-3 rounded-md overflow-hidden">
+            <div className="mb-4 rounded-md overflow-hidden">
               <Image
                 src={entry.imageUrl}
                 alt={`${authorName}의 사진 일기`}
@@ -128,7 +125,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
           )}
 
           {entry.type === "video" && entry.videoInfo && (
-            <div className="mb-3 rounded-md overflow-hidden relative">
+            <div className="mb-4 rounded-md overflow-hidden relative">
               <Image
                 src={entry.videoInfo.thumbnailImage}
                 alt={`${authorName}의 영상 일기 썸네일`}
@@ -149,7 +146,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
           )}
 
           {entry.type === "audio" && entry.audioInfo && (
-            <div className="bg-[var(--color-component-bg)] rounded-lg p-3 mb-3 shadow-sm border border-[var(--color-border)]">
+            <div className="bg-[var(--color-component-bg)] rounded-lg p-3 mb-4 shadow-sm border border-[var(--color-border)]">
               {" "}
               {/* 오디오 플레이어 배경 및 그림자 추가 */}
               <div className="flex items-center mb-2">
@@ -190,7 +187,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
           {/* 일기 본문 */}
           <p
             ref={contentRef}
-            className={`text-[var(--text-main)] leading-relaxed text-sm ${
+            className={`text-[var(--text-main)] leading-relaxed text-base ${
               isExpanded ? "" : "line-clamp-3"
             }`}
           >
@@ -199,7 +196,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
           {showReadMore && (
             <p
               onClick={toggleReadMore}
-              className="text-[var(--color-primary)] text-xs mt-1 cursor-pointer hover:underline"
+              className="text-[var(--color-primary-dark)] text-xs mt-2 cursor-pointer hover:underline"
             >
               {isExpanded ? "접기" : "더보기"}
             </p>
@@ -207,22 +204,14 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
         </div>
 
         {/* 하단 액션: 좋아요, 댓글 */}
-        <div className="flex items-center space-x-4 text-[var(--text-subtle)]">
+        <div className="flex items-center space-x-5 text-[var(--text-subtle)]">
           <button // div 대신 button 태그 사용
             className="flex items-center cursor-pointer p-1 rounded-full hover:text-[var(--color-primary)] active:bg-[var(--color-subtle-bg)] transition-colors"
             onClick={handleLikeToggle}
             aria-label="좋아요 버튼"
           >
-            <div className="w-6 h-6 flex items-center justify-center mr-1">
-              <i
-                className={`${
-                  isLiked
-                    ? "ri-heart-fill text-[var(--color-primary)]"
-                    : "ri-heart-line"
-                } ri-lg`}
-              ></i>
-            </div>
-            <span className="text-xs">{currentLikes}</span>
+            <i className={`${isLiked ? "ri-heart-fill text-[var(--color-primary)]" : "ri-heart-line"} ri-lg`}></i>
+            <span className="text-xs ml-1.5">{currentLikes}</span>
           </button>
           <button // div 대신 button 태그 사용
             className="flex items-center cursor-pointer p-1 rounded-full hover:text-[var(--color-primary)] active:bg-[var(--color-subtle-bg)] transition-colors"
@@ -231,10 +220,8 @@ const DiaryCard: React.FC<DiaryCardProps> = ({
               repliySlideHandle(entry.id);
             }}
           >
-            <div className="w-6 h-6 flex items-center justify-center mr-1">
-              <i className="ri-chat-1-line ri-lg"></i>
-            </div>
-            <span className="text-xs">{entry.comments}</span>
+            <i className="ri-chat-1-line ri-lg"></i>
+            <span className="text-xs ml-1.5">{entry.comments}</span>
           </button>
         </div>
       </div>

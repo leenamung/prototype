@@ -1,6 +1,4 @@
-// components/StoryList.tsx
 "use client";
-
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import StoryItem from "./StoryItem"; // 위에서 만든 StoryItem 컴포넌트
 
@@ -68,7 +66,7 @@ const StoryList: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full py-4">
+    <div className="relative w-full py-2">
       {/* 왼쪽 버튼 */}
       {canScrollLeft && (
         <button
@@ -82,7 +80,7 @@ const StoryList: React.FC = () => {
       {/* 스크롤 컨테이너 */}
       <div
         ref={scrollContainerRef}
-        className="flex p-2 space-x-2 overflow-x-auto scrollbar-hide"
+        className="flex px-2 space-x-2 overflow-x-auto scrollbar-hide"
       >
         {sampleStories.map((story) => (
           <StoryItem key={story.id} {...story} />

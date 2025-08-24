@@ -37,9 +37,9 @@ const EmotionSelector: React.FC<EmotionSelectorProps> = ({ selectedEmotions, onE
 
   return (
     <div className="mb-6">
-      <div className="mb-4">
+      <div className="mb-8">
         <h3 className="text-sm text-[var(--text-subtle)] mb-2">오늘의 감정 색</h3>
-        <div className="p-3 bg-[var(--color-subtle-bg)] rounded-lg min-h-[60px] flex items-center space-x-3 border border-[var(--color-border)]">
+        <div className="p-4 bg-[var(--color-subtle-bg)] rounded-lg h-[76px] flex items-center space-x-4 border border-[var(--color-border)]">
           <AnimatePresence>
             {selectedEmotions.length > 0 && (
               <motion.div layout initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.5 }}>
@@ -60,8 +60,9 @@ const EmotionSelector: React.FC<EmotionSelectorProps> = ({ selectedEmotions, onE
           </div>
         </div>
       </div>
+
       <div>
-        <h3 className="text-sm text-[var(--text-subtle)] mb-2">감정 팔레트</h3>
+        <h3 className="text-sm text-[var(--text-subtle)] mb-3">감정 팔레트</h3>
         <div className="grid grid-cols-5 gap-x-3 gap-y-4">
           {emotions.map((emotion) => {
             const isSelected = selectedEmotions.some(e => e.name === emotion.name);

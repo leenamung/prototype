@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useState } from 'react';
 import type { AgitFeedItem } from '../data/agitSampleData';
 import Image from 'next/image';
@@ -25,9 +24,9 @@ const AgitFeedCard: React.FC<AgitFeedCardProps> = ({ item }) => {
   return (
     // 카드 배경색 변경 (기본 #FFFAF0 사용 또는 --color-sub-beige 등 고려)
     <div className="bg-[var(--color-component-bg)] rounded-lg shadow-sm overflow-hidden border border-[var(--color-border)]">
-      <div className="p-4">
-        <div className="flex items-center mb-3">
-          <div className="w-10 h-10 rounded-full bg-[var(--color-border)] overflow-hidden mr-3 flex-shrink-0">
+      <div className="p-5">
+        <div className="flex items-center mb-4">
+          <div className="w-10 h-10 rounded-full bg-[var(--color-border)] overflow-hidden mr-4 flex-shrink-0">
             <Image
               src={item.author.profileImage}
               alt={`${item.author.name} 프로필`}
@@ -45,13 +44,13 @@ const AgitFeedCard: React.FC<AgitFeedCardProps> = ({ item }) => {
         </div>
 
         {/* 감정 오버레이 배경색 변경 (bg-primary/15) */}
-        <div className={item.emotionOverlay ? "bg-[var(--color-primary)]/15 p-3 rounded-md mb-3" : "mb-3"}>
+        <div className={item.emotionOverlay ? "bg-[var(--color-primary)]/15 p-4 rounded-md mb-4" : "mb-4"}>
           {/* 본문 텍스트 색상 변경 */}
-          <p className="text-sm text-[var(--text-main)] leading-relaxed whitespace-pre-wrap">{item.content}</p>
+          <p className="text-base text-[var(--text-main)] leading-relaxed whitespace-pre-wrap">{item.content}</p>
         </div>
 
         {item.imageUrl && (
-          <div className="mb-3 rounded-md overflow-hidden">
+          <div className="mb-4 rounded-md overflow-hidden">
             <Image
               src={item.imageUrl}
               alt="피드 이미지"
@@ -64,29 +63,18 @@ const AgitFeedCard: React.FC<AgitFeedCardProps> = ({ item }) => {
         )}
 
         {/* 아이콘 및 카운트 텍스트 색상 변경 */}
-        <div className="flex justify-between items-center mt-3 text-[var(--text-subtle)]">
-          <div className="flex items-center space-x-4">
-            <button 
-              onClick={handleLike} 
-              className="flex items-center p-1 rounded-full hover:text-[var(--color-primary)] active:bg-[var(--color-subtle-bg)] transition-colors" 
-              aria-label="좋아요"
-            >
+        <div className="flex justify-between items-center text-[var(--text-subtle)]">
+          <div className="flex items-center space-x-5">
+            <button onClick={handleLike} className="flex items-center p-1 rounded-full hover:text-[var(--color-primary)] active:bg-[var(--color-subtle-bg)] transition-colors" aria-label="좋아요">
               <i className={`${isLiked ? 'ri-heart-fill text-[var(--color-primary)]' : 'ri-heart-line'} ri-md`}></i>
-              <span className="text-xs ml-1">{likes}</span>
+              <span className="text-xs ml-1.5">{likes}</span>
             </button>
-            <button 
-              className="flex items-center p-1 rounded-full hover:text-[var(--color-primary)] active:bg-[var(--color-subtle-bg)] transition-colors" 
-              aria-label="댓글"
-            >
+            <button className="flex items-center p-1 rounded-full hover:text-[var(--color-primary)] active:bg-[var(--color-subtle-bg)] transition-colors" aria-label="댓글">
               <i className="ri-chat-1-line ri-md"></i>
-              <span className="text-xs ml-1">{item.comments}</span>
+              <span className="text-xs ml-1.5">{item.comments}</span>
             </button>
           </div>
-          <button 
-            onClick={handleBookmark} 
-            className="p-1 rounded-full hover:text-[var(--color-primary)] active:bg-[var(--color-subtle-bg)] transition-colors" 
-            aria-label="북마크"
-          >
+          <button onClick={handleBookmark} className="p-1 rounded-full hover:text-[var(--color-primary)] active:bg-[var(--color-subtle-bg)] transition-colors" aria-label="북마크">
             <i className={`${isBookmarked ? 'ri-bookmark-fill text-[var(--color-primary)]' : 'ri-bookmark-line'} ri-md`}></i>
           </button>
         </div>

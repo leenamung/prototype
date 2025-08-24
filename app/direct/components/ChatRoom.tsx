@@ -56,7 +56,7 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ thread }) => {
               </div>
             )}
             <div className={`max-w-xs md:max-w-md p-3 rounded-2xl break-words ${msg.sender === 'me' ? 'bg-[var(--color-primary)] text-[var(--text-on-primary)] rounded-br-lg' : 'bg-[var(--color-subtle-bg)] text-[var(--text-main)] rounded-bl-lg'}`}>
-              <p className="text-sm">{msg.content}</p>
+              <p className="text-base">{msg.content}</p>
             </div>
             <div className="flex-shrink-0 self-end text-xs text-[var(--text-subtle)]">
                 {msg.timestamp}
@@ -76,7 +76,7 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ thread }) => {
                 value={newMessage}
                 onChange={(e) => setNewMessage(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                className="flex-1 bg-[var(--color-subtle-bg)] rounded-full px-4 py-2 text-sm outline-none focus:ring-2 focus:ring-[var(--color-primary)]/50 focus:border-[var(--color-primary-dark)] transition-all"
+                className="flex-1 bg-[var(--color-subtle-bg)] rounded-full px-4 py-2 text-base outline-none focus:ring-2 focus:ring-[var(--color-primary)]/50 focus:border-[var(--color-primary-dark)] transition-all"
             />
             <button onClick={handleSendMessage} className="p-2 rounded-full hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] transition-colors">
               <i className="ri-send-plane-2-fill ri-lg text-[var(--color-primary-dark)]"></i>

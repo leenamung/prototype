@@ -100,7 +100,7 @@ const PhotoUploadTab: React.FC<PhotoUploadTabProps> = ({ description, onDescript
         </div>
       )}
       <textarea
-        className="w-full min-h-[250px] bg-[var(--color-subtle-bg)] p-3 rounded-lg border-none focus:ring-2 focus:ring-[var(--color-primary)]/50 outline-none text-[var(--text-main)] text-sm leading-relaxed resize-none placeholder:text-[var(--text-subtle)]/70 transition-shadow"
+        className="w-full min-h-[250px] bg-[var(--color-subtle-bg)] p-3 rounded-lg border-none focus:ring-2 focus:ring-[var(--color-primary)]/50 outline-none text-[var(--text-main)] text-base leading-relaxed resize-none placeholder:text-[var(--text-subtle)]/70 transition-shadow"
         placeholder="사진에 대한 설명을 입력하세요"
         value={description}
         onChange={(e) => onDescriptionChange(e.target.value)}

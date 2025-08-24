@@ -1,5 +1,4 @@
 "use client";
-
 import Image from 'next/image';
 import React from 'react';
 
@@ -19,8 +18,8 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   onEditProfileClick,
 }) => {
   return (
-    <div className="pt-14 pb-4 px-4 bg-[var(--color-component-bg)]"> 
-      <div className="flex flex-col items-center mt-6">
+    <div className="pt-20 pb-6 px-4 bg-[var(--color-component-bg)] border-b border-[var(--color-border)]"> 
+      <div className="flex flex-col items-center">
         <div className="w-24 h-24 rounded-full overflow-hidden mb-4 shadow-md">
           <Image
             src={profileImage}
@@ -31,11 +30,11 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
           />
         </div>
         {/* 이름 텍스트 색상 변경 */}
-        <h2 className="text-xl font-bold text-[var(--text-main)] mb-1">{name}</h2>
+        <h2 className="text-xl font-bold text-[var(--text-main)] mb-2">{name}</h2>
         {/* 소개 텍스트 색상 변경 */}
-        <p className="text-sm text-[var(--text-subtle)] mb-3 text-center max-w-md px-4">{bio}</p>
+        <p className="text-base text-[var(--text-subtle)] mb-4 text-center max-w-md px-4">{bio}</p>
         {/* 친구 수 텍스트 색상 변경 */}
-        <div className="text-sm text-[var(--text-subtle)] mb-4 cursor-pointer hover:text-[var(--color-primary)] transition-colors">
+        <div className="text-sm text-[var(--text-subtle)] mb-5 cursor-pointer hover:text-[var(--color-primary)] transition-colors">
           친구 {friendCount}명
         </div>
         <button

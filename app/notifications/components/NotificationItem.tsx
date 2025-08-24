@@ -27,23 +27,23 @@ const NotificationItem: React.FC<NotificationItemProps> = ({ notification }) => 
   };
 
   return (
-    <Link href="#" className="flex items-center p-2 -mx-2 rounded-lg hover:bg-[var(--color-subtle-bg)] transition-colors">
-      <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0 mr-3">
+    <Link href="#" className="flex items-center p-3 -mx-3 rounded-lg hover:bg-[var(--color-subtle-bg)] transition-colors">
+      <div className="relative w-12 h-12 rounded-full overflow-hidden flex-shrink-0 mr-4">
         <Image src={user.profileImage} alt={`${user.name} 프로필`} fill className="object-cover" />
       </div>
       <div className="flex-1 text-sm">
-        <p className="text-[var(--text-main)]">
+        <p className="text-[var(--text-main)] leading-relaxed">
           <b className="font-semibold">{user.name}</b>님이 {renderContent()}
         </p>
-        <p className="text-xs text-[var(--text-subtle)] mt-0.5">{timestamp}</p>
+        <p className="text-xs text-[var(--text-subtle)] mt-1">{timestamp}</p>
       </div>
       {postThumbnail && (
-        <div className="relative w-12 h-12 rounded-md overflow-hidden flex-shrink-0 ml-3">
+        <div className="relative w-12 h-12 rounded-md overflow-hidden flex-shrink-0 ml-4">
           <Image src={postThumbnail} alt="게시물 썸네일" fill className="object-cover" />
         </div>
       )}
       {type === 'follow' && (
-         <button className="ml-3 px-4 py-1.5 bg-[var(--color-primary)] text-[var(--text-on-primary)] text-xs font-semibold rounded-md hover:opacity-90 active:bg-[var(--color-primary-darker)] active:border-[var(--color-primary-darker)] transition-all border border-[var(--color-primary-dark)]">
+         <button className="ml-4 px-4 py-1.5 bg-[var(--color-primary)] text-[var(--text-on-primary)] text-xs font-semibold rounded-md hover:opacity-90 active:bg-[var(--color-primary-darker)] active:border-[var(--color-primary-darker)] transition-all border border-[var(--color-primary-dark)]">
            맞팔로우
          </button>
       )}

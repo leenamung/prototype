@@ -33,7 +33,7 @@ const ExchangeDiaryOptions: React.FC<ExchangeDiaryOptionsProps> = (props) => {
           <input 
             type="text" 
             placeholder="친구 검색" 
-            className="w-full bg-transparent text-sm outline-none text-[var(--text-main)] placeholder:text-[var(--text-subtle)]/70"
+            className="w-full bg-transparent text-base outline-none text-[var(--text-main)] placeholder:text-[var(--text-subtle)]/70"
             onChange={(e) => props.onFriendSearch && props.onFriendSearch(e.target.value)}
           />
         </div>

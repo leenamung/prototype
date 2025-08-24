@@ -20,8 +20,6 @@ export default function FeedPage() {
   // ⬇️ 1. 어떤 다이어리의 댓글창을 열었는지 ID를 저장할 state 추가
   const [selectedDiaryId, setSelectedDiaryId] = useState<string | null>(null);
 
-  useEffect(() => {}, []);
-
   const handleOpenModal = (entry: DiaryEntry) => {setOptionMenuEntry(entry);setIsModalOpen(true)};
   const handleCloseModal = () => {setOptionMenuEntry(null);setIsModalOpen(false);};
 
@@ -44,7 +42,7 @@ export default function FeedPage() {
         userProfileImage="https://readdy.ai/api/search-image?query=portrait%20of%20a%20young%20asian%20woman%2C%20soft%20lighting%2C%20warm%20tones%2C%20natural%20look%2C%20gentle%20smile%2C%20high%20quality%2C%20professional%20photo&width=100&height=100&seq=1&orientation=squarish"
       />
 
-      <main className="pt-[73px] px-4 pb-4">
+      <main className="pt-20 px-5 pb-5 space-y-4">
         <StoryCarousel />
         {entries.map((entry) => (
           <DiaryCard 

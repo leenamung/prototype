@@ -1,9 +1,6 @@
-// app/write/page.tsx
 "use client";
-
 import React, { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-
 // 컴포넌트 임포트
 import WriteNavigationBar from "./components/WriteNavigationBar";
 import DiaryTypeTabs, { DiaryType } from "./components/DiaryTypeTabs";
@@ -89,7 +86,7 @@ const PublishSettingsModal: React.FC<PublishSettingsModalProps> = ({
       </div>
 
       {/* 모달 콘텐츠 (스크롤 가능 영역) */}
-      <div className="flex-grow overflow-y-auto p-4 space-y-4">
+      <div className="flex-grow overflow-y-auto p-5 space-y-5">
         {/* 1. 게시 공간 선택 */}
         <SettingsSection iconClass="ri-send-plane-line" title="게시 공간">
           <div className="relative">
@@ -266,7 +263,7 @@ export default function WritePage() {
         isPublishDisabled={!isNextEnabled()}
       />
 
-      <main className="pt-16 px-4">
+      <main className="pt-16 px-5">
         {/* 1. 콘텐츠 타입 선택 */}
         <DiaryTypeTabs activeTab={activeTab} onTabChange={setActiveTab} />
 
