@@ -1,7 +1,7 @@
 // app/page.tsx
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import NavigationBar from "./components/NavigationBar";
 import DiaryCard from "./components/DiaryCard";
 import { diaryEntriesData, DiaryEntry } from "./data/diaryEntries";
