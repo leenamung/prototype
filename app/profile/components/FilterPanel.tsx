@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import { emotions, Emotion } from '../../data/emotionData';
+import { emotions } from '../../data/emotionData';
 
 // Define the props for the FilterPanel component
 interface FilterPanelProps {

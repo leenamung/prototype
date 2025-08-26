@@ -9,11 +9,9 @@ import FilterPanel, { ActiveFilters } from './FilterPanel'; // myspace의 컴포
 
 type ViewMode = 'list' | 'grid' | 'calendar';
 
-interface ProfileDiariesContentProps {
-  // 나중에는 userId 등을 props로 받아 해당 유저의 일기를 필터링할 수 있습니다.
-}
 
-const ProfileDiariesContent: React.FC<ProfileDiariesContentProps> = () => {
+
+const ProfileDiariesContent = () => {
   const [viewMode, setViewMode] = useState<ViewMode>('list');
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [activeFilters, setActiveFilters] = useState<ActiveFilters>({});

@@ -30,7 +30,6 @@ const privacyOptionsMap: Record<PrivacyOption, { text: string; icon: string }> =
 
 // --- 2단계: 설정을 위한 전체 화면 모달 컴포넌트 ---
 interface PublishSettingsModalProps {
-  isOpen: boolean;
   onClose: () => void;
   onPublish: () => void;
   diaryTitle: string; // 제목 state
@@ -49,7 +48,6 @@ interface PublishSettingsModalProps {
 }
 
 const PublishSettingsModal: React.FC<PublishSettingsModalProps> = ({
-  isOpen,
   onClose,
   onPublish,
   diaryTitle,
@@ -341,9 +339,8 @@ export default function WritePage() {
       <AnimatePresence>
         {isSettingsModalOpen && (
           <PublishSettingsModal
-            isOpen={isSettingsModalOpen}
             onClose={() => setIsSettingsModalOpen(false)}
-            onPublish={() => console.log("Published!")}
+            onPublish={() => handlePublish()}
             diaryTitle={diaryTitle}
             onTitleChange={setDiaryTitle}
             privacy={privacy}
