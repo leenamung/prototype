@@ -19,7 +19,7 @@ const AgitDetailClient: React.FC<AgitDetailClientProps> = ({ agitData }) => {
 
   // 만약 데이터가 없다면 에러 메시지 표시
   if (!agitData) {
-    return <div className="pt-14 text-center">아지트 정보를 불러올 수 없습니다.</div>;
+    return <div className="pt-20 text-center text-base text-[var(--text-subtle)]">아지트 정보를 불러올 수 없습니다.</div>;
   }
 
   return (

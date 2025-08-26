@@ -1,69 +1,48 @@
-// app/profile/components/ProfileDiariesContent.tsx
 "use client";
-
 import React, { useState } from 'react';
-import ProfileDiaryGridItem from './ProfileDiaryGridItem';
-import ProfileDiaryListItem from './ProfileDiaryListItem';
-import type { UserDiarySummary } from '../data/profileSampleData';
+import { sampleMySpaceDiaries as diaries } from '../data/mySpaceSampleData'; // 샘플 데이터 가져오기
+import DiaryViewControls from './DiaryViewControls'; // 1단계에서 만든 컴포넌트
+import DiaryListView from './DiaryListView'; // myspace의 컴포넌트 재사용
+import DiaryGridView from './DiaryGridView'; // myspace의 컴포넌트 재사용
+import DiaryCalendarView from './DiaryCalendarView'; // myspace의 컴포넌트 재사용
+import FilterPanel, { ActiveFilters } from './FilterPanel'; // myspace의 컴포넌트 재사용
+
+type ViewMode = 'list' | 'grid' | 'calendar';
 
 interface ProfileDiariesContentProps {
-  diaries: UserDiarySummary[];
+  // 나중에는 userId 등을 props로 받아 해당 유저의 일기를 필터링할 수 있습니다.
 }
 
-type DiariesViewMode = 'grid' | 'list';
+const ProfileDiariesContent: React.FC<ProfileDiariesContentProps> = () => {
+  const [viewMode, setViewMode] = useState<ViewMode>('list');
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [activeFilters, setActiveFilters] = useState<ActiveFilters>({});
 
-const ProfileDiariesContent: React.FC<ProfileDiariesContentProps> = ({ diaries }) => {
-  const [viewMode, setViewMode] = useState<DiariesViewMode>('grid');
+  const handleApplyFilters = (filters: ActiveFilters) => {
+    setActiveFilters(filters);
+    setIsFilterOpen(false); // 필터 적용 후 패널 닫기
+  };
 
   return (
     <div>
-      <div className="flex justify-end mb-4 mt-1">
-        <div className="flex bg-[var(--color-subtle-bg)] rounded-full p-0.5">
-          <button
-            onClick={() => setViewMode('grid')}
-            className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors duration-150 active:bg-[var(--color-border)] ${
-              viewMode === 'grid' ? 'bg-[var(--color-primary)] shadow-sm' : 'hover:bg-[var(--color-component-bg)]'
-            }`}
-            aria-pressed={viewMode === 'grid'}
-            aria-label="그리드 뷰로 보기"
-          >
-            <i className={`ri-grid-fill ri-sm ${viewMode === 'grid' ? 'text-white' : 'text-[var(--text-subtle)]'}`}></i>
-          </button>
-          <button
-            onClick={() => setViewMode('list')}
-            className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors duration-150 active:bg-[var(--color-border)] ${
-              viewMode === 'list' ? 'bg-[var(--color-primary)] shadow-sm' : 'hover:bg-[var(--color-component-bg)]'
-            }`}
-            aria-pressed={viewMode === 'list'}
-            aria-label="리스트 뷰로 보기"
-          >
-            <i className={`ri-list-check ri-sm ${viewMode === 'list' ? 'text-white' : 'text-[var(--text-subtle)]'}`}></i>
-          </button>
-        </div>
+      <DiaryViewControls
+        currentView={viewMode}
+        onViewChange={setViewMode}
+        onFilterToggle={() => setIsFilterOpen(true)}
+        hasActiveFilters={Object.keys(activeFilters).length > 0}
+      />
+
+      <div className="px-4 py-4">
+        {viewMode === 'list' && <DiaryListView diaries={diaries} />}
+        {viewMode === 'grid' && <DiaryGridView diaries={diaries} />}
+        {viewMode === 'calendar' && <DiaryCalendarView diaries={diaries} />}
       </div>
 
-      {/* Conditional Rendering based on viewMode */}
-      {viewMode === 'grid' ? (
-        diaries && diaries.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {diaries.map(diary => (
-              <ProfileDiaryGridItem key={diary.id} diary={diary} />
-            ))}
-          </div>
-        ) : (
-          <p className="text-center text-[var(--text-subtle)] py-8 text-sm">작성한 일기가 없습니다.</p>
-        )
-      ) : ( // List View
-        diaries && diaries.length > 0 ? (
-          <div>
-            {diaries.map(diary => (
-              <ProfileDiaryListItem key={diary.id} diary={diary} />
-            ))}
-          </div>
-        ) : (
-          <p className="text-center text-[var(--text-subtle)] py-8 text-sm">작성한 일기가 없습니다.</p>
-        )
-      )}
+      <FilterPanel 
+        isOpen={isFilterOpen}
+        onClose={() => setIsFilterOpen(false)}
+        onApplyFilters={handleApplyFilters}
+      />
     </div>
   );
 };

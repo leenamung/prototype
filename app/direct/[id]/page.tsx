@@ -11,9 +11,9 @@ export default async function ChatRoomPage({ params }: ChatRoomPageProps) {
 
   if (!thread) {
     return (
-        <div className="pt-14 text-center">
+        <div className="pt-20 text-center px-4">
             <h1 className="text-lg font-semibold text-[var(--text-main)]">오류</h1>
-            <p className="text-sm text-[var(--text-subtle)]">대화방을 찾을 수 없습니다.</p>
+            <p className="text-base text-[var(--text-subtle)] mt-2">대화방을 찾을 수 없습니다.</p>
         </div>
     );
   }

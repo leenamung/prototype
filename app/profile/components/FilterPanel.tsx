@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import { emotions, Emotion } from '../../data/emotionData';
 
 // Define the props for the FilterPanel component
 interface FilterPanelProps {
@@ -27,13 +28,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ isOpen, onClose, onApplyFilte
 
   // Define the available filter options
   const dateRanges = ['전체', '최근 일주일', '최근 한 달', '올해', '작년'];
-  const emotions = [
-    { name: 'happy', color: 'var(--emotion-happy)', label: '행복' },
-    { name: 'sad', color: 'var(--emotion-sad)', label: '슬픔' },
-    { name: 'angry', color: 'var(--emotion-angry)', label: '화남' },
-    { name: 'calm', color: 'var(--emotion-calm)', label: '평온' },
-    { name: 'anxious', color: 'var(--emotion-anxious)', label: '불안' },
-  ];
+
   const privacyOptions = ['전체', '비공개', '친구 공개', '아지트 공개', '전체 공개'];
   const diaryTypeOptions = [
     { name: '텍스트', icon: 'ri-file-text-line' },
@@ -82,19 +77,22 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ isOpen, onClose, onApplyFilte
 
   return (
     // Main container for the filter panel, visibility controlled by `isOpen`
-    <div className={`fixed top-0 left-0 w-full h-[calc(100%-4rem)] bg-[var(--color-component-bg)] z-30 transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
-      <div id="filterPanelContent" className="p-4 pt-16 h-full flex flex-col">
-        <button 
-          onClick={onClose} 
-          className="absolute top-4 right-4 text-[var(--text-subtle)] hover:text-[var(--text-main)] z-40 p-1 rounded-full hover:bg-[var(--color-subtle-bg)] transition-colors duration-150"
-          aria-label="필터 닫기"
-        >
-          <i className="ri-close-line ri-xl"></i>
-        </button>
+    <div className={`fixed top-0 left-0 w-full h-[calc(100%-4em)] bg-[var(--color-component-bg)] z-30 transform transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div id="filterPanelContent" className="h-full flex flex-col">
         
-        <h2 id="filter-panel-title" className="sr-only">일기 필터</h2> 
+        <div className="flex-shrink-0 flex items-center justify-between p-4 h-16 border-b border-[var(--color-border)]">
+          <div className="w-8"></div> {/* 왼쪽 공간 확보용 */}
+          <h2 className="font-semibold text-lg text-[var(--text-main)]">필터</h2>
+          <button 
+            onClick={onClose} 
+            className="w-8 h-8 flex items-center justify-center text-[var(--text-subtle)] hover:text-[var(--text-main)] rounded-full hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] transition-colors"
+            aria-label="필터 닫기"
+          >
+            <i className="ri-close-line ri-xl"></i>
+          </button>
+        </div>
 
-        <div className="overflow-y-auto flex-grow mb-4 pr-1">
+        <div className="overflow-y-auto overflow-x-hidden flex-grow p-4 mb-4">
           <section className="mb-6" aria-labelledby="date-filter-heading">
             <h3 id="date-filter-heading" className="text-sm font-semibold mb-2.5 text-[var(--text-main)]">날짜</h3>
             <div className="flex space-x-2 overflow-x-auto pb-2 -mx-1 px-1">
@@ -102,12 +100,11 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ isOpen, onClose, onApplyFilte
                 <button
                   key={range}
                   onClick={() => setSelectedDateRange(range)}
-                  className={`whitespace-nowrap px-3 py-1.5 rounded-full text-xs transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[var(--color-primary)]
-                              ${selectedDateRange === range 
-                                ? 'bg-[var(--color-primary)] border border-[var(--color-primary-dark)] text-white shadow-sm' 
-                                // 비활성 버튼 배경 및 텍스트 색상 변경
-                                : 'bg-[var(--color-sub-beige)] hover:bg-opacity-80 text-[var(--text-subtle)] hover:text-[var(--text-main)]'
-                              }`}
+                  className={`whitespace-nowrap px-3 py-1.5 rounded-full text-xs transition-colors focus:outline-none 
+                  ${selectedDateRange === range 
+                    ? 'bg-[var(--color-primary)] text-[var(--text-on-primary)] shadow-sm hover:opacity-90 border border-[var(--color-primary-dark)]'
+                    : 'bg-[var(--color-subtle-bg)] text-[var(--text-subtle)] hover:text-[var(--text-main)] hover:bg-[var(--color-border)] border border-transparent'
+                  }`}
                   aria-pressed={selectedDateRange === range}
                 >
                   {range}
@@ -117,19 +114,34 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ isOpen, onClose, onApplyFilte
           </section>
 
           <section className="mb-6" aria-labelledby="emotion-filter-heading">
-            <h3 id="emotion-filter-heading" className="text-sm font-semibold mb-2.5 text-[var(--text-main)]">감정</h3>
-            <div className="flex space-x-3 items-center">
+            <h3 id="emotion-filter-heading" className="text-sm font-semibold mb-3 text-[var(--text-main)]">감정</h3>
+            <div className="grid grid-cols-5 gap-x-2 gap-y-3">
               {emotions.map(emotion => (
                 <button
-                  key={emotion.name}
-                  onClick={() => handleEmotionToggle(emotion.name)}
-                  className={`w-9 h-9 rounded-full transition-all duration-150 ease-in-out transform hover:scale-110 focus:outline-none
-                              ${selectedEmotions.includes(emotion.name) ? 'ring-2 ring-offset-2 ring-[var(--color-primary-dark)] scale-105' : 'ring-1 ring-[var(--color-border)]'}`}
-                  style={{ backgroundColor: emotion.color }}
-                  aria-pressed={selectedEmotions.includes(emotion.name)}
-                  aria-label={emotion.label}
-                  title={emotion.label}
-                ></button>
+                  key={emotion.key}
+                  onClick={() => handleEmotionToggle(emotion.key)}
+                  className="flex flex-col items-center justify-center text-center transition-transform duration-200 ease-out transform hover:scale-110 active:scale-95 focus:outline-none"
+                  aria-pressed={selectedEmotions.includes(emotion.key)}
+                >
+                  <div
+                    className="w-10 h-10 rounded-full cursor-pointer transition-all duration-200"
+                    style={{ 
+                      backgroundColor: emotion.color,
+                      boxShadow: selectedEmotions.includes(emotion.key) ? `0 0 0 2px var(--color-component-bg), 0 0 0 4px ${emotion.color}` : '0 1px 2px rgba(0,0,0,0.05)'
+                    }}
+                  >
+                    {selectedEmotions.includes(emotion.key) && (
+                        <div className="w-full h-full flex items-center justify-center">
+                            <i className="ri-check-line text-white text-xl font-bold" style={{textShadow: '0px 1px 2px rgba(0,0,0,0.2)'}}></i>
+                        </div>
+                    )}
+                  </div>
+                  <span className={`mt-2 text-xs transition-colors ${selectedEmotions.includes(emotion.key) ? `font-semibold` : 'text-[var(--text-subtle)]'}`}
+                        style={{color: selectedEmotions.includes(emotion.key) ? emotion.color : ''}}
+                  >
+                    {emotion.label}
+                  </span>
+                </button>
               ))}
             </div>
           </section>
@@ -142,11 +154,11 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ isOpen, onClose, onApplyFilte
                 <button
                   key={option}
                   onClick={() => setSelectedPrivacy(option)}
-                  className={`whitespace-nowrap px-3 py-1.5 rounded-full text-xs transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[var(--color-primary)]
-                              ${selectedPrivacy === option 
-                                ? 'bg-[var(--color-primary)] border border-[var(--color-primary-dark)] text-white shadow-sm' 
-                                : 'bg-[var(--color-sub-beige)] hover:bg-opacity-80 text-[var(--text-subtle)] hover:text-[var(--text-main)]'
-                              }`}
+                  className={`whitespace-nowrap px-3 py-1.5 rounded-full text-xs transition-colors focus:outline-none 
+                  ${selectedPrivacy === option 
+                    ? 'bg-[var(--color-primary)] text-[var(--text-on-primary)] shadow-sm hover:opacity-90 border border-[var(--color-primary-dark)]'
+                    : 'bg-[var(--color-subtle-bg)] text-[var(--text-subtle)] hover:text-[var(--text-main)] hover:bg-[var(--color-border)] border border-transparent'
+                  }`}
                   aria-pressed={selectedPrivacy === option}
                 >
                   {option}
@@ -162,11 +174,11 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ isOpen, onClose, onApplyFilte
                 <button
                   key={type.name}
                   onClick={() => handleDiaryTypeToggle(type.name)}
-                  className={`whitespace-nowrap px-3 py-1.5 rounded-full text-xs flex items-center transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-[var(--color-primary)]
-                              ${selectedDiaryTypes.includes(type.name) 
-                                ? 'bg-[var(--color-primary)] border border-[var(--color-primary-dark)] text-white shadow-sm' 
-                                : 'bg-[var(--color-sub-beige)] hover:bg-opacity-80 text-[var(--text-subtle)] hover:text-[var(--text-main)]'
-                              }`}
+                  className={`whitespace-nowrap px-3 py-1.5 rounded-full text-xs flex items-center transition-colors focus:outline-none 
+                  ${selectedDiaryTypes.includes(type.name) 
+                    ? 'bg-[var(--color-primary)] text-[var(--text-on-primary)] shadow-sm hover:opacity-90 border border-[var(--color-primary-dark)]'
+                    : 'bg-[var(--color-subtle-bg)] text-[var(--text-subtle)] hover:text-[var(--text-main)] hover:bg-[var(--color-border)] border border-transparent'
+                  }`}
                   aria-pressed={selectedDiaryTypes.includes(type.name)}
                 >
                   <i className={`${type.icon} mr-1.5 ri-sm`}></i>{type.name}
@@ -176,7 +188,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ isOpen, onClose, onApplyFilte
           </section>
         </div>
         
-        <div className="flex space-x-3 pt-4 border-t border-[var(--color-border)] mt-auto">
+        <div className="flex-shrink-0 flex space-x-3 p-4 border-t border-[var(--color-border)]">
           <button 
             onClick={handleResetFilters}
             className="flex-1 py-2.5 bg-[var(--color-subtle-bg)] hover:bg-[var(--color-border)] active:bg-[var(--color-border-dark)] rounded-[var(--rounded-button)] text-sm text-[var(--text-subtle)] hover:text-[var(--text-main)] transition-colors"

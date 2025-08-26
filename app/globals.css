@@ -28,12 +28,23 @@
   --agit-notice-badge-bg: #FFF5F2; /* 아지트 공지 뱃지 배경 */
 
   /* --- 감정 색상 (파스텔 톤) --- */
-  --emotion-happy: #FFD6D6;
-  --emotion-sad: #B0C4DE;
-  --emotion-angry: #E57373; /* Warning 색상과 통일 */
-  --emotion-calm: #D4F0F0;
-  --emotion-anxious: #C7CEEA;
-  --emotion-neutral: #E0E0E0;
+  --emotion-happy: #FFD6D6;      /* 행복 */
+  --emotion-joy: #FFEFBA;        /* 기쁨 (추가) */
+  --emotion-calm: #D4F0F0;        /* 평온 */
+  --emotion-hope: #E2F0CB;        /* 희망 (추가) */
+  --emotion-satisfied: #B5EAD7;  /* 만족 (추가) */
+  --emotion-serene: #C7CEEA;      /* 차분 (추가) */
+  --emotion-excitement: #D8B5E0;  /* 설렘 (추가) */
+  --emotion-love: #F8C8DC;        /* 사랑 */
+  --emotion-lazy: #E0E0E0;        /* 무기력 */
+  --emotion-sad: #B4D4E1;         /* 슬픔 */
+  --emotion-angry: #E57373;       /* 화남 */
+  --emotion-grateful: #FFE5B4;    /* 감사 */
+  --emotion-proud: #A8D8B0;       /* 뿌듯 */
+  --emotion-lonely: #C9C9E0;      /* 외로움 */
+  --emotion-tired: #C0C0C0;        /* 지침 */
+  --emotion-miss: #E6E6FA;        /* 그리움 */
+  --emotion-anxious: #BCC5D5;     /* 불안 */
 
   /* --- 프로필 그리드 뷰 전용 반투명 감정 색상 --- */
   --profile-emotion-red: rgba(229, 115, 115, 0.3);

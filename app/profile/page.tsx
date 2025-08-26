@@ -18,7 +18,7 @@ export default function ProfilePage() {
   if (!profileData) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <p className="text-[var(--text-subtle)]">Loading profile...</p>
+        <p className="text-[var(--text-subtle)]">프로필을 불러오는 중...</p>
       </div>
     );
   }
@@ -38,7 +38,7 @@ export default function ProfilePage() {
       <ProfileTabs activeTab={activeTab} onTabChange={setActiveTab} />
       <div className="px-4 py-4">
         {activeTab === 'diaries' && (
-          <ProfileDiariesContent diaries={profileData.diaries} />
+          <ProfileDiariesContent />
         )}
         {activeTab === 'friends' && (
           <div className="text-center text-[var(--text-subtle)] py-8 text-sm">

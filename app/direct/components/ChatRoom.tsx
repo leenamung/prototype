@@ -35,7 +35,7 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ thread }) => {
   };
 
   return (
-    <div className="h-screen flex flex-col bg-[var(--color-component-bg)]">
+    <div className="h-[calc(100vh-4em)] flex flex-col bg-[var(--color-component-bg)]">
       <header className="fixed top-0 w-full bg-[var(--color-component-bg)] shadow-sm z-20 border-b border-[var(--color-border)]">
         <div className="flex items-center px-4 py-3 h-14">
             <button onClick={() => router.back()} className="p-2 -ml-2 rounded-full hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] transition-colors">
@@ -47,7 +47,7 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ thread }) => {
             <p className="font-semibold text-[var(--text-main)]">{thread.participant.name}</p>
         </div>
       </header>
-      <main className="flex-1 overflow-y-auto pt-16 pb-28 px-4 space-y-4">
+      <main className="flex-1 overflow-y-auto pt-16 pb-20 px-4 space-y-4">
         {messages.map(msg => (
           <div key={msg.id} className={`flex items-start gap-2 ${msg.sender === 'me' ? 'justify-end' : 'justify-start'}`}>
             {msg.sender !== 'me' && (

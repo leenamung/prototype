@@ -8,13 +8,14 @@ import TextEditorTab from "./components/TextEditorTab";
 import PhotoUploadTab from "./components/PhotoUploadTab";
 import VideoUploadTab from "./components/VideoUploadTab";
 import VoiceRecordTab from "./components/VoiceRecordTab";
-import EmotionSelector, { EmotionOption } from './components/EmotionSelector'; 
+import EmotionSelector from './components/EmotionSelector'; 
 import SettingsSection from "./components/SettingsSection";
 import DatePickerModal from "./components/DatePickerModal";
 import ExchangeDiaryOptions from "./components/ExchangeDiaryOptions";
 import LocationDisplay from "./components/LocationDisplay";
 import ToggleSwitch from "./components/ToggleSwitch";
 import WeatherSelectionModal, { WeatherOption, weatherOptions } from "./components/WeatherSelectionModal";
+import { Emotion } from "../data/emotionData";
 
 // --- 타입 정의 ---
 type PrivacyOption = "private" | "friends" | "group" | "public" | "exchange";
@@ -29,9 +30,11 @@ const privacyOptionsMap: Record<PrivacyOption, { text: string; icon: string }> =
 
 // --- 2단계: 설정을 위한 전체 화면 모달 컴포넌트 ---
 interface PublishSettingsModalProps {
+  isOpen: boolean;
   onClose: () => void;
   onPublish: () => void;
-
+  diaryTitle: string; // 제목 state
+  onTitleChange: (title: string) => void; // 제목 변경 handler
   // 상태와 핸들러를 Props로 전달받음
   privacy: PrivacyOption;
   setPrivacy: (p: PrivacyOption) => void;
@@ -46,8 +49,11 @@ interface PublishSettingsModalProps {
 }
 
 const PublishSettingsModal: React.FC<PublishSettingsModalProps> = ({
+  isOpen,
   onClose,
   onPublish,
+  diaryTitle,
+  onTitleChange,
   privacy,
   setPrivacy,
   diaryDate,
@@ -58,6 +64,8 @@ const PublishSettingsModal: React.FC<PublishSettingsModalProps> = ({
   selectedWeather,
   setSelectedWeather, // ⭐️ props 추가
 }) => {
+  const MAX_TITLE_LENGTH = 50;
+
   const [isPrivacyDropdownOpen, setIsPrivacyDropdownOpen] = useState(false);
   const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
   const [isWeatherModalOpen, setIsWeatherModalOpen] = useState(false); // ⭐️ 날씨 모달 상태 추가
@@ -70,7 +78,7 @@ const PublishSettingsModal: React.FC<PublishSettingsModalProps> = ({
 
   return (
     <motion.div
-      className="fixed inset-0 bg-[var(--color-component-bg)] z-50 flex flex-col"
+      className="fixed inset-0 bg-[var(--color-component-bg)] z-50 flex flex-col bottom-16"
       initial={{ y: "100%" }}
       animate={{ y: 0 }}
       exit={{ y: "100%" }}
@@ -87,6 +95,32 @@ const PublishSettingsModal: React.FC<PublishSettingsModalProps> = ({
 
       {/* 모달 콘텐츠 (스크롤 가능 영역) */}
       <div className="flex-grow overflow-y-auto p-5 space-y-5">
+        {/* ✅ [추가] 제목 입력 섹션 */}
+        <div className="bg-[var(--color-component-bg)] rounded-lg shadow-sm p-5 border border-[var(--color-border)]">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center">
+              <i className="ri-quill-pen-line ri-lg mr-3 text-[var(--text-subtle)] w-6 h-6 flex items-center justify-center"></i>
+              <span className="text-[var(--text-main)] text-sm font-medium">제목</span>
+            </div>
+            {/* 글자 수 카운터 */}
+            <span className="text-xs text-[var(--text-subtle)]">
+              {diaryTitle.length} / {MAX_TITLE_LENGTH}
+            </span>
+          </div>
+          <div className="mt-3">
+            <input 
+              type="text"
+              value={diaryTitle}
+              onChange={(e) => {
+                if (e.target.value.length <= MAX_TITLE_LENGTH) {
+                  onTitleChange(e.target.value);
+                }
+              }}
+              placeholder="제목 (선택 사항)"
+              className="w-full bg-[var(--color-subtle-bg)] text-base text-[var(--text-main)] placeholder:text-[var(--text-subtle)]/70 focus:outline-none p-3 rounded-lg border border-transparent focus:ring-2 focus:ring-[var(--color-primary)]/50 focus:border-[var(--color-primary-dark)] transition-all"
+            />
+          </div>
+        </div>
         {/* 1. 게시 공간 선택 */}
         <SettingsSection iconClass="ri-send-plane-line" title="게시 공간">
           <div className="relative">
@@ -190,6 +224,7 @@ export default function WritePage() {
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false); // 모달 표시 상태
 
   const [activeTab, setActiveTab] = useState<DiaryType>("text");
+  const [diaryTitle, setDiaryTitle] = useState('');
 
   const [textContent, setTextContent] = useState("");
   const [photoDescription, setPhotoDescription] = useState("");
@@ -206,7 +241,7 @@ export default function WritePage() {
   const [currentLocation, setCurrentLocation] = useState<string | null>(null);
   // ⭐️ 날씨 상태 추가 (기본값: '맑음')
   const [selectedWeather, setSelectedWeather] = useState<WeatherOption>(weatherOptions[0]);
-  const [selectedEmotions, setSelectedEmotions] = useState<EmotionOption[]>([]);
+  const [selectedEmotions, setSelectedEmotions] = useState<Emotion[]>([]);
 
 
   const handlePublish = () => {
@@ -224,7 +259,7 @@ export default function WritePage() {
       useLocation,
       currentLocation,
       selectedWeather: selectedWeather.name, // ⭐️ 날씨 데이터 추가
-      selectedEmotions: selectedEmotions.map(e => e.name), // 이름만 추출하여 전송
+      selectedEmotions: selectedEmotions.map(e => e.label), // 이름만 추출하여 전송
     });
     alert("일기가 발행되었습니다! (콘솔 로그 확인)");
     setIsSettingsModalOpen(false); // 발행 후 모달 닫기
@@ -268,7 +303,7 @@ export default function WritePage() {
         <DiaryTypeTabs activeTab={activeTab} onTabChange={setActiveTab} />
 
         {/* 2. 콘텐츠 작성 영역 */}
-        <div className="mb-6">
+        <div className="mb-6 min-h-[451px]">
           {activeTab === "text" && (
             <TextEditorTab
               content={textContent}
@@ -306,8 +341,11 @@ export default function WritePage() {
       <AnimatePresence>
         {isSettingsModalOpen && (
           <PublishSettingsModal
+            isOpen={isSettingsModalOpen}
             onClose={() => setIsSettingsModalOpen(false)}
-            onPublish={handlePublish}
+            onPublish={() => console.log("Published!")}
+            diaryTitle={diaryTitle}
+            onTitleChange={setDiaryTitle}
             privacy={privacy}
             setPrivacy={setPrivacy}
             diaryDate={diaryDate}

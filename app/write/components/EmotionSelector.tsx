@@ -2,30 +2,18 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import MixedEmotionIcon from './MixedEmotionIcon';
-
-export interface EmotionOption {
-  name: string;
-  color: string;
-}
-
-export const emotions: EmotionOption[] = [
-    { name: "행복", color: "#FFD6D6" }, { name: "기쁨", color: "#FFEFBA" },
-    { name: "평온", color: "#D4F0F0" }, { name: "희망", color: "#E2F0CB" },
-    { name: "만족", color: "#B5EAD7" }, { name: "차분", color: "#C7CEEA" },
-    { name: "설렘", color: "#D8B5E0" }, { name: "사랑", color: "#F0D0D0" },
-    { name: "무기력", color: "#E0E0E0" }, { name: "슬픔", color: "#B0C4DE" },
-];
+import { emotions, Emotion } from '../../data/emotionData';
 
 interface EmotionSelectorProps {
-  selectedEmotions: EmotionOption[];
-  onEmotionChange: (emotions: EmotionOption[]) => void;
+  selectedEmotions: Emotion[];
+  onEmotionChange: (emotions: Emotion[]) => void;
 }
 
 const EmotionSelector: React.FC<EmotionSelectorProps> = ({ selectedEmotions, onEmotionChange }) => {
-  const handleEmotionToggle = (emotion: EmotionOption) => {
-    const isSelected = selectedEmotions.some(e => e.name === emotion.name);
+  const handleEmotionToggle = (emotion: Emotion) => {
+    const isSelected = selectedEmotions.some(e => e.label === emotion.label);
     if (isSelected) {
-      onEmotionChange(selectedEmotions.filter(e => e.name !== emotion.name));
+      onEmotionChange(selectedEmotions.filter(e => e.label !== emotion.label));
     } else {
       if (selectedEmotions.length < 3) {
         onEmotionChange([...selectedEmotions, emotion]);
@@ -50,8 +38,8 @@ const EmotionSelector: React.FC<EmotionSelectorProps> = ({ selectedEmotions, onE
           <div className="flex flex-wrap gap-2">
             {selectedEmotions.length > 0 ? (
               selectedEmotions.map(emotion => (
-                <span key={emotion.name} className="px-3 py-1 text-sm font-medium text-[var(--text-main)] bg-[var(--color-component-bg)] rounded-full shadow-sm border border-[var(--color-border)]">
-                  {emotion.name}
+                <span key={emotion.label} className="px-3 py-1 text-sm font-medium text-[var(--text-main)] bg-[var(--color-component-bg)] rounded-full shadow-sm border border-[var(--color-border)]">
+                  {emotion.label}
                 </span>
               ))
             ) : (
@@ -65,10 +53,10 @@ const EmotionSelector: React.FC<EmotionSelectorProps> = ({ selectedEmotions, onE
         <h3 className="text-sm text-[var(--text-subtle)] mb-3">감정 팔레트</h3>
         <div className="grid grid-cols-5 gap-x-3 gap-y-4">
           {emotions.map((emotion) => {
-            const isSelected = selectedEmotions.some(e => e.name === emotion.name);
+            const isSelected = selectedEmotions.some(e => e.label === emotion.label);
             return (
               <button
-                key={emotion.name}
+                key={emotion.label}
                 onClick={() => handleEmotionToggle(emotion)}
                 className="flex flex-col items-center justify-center text-center transition-transform duration-200 ease-out transform hover:scale-110 active:scale-95 focus:outline-none"
                 aria-pressed={isSelected}
@@ -89,7 +77,7 @@ const EmotionSelector: React.FC<EmotionSelectorProps> = ({ selectedEmotions, onE
                 <span className={`mt-2 text-xs transition-colors ${isSelected ? `font-semibold` : 'text-[var(--text-subtle)]'}`}
                       style={{color: isSelected ? emotion.color : ''}}
                 >
-                  {emotion.name}
+                  {emotion.label}
                 </span>
               </button>
             );
