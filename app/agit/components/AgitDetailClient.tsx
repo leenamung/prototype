@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import type { AgitInfo, sampleAgitData } from '../data/agitSampleData';
+import type { AgitInfo } from '../data/agitSampleData';
 import AgitHeader from './AgitHeader';
 import AgitTabs, { AgitTabKey } from './AgitTabs';
 import AgitFeedContent from './AgitFeedContent';

@@ -18,7 +18,6 @@ const AgitMembersContent: React.FC<AgitMembersContentProps> = ({ members, totalM
   const filteredMembers = members.filter(member =>
     member.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  const sortedMembers = filteredMembers; // 정렬 로직은 아직 미구현
 
   return (
     <div>

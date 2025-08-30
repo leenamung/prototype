@@ -5,7 +5,7 @@ import AgitMainNavigationBar from './components/AgitMainNavigationBar';
 import AgitListTabs, { AgitListTabKey } from './components/AgitListTabs';
 import FloatingActionButton from '../components/FloatingActionButton';
 import ProfileAgitListItem from '../profile/components/ProfileAgitListItem';
-import { sampleUserProfileData, UserAgitSummary } from '../profile/data/profileSampleData';
+import { sampleUserProfileData } from '../profile/data/profileSampleData';
 import EmptyMyAgitList from './components/EmptyMyAgitList';
 
 const exploreAgitsData = [
