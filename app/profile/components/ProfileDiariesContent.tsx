@@ -6,6 +6,7 @@ import DiaryListView from './DiaryListView'; // myspace의 컴포넌트 재사�
 import DiaryGridView from './DiaryGridView'; // myspace의 컴포넌트 재사용
 import DiaryCalendarView from './DiaryCalendarView'; // myspace의 컴포넌트 재사용
 import FilterPanel, { ActiveFilters } from './FilterPanel'; // myspace의 컴포넌트 재사용
+import EmptyProfileDiaries from './EmptyProfileDiaries';
 
 type ViewMode = 'list' | 'grid' | 'calendar';
 
@@ -21,19 +22,28 @@ const ProfileDiariesContent = () => {
     setIsFilterOpen(false); // 필터 적용 후 패널 닫기
   };
 
+  const isDiariesEmpty = diaries.length === 0;
   return (
     <div>
-      <DiaryViewControls
-        currentView={viewMode}
-        onViewChange={setViewMode}
-        onFilterToggle={() => setIsFilterOpen(true)}
-        hasActiveFilters={Object.keys(activeFilters).length > 0}
-      />
+      {!isDiariesEmpty && (
+        <DiaryViewControls
+          currentView={viewMode}
+          onViewChange={setViewMode}
+          onFilterToggle={() => setIsFilterOpen(true)}
+          hasActiveFilters={Object.keys(activeFilters).length > 0}
+        />
+      )}
 
       <div className="px-4 py-4">
-        {viewMode === 'list' && <DiaryListView diaries={diaries} />}
-        {viewMode === 'grid' && <DiaryGridView diaries={diaries} />}
-        {viewMode === 'calendar' && <DiaryCalendarView diaries={diaries} />}
+        {isDiariesEmpty ? (
+          <EmptyProfileDiaries />
+        ) : (
+          <>
+            {viewMode === 'list' && <DiaryListView diaries={diaries} />}
+            {viewMode === 'grid' && <DiaryGridView diaries={diaries} />}
+            {viewMode === 'calendar' && <DiaryCalendarView diaries={diaries} />}
+          </>
+        )}
       </div>
 
       <FilterPanel 

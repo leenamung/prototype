@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import AgitMemberItem from './AgitMemberItem';
 import type { AgitMember } from '../data/agitSampleData';
+import EmptySearchResult from '../../components/EmptySearchResult';
 
 interface AgitMembersContentProps {
   members: AgitMember[];
@@ -68,18 +69,14 @@ const AgitMembersContent: React.FC<AgitMembersContentProps> = ({ members, totalM
       </div>
 
       <div className="p-4">
-        {sortedMembers && sortedMembers.length > 0 ? (
-          // 멤버 리스트 카드 배경 변경
-          <div className="bg-[var(--color-component-bg)] rounded-lg shadow-sm overflow-hidden">
-            {sortedMembers.map((member) => (
+        {filteredMembers.length > 0 ? (
+          <div className="bg-[var(--color-component-bg)] rounded-lg shadow-sm overflow-hidden border border-[var(--color-border)]">
+            {filteredMembers.map((member) => (
               <AgitMemberItem key={member.id} member={member} />
             ))}
           </div>
         ) : (
-          // 메시지 텍스트 색상 변경
-          <p className="text-center text-[var(--text-subtle)] py-8 text-sm">
-            {searchTerm ? '검색된 멤버가 없습니다.' : '아지트 멤버가 없습니다.'}
-          </p>
+          searchTerm ? <EmptySearchResult searchTerm={searchTerm} /> : <p className="text-center text-[var(--text-subtle)] py-8 text-sm">아지트 멤버가 없습니다.</p>
         )}
       </div>
     </div>

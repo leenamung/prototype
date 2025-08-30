@@ -5,7 +5,8 @@ import AgitMainNavigationBar from './components/AgitMainNavigationBar';
 import AgitListTabs, { AgitListTabKey } from './components/AgitListTabs';
 import FloatingActionButton from '../components/FloatingActionButton';
 import ProfileAgitListItem from '../profile/components/ProfileAgitListItem';
-import { sampleUserProfileData } from '../profile/data/profileSampleData';
+import { sampleUserProfileData, UserAgitSummary } from '../profile/data/profileSampleData';
+import EmptyMyAgitList from './components/EmptyMyAgitList';
 
 const exploreAgitsData = [
     ...sampleUserProfileData.agits,
@@ -17,6 +18,7 @@ export default function AgitListPage() {
   const [activeTab, setActiveTab] = useState<AgitListTabKey>('myAgits');
   const router = useRouter();
   const myAgits = sampleUserProfileData.agits;
+  // const myAgits: UserAgitSummary[] = [];
   const handleCreateAgit = () => router.push('/agit/create');
 
   return (
@@ -31,15 +33,7 @@ export default function AgitListPage() {
             {myAgits.length > 0 ? (
               myAgits.map(agit => <ProfileAgitListItem key={agit.id} agit={agit} />)
             ) : (
-              <div className="text-center text-[var(--text-subtle)] py-20">
-                <p className="mb-4">아직 소속된 아지트가 없어요.</p>
-                <button 
-                  onClick={() => setActiveTab('explore')}
-                  className="bg-[var(--color-primary)] text-[var(--text-on-primary)] px-5 py-2 rounded-[var(--rounded-button)] text-sm font-semibold hover:opacity-80 active:bg-[var(--color-primary-darker)] active:border-[var(--color-primary-darker)] transition-all border border-[var(--color-primary-dark)]"
-                >
-                  아지트 탐색하기
-                </button>
-              </div>
+              <EmptyMyAgitList onExploreClick={() => setActiveTab('explore')} />
             )}
           </div>
         )}

@@ -2,6 +2,7 @@
 import React from 'react';
 import ProfileAgitListItem from './ProfileAgitListItem';
 import type { UserAgitSummary } from '../data/profileSampleData';
+import EmptyProfileAgits from './EmptyProfileAgits';
 
 interface ProfileAgitsContentProps {
   agits: UserAgitSummary[];
@@ -15,7 +16,7 @@ const ProfileAgitsContent: React.FC<ProfileAgitsContentProps> = ({ agits }) => {
           {agits.map(agit => (<ProfileAgitListItem key={agit.id} agit={agit} />))}
         </div>
       ) : (
-        <p className="text-center text-[var(--text-subtle)] py-8 text-sm">소속된 아지트가 없습니다.</p>
+        <EmptyProfileAgits />
       )}
     </div>
   );

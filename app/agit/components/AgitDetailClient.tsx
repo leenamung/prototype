@@ -1,26 +1,34 @@
-// app/agit/components/AgitDetailClient.tsx
 "use client";
-
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import type { AgitInfo, sampleAgitData } from '../data/agitSampleData';
 import AgitHeader from './AgitHeader';
 import AgitTabs, { AgitTabKey } from './AgitTabs';
 import AgitFeedContent from './AgitFeedContent';
 import AgitInfoContent from './AgitInfoContent';
 import AgitMembersContent from './AgitMembersContent';
-import type { AgitInfo } from '../data/agitSampleData'; // 데이터 타입 임포트
 
-// Agit 상세 페이지에 필요한 데이터 타입을 props로 정의
 interface AgitDetailClientProps {
-  agitData: AgitInfo;
+  agitData: AgitInfo | null;
 }
 
 const AgitDetailClient: React.FC<AgitDetailClientProps> = ({ agitData }) => {
   const [activeTab, setActiveTab] = useState<AgitTabKey>('feed');
+  const router = useRouter();
 
-  // 만약 데이터가 없다면 에러 메시지 표시
   if (!agitData) {
     return <div className="pt-20 text-center text-base text-[var(--text-subtle)]">아지트 정보를 불러올 수 없습니다.</div>;
   }
+  
+  const handleWritePost = () => {
+    // 실제로는 아지트 ID를 가지고 글쓰기 페이지로 이동하게 됩니다.
+    console.log(`Writing post for agit ${agitData.id}`);
+    router.push('/write');
+  };
+  
+  const handleInviteMember = () => {
+    console.log("Invite member clicked");
+  };
 
   return (
     <>
@@ -28,14 +36,14 @@ const AgitDetailClient: React.FC<AgitDetailClientProps> = ({ agitData }) => {
         coverImage={agitData.coverImage}
         name={agitData.name}
         memberCount={agitData.memberCount}
-        onWritePostClick={() => console.log("글쓰기 클릭")}
-        onInviteMemberClick={() => console.log("멤버 초대")}
+        onWritePostClick={handleWritePost}
+        onInviteMemberClick={handleInviteMember}
       />
 
       <AgitTabs activeTab={activeTab} onTabChange={setActiveTab} />
 
       {activeTab === 'feed' && (
-        <AgitFeedContent notice={agitData.notice} feedItems={agitData.feedItems} />
+        <AgitFeedContent notice={agitData.notice} feedItems={agitData.feedItems} onWritePostClick={handleWritePost} />
       )}
       {activeTab === 'info' && (
         <AgitInfoContent

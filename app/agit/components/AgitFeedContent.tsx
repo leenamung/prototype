@@ -2,13 +2,15 @@
 import React from 'react';
 import AgitFeedCard from './AgitFeedCard';
 import type { AgitFeedItem } from '../data/agitSampleData';
+import EmptyAgitFeed from './EmptyAgitFeed';
 
 interface AgitFeedContentProps {
   notice?: { title: string; content: string; };
   feedItems: AgitFeedItem[];
+  onWritePostClick: () => void;
 }
 
-const AgitFeedContent: React.FC<AgitFeedContentProps> = ({ notice, feedItems }) => {
+const AgitFeedContent: React.FC<AgitFeedContentProps> = ({ notice, feedItems, onWritePostClick }) => {
   return (
     <div className="p-4">
       {notice && (
@@ -30,7 +32,7 @@ const AgitFeedContent: React.FC<AgitFeedContentProps> = ({ notice, feedItems }) 
           {feedItems.map((item) => (<AgitFeedCard key={item.id} item={item} />))}
         </div>
       ) : (
-        <p className="text-center text-[var(--text-subtle)] py-8 text-sm">아직 게시된 피드가 없습니다.</p>
+        <EmptyAgitFeed onWritePostClick={onWritePostClick} />
       )}
     </div>
   );

@@ -21,6 +21,7 @@ export default async function AgitDetailPage({ params }: AgitDetailPageProps) {
   // 실제 앱에서는 이 id를 사용해 데이터를 가져오게 됩니다.
   // const agitData = await fetchAgitData(id);
   const agitData = sampleAgitData; 
+  // const agitData = null;
 
   return (
     <div className="pt-14"> 
