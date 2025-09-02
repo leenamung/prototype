@@ -9,6 +9,7 @@ async function getAgitData(id: string) {
   // 실제로는 id를 사용해 데이터를 fetch합니다.
   // ❗️피드가 비어있는 상태를 테스트하려면 feedItems를 빈 배열로 수정하세요.
   // return { ...sampleAgitData, feedItems: [] };
+  console.log("요청된 아지트 ID:", id); 
   return sampleAgitData;
 }
 
