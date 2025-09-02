@@ -10,8 +10,14 @@ async function getAgitData(id: string) {
   return sampleAgitData;
 }
 
-export default async function AgitDetailPage({ params }: { params: { id: string } }) {
-  const agitData = await getAgitData(params.id);
+interface AgitDetailPageProps {
+  params: Promise<{ id: string }>;
+}
+
+export default async function AgitDetailPage({ params }: AgitDetailPageProps) {
+  const { id } = await params;
+  
+  const agitData = await getAgitData(id);
 
   return (
     <AgitDetailClient agitData={agitData} />
