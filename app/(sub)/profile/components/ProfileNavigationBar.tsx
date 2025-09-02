@@ -2,10 +2,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 
-interface ProfileNavigationBarProps {
-}
-
-const ProfileNavigationBar: React.FC<ProfileNavigationBarProps> = ({  }) => {
+const ProfileNavigationBar: React.FC = () => {
   const router = useRouter();
 
   return (

@@ -2,8 +2,6 @@
 
 import React from 'react';
 import SkeletonAgitListItem from '../../components/SkeletonAgitListItem';
-// ⬇️ 새로 만든 스켈레톤 컴포넌트들을 import 합니다.
-import SkeletonAgitMainNavigationBar from './components/SkeletonAgitMainNavigationBar';
 import SkeletonAgitListTabs from './components/SkeletonAgitListTabs';
 
 export default function Loading() {
