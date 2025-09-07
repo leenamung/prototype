@@ -4,7 +4,8 @@
 @theme {
   /* --- 핵심 색상 --- */
   --color-background: #F9F5F0;     /* 노이즈 베이지 (전체 배경) */
-  --color-primary: #FFC8B4;        /* 따스한 살구색 (주요 버튼, 아이콘) */
+  --color-primary: #FFBFAB;        /* 따스한 살구색 (주요 버튼, 아이콘) */
+  --color-secondary: #FAF0E6;
   --color-primary-dark: #EAA994;   /* 깊은 살구색 (테두리, 강조) */
   --color-component-bg: #FFFAF0;  /* 포근한 크림색 (카드, 모달) */
 
@@ -14,12 +15,14 @@
   /* --- 보조 색상 --- */
   --color-accent-mint: #BEE8D0;     /* 서정적인 민트 */
   --color-accent-yellow: #FFF4BD;   /* 은은한 레몬색 */
-  --color-border: #EAE3D9;         /* 그림자 회색 (테두리/구분선) */
+  --color-border: #EAE3DA;         /* 그림자 회색 (테두리/구분선) */
   --color-subtle-bg: #F5F5F1;       /* 은은한 배경색 (호버, 탭 등) */
+  --color-inset-border: rgba(0, 0, 0, 0.04); /* 미묘한 내부 테두리용 */
+  --color-divider: rgba(0, 0, 0, 0.08);    /* 부드러운 구분선용 */
 
   /* --- 텍스트 색상 --- */
-  --text-main: #4F4A45;            /* 차콜 브라운 (주요 텍스트) */
-  --text-subtle: #8D8D8D;          /* 안개 회색 (보조 텍스트, 아이콘) */
+  --text-main: #333333;            /* 차콜 브라운 (주요 텍스트) */
+  --text-subtle: #555555;          /* 안개 회색 (보조 텍스트, 아이콘) */
   --text-on-primary: #FFFFFF;      /* Primary 색상 위의 텍스트 */
 
   /* --- 기능 색상 --- */
@@ -59,9 +62,30 @@
 
 /* --- 전역 스타일 --- */
 body {
-  background-color: transparent;
-  color: var(--text-main);
+  background-color: var(--color-background); /* ⬇️ 배경색을 --color-background로 변경 */
   font-family: 'Pretendard', sans-serif;
+  color: var(--text-main);
+  line-height: 1.6; /* ⬇️ 본문 가독성을 위한 줄 간격 추가 */
+}
+
+/* ⬇️ 3. Gowun Batang 폰트를 사용하기 위한 클래스를 추가합니다. */
+.font-gowun-batang {
+  font-family: 'Gowun Batang', serif;
+}
+
+/* ⬇️ 카드에 적용할 새로운 스타일 클래스를 추가합니다. */
+.card-base {
+  @apply relative mb-4 overflow-hidden rounded-lg border;
+  background-color: rgba(255, 250, 240, 0.6); /* ⬇️ --color-component-bg 기반의 반투명 배경 */
+  border-color: var(--color-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03), 
+              inset 0 0 0 1px var(--color-inset-border); /* ⬇️ 외부 그림자 + 내부 테두리 */
+  transition: all 0.2s ease-in-out;
+}
+.card-base:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06),
+              inset 0 0 0 1px var(--color-inset-border);
 }
 
 .noise-background {

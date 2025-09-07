@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import type { AgitFeedItem } from '../data/agitSampleData';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 interface AgitFeedCardProps {
   item: AgitFeedItem;
@@ -9,77 +10,165 @@ interface AgitFeedCardProps {
 
 const AgitFeedCard: React.FC<AgitFeedCardProps> = ({ item }) => {
   const [isLiked, setIsLiked] = useState(false);
-  const [likes, setLikes] = useState(item.likes);
-  const [isBookmarked, setIsBookmarked] = useState(item.isBookmarked || false);
+  const [likesCount, setLikesCount] = useState(item.likes);
 
-  const handleLike = () => {
+  const handleLikeClick = () => {
     setIsLiked(!isLiked);
-    setLikes(isLiked ? likes - 1 : likes + 1);
+    setLikesCount(isLiked ? likesCount - 1 : likesCount + 1);
+  };
+  
+  // ⬇️ DiaryCard에서 사용했던 헬퍼 함수들을 그대로 가져옵니다.
+  const getEmotionBackgroundStyle = () => {
+    const colors = item.selectedEmotions.map(e => e.color);
+    if (colors.length === 0) return { backgroundColor: 'transparent' };
+    if (colors.length === 1) return { backgroundColor: colors[0] };
+    return { backgroundImage: `linear-gradient(135deg, ${colors.join(', ')})` };
+  };
+  
+  const getEmotionBorderStyle = () => {
+    const colors = item.selectedEmotions.map(e => e.color);
+    if (colors.length === 0) return { borderLeftColor: 'transparent' };
+    if (colors.length === 1) return { borderLeftColor: colors[0] };
+    return { 
+      borderImageSlice: 1,
+      borderImageSource: `linear-gradient(to bottom, ${colors.join(', ')})`
+    };
   };
 
-  const handleBookmark = () => {
-    setIsBookmarked(!isBookmarked);
-  };
-
-  return (
-    // 카드 배경색 변경 (기본 #FFFAF0 사용 또는 --color-sub-beige 등 고려)
-    <div className="bg-[var(--color-component-bg)] rounded-lg shadow-sm overflow-hidden border border-[var(--color-border)]">
-      <div className="p-5">
-        <div className="flex items-center mb-4">
-          <div className="w-10 h-10 rounded-full bg-[var(--color-border)] overflow-hidden mr-4 flex-shrink-0">
-            <Image
-              src={item.author.profileImage}
-              alt={`${item.author.name} 프로필`}
-              className="w-full h-full object-cover"
-              width={40}
-              height={40}
-            />
+  // ⬇️ 1. 미디어 중심 레이아웃 (사진 또는 영상일 경우)
+  if (item.imageUrl) { // 간단하게 imageUrl 유무로 판단
+    return (
+      <motion.div
+        className="card-base overflow-hidden p-0"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "circOut" }}
+      >
+        {/* 미디어 영역 */}
+        <div className="relative">
+          <div className="absolute top-0 left-0 right-0 z-20 p-4 flex items-center justify-between bg-gradient-to-b from-black/30 to-transparent">
+            <div className="flex items-center">
+              <div className="w-8 h-8 rounded-full border-2 border-white/80 overflow-hidden mr-2 flex-shrink-0">
+                <Image
+                  src={item.author.profileImage}
+                  alt={`${item.author.name} 프로필`}
+                  width={32}
+                  height={32}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div>
+                <p className="font-gowun-batang font-bold text-white text-sm leading-tight shadow-sm">{item.author.name}</p>
+              </div>
+            </div>
+            <button className="w-8 h-8 flex items-center justify-center cursor-pointer rounded-full text-white/90 hover:bg-white/20 transition-colors">
+              <i className="ri-more-2-fill ri-lg"></i>
+            </button>
           </div>
-          <div>
-            {/* 작성자 이름 텍스트 색상 변경 */}
-            <p className="font-medium text-sm text-[var(--text-main)]">{item.author.name}</p>
-            {/* 타임스탬프 텍스트 색상 변경 */}
-            <p className="text-xs text-[var(--text-subtle)]">{item.timestamp}</p>
-          </div>
-        </div>
-
-        {/* 감정 오버레이 배경색 변경 (bg-primary/15) */}
-        <div className={item.emotionOverlay ? "bg-[var(--color-primary)]/15 p-4 rounded-md mb-4" : "mb-4"}>
-          {/* 본문 텍스트 색상 변경 */}
-          <p className="text-base text-[var(--text-main)] leading-relaxed whitespace-pre-wrap">{item.content}</p>
-        </div>
-
-        {item.imageUrl && (
-          <div className="mb-4 rounded-md overflow-hidden">
+          <div className="relative w-full aspect-square bg-[var(--color-border)]">
             <Image
               src={item.imageUrl}
-              alt="피드 이미지"
-              width={500} // ⭐️ 원본 이미지의 너비 (비율 계산용)
-              height={375} // ⭐️ 원본 이미지의 높이 (비율 계산용)
-              className="w-full h-auto object-cover"
-              sizes="(max-width: 640px) 100vw, 640px"
+              alt="게시물 이미지"
+              fill
+              style={{ objectFit: 'cover' }}
+              sizes="(max-width: 600px) 100vw, 600px"
             />
           </div>
-        )}
+        </div>
 
-        {/* 아이콘 및 카운트 텍스트 색상 변경 */}
-        <div className="flex justify-between items-center text-[var(--text-subtle)]">
-          <div className="flex items-center space-x-5">
-            <button onClick={handleLike} className="flex items-center p-1 rounded-full hover:text-[var(--color-primary)] active:bg-[var(--color-subtle-bg)] transition-colors" aria-label="좋아요">
-              <i className={`${isLiked ? 'ri-heart-fill text-[var(--color-primary)]' : 'ri-heart-line'} ri-md`}></i>
-              <span className="text-xs ml-1.5">{likes}</span>
-            </button>
-            <button className="flex items-center p-1 rounded-full hover:text-[var(--color-primary)] active:bg-[var(--color-subtle-bg)] transition-colors" aria-label="댓글">
-              <i className="ri-chat-1-line ri-md"></i>
-              <span className="text-xs ml-1.5">{item.comments}</span>
+        {/* 텍스트 및 피드백 영역 (감성 디자인 적용) */}
+        <div className="relative">
+          <div 
+            className="absolute inset-0 opacity-[0.15] z-0" 
+            style={getEmotionBackgroundStyle()}
+          ></div>
+          <div 
+            className="relative border-l-4" 
+            style={getEmotionBorderStyle()}
+          >
+            <div className="p-4 backdrop-blur-sm">
+              <p className="text-[15px] text-[var(--text-main)] mb-4">{item.content}</p>
+              <div className="border-t border-[var(--color-divider)] my-3"></div>
+              <div className="flex items-center space-x-5 text-[var(--text-subtle)] text-sm">
+                <button 
+                  className="flex items-center space-x-1.5 hover:text-[var(--text-main)] transition-colors"
+                  onClick={handleLikeClick}
+                >
+                  <i className={`ri-heart-3-${isLiked ? 'fill text-[var(--color-warning)]' : 'line'}`}></i>
+                  <span>{likesCount}</span>
+                </button>
+                <button className="flex items-center space-x-1.5 hover:text-[var(--text-main)] transition-colors">
+                  <i className="ri-chat-3-line"></i>
+                  <span>{item.comments}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    );
+  }
+
+  // ⬇️ 2. 텍스트 중심 레이아웃 (사진이 없을 경우)
+  return (
+    <motion.div
+      className="card-base"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "circOut" }}
+    >
+      <div 
+        className="absolute inset-0 opacity-[0.15] z-0" 
+        style={getEmotionBackgroundStyle()}
+      ></div>
+      <div 
+        className="relative border-l-4" 
+        style={getEmotionBorderStyle()}
+      >
+        <div className="p-5 backdrop-blur-sm">
+          <div className="flex items-start justify-between mb-4">
+            <div className="flex items-center">
+              <div className="w-10 h-10 rounded-full bg-[var(--color-border)] overflow-hidden mr-3 flex-shrink-0">
+                <Image
+                  src={item.author.profileImage}
+                  alt={`${item.author.name} 프로필`}
+                  className="w-full h-full object-cover"
+                  width={40}
+                  height={40}
+                />
+              </div>
+              <div>
+                <p className="font-gowun-batang font-bold text-[var(--text-main)] text-[15px] leading-tight">{item.author.name}</p>
+                <p className="text-xs text-[var(--text-subtle)]">{item.timestamp}</p>
+              </div>
+            </div>
+            <button className="w-8 h-8 flex items-center justify-center cursor-pointer rounded-full hover:bg-[var(--color-subtle-bg)] transition-colors">
+              <i className="ri-more-2-fill ri-lg text-[var(--text-subtle)]"></i>
             </button>
           </div>
-          <button onClick={handleBookmark} className="p-1 rounded-full hover:text-[var(--color-primary)] active:bg-[var(--color-subtle-bg)] transition-colors" aria-label="북마크">
-            <i className={`${isBookmarked ? 'ri-bookmark-fill text-[var(--color-primary)]' : 'ri-bookmark-line'} ri-md`}></i>
-          </button>
+          
+          <div className="mb-4">
+            <p className="text-[15px] text-[var(--text-main)]">{item.content}</p>
+          </div>
+
+          <div className="border-t border-[var(--color-divider)] my-4"></div>
+
+          <div className="flex items-center space-x-5 text-[var(--text-subtle)] text-sm">
+            <button 
+              className="flex items-center space-x-1.5 hover:text-[var(--text-main)] transition-colors"
+              onClick={handleLikeClick}
+            >
+              <i className={`ri-heart-3-${isLiked ? 'fill text-[var(--color-warning)]' : 'line'}`}></i>
+              <span>{likesCount}</span>
+            </button>
+            <button className="flex items-center space-x-1.5 hover:text-[var(--text-main)] transition-colors">
+              <i className="ri-chat-3-line"></i>
+              <span>{item.comments}</span>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
