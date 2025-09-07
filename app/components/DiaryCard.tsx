@@ -138,11 +138,9 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ entry, optionHandle, repliySlideH
             style={getEmotionBorderStyle()}
           >
             <div className="p-4 backdrop-blur-sm">
-              {entry.content && (
-                <p ref={contentRef} className={`text-[15px] text-[var(--text-main)] mb-4 ${isExpanded ? "" : "line-clamp-3"}`}>
-                  {entry.content}
-                </p>
-              )}
+              <p ref={contentRef} className={`text-[15px] text-[var(--text-main)] mb-4 ${isExpanded ? "" : "line-clamp-3"}`}>
+                {entry.content}
+              </p>
               {showReadMore && (
                 <button onClick={toggleReadMore} className="text-[var(--text-subtle)] text-sm -mt-3 mb-3 hover:underline focus:outline-none">
                   {isExpanded ? "간략히" : "더보기"}
@@ -202,7 +200,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ entry, optionHandle, repliySlideH
                 />
               </div>
               <div>
-                <p className="font-gowun-batang font-bold text-[var(--text-main)] text-[15px] leading-tight">{entry.author}</p> 
+                <p className="font-gowun-batang font-bold text-[var(--text-main)] text-[15px] leading-tight">{entry.author}</p>
                 <p className="text-xs text-[var(--text-subtle)]">{entry.timestamp}</p>
               </div>
             </div>
@@ -216,39 +214,6 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ entry, optionHandle, repliySlideH
 
         {/* 일기 타입별 콘텐츠 렌더링 */}
           <div className="mb-4">
-            {entry.type === "image" && entry.imageUrl && (
-              <div className="w-full rounded-lg overflow-hidden mb-4 border border-[var(--color-border)]">
-                <Image
-                  src={entry.imageUrl}
-                  alt={`${entry.author}의 사진 일기`}
-                  width={500}
-                  height={375}
-                  className="w-full h-auto object-cover"
-                  sizes="(max-width: 640px) 100vw, 640px"
-                />
-              </div>
-            )}
-
-            {entry.type === "video" && entry.videoInfo && (
-               <div className="mb-4 rounded-lg overflow-hidden relative border border-[var(--color-border)]">
-                  <Image
-                    src={entry.videoInfo.thumbnailImage}
-                    alt={`${entry.author}의 영상 일기 썸네일`}
-                    width={513}  // ⭐️ 원본 이미지의 너비 (비율 계산용)
-                    height={288} // ⭐️ 원본 이미지의 높이 (비율 계산용)
-                    className="w-full h-auto object-cover"
-                    sizes="(max-width: 640px) 100vw, 640px"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                    <button className="w-14 h-14 flex items-center justify-center bg-[var(--color-component-bg)]/80 rounded-full cursor-pointer">
-                      <i className="ri-play-fill ri-2x text-[var(--color-primary)]"></i>
-                    </button>
-                  </div>
-                  <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded-md">
-                    {entry.videoInfo.duration}
-                  </div>
-                </div>
-            )}
 
             {entry.type === "audio" && entry.audioInfo && (
                <div className="bg-[var(--color-component-bg)] rounded-lg p-3 mb-4 shadow-sm border border-[var(--color-border)]">
