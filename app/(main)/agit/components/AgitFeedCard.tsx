@@ -46,9 +46,9 @@ const AgitFeedCard: React.FC<AgitFeedCardProps> = ({ item }) => {
       >
         {/* 미디어 영역 */}
         <div className="relative">
-          <div className="absolute top-0 left-0 right-0 z-20 p-4 flex items-center justify-between bg-gradient-to-b from-black/30 to-transparent">
+          <div className="absolute top-0 left-0 right-0 z-20 p-4 flex items-center justify-between bg-gradient-to-b from-[var(--text-main)]/30 to-transparent">
             <div className="flex items-center">
-              <div className="w-8 h-8 rounded-full border-2 border-white/80 overflow-hidden mr-2 flex-shrink-0">
+              <div className="w-8 h-8 rounded-full border-2 border-[var(--text-on-primary)]/80 overflow-hidden mr-2 flex-shrink-0">
                 <Image
                   src={item.author.profileImage}
                   alt={`${item.author.name} 프로필`}
@@ -58,10 +58,10 @@ const AgitFeedCard: React.FC<AgitFeedCardProps> = ({ item }) => {
                 />
               </div>
               <div>
-                <p className="font-gowun-batang font-bold text-white text-sm leading-tight shadow-sm">{item.author.name}</p>
+                <p className="font-maru-buri font-bold text-[var(--text-on-primary)] text-sm leading-tight shadow-sm">{item.author.name}</p>
               </div>
             </div>
-            <button className="w-8 h-8 flex items-center justify-center cursor-pointer rounded-full text-white/90 hover:bg-white/20 transition-colors">
+            <button className="w-8 h-8 flex items-center justify-center cursor-pointer rounded-full text-[var(--text-on-primary)]/90 hover:bg-[var(--text-on-primary)]/20 transition-colors">
               <i className="ri-more-2-fill ri-lg"></i>
             </button>
           </div>
@@ -138,7 +138,7 @@ const AgitFeedCard: React.FC<AgitFeedCardProps> = ({ item }) => {
                 />
               </div>
               <div>
-                <p className="font-gowun-batang font-bold text-[var(--text-main)] text-[15px] leading-tight">{item.author.name}</p>
+                <p className="font-maru-buri font-bold text-[var(--text-main)] text-[15px] leading-tight">{item.author.name}</p>
                 <p className="text-xs text-[var(--text-subtle)]">{item.timestamp}</p>
               </div>
             </div>

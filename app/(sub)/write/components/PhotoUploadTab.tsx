@@ -91,7 +91,7 @@ const PhotoUploadTab: React.FC<PhotoUploadTabProps> = ({ description, onDescript
             )}
             <button
               onClick={handleRemovePhoto}
-              className="absolute top-2 right-2 bg-black/50 text-white rounded-full p-1 cursor-pointer opacity-0 group-hover:opacity-100 active:bg-black/70 transition-all"
+              className="absolute top-2 right-2 bg-[var(--text-main)]/50 text-[var(--text-on-primary)] rounded-full p-1 cursor-pointer opacity-0 group-hover:opacity-100 active:bg-[var(--text-main)]/70 transition-all"
               aria-label="사진 삭제"
             >
               <i className="ri-close-line ri-lg w-5 h-5 flex items-center justify-center"></i>

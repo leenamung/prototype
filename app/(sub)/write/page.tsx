@@ -137,7 +137,7 @@ const PublishSettingsModal: React.FC<PublishSettingsModalProps> = ({
               ></i>
             </button>
             {isPrivacyDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-44 bg-[var(--color-component-bg)] rounded-lg shadow-lg z-20 border border-[var(--color-border)] py-1">
+              <div className="absolute right-0 mt-2 w-44 bg-[var(--color-component-bg)] rounded-lg z-20 border border-[var(--color-border)] py-1 shadow-[0_4px_12px_rgba(0,0,0,0.05),_inset_0_0_0_1px_var(--color-inset-border)]">
                 <ul>
                   {(Object.keys(privacyOptionsMap) as PrivacyOption[]).map(
                     (key) => (

@@ -15,6 +15,7 @@
   /* --- 보조 색상 --- */
   --color-accent-mint: #BEE8D0;     /* 서정적인 민트 */
   --color-accent-yellow: #FFF4BD;   /* 은은한 레몬색 */
+  --color-accent-blue: #AEC6CF;     /* 서정적인 파란색 */
   --color-border: #EAE3DA;         /* 그림자 회색 (테두리/구분선) */
   --color-subtle-bg: #F5F5F1;       /* 은은한 배경색 (호버, 탭 등) */
   --color-inset-border: rgba(0, 0, 0, 0.04); /* 미묘한 내부 테두리용 */
@@ -68,9 +69,12 @@ body {
   line-height: 1.6; /* ⬇️ 본문 가독성을 위한 줄 간격 추가 */
 }
 
-/* ⬇️ 3. Gowun Batang 폰트를 사용하기 위한 클래스를 추가합니다. */
-.font-gowun-batang {
-  font-family: 'Gowun Batang', serif;
+.font-maru-buri {
+  font-family: 'Maru Buri', serif;
+}
+
+.text-shadow-sm {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* 부드러운 그림자 효과 */
 }
 
 /* ⬇️ 카드에 적용할 새로운 스타일 클래스를 추가합니다. */

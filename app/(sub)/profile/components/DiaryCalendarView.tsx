@@ -96,7 +96,7 @@ const DiaryCalendarView: React.FC<DiaryCalendarViewProps> = ({ diaries }) => {
       <div className="grid grid-cols-7 mb-1">
         {weekDays.map((day, index) => (
           // ✨ 요일 텍스트 색상 text-[var(--text-subtle)] 적용 (주말 제외)
-          <div key={day} className={`text-center text-xs font-medium ${index === 0 ? 'text-[var(--color-warning)]' : index === 6 ? 'text-blue-500' : 'text-[var(--text-subtle)]'}`}>
+          <div key={day} className={`text-center text-xs font-medium ${index === 0 ? 'text-[var(--color-warning)]' : index === 6 ? 'text-[var(--color-accent-blue)]' : 'text-[var(--text-subtle)]'}`}>
             {day}
           </div>
         ))}

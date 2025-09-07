@@ -26,7 +26,7 @@ export default function RootLayout({
 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Maru+Buri:wght@300;400;500;700&display=swap" rel="stylesheet" />
       </head>
       {/* Ensure no whitespace or comments between </head> and <body> */}
       {/* Apply padding-bottom to the body to prevent content from being hidden by the fixed BottomTabBar */}

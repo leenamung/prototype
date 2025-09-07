@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect, useMemo } from "react";
 import { CommentEntry } from "../../data/commentEntries";
 import CommentItem from "./CommentItem";
 import { RemoveScroll } from "react-remove-scroll";
-import Image from 'next/image'; // ⭐️ Image 컴포넌트 임포트
+import Image from 'next/image';
 
 interface SlideFromBottomReplyProps {
   entry: CommentEntry[];
@@ -124,16 +124,16 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
         onTouchEnd={handleOverlayInteractionEnd}
       >
         <div
-          className="bg-[var(--color-component-bg)] rounded-t-2xl w-full flex flex-col absolute bottom-16 animate-slideInFromBottom"
+          className="bg-[var(--color-component-bg)]/90 backdrop-blur-sm border-t border-[var(--color-border)] rounded-t-2xl w-full flex flex-col absolute bottom-16"
           style={{ height: `${height}px`, transition: isHeightDragging ? 'none' : 'height 0.3s ease-out' }}
         >
           <div
-            className="flex flex-col w-full items-center justify-center py-3 flex-shrink-0 cursor-ns-resize"
+            className="flex flex-col w-full items-center justify-center pt-2.5 pb-2 flex-shrink-0 cursor-ns-resize bg-[var(--text-main)]/5 rounded-t-2xl"
             onMouseDown={handleHeightDragStart}
             onTouchStart={handleHeightDragStart}
           >
             <div className="w-10 h-1 bg-[var(--color-border)] rounded-full" />
-            <span className="font-bold text-base mt-2 text-[var(--text-main)]">댓글</span>
+            <span className="font-semibold text-sm mt-2 text-[var(--text-main)]">댓글</span>
           </div>
           <div className="h-full overflow-y-auto overscroll-contain">
             {entry.map((comment) => (
@@ -144,8 +144,7 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
               ></CommentItem>
             ))}
           </div>
-          <div className="flex items-end border-t border-[var(--color-border)] p-4 space-x-2">
-            {/* ⬇️ 1. 부모 div에 'relative' 클래스 추가 */}
+          <div className="flex-shrink-0 flex items-end border-t border-[var(--color-border)] p-3 space-x-2">
             <div className="relative w-10 h-10 rounded-full bg-[var(--color-border)] overflow-hidden flex-shrink-0">
               {/* ⬇️ 2. img를 Image로 변경하고 fill 속성 적용 */}
               <Image 
@@ -183,8 +182,8 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
               />
             </div>
             <div>
-              <button className="cursor-pointer text-md px-3 py-2 rounded-xl bg-[var(--color-subtle-bg)] hover:bg-[var(--color-border)] active:bg-[var(--color-border-dark)] transition-colors">
-                <i className="ri-upload-line"></i>
+              <button className="cursor-pointer text-md w-10 h-10 flex items-center justify-center rounded-xl bg-[var(--color-subtle-bg)] hover:bg-[var(--color-border)] active:bg-[var(--color-border-dark)] transition-colors">
+                <i className="ri-send-plane-2-fill text-[var(--color-primary)]"></i>
               </button>
             </div>
           </div>

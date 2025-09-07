@@ -55,7 +55,11 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ thread }) => {
                 <Image src={thread.participant.profileImage} alt={thread.participant.name} fill className="object-cover" />
               </div>
             )}
-            <div className={`max-w-xs md:max-w-md p-3 rounded-2xl break-words ${msg.sender === 'me' ? 'bg-[var(--color-primary)] text-[var(--text-on-primary)] rounded-br-lg' : 'bg-[var(--color-subtle-bg)] text-[var(--text-main)] rounded-bl-lg'}`}>
+            <div className={`max-w-xs md:max-w-md p-3 rounded-2xl break-words shadow-sm ${
+              msg.sender === 'me' 
+                ? 'bg-[var(--color-primary)] text-[var(--text-on-primary)] rounded-br-lg border border-[var(--color-primary-dark)]' 
+                : 'bg-[var(--color-component-bg)] text-[var(--text-main)] rounded-bl-lg border border-[var(--color-border)]'
+            }`}>
               <p className="text-base">{msg.content}</p>
             </div>
             <div className="flex-shrink-0 self-end text-xs text-[var(--text-subtle)]">

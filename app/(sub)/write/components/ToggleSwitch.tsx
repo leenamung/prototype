@@ -27,7 +27,7 @@ const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ id, checked, onChange, aria
                    after:absolute after:top-[2px] after:start-[2px] 
                    after:bg-white after:border-[var(--color-border)] after:border after:rounded-full 
                    after:h-5 after:w-5 after:transition-all 
-                   peer-checked:bg-[var(--color-primary)]"
+                   peer-checked:bg-[var(--color-primary)] transition-colors"
       ></div>
     </label>
   );

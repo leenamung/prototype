@@ -72,9 +72,9 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ entry, optionHandle, repliySlideH
       >
         <div className="relative">
           {/* 헤더: 프로필, 이름, 더보기 (콘텐츠 위에 오버레이) */}
-          <div className="absolute top-0 left-0 right-0 z-20 p-4 flex items-center justify-between bg-gradient-to-b from-black/30 to-transparent">
+          <div className="absolute top-0 left-0 right-0 z-20 p-4 flex items-center justify-between bg-gradient-to-b from-[var(--text-main)]/30 to-transparent">
             <div className="flex items-center">
-              <div className="w-8 h-8 rounded-full border-2 border-white/80 overflow-hidden mr-2 flex-shrink-0">
+              <div className="w-8 h-8 rounded-full border-2 border-[var(--text-on-primary)]/80 overflow-hidden mr-2 flex-shrink-0">
                 <Image
                   src={entry.profileImage}
                   alt={`${entry.author} 프로필`}
@@ -84,11 +84,11 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ entry, optionHandle, repliySlideH
                 />
               </div>
               <div>
-                <p className="font-gowun-batang font-bold text-white text-sm leading-tight shadow-sm">{entry.author}</p>
+                <p className="font-maru-buri font-bold text-[var(--text-on-primary)] text-sm leading-tight shadow-sm">{entry.author}</p>
               </div>
             </div>
             <button
-              className="w-8 h-8 flex items-center justify-center cursor-pointer rounded-full text-white/90 hover:bg-white/20 transition-colors"
+              className="w-8 h-8 flex items-center justify-center cursor-pointer rounded-full text-[var(--text-on-primary)]/90 hover:bg-[var(--text-on-primary)]/20 transition-colors"
               onClick={handleOpenOptionsMenu}
             >
               <i className="ri-more-2-fill ri-lg"></i>
@@ -115,7 +115,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ entry, optionHandle, repliySlideH
                   style={{ objectFit: 'cover' }}
                   sizes="(max-width: 600px) 100vw, 600px"
                 />
-                <div className="absolute inset-0 flex items-center justify-center bg-black/20">
+                <div className="absolute inset-0 flex items-center justify-center bg-[var(--text-main)]/20">
                   <button className="w-14 h-14 flex items-center justify-center bg-[var(--color-component-bg)]/80 rounded-full cursor-pointer">
                     <i className="ri-play-fill ri-2x text-[var(--color-primary)]"></i>
                   </button>
@@ -200,7 +200,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ entry, optionHandle, repliySlideH
                 />
               </div>
               <div>
-                <p className="font-gowun-batang font-bold text-[var(--text-main)] text-[15px] leading-tight">{entry.author}</p>
+                <p className="font-maru-buri font-bold text-[var(--text-main)] text-[15px] leading-tight">{entry.author}</p>
                 <p className="text-xs text-[var(--text-subtle)]">{entry.timestamp}</p>
               </div>
             </div>
