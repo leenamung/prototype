@@ -1,8 +1,6 @@
-// app/loading.tsx (새 파일)
-
 import React from 'react';
-import SkeletonStoryCarousel from '../components/StoryCarousel/SkeletonStoryCarousel';
-import SkeletonDiaryCard from '../components/SkeletonDiaryCard';
+import SkeletonStoryCarousel from '../components/domain/feed/StoryCarousel/ui/skeletons/SkeletonStoryCarousel';
+import SkeletonDiaryCard from '../components/domain/feed/DiaryCard/ui/skeletons/SkeletonDiaryCard';
 
 export default function Loading() {
   return (

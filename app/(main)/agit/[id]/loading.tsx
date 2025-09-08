@@ -1,9 +1,7 @@
-// app/agit/[id]/loading.tsx (새 파일)
-
 import React from 'react';
-import SkeletonAgitHeader from '../components/SkeletonAgitHeader';
-import SkeletonAgitListTabs from '../components/SkeletonAgitListTabs'; // 아지트 목록에서 만든 탭 스켈레톤 재사용
-import SkeletonAgitFeedCard from '../components/SkeletonAgitFeedCard';
+import SkeletonAgitHeader from '../../../components/domain/agit/AgitHeader/ui/skeletons/SkeletonAgitHeader';
+import SkeletonAgitListTabs from '../../../components/domain/agit/ui/skeletons/SkeletonAgitListTabs'; // 아지트 목록에서 만든 탭 스켈레톤 재사용
+import SkeletonAgitFeedCard from '../../../components/domain/agit/AgitFeed/ui/skeletons/SkeletonAgitFeedCard';
 
 export default function Loading() {
   return (

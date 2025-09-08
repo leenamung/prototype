@@ -1,9 +1,7 @@
-// app/profile/loading.tsx (파일 교체)
-
 import React from 'react';
-import SkeletonProfileHeader from './components/SkeletonProfileHeader';
-import SkeletonProfileTabs from './components/SkeletonProfileTabs';
-import SkeletonProfileDiariesContent from './components/SkeletonProfileDiariesContent';
+import SkeletonProfileHeader from '../../components/domain/profile/ProfileHeader/ui/skeletons/SkeletonProfileHeader';
+import SkeletonProfileTabs from '../../components/domain/profile/ProfileTabs/ui/skeletons/SkeletonProfileTabs';
+import SkeletonProfileDiariesContent from '@/app/components/domain/profile/ProfileContent/ui/skeletons/SkeletonProfileDiariesContent';
 
 export default function Loading() {
   return (

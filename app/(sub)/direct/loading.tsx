@@ -1,7 +1,5 @@
-// app/direct/loading.tsx (새 파일)
-
 import React from 'react';
-import SkeletonMessageListItem from './components/SkeletonMessageListItem';
+import SkeletonMessageListItem from '../../components/domain/direct/MessageList/ui/skeletons/SkeletonMessageListItem';
 
 export default function Loading() {
   return (

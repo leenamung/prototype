@@ -1,8 +1,6 @@
-// app/notifications/loading.tsx
-
 import React from 'react';
-import NotificationNavigationBar from './components/NotificationNavigationBar';
-import SkeletonNotificationGroup from './components/SkeletonNotificationGroup';
+import SkeletonNotificationGroup from '../../components/domain/notifications/ui/skeletons/SkeletonNotificationGroup';
+import NotificationNavigationBar from '@/app/components/domain/notifications/NotificationNavigationBar';
 
 export default function Loading() {
   // NotificationNavigationBar는 정적이라 그대로 두고,

@@ -1,7 +1,7 @@
 // app/layout.tsx
 import type { Metadata } from "next";
-import "./globals.css"; // Import global styles
-import BottomTabBar from "./components/BottomTabBar"; // Import the BottomTabBar component
+import "./styles/globals.css"; // Import global styles
+import BottomTabBar from "./components/layout/BottomTabBar"; // Import the BottomTabBar component
 
 // Define metadata for the application
 export const metadata: Metadata = {

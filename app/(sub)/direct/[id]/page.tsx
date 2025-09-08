@@ -1,7 +1,5 @@
-// app/direct/[id]/page.tsx (수정)
-
-import ChatRoom from '../components/ChatRoom';
-import { sampleMessageThreads } from '../data/messageSampleData';
+import ChatRoom from '../../../components/domain/direct/ChatRoom/ChatRoom';
+import { sampleMessageThreads } from '../../../data/messageSampleData';
 
 async function getThreadData(id: string) {
   console.log("요청된 채팅방 ID:", id);

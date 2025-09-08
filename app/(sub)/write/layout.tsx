@@ -1,5 +1,3 @@
-// app/(sub)/write/layout.tsx (수정)
-
 import React from 'react';
 
 // WriteNavigationBar를 여기서 제거합니다.

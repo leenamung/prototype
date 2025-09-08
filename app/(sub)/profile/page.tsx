@@ -1,8 +1,6 @@
-// app/profile/page.tsx (파일 교체)
-
 import React from 'react';
-import { sampleUserProfileData } from './data/profileSampleData';
-import ProfileView from './components/ProfileView'; // 새로 만든 통합 클라이언트 컴포넌트
+import { sampleUserProfileData } from '../../data/profileSampleData';
+import ProfileView from '../../components/domain/profile/ProfileView'; // 새로 만든 통합 클라이언트 컴포넌트
 
 // 데이터를 2초 뒤에 가져오는 것처럼 시뮬레이션
 async function getProfileData() {

@@ -1,7 +1,7 @@
 import React from 'react';
-import NotificationNavigationBar from './components/NotificationNavigationBar';
-import { sampleNotifications, groupNotificationsByTime } from './data/notificationSampleData';
-import NotificationDisplay from './components/NotificationDisplay'; // 새로 만든 클라이언트 컴포넌트를 가져옵니다.
+import { sampleNotifications, groupNotificationsByTime } from '../../data/notificationSampleData';
+import NotificationNavigationBar from '@/app/components/domain/notifications/NotificationNavigationBar';
+import NotificationDisplay from '@/app/components/domain/notifications/NotificationDisplay';
 
 // 데이터를 일부러 2초 뒤에 가져오는 것처럼 시뮬레이션합니다.
 async function getNotifications() {

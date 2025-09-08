@@ -1,7 +1,5 @@
-// app/agit/[id]/page.tsx (수정)
-
-import AgitDetailClient from '../components/AgitDetailClient';
-import { sampleAgitData } from '../data/agitSampleData';
+import AgitDetailClient from '../../../components/domain/agit/AgitDetailClient';
+import { sampleAgitData } from '../../../data/agitSampleData';
 
 async function getAgitData(id: string) {
   console.log("요청된 아지트 ID:", id);

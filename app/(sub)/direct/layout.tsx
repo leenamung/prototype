@@ -1,6 +1,5 @@
-// app/(sub)/direct/layout.tsx (새 파일)
+import DirectNavigationBar from '@/app/components/domain/direct/MessageList/DirectNavigationBar';
 import React from 'react';
-import DirectNavigationBar from './components/DirectNavigationBar';
 
 export default function DirectLayout({ children }: { children: React.ReactNode }) {
   return (

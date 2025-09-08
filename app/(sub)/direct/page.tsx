@@ -1,8 +1,6 @@
-// app/direct/page.tsx (최종 수정)
-
 import React from 'react';
-import { sampleMessageThreads } from './data/messageSampleData';
-import DirectClientPage from './components/DirectClientPage';
+import { sampleMessageThreads } from '../../data/messageSampleData';
+import DirectClientPage from '../../components/domain/direct/DirectClientPage';
 
 // 데이터를 2초 뒤에 가져오는 것처럼 시뮬레이션
 async function getMessageThreads() {

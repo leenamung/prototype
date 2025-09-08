@@ -1,8 +1,6 @@
-// app/direct/[id]/loading.tsx (새 파일)
-
 import React from 'react';
-import SkeletonDirectNavigationBar from '../components/SkeletonDirectNavigationBar'; // 메시지 목록에서 만든 스켈레톤 재사용
-import SkeletonChatMessages from '../components/SkeletonChatMessages';
+import SkeletonDirectNavigationBar from '../../../components/domain/direct/MessageList/ui/skeletons/SkeletonDirectNavigationBar'; // 메시지 목록에서 만든 스켈레톤 재사용
+import SkeletonChatMessages from '../../../components/domain/direct/ChatRoom/ui/skeletons/SkeletonChatMessages';
 
 export default function Loading() {
   return (

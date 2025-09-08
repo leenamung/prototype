@@ -2,20 +2,20 @@
 import React, { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 // 컴포넌트 임포트
-import WriteNavigationBar from "./components/WriteNavigationBar";
-import DiaryTypeTabs, { DiaryType } from "./components/DiaryTypeTabs";
-import TextEditorTab from "./components/TextEditorTab";
-import PhotoUploadTab from "./components/PhotoUploadTab";
-import VideoUploadTab from "./components/VideoUploadTab";
-import VoiceRecordTab from "./components/VoiceRecordTab";
-import EmotionSelector from './components/EmotionSelector'; 
-import SettingsSection from "./components/SettingsSection";
-import DatePickerModal from "./components/DatePickerModal";
-import ExchangeDiaryOptions from "./components/ExchangeDiaryOptions";
-import LocationDisplay from "./components/LocationDisplay";
-import ToggleSwitch from "./components/ToggleSwitch";
-import WeatherSelectionModal, { WeatherOption, weatherOptions } from "./components/WeatherSelectionModal";
+import WeatherSelectionModal, { WeatherOption, weatherOptions } from "../../components/domain/write/WeatherSelectionModal";
 import { Emotion } from "../../data/emotionData";
+import SettingsSection from "@/app/components/domain/write/SettingsSection";
+import ExchangeDiaryOptions from "@/app/components/domain/write/ExchangeDiaryOptions";
+import DatePickerModal from "@/app/components/domain/write/DatePickerModal";
+import ToggleSwitch from "@/app/components/domain/write/ToggleSwitch";
+import LocationDisplay from "@/app/components/domain/write/LocationDisplay";
+import DiaryTypeTabs, { DiaryType } from "@/app/components/domain/write/DiaryTypeTabs";
+import WriteNavigationBar from "@/app/components/domain/write/WriteNavigationBar";
+import TextEditorTab from "@/app/components/domain/write/TextEditorTab";
+import PhotoUploadTab from "@/app/components/domain/write/PhotoUploadTab";
+import VideoUploadTab from "@/app/components/domain/write/VideoUploadTab";
+import VoiceRecordTab from "@/app/components/domain/write/VoiceRecordTab";
+import EmotionSelector from "@/app/components/domain/write/EmotionSelector";
 
 // --- 타입 정의 ---
 type PrivacyOption = "private" | "friends" | "group" | "public" | "exchange";

@@ -1,6 +1,5 @@
-// app/(sub)/notifications/layout.tsx (새 파일)
+import NotificationNavigationBar from '@/app/components/domain/notifications/NotificationNavigationBar';
 import React from 'react';
-import NotificationNavigationBar from './components/NotificationNavigationBar';
 
 export default function NotificationsLayout({ children }: { children: React.ReactNode }) {
   return (

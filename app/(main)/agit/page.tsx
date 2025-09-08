@@ -1,8 +1,6 @@
-// app/agit/page.tsx (최종 수정)
-
 import React from 'react';
-import { sampleUserProfileData } from '../../(sub)/profile/data/profileSampleData';
-import AgitClientPage from './components/AgitClientPage';
+import { sampleUserProfileData } from '../../data/profileSampleData';
+import AgitClientPage from '../../components/domain/agit/AgitClientPage';
 
 const exploreAgitsData = [
     ...sampleUserProfileData.agits,
