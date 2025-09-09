@@ -43,7 +43,7 @@ export default function AuthPage() {
             Our Diary
           </h1>
           <p className="font-maru-buri text-lg text-[var(--text-subtle)] mt-8 leading-relaxed">
-            "오늘 당신의 하루는<br/>어떤 색이었나요?"
+            &quot;오늘 당신의 하루는<br/>어떤 색이었나요?&quot;
           </p>
         </motion.div>
 
