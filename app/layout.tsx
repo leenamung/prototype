@@ -1,7 +1,7 @@
 // app/layout.tsx
 import type { Metadata } from "next";
 import "./styles/globals.css"; // Import global styles
-import BottomTabBar from "./components/layout/BottomTabBar"; // Import the BottomTabBar component
+import LayoutWrapper from "./components/layout/LayoutWrapper";
 
 // Define metadata for the application
 export const metadata: Metadata = {
@@ -35,10 +35,9 @@ export default function RootLayout({
         <div className="noise-background" />
         
         {/* ✅ [수정] 콘텐츠를 감싸는 wrapper div 추가 */}
-        <div className="content-wrapper pb-16">
+        <LayoutWrapper>
           {children}
-        </div>
-        <BottomTabBar />
+        </LayoutWrapper>
       </body>
       {/* Ensure no whitespace or comments after </body> or before </html> */}
     </html>
