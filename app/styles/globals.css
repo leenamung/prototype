@@ -141,4 +141,8 @@ body {
 @layer utilities {
   .scrollbar-hide::-webkit-scrollbar { display: none; }
   .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  .text-stroke-1 {
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3);
+    text-stroke: 1px rgba(0, 0, 0, 0.3);
+  }
 }

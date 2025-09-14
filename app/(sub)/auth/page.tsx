@@ -1,5 +1,3 @@
-// app/(sub)/auth/page.tsx
-
 "use client";
 
 import Image from 'next/image';
@@ -65,7 +63,7 @@ export default function AuthPage() {
             </button>
           </div>
           <div className="mt-6 text-xs text-[var(--text-subtle)]">
-            <Link href="/signup" className="hover:underline">이메일로 가입하기</Link>
+            <Link href="/auth/signup" className="hover:underline">이메일로 가입하기</Link>
             <span className="mx-2">|</span>
             <Link href="/login" className="hover:underline">로그인</Link>
           </div>

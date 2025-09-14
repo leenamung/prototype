@@ -74,7 +74,7 @@ const EmotionSelector: React.FC<EmotionSelectorProps> = ({ selectedEmotions, onE
                       </div>
                   )}
                 </div>
-                <span className={`mt-2 text-xs transition-colors ${isSelected ? `font-semibold text-shadow-sm` : 'text-[var(--text-subtle)]'}`}
+                <span className={`mt-2 text-xs transition-colors ${isSelected ? `font-semibold text-stroke-1` : 'text-[var(--text-subtle)]'}`}
                       style={{color: isSelected ? emotion.color : ''}}
                 >
                   {emotion.label}

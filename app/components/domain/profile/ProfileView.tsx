@@ -19,7 +19,7 @@ export default function ProfileView({ profileData }: ProfileViewProps) {
   
   const hasDiaries = profileData.diaries && profileData.diaries.length > 0;
   const hasAgits = profileData.agits && profileData.agits.length > 0;
-  const hasFriends = profileData.friendCount > 0;
+  const hasFriends = profileData.friendCount === 0;
 
   return (
     <>

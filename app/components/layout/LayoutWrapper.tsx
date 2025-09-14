@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import BottomTabBar from './BottomTabBar';
 
 // BottomTabBar와 하단 여백을 숨길 페이지 경로 목록입니다.
-const FULL_PAGE_ROUTES = ['/auth', '/login', '/signup'];
+const FULL_PAGE_ROUTES = ['/auth', '/diary', '/agit']; 
 
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
