@@ -31,7 +31,7 @@ const BottomTabBar: React.FC = () => {
   const pathname = usePathname();
   const navItems = [
     { href: "/", iconClass: "ri-home-5-line", label: "홈" }, // Assuming '/' is the feed page
-    { href: "/explore", iconClass: "ri-compass-3-line", label: "탐색" }, // Example explore path
+    { href: "/friends", iconClass: "ri-group-fill", label: "친구" }, // Example explore path
     { href: "/agit", iconClass: "ri-group-line", label: "아지트" }, // Example explore path
     { href: "/write", iconClass: "ri-add-box-line", label: "작성" }, // Example write path
     { href: "/direct", iconClass: "ri-discuss-line", label: "메시지" }, // Example notifications path
