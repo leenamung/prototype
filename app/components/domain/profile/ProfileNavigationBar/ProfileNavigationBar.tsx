@@ -1,6 +1,7 @@
 "use client";
 import React from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const ProfileNavigationBar: React.FC = () => {
   const router = useRouter();
@@ -16,13 +17,13 @@ const ProfileNavigationBar: React.FC = () => {
           <i className="ri-arrow-left-s-line ri-lg text-[var(--text-subtle)]"></i>
         </button>
         <h1 className="text-lg font-medium text-[var(--text-main)]">프로필</h1>
-        <button 
-          onClick={() => console.log("options clicked")}
+        <Link 
+          href="/settings"
           className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] transition-colors"
           aria-label="설정"
         >
           <i className="ri-settings-3-line ri-lg text-[var(--text-subtle)]"></i>
-        </button>
+        </Link>
       </div>
     </div>
   );

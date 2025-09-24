@@ -20,14 +20,14 @@ const ToggleSwitch: React.FC<ToggleSwitchProps> = ({ id, checked, onChange, aria
         aria-label={ariaLabel}
       />
       <div 
-        className="relative w-11 h-6 bg-[var(--color-border)] peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-[var(--color-primary)]/50 
+        className="relative w-11 h-6 bg-[var(--color-border)] peer-focus:outline-none 
                    rounded-full
                    peer-checked:after:translate-x-full
                    peer-checked:after:border-white after:content-[''] 
                    after:absolute after:top-[2px] after:start-[2px] 
                    after:bg-white after:border-[var(--color-border)] after:border after:rounded-full 
                    after:h-5 after:w-5 after:transition-all 
-                   peer-checked:bg-[var(--color-primary)] transition-colors"
+                   peer-checked:bg-[var(--color-primary)]"
       ></div>
     </label>
   );
