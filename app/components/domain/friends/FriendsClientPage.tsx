@@ -32,7 +32,7 @@ export default function FriendsClientPage({
         
         {/* 검색창 */}
         <div className="relative my-4">
-          <div className="flex items-center bg-[var(--color-subtle-bg)] rounded-full px-4 py-2.5
+          <div className="flex items-center bg-[var(--color-subtle-bg)] rounded-lg px-4 py-2.5
                         border border-transparent 
                         focus-within:ring-2 focus-within:ring-[var(--color-primary)]/50 
                         transition-all">

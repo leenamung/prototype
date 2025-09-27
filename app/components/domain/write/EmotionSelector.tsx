@@ -1,8 +1,15 @@
 "use client";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import MixedEmotionIcon from './MixedEmotionIcon';
 import { emotions, Emotion } from '../../../data/emotionData';
+
+const instructionOptions = [
+  "오늘 하루, 당신의 마음은 어떤 색에 가까웠나요?",
+  "당신의 하루를 색으로 표현한다면 어떤 느낌일까요?",
+  "오늘의 감정을 색으로 물들여주세요.",
+];
+
 
 interface EmotionSelectorProps {
   selectedEmotions: Emotion[];
@@ -10,6 +17,12 @@ interface EmotionSelectorProps {
 }
 
 const EmotionSelector: React.FC<EmotionSelectorProps> = ({ selectedEmotions, onEmotionChange }) => {
+  const [instruction, setInstruction] = useState(instructionOptions[0]);
+
+  useEffect(() => {
+    setInstruction(instructionOptions[Math.floor(Math.random() * instructionOptions.length)]);
+  }, []);
+
   const handleEmotionToggle = (emotion: Emotion) => {
     const isSelected = selectedEmotions.some(e => e.label === emotion.label);
     if (isSelected) {
@@ -43,7 +56,7 @@ const EmotionSelector: React.FC<EmotionSelectorProps> = ({ selectedEmotions, onE
                 </span>
               ))
             ) : (
-              <p className="text-sm text-[var(--text-subtle)]">아래에서 오늘 하루를 표현하는 색을 골라보세요.</p>
+              <p className="text-sm text-[var(--text-subtle)]">{instruction}</p>
             )}
           </div>
         </div>

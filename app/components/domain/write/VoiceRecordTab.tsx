@@ -2,20 +2,29 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 
+const placeholderOptions = [
+    "목소리에 담긴 당신의 생각이나 느낌을 정리해보세요.",
+    "소리내어 말했던 그 순간의 생각을 글로 간직하세요.",
+];
+
 interface VoiceRecordTabProps {
-  description: string;
-  onDescriptionChange: (description: string) => void;
+  content: string;
+  onContentChange: (content: string) => void;
   onAudioRecordingChange: (audioBlob: Blob | null) => void; // For actual recording
 }
 
-const VoiceRecordTab: React.FC<VoiceRecordTabProps> = ({ description, onDescriptionChange, onAudioRecordingChange }) => {
+const VoiceRecordTab: React.FC<VoiceRecordTabProps> = ({ content, onContentChange, onAudioRecordingChange }) => {
   const [isRecording, setIsRecording] = useState(false);
   const [recordedAudioUrl, setRecordedAudioUrl] = useState<string | null>(null);
   const [recordingTime, setRecordingTime] = useState(0);
   const timerIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
+  const [placeholder, setPlaceholder] = useState(placeholderOptions[0]);
 
+  useEffect(() => {
+    setPlaceholder(placeholderOptions[Math.floor(Math.random() * placeholderOptions.length)]);
+  }, []);
 
   // Simulate recording time for UI
   useEffect(() => {
@@ -156,12 +165,18 @@ const VoiceRecordTab: React.FC<VoiceRecordTabProps> = ({ description, onDescript
       )}
 
       {/* Textarea for description */}
-      <textarea
-        className="w-full min-h-[250px] bg-[var(--color-subtle-bg)] p-3 rounded-lg border-none focus:ring-2 focus:ring-[var(--color-primary)]/50 outline-none text-[var(--text-main)] text-base leading-relaxed resize-none placeholder:text-[var(--text-subtle)]/70 transition-shadow"
-        placeholder="음성 메모에 대한 설명을 입력하세요"
-        value={description}
-        onChange={(e) => onDescriptionChange(e.target.value)}
-      />
+      <div className="bg-[var(--color-subtle-bg)] rounded-lg p-3 border border-transparent
+                    focus-within:ring-2 focus-within:ring-[var(--color-primary)]/50 
+                    transition-all">
+        <textarea
+          className="w-full min-h-[250px] bg-transparent text-[var(--text-main)] text-base leading-relaxed 
+                     resize-none placeholder:text-[var(--text-subtle)]/70 
+                     outline-none border-none p-0 focus:ring-0"
+          placeholder={placeholder}
+          value={content}
+          onChange={(e) => onContentChange(e.target.value)}
+        />
+      </div>
     </div>
   );
 };

@@ -1,19 +1,31 @@
 "use client";
 
 import Image from 'next/image';
-import React, { useState, ChangeEvent, useRef } from 'react';
+import React, { useState, ChangeEvent, useRef, useEffect } from 'react';
+
+const placeholderOptions = [
+    "사진에 담긴 순간의 감정을 기록해보세요.",
+    "이 사진은 어떤 이야기를 담고 있나요?",
+    "찰나의 순간, 그 때의 기분을 함께 남겨주세요.",
+];
 
 interface PhotoUploadTabProps {
-  description: string;
-  onDescriptionChange: (description: string) => void;
+  content: string;
+  onContentChange: (content: string) => void;
   onPhotoChange: (file: File | null) => void;
 }
 
-const PhotoUploadTab: React.FC<PhotoUploadTabProps> = ({ description, onDescriptionChange, onPhotoChange }) => {
+const PhotoUploadTab: React.FC<PhotoUploadTabProps> = ({ content, onContentChange, onPhotoChange }) => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   // ⬇️ 1. 업로드된 이미지의 원본 크기를 저장할 state 추가
   const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const [placeholder, setPlaceholder] = useState(placeholderOptions[0]);
+
+  useEffect(() => {
+    setPlaceholder(placeholderOptions[Math.floor(Math.random() * placeholderOptions.length)]);
+  }, []);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -98,12 +110,18 @@ const PhotoUploadTab: React.FC<PhotoUploadTabProps> = ({ description, onDescript
           </div>
         </div>
       )}
-      <textarea
-        className="w-full min-h-[250px] bg-[var(--color-subtle-bg)] p-3 rounded-lg border-none focus:ring-2 focus:ring-[var(--color-primary)]/50 outline-none text-[var(--text-main)] text-base leading-relaxed resize-none placeholder:text-[var(--text-subtle)]/70 transition-shadow"
-        placeholder="사진에 대한 설명을 입력하세요"
-        value={description}
-        onChange={(e) => onDescriptionChange(e.target.value)}
-      />
+      <div className="bg-[var(--color-subtle-bg)] rounded-lg p-3 border border-transparent
+                    focus-within:ring-2 focus-within:ring-[var(--color-primary)]/50 
+                    transition-all">
+        <textarea
+          className="w-full min-h-[250px] bg-transparent text-[var(--text-main)] text-base leading-relaxed 
+                     resize-none placeholder:text-[var(--text-subtle)]/70 
+                     outline-none border-none p-0 focus:ring-0"
+          placeholder={placeholder}
+          value={content}
+          onChange={(e) => onContentChange(e.target.value)}
+        />
+      </div>
     </div>
   );
 };

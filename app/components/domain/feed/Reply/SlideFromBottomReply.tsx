@@ -144,7 +144,7 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
               ></CommentItem>
             ))}
           </div>
-          <div className="flex-shrink-0 flex items-end border-t border-[var(--color-border)] p-3 space-x-2">
+          <div className="flex items-end border-t border-[var(--color-border)] p-4 space-x-2">
             <div className="relative w-10 h-10 rounded-full bg-[var(--color-border)] overflow-hidden flex-shrink-0">
               {/* ⬇️ 2. img를 Image로 변경하고 fill 속성 적용 */}
               <Image 
@@ -156,11 +156,13 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
                 onError={handleImageError} 
               />
             </div>
-            <div className="flex-1 flex flex-col bg-[var(--color-subtle-bg)] rounded-xl border border-transparent focus-within:ring-2 focus-within:ring-[var(--color-primary)]/50 transition-all p-2">
+            <div className="flex-1 flex flex-col bg-[var(--color-subtle-bg)] rounded-lg border border-transparent 
+                          focus-within:ring-2 focus-within:ring-[var(--color-primary)]/50 
+                          transition-all p-3">
               <AnimatePresence>
                 {replyUserName && (
                   <motion.div
-                    className="flex justify-between items-center text-sm px-2 pb-1"
+                    className="flex justify-between items-center text-sm pb-1"
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: 'auto' }}
                     exit={{ opacity: 0, height: 0 }}
@@ -177,7 +179,7 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
                 )}
               </AnimatePresence>
               <input 
-                className="outline-none w-full text-base bg-transparent px-2"
+                className="outline-none w-full text-base bg-transparent"
                 placeholder="댓글을 입력하세요..."
               />
             </div>

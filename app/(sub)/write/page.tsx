@@ -224,10 +224,7 @@ export default function WritePage() {
   const [activeTab, setActiveTab] = useState<DiaryType>("text");
   const [diaryTitle, setDiaryTitle] = useState('');
 
-  const [textContent, setTextContent] = useState("");
-  const [photoDescription, setPhotoDescription] = useState("");
-  const [videoDescription, setVideoDescription] = useState("");
-  const [voiceDescription, setVoiceDescription] = useState("");
+  const [diaryContent, setDiaryContent] = useState("");
 
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const [videoFile, setVideoFile] = useState<File | null>(null);
@@ -245,13 +242,10 @@ export default function WritePage() {
   const handlePublish = () => {
     console.log("--- 최종 발행 데이터 ---", {
       type: activeTab,
-      textContent,
+      content: diaryContent,
       photoFile,
-      photoDescription,
       videoFile,
-      videoDescription,
       audioBlob,
-      voiceDescription,
       privacy,
       diaryDate,
       useLocation,
@@ -266,13 +260,13 @@ export default function WritePage() {
   const isNextEnabled = (): boolean => {
     switch (activeTab) {
       case "text":
-        return textContent.trim() !== "";
+        return diaryContent.trim() !== "";
       case "photo":
-        return photoFile !== null || photoDescription.trim() !== "";
+        return photoFile !== null || diaryContent.trim() !== "";
       case "video":
-        return videoFile !== null || videoDescription.trim() !== "";
+        return videoFile !== null || diaryContent.trim() !== "";
       case "voice":
-        return audioBlob !== null || voiceDescription.trim() !== "";
+        return audioBlob !== null || diaryContent.trim() !== "";
       default:
         return false;
     }
@@ -304,28 +298,28 @@ export default function WritePage() {
         <div className="mb-6 min-h-[451px]">
           {activeTab === "text" && (
             <TextEditorTab
-              content={textContent}
-              onContentChange={setTextContent}
+              content={diaryContent}
+              onContentChange={setDiaryContent}
             />
           )}
           {activeTab === "photo" && (
             <PhotoUploadTab
-              description={photoDescription}
-              onDescriptionChange={setPhotoDescription}
+              content={diaryContent}
+              onContentChange={setDiaryContent}
               onPhotoChange={setPhotoFile}
             />
           )}
           {activeTab === "video" && (
             <VideoUploadTab
-              description={videoDescription}
-              onDescriptionChange={setVideoDescription}
+              content={diaryContent}
+              onContentChange={setDiaryContent}
               onVideoChange={setVideoFile}
             />
           )}
           {activeTab === "voice" && (
             <VoiceRecordTab
-              description={voiceDescription}
-              onDescriptionChange={setVoiceDescription}
+              content={diaryContent}
+              onContentChange={setDiaryContent}
               onAudioRecordingChange={setAudioBlob}
             />
           )}

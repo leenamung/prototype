@@ -1,24 +1,18 @@
-import { diaryEntriesData } from "@/app/data/diaryEntries";
-import DiaryDetailClient from "@/app/components/domain/diary/DiaryDetailClient";
-import { commentEntriesData } from "@/app/data/commentEntries";
+import React from 'react';
+import { diaryEntriesData } from '@/app/data/diaryEntries';
+import DiaryDetailClient from '@/app/components/domain/diary/DiaryDetailClient';
 
-// 실제로는 params.id를 사용하여 DB에서 해당 일기 데이터를 가져옵니다.
 async function getDiaryData(id: string) {
   console.log("요청된 일기 ID:", id);
-  await new Promise(resolve => setTimeout(resolve, 1500)); // 데이터 로딩 시뮬레이션
-  // 현재는 샘플 데이터의 첫 번째 항목을 반환합니다.
-  const diaryEntry = diaryEntriesData.find(entry => entry.id === id) || diaryEntriesData[0];
-  const comments = commentEntriesData;
-  return { diaryEntry, comments };
+  await new Promise(resolve => setTimeout(resolve, 2000));
+  // 실제로는 id에 맞는 데이터를 찾아야 합니다.
+  return diaryEntriesData.find(diary => diary.id === id);
 }
 
-interface DiaryDetailPageProps {
-  params: Promise<{ id: string }>;
-}
-
-export default async function DiaryDetailPage({ params }: DiaryDetailPageProps) {
-  const { id } = await params;
-  const { diaryEntry, comments } = await getDiaryData(id);
-
-  return <DiaryDetailClient diary={diaryEntry} initialComments={comments} />;
+export default async function DiaryDetailPage({ params }: { params: { id: string } }) {
+  const diaryData = await getDiaryData(params.id);
+  if (!diaryData) {
+    return <div>일기를 찾을 수 없습니다.</div>
+  }
+  return <DiaryDetailClient diary={diaryData} />;
 }

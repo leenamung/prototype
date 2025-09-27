@@ -76,15 +76,15 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ entry, optionHandle, repliySlideH
             <div className="flex items-center">
               <div className="w-8 h-8 rounded-full border-2 border-[var(--text-on-primary)]/80 overflow-hidden mr-2 flex-shrink-0">
                 <Image
-                  src={entry.profileImage}
-                  alt={`${entry.author} 프로필`}
+                  src={entry.author.profileImage}
+                  alt={`${entry.author.name} 프로필`}
                   width={32}
                   height={32}
                   className="w-full h-full object-cover"
                 />
               </div>
               <div>
-                <p className="font-maru-buri font-bold text-[var(--text-on-primary)] text-sm leading-tight shadow-sm">{entry.author}</p>
+                <p className="font-maru-buri font-bold text-[var(--text-on-primary)] text-sm leading-tight shadow-sm">{entry.author.name}</p>
               </div>
             </div>
             <button
@@ -192,15 +192,15 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ entry, optionHandle, repliySlideH
             <div className="flex items-center">
               <div className="w-10 h-10 rounded-full bg-[var(--color-border)] overflow-hidden mr-3 flex-shrink-0">
                 <Image
-                  src={entry.profileImage}
-                  alt={`${entry.author} 프로필`}
+                  src={entry.author.profileImage}
+                  alt={`${entry.author.name} 프로필`}
                   className="w-full h-full object-cover"
                   width={40}
                   height={40}
                 />
               </div>
               <div>
-                <p className="font-maru-buri font-bold text-[var(--text-main)] text-[15px] leading-tight">{entry.author}</p>
+                <p className="font-maru-buri font-bold text-[var(--text-main)] text-[15px] leading-tight">{entry.author.name}</p>
                 <p className="text-xs text-[var(--text-subtle)]">{entry.timestamp}</p>
               </div>
             </div>

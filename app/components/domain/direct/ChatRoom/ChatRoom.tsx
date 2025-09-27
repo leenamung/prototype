@@ -74,14 +74,19 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ thread }) => {
             <button className="p-2 rounded-full hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] transition-colors">
               <i className="ri-add-line ri-lg text-[var(--text-subtle)]"></i>
             </button>
-            <input 
-                type="text" 
-                placeholder="메시지 입력..."
-                value={newMessage}
-                onChange={(e) => setNewMessage(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
-                className="flex-1 bg-[var(--color-subtle-bg)] rounded-full px-4 py-2 text-base outline-none focus:ring-2 focus:ring-[var(--color-primary)]/50 focus:border-[var(--color-primary-dark)] transition-all"
-            />
+            <div className="flex-1 flex items-center bg-[var(--color-subtle-bg)] rounded-lg px-4 py-2 
+                          border border-transparent 
+                          focus-within:ring-2 focus-within:ring-[var(--color-primary)]/50 
+                          transition-all">
+              <input 
+                  type="text" 
+                  placeholder="메시지 입력..."
+                  value={newMessage}
+                  onChange={(e) => setNewMessage(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
+                  className="w-full bg-transparent text-base outline-none border-none p-0 focus:ring-0"
+              />
+            </div>
             <button onClick={handleSendMessage} className="p-2 rounded-full hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] transition-colors">
               <i className="ri-send-plane-2-fill ri-lg text-[var(--color-primary-dark)]"></i>
             </button>

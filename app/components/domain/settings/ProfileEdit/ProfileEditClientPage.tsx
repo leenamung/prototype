@@ -89,26 +89,33 @@ const ProfileEditClientPage = () => {
                 <div className="space-y-4">
                     <div>
                         <label className="text-sm font-medium text-[var(--text-subtle)] block mb-1">닉네임</label>
-                        <input
-                            type="text"
-                            value={nickname}
-                            onChange={handleNicknameChange}
-                            className={`w-full p-3 bg-[var(--color-component-bg)] rounded-lg border 
-                                        ${nicknameError ? 'border-[var(--color-warning)]' : 'border-[var(--color-border)]'} 
-                                        focus:ring-2 focus:ring-[var(--color-primary)]/50 outline-none font-gowun-batang`}
-                        />
+                        <div className={`flex items-center bg-[var(--color-subtle-bg)] rounded-lg px-4 py-2.5 
+                                      border ${nicknameError ? 'border-red-300 ring-2 ring-red-200/50' : 'border-transparent'}
+                                      focus-within:ring-2 focus-within:ring-[var(--color-primary)]/50 transition-all`}>
+                            <input
+                                type="text"
+                                value={nickname}
+                                onChange={handleNicknameChange}
+                                className="flex-1 w-full bg-transparent text-base text-[var(--text-main)] placeholder:text-[var(--text-subtle)]/80 
+                                           outline-none border-none p-0 focus:ring-0 font-gowun-batang"
+                            />
+                        </div>
                         <div className="h-6 mt-1.5">
                             {nicknameError && <p className="text-xs text-[var(--color-warning)]">{nicknameError}</p>}
                         </div>
                     </div>
                     <div>
                         <label className="text-sm font-medium text-[var(--text-subtle)] block mb-1">자기소개</label>
-                        <textarea
-                            value={bio}
-                            onChange={(e) => setBio(e.target.value)}
-                            className="w-full min-h-[100px] p-3 bg-[var(--color-component-bg)] rounded-lg border border-[var(--color-border)] focus:ring-2 focus:ring-[var(--color-primary)]/50 outline-none resize-none"
-                            rows={4}
-                        />
+                        <div className="bg-[var(--color-subtle-bg)] rounded-lg p-3 border border-transparent
+                                      focus-within:ring-2 focus-within:ring-[var(--color-primary)]/50 transition-all">
+                            <textarea
+                                value={bio}
+                                onChange={(e) => setBio(e.target.value)}
+                                className="w-full min-h-[100px] bg-transparent text-base text-[var(--text-main)] 
+                                           outline-none border-none p-0 focus:ring-0 resize-none"
+                                rows={4}
+                            />
+                        </div>
                     </div>
                 </div>
             </main>
