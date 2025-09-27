@@ -9,7 +9,7 @@ async function getDiaryData(id: string) {
   return diaryEntriesData.find(diary => diary.id === id);
 }
 
-export default async function DiaryDetailPage({ params }: { params: { id: string } }) {
+export default async function DiaryDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const {id} = await params;
   const diaryData = await getDiaryData(id);
   if (!diaryData) {
