@@ -10,7 +10,8 @@ async function getDiaryData(id: string) {
 }
 
 export default async function DiaryDetailPage({ params }: { params: { id: string } }) {
-  const diaryData = await getDiaryData(params.id);
+  const {id} = await params;
+  const diaryData = await getDiaryData(id);
   if (!diaryData) {
     return <div>일기를 찾을 수 없습니다.</div>
   }
