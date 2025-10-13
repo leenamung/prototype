@@ -3,7 +3,6 @@
 "use client";
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { DiaryEntry } from '@/app/data/diaryEntries';
 import { commentEntriesData } from '@/app/data/commentEntries';
@@ -21,7 +20,7 @@ const getEmotionGradientStyle = (emotions: DiaryEntry['selectedEmotions']) => {
 
 
 const DiaryDetailClient = ({ diary, backButton }: { diary: DiaryEntry, backButton: React.ReactNode }) => {
-  const router = useRouter();
+
   const [isReplySlideOpen, setIsReplySlideOpen] = useState(false);
   const [isLiked, setIsLiked] = useState(diary.isInitiallyLiked || false);
   const [likesCount, setLikesCount] = useState(diary.likes);

@@ -179,7 +179,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ entry, optionHandle, repliySlideH
                         </button>
                     </div>
                     <div className="mb-4">
-                        {entry.type === 'text' && entry.title && <p className="font-maru-buri text-sm text-[var(--text-subtle)] mb-3">'{entry.title}'</p>}
+                        {entry.type === 'text' && entry.title && <p className="font-maru-buri text-sm text-[var(--text-subtle)] mb-3">`&apos;`{entry.title}`&apos;`</p>}
                         {entry.type === "audio" && entry.audioInfo && (
                             <div className="bg-[var(--color-component-bg)] rounded-lg p-3 mb-4 shadow-sm border border-[var(--color-border)]">
                                 {entry.title && <p className="font-gowun-dodum text-sm text-center text-[var(--text-subtle)] mb-2">{entry.title}</p>}
