@@ -73,6 +73,10 @@ body {
   font-family: 'Maru Buri', serif;
 }
 
+.font-gowun-dodum {
+  font-family: 'Gowun Dodum', sans-serif;
+}
+
 .text-shadow-sm {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* 부드러운 그림자 효과 */
 }
@@ -136,7 +140,23 @@ body {
 .animate-slideInFromBottom { animation: slideInFromBottom 0.3s ease-out forwards; }
 @keyframes modalShowFront { from {opacity: 0; transform: scale(0.8)} to { opacity: 1; transform: scale(1);}}
 .animate-modalShowFront {animation: modalShowFront 0.3s ease-out forwards; }
-
+@keyframes subtleBreathe {
+  0%, 100% {
+    width: 4px;
+  }
+  50% {
+    width: 8px;
+  }
+}
+.emotion-border-element {
+  width: 4px; /* 항상 기본 너비 4px를 유지하도록 명시 */
+}
+.animate-breathe {
+  /* animation-fill-mode: forwards; 를 추가하여 애니메이션 마지막 상태를 유지하도록 하지만, 
+     저희 keyframes는 100%일 때 width: 4px로 돌아오므로, 기본 상태 유지를 위해 이 속성은 없어도 괜찮습니다. 
+     .emotion-border-element 에서 기본 너비를 보장해줍니다. */
+  animation: subtleBreathe 1.5s ease-in-out;
+}
 /* --- 유틸리티 --- */
 @layer utilities {
   .scrollbar-hide::-webkit-scrollbar { display: none; }

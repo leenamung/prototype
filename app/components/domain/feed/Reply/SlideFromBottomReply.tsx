@@ -1,3 +1,4 @@
+// app/components/domain/feed/Reply/SlideFromBottomReply.tsx
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useState, useRef, useEffect, useMemo } from "react";
@@ -116,19 +117,32 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
 
   return (
     <RemoveScroll>
-      <div
+      {/* ⭐️ 1. 애니메이션 효과를 위해 motion.div로 변경하고 initial, animate, exit 속성 추가 */}
+      <motion.div
         className="fixed inset-0 bg-[var(--text-main)]/50 flex flex-col-reverse z-[60]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3 }}
         onMouseDown={handleOverlayInteractionStart}
         onMouseUp={handleOverlayInteractionEnd}
         onTouchStart={handleOverlayInteractionStart}
         onTouchEnd={handleOverlayInteractionEnd}
       >
-        <div
+        <motion.div
           className="bg-[var(--color-component-bg)]/90 backdrop-blur-sm border-t border-[var(--color-border)] rounded-t-2xl w-full flex flex-col absolute bottom-16"
-          style={{ height: `${height}px`, transition: isHeightDragging ? 'none' : 'height 0.3s ease-out' }}
+          style={{ height: `${height}px` }}
+          initial={{ y: "100%" }}
+          animate={{ y: 0, transition: { type: 'tween', ease: 'circOut', duration: 0.4 } }}
+          exit={{ y: "100%", transition: { type: 'tween', ease: 'easeIn', duration: 0.3 } }}
+          drag="y"
+          dragConstraints={{ top: 0, bottom: 0 }}
+          dragElastic={0.1}
+          dragMomentum={false}
         >
+          {/* ⭐️ 2. 상단 핸들 부분의 배경색을 제거하여 더 깔끔하고 통합된 느낌을 줍니다. */}
           <div
-            className="flex flex-col w-full items-center justify-center pt-2.5 pb-2 flex-shrink-0 cursor-ns-resize bg-[var(--text-main)]/5 rounded-t-2xl"
+            className="flex flex-col w-full items-center justify-center pt-2.5 pb-2 flex-shrink-0 cursor-ns-resize"
             onMouseDown={handleHeightDragStart}
             onTouchStart={handleHeightDragStart}
           >
@@ -144,9 +158,9 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
               ></CommentItem>
             ))}
           </div>
-          <div className="flex items-end border-t border-[var(--color-border)] p-4 space-x-2">
+          {/* ⭐️ 3. flex 컨테이너에 items-center를 적용하여 입력창과 버튼을 중앙 정렬합니다. */}
+          <div className="flex items-center border-t border-[var(--color-border)] p-4 space-x-2">
             <div className="relative w-10 h-10 rounded-full bg-[var(--color-border)] overflow-hidden flex-shrink-0">
-              {/* ⬇️ 2. img를 Image로 변경하고 fill 속성 적용 */}
               <Image 
                 src={userProfile} 
                 alt={`사용자프로필`} 
@@ -183,14 +197,13 @@ const SlideFromBottomReply: React.FC<SlideFromBottomReplyProps> = ({
                 placeholder="댓글을 입력하세요..."
               />
             </div>
-            <div>
-              <button className="cursor-pointer text-md w-10 h-10 flex items-center justify-center rounded-xl bg-[var(--color-subtle-bg)] hover:bg-[var(--color-border)] active:bg-[var(--color-border-dark)] transition-colors">
-                <i className="ri-send-plane-2-fill text-[var(--color-primary)]"></i>
-              </button>
-            </div>
+            {/* 버튼을 감싸는 div 제거 */}
+            <button className="cursor-pointer text-md w-10 h-10 flex items-center justify-center rounded-xl bg-[var(--color-subtle-bg)] hover:bg-[var(--color-border)] active:bg-[var(--color-border-dark)] transition-colors flex-shrink-0">
+              <i className="ri-send-plane-2-fill text-[var(--color-primary)]"></i>
+            </button>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </RemoveScroll>
   );
 };

@@ -1,3 +1,4 @@
+// app/components/domain/diary/Navigation/DiaryDetailNavigationBar.tsx
 "use client";
 import { useRouter } from 'next/navigation';
 import React from 'react';
@@ -19,6 +20,7 @@ const DiaryDetailNavigationBar: React.FC<DiaryDetailNavigationBarProps> = ({ dat
         >
           <i className="ri-arrow-left-s-line ri-lg text-[var(--text-subtle)]"></i>
         </button>
+        {/* 중앙에 날짜와 날씨 정보 표시 */}
         <div className="flex items-center text-sm text-[var(--text-main)] font-medium">
           <span>{dateString}</span>
           <i className={`${weatherIcon} ri-lg ml-2 text-[var(--text-subtle)]`}></i>
