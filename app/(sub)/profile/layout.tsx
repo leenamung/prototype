@@ -1,11 +1,9 @@
 import React from 'react';
-import ProfileNavigationBar from '../../components/domain/profile/ProfileNavigationBar/ProfileNavigationBar';
 
+// ProfileNavigationBar를 여기서 제거하고, 각 page나 ProfileView에서 렌더링하도록 변경
 export default function ProfileLayout({ children }: { children: React.ReactNode }) {
-  // ProfileView에서 네비게이션을 포함하므로, 여기서는 div만 렌더링
   return (
-    <div className="pt-14">
-      <ProfileNavigationBar />
+    <div>
       {children}
     </div>
   );

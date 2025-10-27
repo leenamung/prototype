@@ -1,11 +1,11 @@
 import React from 'react';
-import { sampleUserProfileData } from '../../data/profileSampleData';
+import { sampleMyProfileData } from '../../data/profileSampleData';
 import ProfileView from '../../components/domain/profile/ProfileView'; // 새로 만든 통합 클라이언트 컴포넌트
 
 // 데이터를 2초 뒤에 가져오는 것처럼 시뮬레이션
 async function getProfileData() {
   await new Promise(resolve => setTimeout(resolve, 2000));
-  return sampleUserProfileData;
+  return sampleMyProfileData;
 }
 
 // page.tsx는 이제 서버 컴포넌트입니다.
