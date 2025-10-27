@@ -18,16 +18,11 @@ import { Friend, sampleMyFriends } from '@/app/data/sampleFriendData';
 
 
 interface ProfileViewProps {
-  profileData: UserProfileData | null;
+  profileData: UserProfileData;
 }
 
 export default function ProfileView({ profileData }: ProfileViewProps) {
-  if (!profileData) {
-     // 또는 로딩 상태나 에러 메시지를 표시할 수 있습니다.
-     // page.tsx에서 notFound()를 호출하므로 이 경우는 거의 발생하지 않아야 합니다.
-    return <div>프로필 데이터를 불러오는 중 오류가 발생했습니다.</div>;
-  }
-const [activeTab, setActiveTab] = useState<ProfileTabKey>('diaries');
+  const [activeTab, setActiveTab] = useState<ProfileTabKey>('diaries');
   const isMyProfile = profileData.relationshipStatus === 'self';
 
   // --- 파생 데이터 계산 ---
