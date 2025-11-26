@@ -7,7 +7,6 @@ import EmptyMyAgitList from './ui/empty/EmptyMyAgitList';
 import { UserAgitSummary } from '@/app/data/profileSampleData';
 import ProfileAgitListItem from '../common/AgitListItem';
 import FloatingActionButton from '../common/FloatingActionButton';
-import AgitMainNavigationBar from './AgitMainNavigationBar'; // 👈 [추가] 네비게이션 바 import
 
 interface AgitClientPageProps {
   myAgits: UserAgitSummary[];
@@ -19,7 +18,6 @@ export default function AgitClientPage({ myAgits, exploreAgits }: AgitClientPage
   const router = useRouter();
 
   // 👈 [추가] 네비게이션 바에 필요한 프로필 이미지 (임시)
-  const userProfileImage = "https://readdy.ai/api/search-image?query=portrait%20of%20a%20young%20asian%20woman%2C%20soft%20lighting%2C%20warm%20tones%2C%20natural%20look%2C%20gentle%20smile%2C%20high%20quality%2C%20professional%20photo&width=100&height=100&seq=1&orientation=squarish";
 
   const handleCreateAgit = () => router.push('/agit/create');
   

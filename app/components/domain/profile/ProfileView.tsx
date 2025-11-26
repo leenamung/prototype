@@ -42,16 +42,16 @@ export default function ProfileView({ profileData }: ProfileViewProps) {
   const hasViewableDiaries = viewableDiaries.length > 0;
 
   const mutualFriendIds = profileData.mutualFriendIds;
-  const mutualFriends: Friend[] = useMemo(() => {
-     return mutualFriendIds
-       ? sampleMyFriends.filter(friend => mutualFriendIds.includes(friend.id))
-       : [];
-  }, [mutualFriendIds]);
+  // const mutualFriends: Friend[] = useMemo(() => {
+  //    return mutualFriendIds
+  //      ? sampleMyFriends.filter(friend => mutualFriendIds.includes(friend.id))
+  //      : [];
+  // }, [mutualFriendIds]);
   
   // 여기서는 mutualFriendIds가 있으면 표시하도록 로직 유지 (실제 데이터 연동 시 수정 가능)
   const hasFriendsToShow = mutualFriendIds && mutualFriendIds.length > 0;
 
-  const userAgits = profileData.agits || [];
+  const userAgits = useMemo(() => profileData.agits || [], [profileData.agits]);
   const mutualAgits: UserAgitSummary[] = useMemo(() => {
     return mutualAgitIds
       ? userAgits.filter(agit => mutualAgitIds.includes(agit.id))

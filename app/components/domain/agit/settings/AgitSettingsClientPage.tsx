@@ -2,7 +2,6 @@
 
 import React, { useState, useRef, ChangeEvent, useEffect } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import { AgitInfo } from '@/app/data/agitSampleData';
 import AgitSettingsNavigationBar from './AgitSettingsNavigationBar';
 
@@ -22,7 +21,6 @@ const maxMembersOptions = [
 ];
 
 const AgitSettingsClientPage: React.FC<AgitSettingsClientPageProps> = ({ agitData }) => {
-  const router = useRouter();
   
   // ... (useState, useEffect 등 기존 로직 유지) ...
   const [initialData] = useState({

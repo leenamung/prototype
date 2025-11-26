@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
-import type { AgitInfo, AgitMember } from '../../../data/agitSampleData';
+import type { AgitInfo } from '@/app/data/agitSampleData';
 import AgitHeader from './AgitHeader/AgitHeader';
 import AgitTabs, { AgitTabKey } from './AgitTabs';
 import AgitInfoContent from './AgitInfo/AgitInfoContent';
