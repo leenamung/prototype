@@ -2,10 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-interface AgitMainNavigationBarProps {
-}
-
-const AgitMainNavigationBar: React.FC<AgitMainNavigationBarProps> = () => {
+const AgitMainNavigationBar = () => {
   return (
     <nav className="fixed top-0 w-full bg-[var(--color-component-bg)] border-b border-[var(--color-border)] shadow-sm z-20">
       <div className="flex items-center justify-between px-4 py-3 h-14">

@@ -11,7 +11,6 @@ import ProfileDiariesContent from './ProfileContent/ProfileDiariesContent';
 import ProfileAgitsContent from './ProfileContent/ProfileAgitsContent';
 import MutualFriendList from './ProfileContent/MutualFriendList';
 import MutualAgitList from './ProfileContent/MutualAgitList';
-import { Friend, sampleMyFriends } from '@/app/data/sampleFriendData';
 
 interface ProfileViewProps {
   profileData: UserProfileData;

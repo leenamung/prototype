@@ -3,7 +3,6 @@ import "./styles/globals.css";
 import LayoutWrapper from "./components/layout/LayoutWrapper";
 import { Gowun_Dodum, Pacifico } from 'next/font/google';
 
-// 구글 폰트 설정
 const gowunDodum = Gowun_Dodum({
   weight: '400',
   subsets: ['latin'],
@@ -40,6 +39,7 @@ export default function RootLayout({
         {/* Maru Buri (구글 폰트에 없을 수 있어 CDN 유지) */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link href="https://fonts.googleapis.com/css2?family=Maru+Buri:wght@300;400;500;700&display=swap" rel="stylesheet" />
       </head>
       <body>
