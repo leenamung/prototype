@@ -1,5 +1,3 @@
-// app/components/domain/agit/AgitCreateClient.tsx
-
 "use client";
 
 import { useState, ChangeEvent, useRef } from 'react';
@@ -14,11 +12,11 @@ export default function AgitCreateClient() {
   const [agitName, setAgitName] = useState('');
   const [agitDescription, setAgitDescription] = useState('');
   const [agitImage, setAgitImage] = useState<string | null>(null);
-  const [isPublic, setIsPublic] = useState(true); // true: 공개, false: 비공개
-  const [joinType, setJoinType] = useState('free'); // 'free': 자유 가입, 'approval': 가입 신청
-  const [maxMembers, setMaxMembers] = useState('30'); // '30', '100', 'unlimited'
+  const [isPublic, setIsPublic] = useState(true); 
+  const [joinType, setJoinType] = useState('free'); 
+  const [maxMembers, setMaxMembers] = useState('30'); 
 
-  const isFormValid = agitName.trim().length >= 2; // 아지트 이름은 2자 이상 필수
+  const isFormValid = agitName.trim().length >= 2;
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -46,24 +44,19 @@ export default function AgitCreateClient() {
       joinType,
       maxMembers,
     });
-    // 실제 아지트 생성 API 호출 로직
     alert(`'${agitName}' 아지트가 생성되었습니다!`);
-    router.push('/main/agit');
+    router.push('/agit'); // 메인 > 아지트 목록으로 이동
   };
+  
+  // 공통 라디오 버튼 스타일 (설정 페이지와 통일)
+  const radioClassName = "appearance-none w-4 h-4 rounded-full border-2 border-[var(--color-border)] bg-[var(--color-component-bg)] checked:bg-[var(--color-primary)] checked:border-[var(--color-primary)] transition-colors mr-2 relative cursor-pointer after:content-[''] after:w-1.5 after:h-1.5 after:rounded-full after:bg-white after:absolute after:left-1/2 after:top-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:opacity-0 checked:after:opacity-100";
 
   return (
     <div className="bg-[var(--color-background)] min-h-screen flex flex-col">
-      <header className="fixed top-0 w-full bg-[var(--color-component-bg)]/80 backdrop-blur-sm z-20 border-b border-[var(--color-border)]">
-        <div className="flex items-center justify-between px-2 h-14">
-          <button onClick={() => router.back()} className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] transition-colors">
-            <i className="ri-arrow-left-s-line ri-xl text-[var(--text-subtle)]"></i>
-          </button>
-          <h1 className="font-pretendard font-semibold text-lg text-[var(--text-main)]">아지트 만들기</h1>
-          <div className="w-10 h-10"></div> {/* 우측 정렬 맞춤용 */}
-        </div>
-      </header>
-
-      <main className="flex-grow pt-14 pb-20 px-5 overflow-y-auto">
+      {/* ❌ 기존 Header 제거됨 */}
+      
+      {/* ✅ pt-14 제거 (부모에서 처리) */}
+      <main className="flex-grow pb-20 px-5 overflow-y-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -77,7 +70,7 @@ export default function AgitCreateClient() {
             나와 같은 관심사를 가진 사람들과 이야기를 나눌 수 있어요.
           </p>
 
-          {/* ✅ 아지트 대표 이미지 - 디자인 개선 */}
+          {/* 아지트 대표 이미지 */}
           <div className="mt-8 mb-8 text-center">
             <p className="font-pretendard text-sm text-left block text-[var(--text-subtle)] mb-2">
               아지트 대표 이미지 <span className="text-[var(--text-subtle)]/70">(선택)</span>
@@ -111,14 +104,16 @@ export default function AgitCreateClient() {
             <label htmlFor="agitName" className="font-pretendard text-sm text-left block text-[var(--text-subtle)] mb-2">
               아지트 이름 <span className="text-[var(--color-warning)]">(필수)</span>
             </label>
-            <input
-              id="agitName"
-              type="text"
-              value={agitName}
-              onChange={(e) => setAgitName(e.target.value)}
-              placeholder="예: 우리 동네 독서 모임"
-              className="w-full bg-white text-base text-[var(--text-main)] placeholder:text-[var(--text-subtle)]/70 focus:outline-none p-3 rounded-lg border border-[var(--color-border)] focus:ring-2 focus:ring-[var(--color-primary)]/50 transition-all font-pretendard"
-            />
+            <div className="bg-[var(--color-subtle-bg)] rounded-lg p-3 border border-transparent focus-within:ring-2 focus-within:ring-[var(--color-primary)]/50 transition-all">
+              <input
+                id="agitName"
+                type="text"
+                value={agitName}
+                onChange={(e) => setAgitName(e.target.value)}
+                placeholder="예: 우리 동네 독서 모임"
+                className="w-full bg-transparent text-base text-[var(--text-main)] placeholder:text-[var(--text-subtle)]/70 focus:outline-none p-0 border-none font-pretendard"
+              />
+            </div>
              {!isFormValid && agitName.length > 0 && (
                 <p className="font-pretendard text-xs text-[var(--color-warning)] mt-1">
                     아지트 이름은 2자 이상 입력해주세요.
@@ -131,14 +126,16 @@ export default function AgitCreateClient() {
             <label htmlFor="agitDescription" className="font-pretendard text-sm text-left block text-[var(--text-subtle)] mb-2">
               아지트 설명 <span className="text-[var(--text-subtle)]/70">(선택)</span>
             </label>
-            <textarea
-              id="agitDescription"
-              value={agitDescription}
-              onChange={(e) => setAgitDescription(e.target.value)}
-              placeholder="아지트의 목표, 활동 방식 등을 자유롭게 설명해주세요."
-              rows={4}
-              className="w-full bg-white text-base text-[var(--text-main)] placeholder:text-[var(--text-subtle)]/70 focus:outline-none p-3 rounded-lg border border-[var(--color-border)] focus:ring-2 focus:ring-[var(--color-primary)]/50 transition-all resize-none font-pretendard"
-            />
+            <div className="bg-[var(--color-subtle-bg)] rounded-lg p-3 border border-transparent focus-within:ring-2 focus-within:ring-[var(--color-primary)]/50 transition-all">
+              <textarea
+                id="agitDescription"
+                value={agitDescription}
+                onChange={(e) => setAgitDescription(e.target.value)}
+                placeholder="아지트의 목표, 활동 방식 등을 자유롭게 설명해주세요."
+                rows={4}
+                className="w-full bg-transparent text-base text-[var(--text-main)] placeholder:text-[var(--text-subtle)]/70 focus:outline-none p-0 border-none resize-none font-pretendard"
+              />
+            </div>
           </div>
 
           {/* 공개 설정 */}
@@ -153,7 +150,7 @@ export default function AgitCreateClient() {
                   name="isPublic"
                   checked={isPublic === true}
                   onChange={() => setIsPublic(true)}
-                  className="form-radio h-4 w-4 text-[var(--color-primary)] border-[var(--color-border)] focus:ring-[var(--color-primary)] checked:bg-[var(--color-primary)] checked:border-[var(--color-primary)] mr-2"
+                  className={radioClassName}
                 />
                 공개
               </label>
@@ -163,7 +160,7 @@ export default function AgitCreateClient() {
                   name="isPublic"
                   checked={isPublic === false}
                   onChange={() => setIsPublic(false)}
-                  className="form-radio h-4 w-4 text-[var(--color-primary)] border-[var(--color-border)] focus:ring-[var(--color-primary)] checked:bg-[var(--color-primary)] checked:border-[var(--color-primary)] mr-2"
+                  className={radioClassName}
                 />
                 비공개
               </label>
@@ -186,7 +183,7 @@ export default function AgitCreateClient() {
                   value="free"
                   checked={joinType === 'free'}
                   onChange={() => setJoinType('free')}
-                  className="form-radio h-4 w-4 text-[var(--color-primary)] border-[var(--color-border)] focus:ring-[var(--color-primary)] checked:bg-[var(--color-primary)] checked:border-[var(--color-primary)] mr-2"
+                  className={radioClassName}
                 />
                 자유 가입
               </label>
@@ -197,7 +194,7 @@ export default function AgitCreateClient() {
                   value="approval"
                   checked={joinType === 'approval'}
                   onChange={() => setJoinType('approval')}
-                  className="form-radio h-4 w-4 text-[var(--color-primary)] border-[var(--color-border)] focus:ring-[var(--color-primary)] checked:bg-[var(--color-primary)] checked:border-[var(--color-primary)] mr-2"
+                  className={radioClassName}
                 />
                 가입 신청
               </label>
@@ -207,12 +204,12 @@ export default function AgitCreateClient() {
             </p>
           </div>
 
-          {/* ✅ 최대 인원 설정 -> 아지트 규모로 변경 및 설명 추가 */}
+          {/* 아지트 규모 */}
           <div className="mb-6">
             <p className="font-pretendard text-sm text-left block text-[var(--text-subtle)] mb-2">
               아지트 규모
             </p>
-            <div className="flex flex-col space-y-3"> {/* ✅ space-y-3으로 간격 조절 */}
+            <div className="flex flex-col space-y-3">
               <div>
                 <label className="flex items-center font-pretendard text-[var(--text-main)]">
                   <input
@@ -221,7 +218,7 @@ export default function AgitCreateClient() {
                     value="30"
                     checked={maxMembers === '30'}
                     onChange={() => setMaxMembers('30')}
-                    className="form-radio h-4 w-4 text-[var(--color-primary)] border-[var(--color-border)] focus:ring-[var(--color-primary)] checked:bg-[var(--color-primary)] checked:border-[var(--color-primary)] mr-2"
+                    className={radioClassName}
                   />
                   소소하게 (최대 30명)
                 </label>
@@ -238,7 +235,7 @@ export default function AgitCreateClient() {
                     value="100"
                     checked={maxMembers === '100'}
                     onChange={() => setMaxMembers('100')}
-                    className="form-radio h-4 w-4 text-[var(--color-primary)] border-[var(--color-border)] focus:ring-[var(--color-primary)] checked:bg-[var(--color-primary)] checked:border-[var(--color-primary)] mr-2"
+                    className={radioClassName}
                   />
                   적당하게 (최대 100명)
                 </label>
@@ -255,7 +252,7 @@ export default function AgitCreateClient() {
                     value="unlimited"
                     checked={maxMembers === 'unlimited'}
                     onChange={() => setMaxMembers('unlimited')}
-                    className="form-radio h-4 w-4 text-[var(--color-primary)] border-[var(--color-border)] focus:ring-[var(--color-primary)] checked:bg-[var(--color-primary)] checked:border-[var(--color-primary)] mr-2"
+                    className={radioClassName}
                   />
                   자유롭게 (제한 없음)
                 </label>
@@ -265,18 +262,26 @@ export default function AgitCreateClient() {
               </div>
             </div>
           </div>
-
         </motion.div>
       </main>
 
+      {/* Footer (취소/만들기 버튼) 유지 */}
       <footer className="fixed bottom-0 w-full bg-[var(--color-component-bg)] border-t border-[var(--color-border)] p-4 z-10">
-        <button
-          onClick={handleSubmit}
-          disabled={!isFormValid}
-          className="w-full py-3 bg-[var(--color-primary)] text-[var(--text-on-primary)] rounded-[var(--rounded-button)] font-semibold transition-opacity hover:opacity-90 active:bg-[var(--color-primary-darker)] disabled:opacity-50 disabled:cursor-not-allowed font-pretendard"
-        >
-          아지트 만들기
-        </button>
+        <div className="flex space-x-3">
+          <button
+            onClick={() => router.back()}
+            className="flex-1 py-3 bg-[var(--color-subtle-bg)] text-[var(--text-subtle)] rounded-[var(--rounded-button)] font-semibold transition-colors hover:bg-[var(--color-border)] active:bg-[var(--color-border-dark)] font-pretendard"
+          >
+            취소
+          </button>
+          <button
+            onClick={handleSubmit}
+            disabled={!isFormValid}
+            className="flex-1 py-3 bg-[var(--color-primary)] text-[var(--text-on-primary)] rounded-[var(--rounded-button)] font-semibold transition-opacity hover:opacity-90 active:bg-[var(--color-primary-darker)] disabled:opacity-50 disabled:cursor-not-allowed font-pretendard"
+          >
+            아지트 만들기
+          </button>
+        </div>
       </footer>
     </div>
   );

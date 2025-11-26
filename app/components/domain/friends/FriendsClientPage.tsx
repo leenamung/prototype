@@ -1,37 +1,29 @@
 "use client";
 import React from 'react';
-// 컴포넌트 import
-import FriendsNavigationBar from '@/app/components/domain/friends/Navigation/FriendsNavigationBar';
 import RecommendedFriendCarousel from '@/app/components/domain/friends/Recommended/RecommendedFriendCarousel';
 import FriendListItem from '@/app/components/domain/friends/FriendList/FriendListItem';
-// 데이터 타입 import
-import type { RecommendedFriend, Friend, FriendRequest } from '@/app/data/sampleFriendData';
+import type { RecommendedFriend, Friend } from '@/app/data/sampleFriendData';
 
-// 데이터를 Props로 받도록 수정
 interface FriendsClientPageProps {
   recommendedFriends: RecommendedFriend[];
   myFriends: Friend[];
-  receivedRequests: FriendRequest[];
+  // receivedRequests는 NavigationBar에서만 쓰이므로 ClientPage Props에서 제거합니다.
 }
 
 export default function FriendsClientPage({
   recommendedFriends,
   myFriends,
-  receivedRequests
 }: FriendsClientPageProps) {
   
-  const newRequestCount = receivedRequests.length;
-
   return (
     <>
-      {/* 1. 친구 탭 전용 네비게이션 (Fixed Top 0) */}
-      <FriendsNavigationBar requestCount={newRequestCount} />
-
-      {/* 2. 메인 콘텐츠 (pt-14) */}
-      <main className="pt-14 px-4">
+      {/* ❌ FriendsNavigationBar 제거됨 */}
+      
+      {/* ✅ pt-14 제거 (부모에서 처리), px-4는 콘텐츠 여백이므로 유지 */}
+      <main className="px-4 py-4">
         
         {/* 검색창 */}
-        <div className="relative my-4">
+        <div className="relative mb-4"> {/* my-4 -> mb-4 (상단 여백은 pt-14로 충분) */}
           <div className="flex items-center bg-[var(--color-subtle-bg)] rounded-lg px-4 py-2.5
                         border border-transparent 
                         focus-within:ring-2 focus-within:ring-[var(--color-primary)]/50 

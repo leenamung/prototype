@@ -1,10 +1,9 @@
 "use client";
 import React from 'react';
-import RequestsNavigationBar from '@/app/components/domain/friends/Navigation/RequestsNavigationBar';
+// RequestsNavigationBar 제거 ❌
 import FriendRequestItem from '@/app/components/domain/friends/FriendRequest/RequestItem/FriendRequestItem';
 import type { FriendRequest } from '@/app/data/sampleFriendData';
 
-// 데이터를 Props로 받도록 수정
 interface RequestsClientPageProps {
   sentRequests: FriendRequest[];
   receivedRequests: FriendRequest[];
@@ -13,11 +12,10 @@ interface RequestsClientPageProps {
 export default function RequestsClientPage({ sentRequests, receivedRequests }: RequestsClientPageProps) {
   return (
     <>
-      {/* 1. 친구 요청 페이지 전용 헤더 (Fixed Top 0) */}
-      <RequestsNavigationBar />
+      {/* ❌ RequestsNavigationBar 제거됨 */}
 
-      {/* 2. 메인 콘텐츠 (pt-14) */}
-      <main className="pt-14">
+      {/* ✅ pt-14 제거 (부모에서 처리) */}
+      <main>
         
         {/* 섹션 1: 내가 보낸 친구 요청 */}
         <section className="mb-4">

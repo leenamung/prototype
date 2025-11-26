@@ -1,4 +1,3 @@
-// app/components/domain/diary/Navigation/DiaryDetailNavigationBar.tsx
 "use client";
 import { useRouter } from 'next/navigation';
 import React from 'react';
@@ -11,7 +10,8 @@ interface DiaryDetailNavigationBarProps {
 const DiaryDetailNavigationBar: React.FC<DiaryDetailNavigationBarProps> = ({ dateString, weatherIcon }) => {
   const router = useRouter();
   return (
-    <nav className="fixed top-0 w-full bg-[var(--color-component-bg)] border-b border-[var(--color-border)] shadow-sm z-20">
+    // 👈 [수정] z-20 -> z-50 (전체 화면 배경 위에 표시하기 위함)
+    <nav className="fixed top-0 w-full bg-[var(--color-component-bg)]/80 backdrop-blur-sm border-b border-[var(--color-border)] shadow-sm z-50">
       <div className="flex items-center justify-between px-4 py-3 h-14">
         <button 
           onClick={() => router.back()} 

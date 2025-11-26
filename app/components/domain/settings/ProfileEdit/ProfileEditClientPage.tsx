@@ -1,7 +1,8 @@
 "use client";
 import React, { useState, useRef, ChangeEvent } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation'; // Header로 이동됨
+import ProfileEditNavigationBar from './ProfileEditNavigationBar';
 
 const validateNickname = (name: string) => {
   if (name.length < 2 || name.length > 10) {
@@ -14,11 +15,19 @@ const validateNickname = (name: string) => {
 };
 
 const ProfileEditClientPage = () => {
-    const router = useRouter();
+    // const router = useRouter(); // Header 컴포넌트 내부에서 사용
     
-    const [nickname, setNickname] = useState("김민지");
-    const [bio, setBio] = useState("매일 조금씩 성장하는 중입니다 🌱");
-    const [profileImage, setProfileImage] = useState<string | null>("https://i.pravatar.cc/150?img=11");
+    // ✅ 초기 데이터 정의 (변경 사항 비교용)
+    // 실제 구현 시에는 서버에서 받아온 props 데이터를 여기에 할당하면 됩니다.
+    const initialData = {
+        nickname: "김민지",
+        bio: "매일 조금씩 성장하는 중입니다 🌱",
+        profileImage: "https://i.pravatar.cc/150?img=11"
+    };
+
+    const [nickname, setNickname] = useState(initialData.nickname);
+    const [bio, setBio] = useState(initialData.bio);
+    const [profileImage, setProfileImage] = useState<string | null>(initialData.profileImage);
     const [nicknameError, setNicknameError] = useState<string | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -41,26 +50,30 @@ const ProfileEditClientPage = () => {
     
     const triggerFileSelect = () => fileInputRef.current?.click();
 
-    const isSaveDisabled = !!nicknameError;
+    const handleSave = () => {
+        console.log("프로필 저장:", { nickname, bio, profileImage });
+        alert("프로필이 수정되었습니다.");
+        // router.back(); // 저장 후 이동 로직 추가 가능
+    };
+
+    // ✅ 변경 사항 여부 확인 (Dirty Check)
+    // 닉네임, 자기소개, 프로필 이미지 중 하나라도 초기값과 다르면 true
+    const isDirty = nickname !== initialData.nickname || 
+                    bio !== initialData.bio || 
+                    profileImage !== initialData.profileImage;
+
+    // ✅ 저장 버튼 비활성화 조건 수정:
+    // 1. 닉네임 유효성 에러가 있거나 (!!nicknameError)
+    // 2. 변경 사항이 없을 때 (!isDirty)
+    const isSaveDisabled = !!nicknameError || !isDirty;
 
     return (
-        <>
-            <nav className="fixed top-0 w-full bg-[var(--color-component-bg)] border-b border-[var(--color-border)] shadow-sm z-20">
-                <div className="flex items-center justify-between px-4 py-3 h-14">
-                    <button onClick={() => router.back()} className="text-sm text-[var(--text-subtle)] hover:text-[var(--text-main)] px-2 py-1 rounded-md hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] transition-colors">취소</button>
-                    <h1 className="text-lg font-semibold text-[var(--text-main)]">프로필 편집</h1>
-                    <button 
-                        disabled={isSaveDisabled}
-                         className={`text-sm font-bold transition-all px-2 py-1 rounded-md ${isSaveDisabled ? 'text-[var(--color-border)]' : 'text-[var(--color-primary)] hover:bg-[var(--color-primary)]/10 active:bg-[var(--color-primary)]/20'}`}
-                    >
-                        완료
-                    </button>
-                </div>
-            </nav>
-            <main className="pt-20 px-5 pb-10">
+        <div className="pb-10">
+            {/* 네비게이션 바에 isSaveDisabled 상태 전달 */}
+            <ProfileEditNavigationBar onSave={handleSave} isSaveDisabled={isSaveDisabled} />
+
+            <main className="pt-20 px-5">
                 <div className="flex flex-col items-center">
-                    
-                    {/* ⭐️ 수정: '프로필 사진' h3 타이틀을 제거했습니다. */}
                     <div className="relative w-24 h-24 mb-8">
                         <div className="w-24 h-24 rounded-full overflow-hidden bg-[var(--color-border)] cursor-pointer group" onClick={triggerFileSelect}>
                             {profileImage && <Image src={profileImage} alt="프로필 사진" layout="fill" objectFit="cover" className="rounded-full" />}
@@ -119,7 +132,7 @@ const ProfileEditClientPage = () => {
                     </div>
                 </div>
             </main>
-        </>
+        </div>
     )
 }
 

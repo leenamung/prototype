@@ -38,12 +38,9 @@ const AgitInfoContent: React.FC<AgitInfoContentProps> = ({
       </InfoSection>
 
       <InfoSection title="모임 규칙">
-        {/* 리스트 아이템 텍스트 색상 변경 */}
-        <ul className="list-disc pl-5 space-y-2 text-base text-[var(--text-main)]">
-          {rules.map((rule, index) => (
-            <li key={index}>{rule}</li>
-          ))}
-        </ul>
+        <p className="text-base text-[var(--text-main)] leading-relaxed whitespace-pre-wrap">
+          {rules.join('\n')}
+        </p>
       </InfoSection>
 
       <InfoSection title="관리자 정보">

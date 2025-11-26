@@ -1,6 +1,5 @@
 "use client";
 import React from 'react';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { sampleBlockedUsers } from '@/app/data/sampleSettingsData';
 import type { BlockedUser } from '@/app/data/sampleSettingsData';
@@ -20,27 +19,19 @@ const BlockedUserItem = ({ user }: { user: BlockedUser }) => (
 );
 
 const BlockedUsersClientPage = () => {
-    const router = useRouter();
-    const blockedUsers = sampleBlockedUsers; // 실제로는 API 호출
+    const blockedUsers = sampleBlockedUsers;
 
     return (
-        <>
-            <nav className="fixed top-0 w-full bg-[var(--color-component-bg)] border-b border-[var(--color-border)] shadow-sm z-20">
-                <div className="flex items-center px-4 py-3 h-14">
-                    <button onClick={() => router.back()} className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] transition-colors"><i className="ri-arrow-left-s-line ri-lg text-[var(--text-subtle)]"></i></button>
-                    <h1 className="text-lg font-semibold text-[var(--text-main)] absolute left-1/2 -translate-x-1/2">차단된 사용자 관리</h1>
-                </div>
-            </nav>
-            <main className="pt-14">
-                <div className="bg-[var(--color-component-bg)] border-y border-[var(--color-border)] divide-y divide-[var(--color-border)]">
-                    {blockedUsers.length > 0 ? (
-                        blockedUsers.map(user => <BlockedUserItem key={user.id} user={user} />)
-                    ) : (
-                        <p className="text-center text-sm text-[var(--text-subtle)] py-16">차단된 사용자가 없습니다.</p>
-                    )}
-                </div>
-            </main>
-        </>
+        // ✅ NavigationBar 및 pt-14 제거
+        <div>
+            <div className="bg-[var(--color-component-bg)] border-y border-[var(--color-border)] divide-y divide-[var(--color-border)] mt-4">
+                {blockedUsers.length > 0 ? (
+                    blockedUsers.map(user => <BlockedUserItem key={user.id} user={user} />)
+                ) : (
+                    <p className="text-center text-sm text-[var(--text-subtle)] py-16">차단된 사용자가 없습니다.</p>
+                )}
+            </div>
+        </div>
     );
 };
 

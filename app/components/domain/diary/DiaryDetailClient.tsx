@@ -1,5 +1,3 @@
-// app/components/domain/diary/DiaryDetailClient.tsx
-
 "use client";
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -10,7 +8,6 @@ import SlideFromBottomReply from '../feed/Reply/SlideFromBottomReply';
 import Link from 'next/link';
 import { RemoveScroll } from 'react-remove-scroll';
 
-// 헬퍼 함수: 감정 색상으로 그라데이션 배경 스타일 생성
 const getEmotionGradientStyle = (emotions: DiaryEntry['selectedEmotions']) => {
     const colors = emotions.map(e => e.color);
     if (colors.length === 0) return { backgroundColor: 'var(--color-background)' };
@@ -18,8 +15,8 @@ const getEmotionGradientStyle = (emotions: DiaryEntry['selectedEmotions']) => {
     return { backgroundImage: `linear-gradient(160deg, ${colors.map(c => `${c}B3`).join(', ')})` };
 };
 
-
-const DiaryDetailClient = ({ diary, backButton }: { diary: DiaryEntry, backButton: React.ReactNode }) => {
+// 👈 [수정] backButton prop 제거
+const DiaryDetailClient = ({ diary }: { diary: DiaryEntry }) => {
 
   const [isReplySlideOpen, setIsReplySlideOpen] = useState(false);
   const [isLiked, setIsLiked] = useState(diary.isInitiallyLiked || false);
@@ -31,7 +28,6 @@ const DiaryDetailClient = ({ diary, backButton }: { diary: DiaryEntry, backButto
   }
 
   return (
-    // ✅ [최종 수정] AnimatePresence로 감싸서 부드러운 퇴장 애니메이션을 준비합니다.
     <RemoveScroll>
       <AnimatePresence>
         <div key="diary-detail-modal">
@@ -47,21 +43,21 @@ const DiaryDetailClient = ({ diary, backButton }: { diary: DiaryEntry, backButto
             <div className="noise-background" style={{ zIndex: 31 }} />
           </motion.div>
 
-          {/* 뒤로가기 버튼 */}
-          {backButton}
+          {/* ❌ {backButton} 제거됨 */}
           
-          {/* ✅ [최종 수정] 콘텐츠 스크롤 영역을 fixed inset-0 으로 변경하여 전체 화면 모달로 만듭니다. */}
+          {/* 콘텐츠 스크롤 영역 */}
           <div 
               className="fixed inset-0 z-40 flex justify-center items-start p-4 pt-20 pb-28 overflow-y-auto"
           >
+            {/* ... (기존 카드 콘텐츠 동일) ... */}
             <motion.div
               layoutId={`diary-card-${diary.id}`}
               className="w-full max-w-2xl bg-[var(--color-component-bg)]/80 backdrop-blur-lg rounded-xl shadow-2xl overflow-hidden"
-              onClick={(e) => e.stopPropagation()} // 카드 클릭 시 닫기 방지
+              onClick={(e) => e.stopPropagation()}
             >
                 {diary.imageUrl && (
                   <div className="relative w-full aspect-video">
-                    <Image src={diary.imageUrl} alt={diary.title || '일기 이미지'} fill objectFit="cover" priority/>
+                    <Image src={diary.imageUrl} alt={diary.title || '일기 이미지'} fill style={{objectFit: "cover"}} priority/>
                   </div>
                 )}
                 
@@ -96,7 +92,7 @@ const DiaryDetailClient = ({ diary, backButton }: { diary: DiaryEntry, backButto
             </motion.div>
           </div>
 
-          {/* 3. 감정의 문 (하단 고정 바) */}
+          {/* ... (하단 바 동일) ... */}
           <motion.div
             className="fixed bottom-0 left-0 right-0 z-50 h-20 flex justify-center"
             initial={{ y: "100%" }}

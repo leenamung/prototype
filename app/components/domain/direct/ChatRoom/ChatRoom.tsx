@@ -1,7 +1,6 @@
 "use client";
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 import type { Message, MessageThread } from '../../../../data/messageSampleData';
 
 interface ChatRoomProps {
@@ -9,17 +8,37 @@ interface ChatRoomProps {
 }
 
 const ChatRoom: React.FC<ChatRoomProps> = ({ thread }) => {
-  const router = useRouter();
   const [messages, setMessages] = useState<Message[]>(thread.messages);
   const [newMessage, setNewMessage] = useState('');
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  
+  const scrollRef = useRef<HTMLElement>(null);
+  const isInitialMount = useRef(true);
+  
+  // ✅ 초기 로딩 시 "깜빡임 없이" 하단 고정을 위한 로직 (이전과 동일하게 유지)
+  useLayoutEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (scrollContainer) {
+      scrollContainer.scrollTop = scrollContainer.scrollHeight;
+      requestAnimationFrame(() => {
+        scrollContainer.style.opacity = '1';
+      });
+    }
+  }, []);
 
   useEffect(() => {
-    scrollToBottom();
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    const scrollContainer = scrollRef.current;
+    if (scrollContainer) {
+      setTimeout(() => {
+        scrollContainer.scrollTo({
+          top: scrollContainer.scrollHeight,
+          behavior: 'smooth',
+        });
+      }, 0);
+    }
   }, [messages]);
 
   const handleSendMessage = () => {
@@ -35,19 +54,19 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ thread }) => {
   };
 
   return (
-    <div className="h-[calc(100dvh-4em)] flex flex-col bg-[var(--color-component-bg)]">
-      <header className="fixed top-0 w-full bg-[var(--color-component-bg)] shadow-sm z-20 border-b border-[var(--color-border)]">
-        <div className="flex items-center px-4 py-3 h-14">
-            <button onClick={() => router.back()} className="p-2 -ml-2 rounded-full hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] transition-colors">
-              <i className="ri-arrow-left-s-line ri-lg text-[var(--text-subtle)]"></i>
-            </button>
-            <div className="relative w-8 h-8 rounded-full overflow-hidden ml-2 mr-3">
-                <Image src={thread.participant.profileImage} alt={thread.participant.name} fill className="object-cover" />
-            </div>
-            <p className="font-semibold text-[var(--text-main)]">{thread.participant.name}</p>
-        </div>
-      </header>
-      <main className="flex-1 overflow-y-auto pt-16 pb-20 px-4 space-y-4">
+    // ✅ [레이아웃 수정] h-full로 부모 영역(page.tsx에서 잡은 safe area)을 가득 채움
+    <div className="flex flex-col h-full overflow-hidden">
+      
+      {/* ✅ [스크롤 영역]
+        - flex-1: 남은 높이를 모두 차지 (입력창 제외한 공간)
+        - overflow-y-auto: 내용이 넘치면 스크롤 발생 (입력창 위까지만!)
+        - padding은 이제 콘텐츠 여백 용도로만 사용 (구조적 여백 X)
+      */}
+      <main 
+        ref={scrollRef}
+        className="flex-1 overflow-y-auto px-4 pt-4 pb-4 space-y-4"
+        style={{ opacity: 0 }} // 초기 위치 잡기 전까지 숨김 (useLayoutEffect에서 해제)
+      >
         {messages.map(msg => (
           <div key={msg.id} className={`flex items-start gap-2 ${msg.sender === 'me' ? 'justify-end' : 'justify-start'}`}>
             {msg.sender !== 'me' && (
@@ -67,9 +86,14 @@ const ChatRoom: React.FC<ChatRoomProps> = ({ thread }) => {
             </div>
           </div>
         ))}
-        <div ref={messagesEndRef} />
       </main>
-      <footer className="fixed bottom-16 w-full bg-[var(--color-component-bg)] border-t border-[var(--color-border)] p-2">
+      
+      {/* ✅ [입력창 영역]
+        - fixed 제거: Flex 흐름에 따라 main 아래에 자연스럽게 위치
+        - flex-none: 높이가 줄어들지 않도록 고정
+        - z-index 불필요: 자연스러운 스택킹 컨텍스트 따름
+      */}
+      <footer className="flex-none w-full bg-[var(--color-component-bg)] border-t border-[var(--color-border)] p-2">
         <div className="flex items-center">
             <button className="p-2 rounded-full hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] transition-colors">
               <i className="ri-add-line ri-lg text-[var(--text-subtle)]"></i>

@@ -16,7 +16,7 @@ const AgitTabs: React.FC<AgitTabsProps> = ({ activeTab, onTabChange }) => {
   ];
 
   return (
-    <div className="sticky top-14 bg-[var(--color-component-bg)] z-10 border-b border-[var(--color-border)] shadow-sm">
+    <div className="sticky top-0 bg-[var(--color-component-bg)] z-30 border-b border-[var(--color-border)] shadow-sm">
       <div className="flex">
         {tabs.map((tab) => (
           <button

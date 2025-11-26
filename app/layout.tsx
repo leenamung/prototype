@@ -11,9 +11,10 @@ export const metadata: Metadata = {
 
 // Root layout component applying to all routes
 export default function RootLayout({
-  children,
+  children, modal,
 }: Readonly<{
   children: React.ReactNode; // Type for children components
+  modal: React.ReactNode;
 }>) {
   return (
     <html lang="ko">
@@ -38,6 +39,7 @@ export default function RootLayout({
         {/* ✅ [수정] 콘텐츠를 감싸는 wrapper div 추가 */}
         <LayoutWrapper>
           {children}
+          {modal}
         </LayoutWrapper>
       </body>
       {/* Ensure no whitespace or comments after </body> or before </html> */}

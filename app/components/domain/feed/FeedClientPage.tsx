@@ -35,7 +35,7 @@ export default function FeedClientPage({ initialEntries }: FeedClientPageProps) 
 
   return (
     <>
-      <main className="pt-20 px-5 pb-5">
+      <main className="px-5 pb-5">
         <StoryCarousel />
         <div className="mt-4 space-y-4">
         {!isFeedEmpty? (
