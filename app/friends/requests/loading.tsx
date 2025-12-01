@@ -1,6 +1,6 @@
 import React from 'react';
-import SkeletonRequestsNavigationBar from '@/app/components/domain/friends/Navigation/ui/skeletons/SkeletonRequestsNavigationBar';
-import SkeletonFriendRequestItem from '@/app/components/domain/friends/FriendRequest/RequestItem/ui/skeletons/SkeletonFriendRequestItem';
+import SkeletonRequestsNavigationBar from '@/app/components/domain/friends/ui/skeletons/SkeletonRequestsNavigationBar';
+import SkeletonFriendRequestItem from '@/app/components/domain/friends/ui/skeletons/SkeletonFriendRequestItem';
 
 export default function Loading() {
   return (

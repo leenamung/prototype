@@ -1,8 +1,8 @@
 import React from 'react';
 import { sampleMessageThreads } from '../data/messageSampleData';
-import DirectClientPage from '../components/domain/direct/DirectClientPage';
+import DirectClientPage from '../components/domain/direct/views/DirectClientPage';
 // 1. 네비게이션 바 Import
-import DirectNavigationBar from '@/app/components/domain/direct/MessageList/DirectNavigationBar';
+import DirectNavigationBar from '@/app/components/domain/direct/layout/DirectNavigationBar';
 
 async function getMessageThreads() {
   await new Promise(resolve => setTimeout(resolve, 2000));
@@ -14,14 +14,15 @@ export default async function DirectMessagesPage() {
   const threads = await getMessageThreads();
   
   return (
-    <>
-      {/* 2. 네비게이션 바 */}
+    <div className="flex flex-col h-full bg-[var(--color-background)]">
+      {/* 1. 네비게이션 바 (flex-none) */}
       <DirectNavigationBar />
 
-      {/* 3. 콘텐츠 영역 (헤더 높이만큼 상단 여백 추가) */}
-      <div className="pt-14">
+      {/* 2. 콘텐츠 영역 (flex-1 overflow-y-auto) */}
+      {/* pt-14 제거 */}
+      <div className="flex-1 overflow-y-auto">
         <DirectClientPage threads={threads} />
       </div>
-    </>
+    </div>
   );
 }

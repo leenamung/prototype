@@ -39,7 +39,7 @@ const BottomTabBar: React.FC = () => {
 
 
   return (
-    <nav className="fixed bottom-0 w-full bg-[var(--color-component-bg)] 
+      <nav className="flex-none w-full bg-[var(--color-component-bg)] 
                    border-t border-[var(--color-border)]
                    shadow-sm z-20 h-16">
       <div className="grid grid-cols-5 h-full">

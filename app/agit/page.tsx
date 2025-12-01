@@ -1,7 +1,7 @@
 import React from 'react';
 import { sampleMyProfileData } from '@/app/data/profileSampleData';
-import AgitClientPage from '@/app/components/domain/agit/AgitClientPage';
-import AgitMainNavigationBar from '../components/domain/agit/AgitMainNavigationBar';
+import AgitClientPage from '@/app/components/domain/agit/views/AgitListClientPage';
+import AgitMainNavigationBar from '@/app/components/domain/agit/layout/AgitMainNavigationBar';
 
 const exploreAgitsData = [
     ...sampleMyProfileData.agits,
@@ -20,14 +20,19 @@ async function getMyAgits() {
 export default async function AgitListPage() {
   const myAgits = await getMyAgits();
   return (
-    <>
-      {/* 1. 헤더 영역 */}
+    <div className="flex flex-col h-full">
+      
+      {/* 1. 헤더 영역 (flex-none으로 높이 차지) */}
       <AgitMainNavigationBar />
 
-      {/* 2. 콘텐츠 영역 (pt-14) */}
-      <div className="pt-14">
+      {/* 2. 콘텐츠 영역 
+          - pt-14 제거: Flex 레이아웃이므로 패딩 불필요
+          - flex-1: 남은 공간 모두 차지
+          - overflow-y-auto: 내용이 넘치면 이 영역 내부에서만 스크롤 발생
+      */}
+      <div className="flex-1 overflow-y-auto bg-[var(--color-background)]">
         <AgitClientPage myAgits={myAgits} exploreAgits={exploreAgitsData} />
       </div>
-    </>
+    </div>
   );
 }

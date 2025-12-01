@@ -1,6 +1,6 @@
-import AgitDetailClient from '@/app/components/domain/agit/AgitDetailClient';
+import AgitDetailClient from '@/app/components/domain/agit/views/AgitDetailClientPage';
 import { sampleAgitData } from '@/app/data/agitSampleData';
-import AgitDetailNavigationBar from '@/app/components/domain/agit/AgitDetailNavigationBar';
+import AgitDetailNavigationBar from '@/app/components/domain/agit/layout/AgitDetailNavigationBar';
 
 async function getAgitData(id: string) {
   console.log("요청된 아지트 ID:", id);
@@ -18,19 +18,17 @@ export default async function AgitDetailPage({ params }: AgitDetailPageProps) {
   const agitData = await getAgitData(id);
 
   return (
-    <>
-       {/* 1. 헤더 영역 */}
-       {/* onMoreClick은 클라이언트 인터랙션이 필요하므로, 
-           여기서 빈 함수를 넘기거나, 네비게이션 바만 Client Component로 분리해서 사용하는 패턴도 가능합니다. 
-           우선은 AgitDetailClient 내부 로직과 분리된 순수 네비게이션 바 렌더링을 보여드립니다. */}
+    <div className="flex flex-col h-full">
+       {/* 헤더 (flex-none) */}
       <AgitDetailNavigationBar 
         agitName={agitData.name} 
       />
 
-      {/* 2. 콘텐츠 영역 (pt-14) */}
-      <div className="pt-14">
+      {/* 콘텐츠 (flex-1 overflow-y-auto) */}
+      {/* pt-14 제거 */}
+      <div className="flex-1 overflow-y-auto bg-[var(--color-background)]">
         <AgitDetailClient agitData={agitData} />
       </div>
-    </>
+    </div>
   );
 }

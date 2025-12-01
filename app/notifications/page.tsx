@@ -1,8 +1,8 @@
 import React from 'react';
 import { sampleNotifications, groupNotificationsByTime } from '../data/notificationSampleData';
-import NotificationDisplay from '@/app/components/domain/notifications/NotificationDisplay';
 // 1. 네비게이션 바 Import
-import NotificationNavigationBar from '@/app/components/domain/notifications/NotificationNavigationBar';
+import NotificationNavigationBar from '@/app/components/domain/notifications/layout/NotificationNavigationBar';
+import NotificationDisplay from '../components/domain/notifications/views/NotificationDisplay';
 
 async function getNotifications() {
   await new Promise(resolve => setTimeout(resolve, 2000));
@@ -13,14 +13,16 @@ export default async function NotificationsPage() {
   const notificationGroups = await getNotifications();
 
   return (
-    <>
-      {/* 1. 네비게이션 바 */}
+    <div className="flex flex-col h-full bg-[var(--color-background)]">
+      
+      {/* 1. 네비게이션 바 (flex-none) */}
       <NotificationNavigationBar />
       
-      {/* 2. 콘텐츠 영역 (헤더 높이만큼 상단 여백 추가) */}
-      <div className="pt-14">
+      {/* 2. 콘텐츠 영역 (flex-1) */}
+      {/* pt-14 제거, 내부 스크롤(overflow-y-auto) 적용 */}
+      <div className="flex-1 overflow-y-auto">
         <NotificationDisplay groupedNotifications={notificationGroups} />
       </div>
-    </>
+    </div>
   );
 }

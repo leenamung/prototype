@@ -2,7 +2,7 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import { sampleAgitData } from '@/app/data/agitSampleData'; 
 import type { AgitInfo } from '@/app/data/agitSampleData';
-import AgitSettingsClientPage from '@/app/components/domain/agit/settings/AgitSettingsClientPage';
+import AgitSettingsClientPage from '@/app/components/domain/agit/views/AgitSettingsClientPage';
 
 // 가상의 현재 사용자 ID (실제 구현 시 로그인 상태에서 가져와야 함)
 const currentUserId = "member1"; // 관리자로 가정

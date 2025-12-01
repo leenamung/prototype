@@ -1,7 +1,7 @@
 import React from 'react';
-import SkeletonFriendsNavigationBar from '@/app/components/domain/friends/Navigation/ui/skeletons/SkeletonFriendsNavigationBar';
-import SkeletonRecommendedFriendCard from '@/app/components/domain/friends/Recommended/ui/skeletons/SkeletonRecommendedFriendCard';
-import SkeletonFriendListItem from '@/app/components/domain/friends/FriendList/ui/skeletons/SkeletonFriendListItem';
+import SkeletonFriendsNavigationBar from '@/app/components/domain/friends/ui/skeletons/SkeletonFriendsNavigationBar';
+import SkeletonRecommendedFriendCard from '@/app/components/domain/friends/ui/skeletons/SkeletonRecommendedFriendCard';
+import SkeletonFriendListItem from '@/app/components/domain/friends/ui/skeletons/SkeletonFriendListItem';
 
 export default function Loading() {
   return (

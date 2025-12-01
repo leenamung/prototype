@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 // (sub) 그룹에 생성하는 것이 좋습니다.
 export default function AuthPage() {
   return (
-    <div className="relative w-full h-screen bg-[var(--color-background)] flex flex-col justify-between overflow-hidden">
+    <div className="relative w-full h-full bg-[var(--color-background)] flex flex-col justify-between overflow-hidden">
       {/* 1. 감성적인 배경 이미지 */}
       <motion.div
         className="absolute inset-0 z-0"

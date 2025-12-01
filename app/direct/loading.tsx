@@ -1,22 +1,20 @@
 import React from 'react';
-import SkeletonMessageListItem from '@/app/components/domain/direct/MessageList/ui/skeletons/SkeletonMessageListItem';
+import SkeletonMessageListItem from '@/app/components/domain/direct/ui/skeletons/SkeletonMessageListItem';
 // 1. 네비게이션 바 스켈레톤 import
-import SkeletonDirectNavigationBar from '@/app/components/domain/direct/MessageList/ui/skeletons/SkeletonDirectNavigationBar';
+import SkeletonDirectNavigationBar from '@/app/components/domain/direct/ui/skeletons/SkeletonDirectNavigationBar';
 
 export default function Loading() {
   return (
-    <>
-      {/* 2. 네비게이션 바 스켈레톤 추가 */}
+    <div className="flex flex-col h-full">
       <SkeletonDirectNavigationBar />
 
-      {/* 3. 콘텐츠 영역 (헤더 높이만큼 상단 여백 추가) */}
-      <main className="pt-14">
+      <main className="flex-1 overflow-y-auto">
         <SkeletonMessageListItem />
         <SkeletonMessageListItem />
         <SkeletonMessageListItem />
         <SkeletonMessageListItem />
         <SkeletonMessageListItem />
       </main>
-    </>
+    </div>
   );
 }

@@ -10,8 +10,8 @@ interface NavigationBarProps {
 
 const NavigationBar: React.FC<NavigationBarProps> = ({ userProfileImage }) => {
   return (
-    <nav className="fixed top-0 w-full bg-[var(--color-component-bg)] border-b border-[var(--color-border)] shadow-sm z-50">
-      <div className="flex items-center justify-between px-4 py-3 h-14">
+    <nav className="flex-none w-full bg-[var(--color-component-bg)] border-b border-[var(--color-border)] shadow-sm z-50 h-14">
+      <div className="flex items-center justify-between px-4 h-full">
         <div className="font-pacifico text-xl text-[var(--color-primary)] cursor-pointer">logo</div>
         <div className="flex items-center space-x-2">
           <Link href="/notifications" className="w-8 h-8 flex items-center justify-center cursor-pointer relative rounded-full hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] transition-colors">

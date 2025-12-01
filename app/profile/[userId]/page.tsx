@@ -1,7 +1,7 @@
 import React from 'react';
 import { getProfileDataForUser, UserProfileData } from '@/app/data/profileSampleData';
-import ProfileView from '@/app/components/domain/profile/ProfileView';
-import UserProfileNavigationBar from '@/app/components/domain/profile/UserProfileNavigationBar/UserProfileNavigationBar';
+import ProfileView from '@/app/components/domain/profile/views/ProfileView';
+import UserProfileNavigationBar from '@/app/components/domain/profile/layout/UserProfileNavigationBar';
 import { notFound } from 'next/navigation';
 
 // 데이터를 2초 뒤에 가져오는 것처럼 시뮬레이션 (userId에 따라 다른 데이터 반환)
@@ -22,18 +22,19 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
   }
 
   return (
-    <>
-      {/* 1. 타인 프로필 전용 네비게이션 바 */}
+    <div className="flex flex-col h-full bg-[var(--color-background)]">
+      {/* 1. 타인 프로필 전용 네비게이션 바 (flex-none) */}
       <UserProfileNavigationBar 
         userName={profileData.name}
         userId={profileData.userId}
         relationshipStatus={profileData.relationshipStatus}
       />
 
-      {/* 2. 콘텐츠 영역 (헤더 높이만큼 상단 여백 추가) */}
-      <div className="pt-14">
+      {/* 2. 콘텐츠 영역 (flex-1 overflow-y-auto) */}
+      {/* pt-14 제거 */}
+      <div className="flex-1 overflow-y-auto relative">
         <ProfileView profileData={profileData} />
       </div>
-    </>
+    </div>
   );
 }

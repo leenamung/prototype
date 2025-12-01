@@ -1,5 +1,5 @@
 import React from 'react';
-import AgitSearchClientPage from '@/app/components/domain/agit/search/AgitSearchClientPage';
+import AgitSearchClientPage from '@/app/components/domain/agit/views/AgitSearchClientPage';
 import { sampleMyProfileData } from '@/app/data/profileSampleData'; // 👈 샘플 데이터 import
 
 // '탐색' 탭의 데이터를 검색 대상으로 사용 (임시)

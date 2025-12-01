@@ -1,6 +1,6 @@
 import React from 'react';
-import SkeletonAgitSettingsNavigationBar from '@/app/components/domain/agit/settings/ui/skeletons/SkeletonAgitSettingsNavigationBar';
-import SkeletonAgitSettingsClientPage from '@/app/components/domain/agit/settings/ui/skeletons/SkeletonAgitSettingsClientPage';
+import SkeletonAgitSettingsNavigationBar from '@/app/components/domain/agit/ui/skeletons/SkeletonAgitSettingsNavigationBar';
+import SkeletonAgitSettingsClientPage from '@/app/components/domain/agit/ui/skeletons/SkeletonAgitSettingsClientPage';
 
 export default function Loading() {
   return (

@@ -4,9 +4,9 @@ import {
   sampleMyFriends, 
   sampleReceivedRequests 
 } from '@/app/data/sampleFriendData';
-import FriendsClientPage from '@/app/components/domain/friends/FriendsClientPage';
+import FriendsClientPage from '@/app/components/domain/friends/views/FriendsClientPage';
 // 1. 네비게이션 바 Import
-import FriendsNavigationBar from '@/app/components/domain/friends/Navigation/FriendsNavigationBar';
+import FriendsNavigationBar from '@/app/components/domain/friends/layout/FriendsNavigationBar';
 
 async function getFriendsData() {
   await new Promise(resolve => setTimeout(resolve, 2000));
@@ -23,17 +23,15 @@ export default async function FriendsPage() {
   const requestCount = data.receivedRequests.length;
 
   return (
-    <>
-      {/* 2. 네비게이션 바 */}
+    <div className="flex flex-col h-full bg-[var(--color-background)]">
       <FriendsNavigationBar requestCount={requestCount} />
 
-      {/* 3. 콘텐츠 영역 (헤더 높이만큼 상단 여백 추가) */}
-      <div className="pt-14">
+      <div className="flex-1 overflow-y-auto">
         <FriendsClientPage 
           recommendedFriends={data.recommendedFriends}
           myFriends={data.myFriends}
         />
       </div>
-    </>
+    </div>
   );
 }

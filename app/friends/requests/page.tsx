@@ -3,9 +3,9 @@ import {
   sampleSentRequests, 
   sampleReceivedRequests 
 } from '@/app/data/sampleFriendData';
-import RequestsClientPage from '@/app/components/domain/friends/FriendRequest/RequestsClientPage';
+import RequestsClientPage from '@/app/components/domain/friends/views/RequestsClientPage';
 // 1. 네비게이션 바 Import
-import RequestsNavigationBar from '@/app/components/domain/friends/Navigation/RequestsNavigationBar';
+import RequestsNavigationBar from '@/app/components/domain/friends/layout/RequestsNavigationBar';
 
 async function getRequestData() {
   await new Promise(resolve => setTimeout(resolve, 2000));
@@ -19,17 +19,18 @@ export default async function FriendRequestsPage() {
   const data = await getRequestData();
 
   return (
-    <>
-      {/* 2. 네비게이션 바 */}
+    <div className="flex flex-col h-full bg-[var(--color-background)]">
+      {/* 1. 네비게이션 바 (flex-none) */}
       <RequestsNavigationBar />
 
-      {/* 3. 콘텐츠 영역 (헤더 높이만큼 상단 여백 추가) */}
-      <div className="pt-14">
+      {/* 2. 콘텐츠 영역 (flex-1) */}
+      {/* pt-14 제거, overflow-y-auto 적용 */}
+      <div className="flex-1 overflow-y-auto">
         <RequestsClientPage
           sentRequests={data.sentRequests}
           receivedRequests={data.receivedRequests}
         />
       </div>
-    </>
+    </div>
   );
 }
