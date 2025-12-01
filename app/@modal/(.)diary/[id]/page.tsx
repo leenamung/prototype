@@ -6,7 +6,7 @@ import { DiaryEntry, diaryEntriesData } from '@/app/data/diaryEntries';
 import DiaryDetailClient from '@/app/components/domain/diary/views/DiaryDetailClient';
 
 // 스켈레톤 UI 컴포넌트
-const SkeletonCard = ({ id }: { id: string }) => (
+const SkeletonCard = () => (
     <div className="fixed inset-0 z-50 flex flex-col bg-[var(--color-background)]">
         {/* 1. 헤더 스켈레톤 (flex-none) */}
         <div className="flex-none h-14 px-4 flex items-center">
@@ -50,7 +50,7 @@ export default function DiaryModal() {
     const handleClose = () => router.back();
 
     if (!diary) {
-        return <SkeletonCard id={id} />;
+        return <SkeletonCard />;
     }
 
     return (
