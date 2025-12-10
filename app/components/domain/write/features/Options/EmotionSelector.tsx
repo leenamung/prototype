@@ -44,7 +44,7 @@ const EmotionSelector: React.FC<EmotionSelectorProps> = ({ selectedEmotions, onE
           <AnimatePresence>
             {selectedEmotions.length > 0 && (
               <motion.div layout initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.5 }}>
-                <MixedEmotionIcon colors={selectedEmotions.map(e => e.color)} />
+                <MixedEmotionIcon colors={selectedEmotions.map(e => `var(--emotion-${e.key})`)} />
               </motion.div>
             )}
           </AnimatePresence>
@@ -67,6 +67,10 @@ const EmotionSelector: React.FC<EmotionSelectorProps> = ({ selectedEmotions, onE
         <div className="grid grid-cols-5 gap-x-3 gap-y-4">
           {emotions.map((emotion) => {
             const isSelected = selectedEmotions.some(e => e.label === emotion.label);
+            const emotionColorVar = `var(--emotion-${emotion.key})`;
+            // 만약 border 변수가 없으면 기본 색상 사용 (Fallback)
+            const emotionBorderVar = `var(--emotion-${emotion.key}-border, ${emotionColorVar})`;
+
             return (
               <button
                 key={emotion.label}
@@ -77,8 +81,11 @@ const EmotionSelector: React.FC<EmotionSelectorProps> = ({ selectedEmotions, onE
                 <div
                   className="w-12 h-12 rounded-full cursor-pointer transition-all duration-200"
                   style={{ 
-                    backgroundColor: emotion.color,
-                    boxShadow: isSelected ? `0 0 0 2px var(--color-component-bg), 0 0 0 4px ${emotion.color}` : '0 1px 2px rgba(0,0,0,0.05)'
+                    backgroundColor: emotionColorVar,
+                    // 선택 시 앙주 스타일: 진한 외곽선 + 흰색 갭(2px)으로 스티커 느낌
+                    boxShadow: isSelected 
+                      ? `0 0 0 2px var(--color-component-bg), 0 0 0 4px ${emotionBorderVar}` 
+                      : '0 1px 2px rgba(0,0,0,0.05)'
                   }}
                 >
                   {isSelected && (
@@ -87,8 +94,9 @@ const EmotionSelector: React.FC<EmotionSelectorProps> = ({ selectedEmotions, onE
                       </div>
                   )}
                 </div>
-                <span className={`mt-2 text-xs transition-colors ${isSelected ? `font-semibold text-stroke-1` : 'text-[var(--text-subtle)]'}`}
-                      style={{color: isSelected ? emotion.color : ''}}
+                <span 
+                  className={`mt-2 text-xs transition-colors ${isSelected ? `font-semibold text-stroke-1` : 'text-[var(--text-subtle)]'}`}
+                  style={{ color: isSelected ? emotionBorderVar : '' }} // 텍스트도 진한 색상으로
                 >
                   {emotion.label}
                 </span>

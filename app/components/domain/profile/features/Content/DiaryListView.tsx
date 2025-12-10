@@ -8,23 +8,14 @@ interface DiaryListItemProps {
 }
 
 const DiaryListItem: React.FC<DiaryListItemProps> = ({ diary }) => {
-  // ⬇️ 1. 감정(emotion)과 완성된 클래스 이름을 짝지어주는 '지도'를 만듭니다.
-  const emotionColorMap: Record<MyDiaryEntry['emotion'], string> = {
-    happy: 'bg-[var(--emotion-happy)]',
-    sad: 'bg-[var(--emotion-sad)]',
-    angry: 'bg-[var(--emotion-angry)]',
-    calm: 'bg-[var(--emotion-calm)]',
-    anxious: 'bg-[var(--emotion-anxious)]',
-    neutral: 'bg-[var(--emotion-neutral)]',
-  };
-
-  // ⬇️ 2. diary.emotion 값으로 지도에서 알맞은 클래스 이름을 찾아옵니다.
-  const emotionBarClass = emotionColorMap[diary.emotion] || 'bg-gray-300';
+  // ⭐️ CSS 변수로 색상 정의
+  const borderVar = `var(--emotion-${diary.emotion}-border, var(--color-border))`;
+  const bgVar = `var(--emotion-${diary.emotion})`;
 
   return (
     <div className="flex bg-white rounded-lg overflow-hidden shadow-sm cursor-pointer hover:shadow-md transition-shadow duration-150 ease-in-out">
-      {/* ⬇️ 3. 이제 Tailwind가 인식할 수 있는 완전한 클래스 이름이 적용됩니다. */}
-      <div className={`w-1.5 ${emotionBarClass}`}></div>
+      {/* ⭐️ 왼쪽 컬러바: 진한 외곽선 색상 사용 */}
+      <div className="w-1.5" style={{ backgroundColor: borderVar }}></div>
       <div className="flex-1 p-3">
         <div className="flex justify-between items-start mb-1">
           <span className="text-xs text-[var(--text-subtle)]">{diary.dateString} {diary.time && `- ${diary.time}`}</span>

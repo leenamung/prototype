@@ -1,72 +1,162 @@
-/* app/globals.css */
 @import "tailwindcss";
 
+/* 1. Tailwind 설정 */
 @theme {
-  /* --- 핵심 색상 --- */
-  --color-background: #F9F5F0;     /* 노이즈 베이지 (전체 배경) */
-  --color-primary: #FFBFAB;        /* 따스한 살구색 (주요 버튼, 아이콘) */
-  --color-secondary: #FAF0E6;
-  --color-primary-dark: #EAA994;   /* 깊은 살구색 (테두리, 강조) */
-  --color-component-bg: #FFFAF0;  /* 포근한 크림색 (카드, 모달) */
+  --color-background: var(--color-background);
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-primary-dark: var(--color-primary-dark);
+  --color-component-bg: var(--color-component-bg);
+  --color-primary-darker: var(--color-primary-darker);
+  --color-border-dark: var(--color-border-dark);
+  --color-accent-mint: var(--color-accent-mint);
+  --color-accent-yellow: var(--color-accent-yellow);
+  --color-accent-blue: var(--color-accent-blue);
+  --color-border: var(--color-border);
+  --color-subtle-bg: var(--color-subtle-bg);
+  --color-inset-border: var(--color-inset-border);
+  --color-divider: var(--color-divider);
+  --text-main: var(--text-main);
+  --text-subtle: var(--text-subtle);
+  --text-on-primary: var(--text-on-primary);
+  --color-warning: var(--color-warning);
+  --color-warning-bg: var(--color-warning-bg);
+  --agit-notice-badge-bg: var(--agit-notice-badge-bg);
+  
+  /* 감정 색상 연결 */
+  --emotion-happy: var(--emotion-happy);
+  --emotion-joy: var(--emotion-joy);
+  --emotion-calm: var(--emotion-calm);
+  --emotion-hope: var(--emotion-hope);
+  --emotion-satisfied: var(--emotion-satisfied);
+  --emotion-serene: var(--emotion-serene);
+  --emotion-excitement: var(--emotion-excitement);
+  --emotion-love: var(--emotion-love);
+  --emotion-lazy: var(--emotion-lazy);
+  --emotion-sad: var(--emotion-sad);
+  --emotion-angry: var(--emotion-angry);
+  --emotion-grateful: var(--emotion-grateful);
+  --emotion-proud: var(--emotion-proud);
+  --emotion-lonely: var(--emotion-lonely);
+  --emotion-tired: var(--emotion-tired);
+  --emotion-miss: var(--emotion-miss);
+  --emotion-anxious: var(--emotion-anxious);
+  --emotion-neutral: var(--emotion-neutral);
 
-  --color-primary-darker: #D48F7A; /* Primary 버튼 클릭 시 배경/테두리 색 */
-  --color-border-dark: #D5CABD;    /* Subtle 버튼 클릭 시 배경/테두리 색 */
+  /* 기타 설정 */
+  --rounded-button: 8px;
+}
+
+/* 2. 실제 CSS 변수 정의 (:root) */
+:root {
+  /* --- 핵심 색상 --- */
+  --color-background: #F9F5F0;     
+  --color-primary: #FFBFAB;        
+  --color-secondary: #FAF0E6;
+  --color-primary-dark: #EAA994;
+  --color-component-bg: #FFFAF0;
+
+  --color-primary-darker: #D48F7A;
+  --color-border-dark: #D5CABD;
 
   /* --- 보조 색상 --- */
-  --color-accent-mint: #BEE8D0;     /* 서정적인 민트 */
-  --color-accent-yellow: #FFF4BD;   /* 은은한 레몬색 */
-  --color-accent-blue: #AEC6CF;     /* 서정적인 파란색 */
-  --color-border: #EAE3DA;         /* 그림자 회색 (테두리/구분선) */
-  --color-subtle-bg: #F5F5F1;       /* 은은한 배경색 (호버, 탭 등) */
-  --color-inset-border: rgba(0, 0, 0, 0.04); /* 미묘한 내부 테두리용 */
-  --color-divider: rgba(0, 0, 0, 0.08);    /* 부드러운 구분선용 */
+  --color-accent-mint: #BEE8D0;
+  --color-accent-yellow: #FFF4BD;
+  --color-accent-blue: #AEC6CF;
+  --color-border: #EAE3DA;
+  --color-subtle-bg: #F5F5F1;
+  --color-inset-border: rgba(0, 0, 0, 0.04);
+  --color-divider: rgba(0, 0, 0, 0.08);
 
   /* --- 텍스트 색상 --- */
-  --text-main: #333333;            /* 차콜 브라운 (주요 텍스트) */
-  --text-subtle: #555555;          /* 안개 회색 (보조 텍스트, 아이콘) */
-  --text-on-primary: #FFFFFF;      /* Primary 색상 위의 텍스트 */
+  --text-main: #333333;
+  --text-subtle: #555555;
+  --text-on-primary: #FFFFFF;
 
   /* --- 기능 색상 --- */
-  --color-warning: #E57373;        /* 부드러운 장미색 (경고, 삭제) */
+  --color-warning: #E57373;
   --color-warning-bg: #FAD2D2;
-  --agit-notice-badge-bg: #FFF5F2; /* 아지트 공지 뱃지 배경 */
+  --agit-notice-badge-bg: #FFF5F2;
 
-  /* --- 감정 색상 (파스텔 톤) --- */
-  --emotion-happy: #FFD6D6;      /* 행복 */
-  --emotion-joy: #FFEFBA;        /* 기쁨 (추가) */
-  --emotion-calm: #D4F0F0;        /* 평온 */
-  --emotion-hope: #E2F0CB;        /* 희망 (추가) */
-  --emotion-satisfied: #B5EAD7;  /* 만족 (추가) */
-  --emotion-serene: #C7CEEA;      /* 차분 (추가) */
-  --emotion-excitement: #D8B5E0;  /* 설렘 (추가) */
-  --emotion-love: #F8C8DC;        /* 사랑 */
-  --emotion-lazy: #E0E0E0;        /* 무기력 */
-  --emotion-sad: #B4D4E1;         /* 슬픔 */
-  --emotion-angry: #E57373;       /* 화남 */
-  --emotion-grateful: #FFE5B4;    /* 감사 */
-  --emotion-proud: #A8D8B0;       /* 뿌듯 */
-  --emotion-lonely: #C9C9E0;      /* 외로움 */
-  --emotion-tired: #C0C0C0;        /* 지침 */
-  --emotion-miss: #E6E6FA;        /* 그리움 */
-  --emotion-anxious: #BCC5D5;     /* 불안 */
+  /* --- [감정 색상 팔레트] --- */
+  /* [수정 포인트]
+     외곽선 색상을 'Dusty Pastel' 톤으로 조정하여 
+     싸인펜이 아닌 '색연필' 느낌을 줍니다. 
+     채도는 낮추고, 따뜻함이나 부드러움을 더했습니다.
+  */
 
-  /* --- 프로필 그리드 뷰 전용 반투명 감정 색상 --- */
+  /* 1. 긍정 (Positive) */
+  --emotion-happy: #FFD6D6;
+  --emotion-happy-border: #FFAAB9; /* 부드러운 인디핑크 */
+
+  --emotion-joy: #FFEFBA;
+  --emotion-joy-border: #FFD54F;   /* 따뜻한 머스터드 */
+
+  --emotion-love: #F8C8DC;
+  --emotion-love-border: #F48FB1;  /* 은은한 로즈 핑크 */
+
+  --emotion-excitement: #D8B5E0;
+  --emotion-excitement-border: #CE93D8; /* 차분한 라일락 */
+
+  --emotion-satisfied: #B5EAD7;
+  --emotion-satisfied-border: #80CBC4; /* 톤다운된 민트 */
+
+  --emotion-proud: #A8D8B0;
+  --emotion-proud-border: #A5D6A7; /* 부드러운 잎사귀 색 */
+
+  --emotion-grateful: #FFE5B4;
+  --emotion-grateful-border: #FFCC80; /* 부드러운 살구색 */
+
+  --emotion-hope: #E2F0CB;
+  --emotion-hope-border: #C5E1A5; /* 연한 올리브 그린 */
+
+  /* 2. 중립 (Neutral) */
+  --emotion-calm: #D4F0F0;
+  --emotion-calm-border: #B2EBF2; /* 맑은 하늘색 */
+
+  --emotion-serene: #C7CEEA;
+  --emotion-serene-border: #9FA8DA; /* 몽환적인 연보라 */
+
+  /* 3. 부정 (Negative) */
+  --emotion-sad: #B4D4E1;
+  --emotion-sad-border: #90CAF9; /* 물빠진 파란색 */
+
+  --emotion-miss: #E6E6FA;
+  --emotion-miss-border: #B39DDB; /* 그리운 느낌의 연보라 */
+
+  --emotion-lonely: #C9C9E0;
+  --emotion-lonely-border: #9FA8DA; /* 차분한 그레이 블루 */
+
+  --emotion-tired: #C0C0C0;
+  --emotion-tired-border: #B0BEC5; /* 따뜻한 회색 */
+
+  --emotion-lazy: #E0E0E0;
+  --emotion-lazy-border: #CFD8DC; /* 부드러운 쿨그레이 */
+
+  --emotion-angry: #E57373;
+  --emotion-angry-border: #EF9A9A; /* 쨍하지 않은 붉은색 */
+
+  --emotion-anxious: #BCC5D5;
+  --emotion-anxious-border: #B0BEC5; /* 안정감을 주는 그레이 블루 */
+
+  /* 기본값 */
+  --emotion-neutral: #E0E0E0;
+  --emotion-neutral-border: #CFD8DC;
+
+  /* --- 프로필 색상 --- */
   --profile-emotion-red: rgba(229, 115, 115, 0.3);
   --profile-emotion-blue: rgba(176, 196, 222, 0.3);
   --profile-emotion-green: rgba(212, 240, 240, 0.3);
   --profile-emotion-yellow: rgba(255, 239, 186, 0.3);
   --profile-emotion-purple: rgba(199, 206, 234, 0.3);
-
-  /* --- 기타 스타일 변수 --- */
-  --rounded-button: 8px;
 }
 
 /* --- 전역 스타일 --- */
 body {
-  background-color: var(--color-background); /* ⬇️ 배경색을 --color-background로 변경 */
+  background-color: var(--color-background);
   font-family: 'Pretendard', sans-serif;
   color: var(--text-main);
-  line-height: 1.6; /* ⬇️ 본문 가독성을 위한 줄 간격 추가 */
+  line-height: 1.6;
 }
 
 .font-maru-buri {
@@ -77,17 +167,21 @@ body {
   font-family: 'Gowun Dodum', sans-serif;
 }
 
-.text-shadow-sm {
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* 부드러운 그림자 효과 */
+.font-pacifico {
+  font-family: 'Pacifico', cursive;
 }
 
-/* ⬇️ 카드에 적용할 새로운 스타일 클래스를 추가합니다. */
+.text-shadow-sm {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* 카드 기본 스타일 */
 .card-base {
   @apply relative mb-4 overflow-hidden rounded-lg border;
-  background-color: rgba(255, 250, 240, 0.6); /* ⬇️ --color-component-bg 기반의 반투명 배경 */
+  background-color: rgba(255, 250, 240, 0.6);
   border-color: var(--color-border);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03), 
-              inset 0 0 0 1px var(--color-inset-border); /* ⬇️ 외부 그림자 + 내부 테두리 */
+              inset 0 0 0 1px var(--color-inset-border);
   transition: all 0.2s ease-in-out;
 }
 .card-base:hover {
@@ -96,6 +190,7 @@ body {
               inset 0 0 0 1px var(--color-inset-border);
 }
 
+/* 노이즈 배경 */
 .noise-background {
   content: "";
   position: fixed;
@@ -108,23 +203,43 @@ body {
   opacity: 0.3;
 }
 
-.content-wrapper {
-  position: relative;
-  z-index: 1;
+/* --- 유틸리티 클래스 --- */
+
+/* [수정: 옵션 2] 더 몽글몽글한 손그림 느낌 */
+.rounded-hand-drawn {
+  border-radius: 24px 28px 22px 26px / 26px 22px 28px 24px;
 }
 
-.font-pacifico {
-  font-family: 'Pacifico', cursive;
+.clip-radius-fix {
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  overflow: hidden;
+  isolation: isolate;
+  transform: translateZ(0);
 }
 
-/* --- 페이지별 커스텀 클래스 --- */
-.profile-emotion-red { background-color: var(--profile-emotion-red); }
-.profile-emotion-blue { background-color: var(--profile-emotion-blue); }
-.profile-emotion-green { background-color: var(--profile-emotion-green); }
-.profile-emotion-yellow { background-color: var(--profile-emotion-yellow); }
-.profile-emotion-purple { background-color: var(--profile-emotion-purple); }
+.rubbed-pastel-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0; 
+  pointer-events: none;
 
-/* ✅ [추가] 캘린더 감정 점 스타일 */
+  /* SVG 변경 사항: <svg ... preserveAspectRatio='none'> 추가 */
+  --mask-url: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='cloud'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.02' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23cloud)' opacity='1'/%3E%3C/svg%3E");
+  
+  -webkit-mask-image: var(--mask-url);
+  mask-image: var(--mask-url);
+  
+  /* 꽉 채우기 설정 */
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  
+  /* 투명도: 적절한 질감 강도 */
+  opacity: 0.7; 
+}
+
+/* 캘린더 감정 점 스타일 */
 .calendar-day { aspect-ratio: 1/1; position: relative; }
 .calendar-day.has-diary::after { content: ''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 5px; height: 5px; border-radius: 50%;}
 .calendar-day.has-diary-happy::after { background-color: var(--emotion-happy); }
@@ -134,33 +249,28 @@ body {
 .calendar-day.has-diary-anxious::after { background-color: var(--emotion-anxious); }
 .calendar-day.has-diary-neutral::after { background-color: var(--emotion-neutral); }
 
-
-/* --- 공통 애니메이션 --- */
+/* 애니메이션 */
 @keyframes slideInFromBottom { from { transform: translateY(100%); } to { transform: translateY(0); } }
 .animate-slideInFromBottom { animation: slideInFromBottom 0.3s ease-out forwards; }
+
 @keyframes modalShowFront { from {opacity: 0; transform: scale(0.8)} to { opacity: 1; transform: scale(1);}}
 .animate-modalShowFront {animation: modalShowFront 0.3s ease-out forwards; }
+
+@keyframes modalShowUp { from {opacity: 0; transform: translateY(20px)} to { opacity: 1; transform: translateY(0);}}
+.animate-modalShowUp {animation: modalShowUp 0.3s ease-out forwards; }
+
 @keyframes subtleBreathe {
-  0%, 100% {
-    width: 4px;
-  }
-  50% {
-    width: 8px;
-  }
+  0%, 100% { width: 4px; }
+  50% { width: 8px; }
 }
-.emotion-border-element {
-  width: 4px; /* 항상 기본 너비 4px를 유지하도록 명시 */
-}
-.animate-breathe {
-  /* animation-fill-mode: forwards; 를 추가하여 애니메이션 마지막 상태를 유지하도록 하지만, 
-     저희 keyframes는 100%일 때 width: 4px로 돌아오므로, 기본 상태 유지를 위해 이 속성은 없어도 괜찮습니다. 
-     .emotion-border-element 에서 기본 너비를 보장해줍니다. */
-  animation: subtleBreathe 1.5s ease-in-out;
-}
-/* --- 유틸리티 --- */
+.emotion-border-element { width: 4px; }
+.animate-breathe { animation: subtleBreathe 1.5s ease-in-out; }
+
+/* 유틸리티 확장 */
 @layer utilities {
   .scrollbar-hide::-webkit-scrollbar { display: none; }
   .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+  
   .text-stroke-1 {
     -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3);
     text-stroke: 1px rgba(0, 0, 0, 0.3);

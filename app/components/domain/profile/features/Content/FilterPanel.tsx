@@ -126,8 +126,8 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ isOpen, onClose, onApplyFilte
                   <div
                     className="w-10 h-10 rounded-full cursor-pointer transition-all duration-200"
                     style={{ 
-                      backgroundColor: emotion.color,
-                      boxShadow: selectedEmotions.includes(emotion.key) ? `0 0 0 2px var(--color-component-bg), 0 0 0 4px ${emotion.color}` : '0 1px 2px rgba(0,0,0,0.05)'
+                      backgroundColor: `var(--emotion-${emotion.key})`,
+                      boxShadow: selectedEmotions.includes(emotion.key) ? `0 0 0 2px var(--color-component-bg), 0 0 0 4px var(--emotion-${emotion.key})` : '0 1px 2px rgba(0,0,0,0.05)'
                     }}
                   >
                     {selectedEmotions.includes(emotion.key) && (
@@ -137,7 +137,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ isOpen, onClose, onApplyFilte
                     )}
                   </div>
                   <span className={`mt-2 text-xs transition-colors ${selectedEmotions.includes(emotion.key) ? `font-semibold` : 'text-[var(--text-subtle)]'}`}
-                        style={{color: selectedEmotions.includes(emotion.key) ? emotion.color : ''}}
+                        style={{ color: selectedEmotions.includes(emotion.key) ? `var(--emotion-${emotion.key})` : '' }}
                   >
                     {emotion.label}
                   </span>

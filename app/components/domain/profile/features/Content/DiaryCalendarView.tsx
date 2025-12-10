@@ -83,19 +83,15 @@ const DiaryCalendarView: React.FC<DiaryCalendarViewProps> = ({ diaries }) => {
     <div className="py-4">
       <div className="flex justify-between items-center mb-4">
         <button onClick={goToPrevMonth} className="p-2 rounded-full hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] transition-colors" aria-label="이전 달">
-          {/* ✨ 아이콘 색상 text-[var(--text-subtle)] 적용 */}
           <i className="ri-arrow-left-s-line ri-lg text-[var(--text-subtle)]"></i>
         </button>
-        {/* ✨ 월/년도 텍스트 색상 text-[var(--text-main)] 적용 */}
         <h2 className="text-base font-semibold text-[var(--text-main)]">{`${year}년 ${month + 1}월`}</h2>
         <button onClick={goToNextMonth} className="p-2 rounded-full hover:bg-[var(--color-subtle-bg)] active:bg-[var(--color-border)] transition-colors" aria-label="다음 달">
-          {/* ✨ 아이콘 색상 text-[var(--text-subtle)] 적용 */}
           <i className="ri-arrow-right-s-line ri-lg text-[var(--text-subtle)]"></i>
         </button>
       </div>
       <div className="grid grid-cols-7 mb-1">
         {weekDays.map((day, index) => (
-          // ✨ 요일 텍스트 색상 text-[var(--text-subtle)] 적용 (주말 제외)
           <div key={day} className={`text-center text-xs font-medium ${index === 0 ? 'text-[var(--color-warning)]' : index === 6 ? 'text-[var(--color-accent-blue)]' : 'text-[var(--text-subtle)]'}`}>
             {day}
           </div>
@@ -106,7 +102,7 @@ const DiaryCalendarView: React.FC<DiaryCalendarViewProps> = ({ diaries }) => {
           const dateKey = getDateKey(dayData.fullDate);
           const dayDiaries = diariesByDate[dateKey] || [];
           const representativeDiary = dayDiaries[0]; 
-          const calendarEmotionClass = representativeDiary ? `has-diary-${representativeDiary.emotion}` : '';
+          
           const isSelected = selectedDateKey === dateKey;
           const isCurrentMonth = dayData.monthOffset === 'current';
           const isTodayInCalendar = representativeDiary?.isToday ?? (dateKey === todayKey && isCurrentMonth) ; 
@@ -118,38 +114,49 @@ const DiaryCalendarView: React.FC<DiaryCalendarViewProps> = ({ diaries }) => {
               className={`calendar-day text-center p-1 text-sm cursor-pointer bg-[var(--color-component-bg)] hover:bg-[var(--color-subtle-bg)] transition-colors relative border-t border-l border-[var(--color-border)] 
                           ${!isCurrentMonth ? 'text-[var(--color-border)]' : 'text-[var(--text-main)]'} 
                           ${isTodayInCalendar ? 'font-bold text-[var(--color-primary-dark)]' : ''}
-                          ${isSelected && isCurrentMonth ? 'ring-2 ring-[var(--color-primary)] ring-inset z-10' : ''}
-                          ${dayDiaries.length > 0 && isCurrentMonth ? `has-diary ${calendarEmotionClass}` : ''}`}
+                          ${isSelected && isCurrentMonth ? 'ring-2 ring-[var(--color-primary)] ring-inset z-10' : ''}`}
             >
               {dayData.day}
+              {/* ⭐️ 감정 점 표시 (CSS 변수 사용) */}
+              {dayDiaries.length > 0 && isCurrentMonth && (
+                <div 
+                  className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 rounded-full"
+                  style={{ backgroundColor: `var(--emotion-${representativeDiary.emotion}-border)` }}
+                ></div>
+              )}
             </div>
           );
         })}
       </div>
       {selectedDate && (
         <div className="mt-6">
-          {/* ✨ 선택된 날짜 텍스트 색상 text-[var(--text-main)] 적용 */}
           <h3 className="text-sm font-semibold mb-3 text-[var(--text-main)]">
             {`${selectedDate.getFullYear()}년 ${selectedDate.getMonth() + 1}월 ${selectedDate.getDate()}일의 일기`}
           </h3>
           {selectedDateDiaries.length > 0 ? (
             <div className="space-y-2">
               {selectedDateDiaries.map(diary => (
-                <div key={diary.id} className={`flex bg-[var(--color-component-bg)] rounded-md overflow-hidden shadow-sm cursor-pointer border border-[var(--color-border)] border-l-4 border-l-[var(--emotion-${diary.emotion})] hover:shadow transition-shadow`}>
+                // ⭐️ 하단 리스트 아이템 스타일 수정
+                <div 
+                  key={diary.id} 
+                  className="flex bg-[var(--color-component-bg)] rounded-md overflow-hidden shadow-sm cursor-pointer border hover:shadow transition-shadow"
+                  style={{
+                    borderColor: `var(--emotion-${diary.emotion}-border)`,
+                    borderLeftWidth: '4px',
+                    borderLeftColor: `var(--emotion-${diary.emotion}-border)`
+                  }}
+                >
                   <div className="flex-1 p-2.5">
                     <div className="flex justify-between items-center">
-                      {/* ✨ 시간/제목 텍스트 색상 text-[var(--text-subtle)] 적용 */}
                       <span className="text-xs text-[var(--text-subtle)]">{diary.time || diary.title}</span>
                        <i className={`${diary.typeIcon} text-[var(--color-border)] ri-sm`} title={diary.type}></i>
                     </div>
-                    {/* ✨ 제목 텍스트 색상 text-[var(--text-main)] 적용 */}
                     {diary.time && <h4 className="font-medium text-xs text-[var(--text-main)] mt-0.5 truncate">{diary.title}</h4>}
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            // ✨ 메시지 텍스트 색상 text-[var(--text-subtle)] 적용
             <p className="text-xs text-[var(--text-subtle)] py-4 text-center">선택된 날짜에 작성된 일기가 없습니다.</p>
           )}
         </div>

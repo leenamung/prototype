@@ -89,8 +89,8 @@ export const sampleAgitData: AgitInfo = {
       likes: 12,
       comments: 8,
       selectedEmotions: [
-        { key: "calm", label: "평온", color: "#D4F0F0" },
-        { key: "serene", label: "차분", color: "#C7CEEA" },
+        { key: "calm", label: "평온"},
+        { key: "serene", label: "차분"},
       ],
     },
     {
@@ -105,8 +105,8 @@ export const sampleAgitData: AgitInfo = {
       likes: 24,
       comments: 5,
       selectedEmotions: [
-        { key: "happy", label: "행복", color: "#FFD6D6" },
-        { key: "excitement", label: "설렘", color: "#D8B5E0" },
+        { key: "happy", label: "행복"},
+        { key: "excitement", label: "설렘"},
       ],
     },
     {

@@ -45,9 +45,9 @@ export const diaryEntriesData: DiaryEntry[] = [
     type: 'text',
     isInitiallyLiked: false,
     selectedEmotions: [
-      { key: "happy",     label: "행복",   color: "#FFD6D6" },
-      { key: "grateful",  label: "감사",   color: "#FFE5B4" },
-      { key: "satisfied", label: "만족",   color: "#B5EAD7" },
+      { key: "happy",     label: "행복"},
+      { key: "grateful",  label: "감사"},
+      { key: "satisfied", label: "만족"},
     ],
   },
   {
@@ -67,8 +67,8 @@ export const diaryEntriesData: DiaryEntry[] = [
     type: 'image',
     isInitiallyLiked: true,
     selectedEmotions: [
-      { key: "calm",   label: "평온",   color: "#D4F0F0" },
-      { key: "serene", label: "차분",   color: "#C7CEEA" },
+      { key: "calm",   label: "평온"},
+      { key: "serene", label: "차분"},
     ],
   },
   {
@@ -92,7 +92,7 @@ export const diaryEntriesData: DiaryEntry[] = [
     },
     isInitiallyLiked: false,
     selectedEmotions: [
-      { key: "hope", label: "희망", color: "#E2F0CB" },
+      { key: "hope", label: "희망"},
     ],
   },
   {
@@ -115,8 +115,8 @@ export const diaryEntriesData: DiaryEntry[] = [
     },
     isInitiallyLiked: false,
     selectedEmotions: [
-        { key: "calm",       label: "평온",  color: "#D4F0F0" },
-        { key: "miss",       label: "그리움",color: "#E6E6FA" },
+        { key: "calm",       label: "평온"},
+        { key: "miss",       label: "그리움"},
     ],
   },
   {
@@ -134,8 +134,8 @@ export const diaryEntriesData: DiaryEntry[] = [
     type: 'text',
     isInitiallyLiked: true,
     selectedEmotions: [
-        { key: "tired",    label: "지침",   color: "#C0C0C0" },
-        { key: "proud",    label: "뿌듯",   color: "#A8D8B0" },
+        { key: "tired",    label: "지침"},
+        { key: "proud",    label: "뿌듯"},
     ],
   },
   {
@@ -155,7 +155,7 @@ export const diaryEntriesData: DiaryEntry[] = [
     type: 'image',
     isInitiallyLiked: false,
     selectedEmotions: [
-      { key: "calm", label: "평온", color: "#D4F0F0" },
+      { key: "calm", label: "평온"},
     ],
   },
 ];

@@ -9,7 +9,7 @@ import { RemoveScroll } from 'react-remove-scroll';
 import SlideFromBottomReply from '../../feed/features/Reply/SlideFromBottomReply';
 
 const getEmotionGradientStyle = (emotions: DiaryEntry['selectedEmotions']) => {
-    const colors = emotions.map(e => e.color);
+    const colors = emotions.map(e => `var(--emotion-${e.key})`);
     if (colors.length === 0) return { backgroundColor: 'var(--color-background)' };
     if (colors.length === 1) return { backgroundColor: `${colors[0]}B3` };
     return { backgroundImage: `linear-gradient(160deg, ${colors.map(c => `${c}B3`).join(', ')})` };
