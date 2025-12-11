@@ -10,7 +10,6 @@ interface DiaryListItemProps {
 const DiaryListItem: React.FC<DiaryListItemProps> = ({ diary }) => {
   // ⭐️ CSS 변수로 색상 정의
   const borderVar = `var(--emotion-${diary.emotion}-border, var(--color-border))`;
-  const bgVar = `var(--emotion-${diary.emotion})`;
 
   return (
     <div className="flex bg-white rounded-lg overflow-hidden shadow-sm cursor-pointer hover:shadow-md transition-shadow duration-150 ease-in-out">

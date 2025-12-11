@@ -78,70 +78,25 @@
   --color-warning-bg: #FAD2D2;
   --agit-notice-badge-bg: #FFF5F2;
 
-  /* --- [감정 색상 팔레트] --- */
-  /* [수정 포인트]
-     외곽선 색상을 'Dusty Pastel' 톤으로 조정하여 
-     싸인펜이 아닌 '색연필' 느낌을 줍니다. 
-     채도는 낮추고, 따뜻함이나 부드러움을 더했습니다.
-  */
-
-  /* 1. 긍정 (Positive) */
-  --emotion-happy: #FFD6D6;
-  --emotion-happy-border: #FFAAB9; /* 부드러운 인디핑크 */
-
-  --emotion-joy: #FFEFBA;
-  --emotion-joy-border: #FFD54F;   /* 따뜻한 머스터드 */
-
-  --emotion-love: #F8C8DC;
-  --emotion-love-border: #F48FB1;  /* 은은한 로즈 핑크 */
-
-  --emotion-excitement: #D8B5E0;
-  --emotion-excitement-border: #CE93D8; /* 차분한 라일락 */
-
-  --emotion-satisfied: #B5EAD7;
-  --emotion-satisfied-border: #80CBC4; /* 톤다운된 민트 */
-
-  --emotion-proud: #A8D8B0;
-  --emotion-proud-border: #A5D6A7; /* 부드러운 잎사귀 색 */
-
-  --emotion-grateful: #FFE5B4;
-  --emotion-grateful-border: #FFCC80; /* 부드러운 살구색 */
-
-  --emotion-hope: #E2F0CB;
-  --emotion-hope-border: #C5E1A5; /* 연한 올리브 그린 */
-
-  /* 2. 중립 (Neutral) */
-  --emotion-calm: #D4F0F0;
-  --emotion-calm-border: #B2EBF2; /* 맑은 하늘색 */
-
-  --emotion-serene: #C7CEEA;
-  --emotion-serene-border: #9FA8DA; /* 몽환적인 연보라 */
-
-  /* 3. 부정 (Negative) */
-  --emotion-sad: #B4D4E1;
-  --emotion-sad-border: #90CAF9; /* 물빠진 파란색 */
-
-  --emotion-miss: #E6E6FA;
-  --emotion-miss-border: #B39DDB; /* 그리운 느낌의 연보라 */
-
-  --emotion-lonely: #C9C9E0;
-  --emotion-lonely-border: #9FA8DA; /* 차분한 그레이 블루 */
-
-  --emotion-tired: #C0C0C0;
-  --emotion-tired-border: #B0BEC5; /* 따뜻한 회색 */
-
-  --emotion-lazy: #E0E0E0;
-  --emotion-lazy-border: #CFD8DC; /* 부드러운 쿨그레이 */
-
-  --emotion-angry: #E57373;
-  --emotion-angry-border: #EF9A9A; /* 쨍하지 않은 붉은색 */
-
-  --emotion-anxious: #BCC5D5;
-  --emotion-anxious-border: #B0BEC5; /* 안정감을 주는 그레이 블루 */
-
-  /* 기본값 */
-  --emotion-neutral: #E0E0E0;
-  --emotion-neutral-border: #CFD8DC;
+/* 감정 테두리용 진한 색상 (Tone-on-Tone) */
+  --emotion-happy: #FFD6D6; --emotion-happy-border: #FF8585;
+  --emotion-joy: #FFEFBA; --emotion-joy-border: #FDD835;
+  --emotion-calm: #D4F0F0; --emotion-calm-border: #4DD0E1;
+  --emotion-hope: #E2F0CB; --emotion-hope-border: #AED581;
+  --emotion-satisfied: #B5EAD7; --emotion-satisfied-border: #4DB6AC;
+  --emotion-serene: #C7CEEA; --emotion-serene-border: #7986CB;
+  --emotion-excitement: #D8B5E0; --emotion-excitement-border: #BA68C8;
+  --emotion-love: #F8C8DC; --emotion-love-border: #F06292;
+  --emotion-lazy: #E0E0E0; --emotion-lazy-border: #BDBDBD;
+  --emotion-sad: #B4D4E1; --emotion-sad-border: #64B5F6;
+  --emotion-angry: #E57373; --emotion-angry-border: #D32F2F;
+  --emotion-grateful: #FFE5B4; --emotion-grateful-border: #FFB74D;
+  --emotion-proud: #A8D8B0; --emotion-proud-border: #81C784;
+  --emotion-lonely: #C9C9E0; --emotion-lonely-border: #7986CB;
+  --emotion-tired: #C0C0C0; --emotion-tired-border: #90A4AE;
+  --emotion-miss: #E6E6FA; --emotion-miss-border: #9575CD;
+  --emotion-anxious: #BCC5D5; --emotion-anxious-border: #90A4AE;
+  --emotion-neutral: #E0E0E0; --emotion-neutral-border: #B0BEC5;
 
   /* --- 프로필 색상 --- */
   --profile-emotion-red: rgba(229, 115, 115, 0.3);
