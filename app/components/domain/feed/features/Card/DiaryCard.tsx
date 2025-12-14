@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+// ✅ [수정] framer-motion 제거
 import { DiaryEntry } from "@/app/data/diaryEntries";
 
 interface DiaryCardProps {
@@ -19,39 +19,13 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ entry, optionHandle, repliySlideH
   const contentRef = useRef<HTMLParagraphElement>(null);
   const [showReadMore, setShowReadMore] = useState(false);
 
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  // ✅ [UX Writing] 랜덤 문구 상태 관리
-  // Hydration Mismatch 방지를 위해 초기값은 하나로 고정하고, 마운트 후 랜덤 설정
+  // 랜덤 문구 상태 관리
   const [backLayerText, setBackLayerText] = useState("온전히 느껴볼까요");
 
   useEffect(() => {
-    // 50% 확률로 문구 랜덤 선택
     const phrases = ["오롯이 집중해볼까요", "온전히 느껴볼까요"];
     setBackLayerText(phrases[Math.floor(Math.random() * phrases.length)]);
   }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (entry.isIntersecting && !hasAnimated) {
-          setHasAnimated(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
-    }
-
-    return () => {
-      if (cardRef.current) observer.disconnect();
-    };
-  }, [hasAnimated]);
 
   useEffect(() => {
     if (contentRef.current && entry.content) {
@@ -99,24 +73,19 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ entry, optionHandle, repliySlideH
 
   const styles = getGradientStyles();
 
-  // 🔥 [BackLayer 구현]
-  // 1. Text: "오롯이 집중해볼까요" OR "온전히 느껴볼까요" (랜덤)
-  // 2. Style: 카드와 동일한 그라데이션 배경 (일체감 형성)
   const BackLayer = () => (
     <Link 
         href={`/diary/${entry.id}`} 
         scroll={false}
         className="absolute inset-x-0 bottom-[-22px] h-full rounded-hand-drawn z-0 transform rotate-1 cursor-pointer border shadow-sm transition-transform active:scale-[0.99]"
         style={{ 
-            background: styles.borderBackground, // 카드와 동일한 그라데이션
+            background: styles.borderBackground,
             opacity: 0.6,
             borderColor: styles.separatorColor,
         }}
         aria-label="상세 페이지로 이동"
     >
         <div className="absolute inset-0 rounded-hand-drawn opacity-60 noise-background mix-blend-multiply" />
-        
-        {/* ✅ [Randomized UX Writing] */}
         <div className="absolute bottom-[4px] right-5 flex items-center space-x-1.5 opacity-90">
             <span className="font-maru-buri text-[11px] text-[var(--text-main)] font-bold tracking-widest">
                 {backLayerText}
@@ -133,14 +102,11 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ entry, optionHandle, repliySlideH
     return (
       <div className="relative mb-10"> 
         <BackLayer />
-        <motion.div
-            ref={cardRef}
-            layoutId={`diary-card-${entry.id}`}
+        
+        {/* ✅ [수정] motion.div -> div 변경, layoutId 제거, ref 제거 */}
+        <div
             className={`relative z-10 shadow-sm rounded-hand-drawn p-[2px] bg-white`} 
             style={{ background: styles.borderBackground }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "circOut" }}
         >
             <div className="relative w-full h-full bg-white rounded-hand-drawn overflow-hidden clip-radius-fix">
                 <div 
@@ -216,7 +182,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ entry, optionHandle, repliySlideH
                     </div>
                 </div>
             </div>
-        </motion.div>
+        </div>
       </div>
     );
   }
@@ -227,14 +193,11 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ entry, optionHandle, repliySlideH
   return (
     <div className="relative mb-10">
       <BackLayer />
-      <motion.div 
-        ref={cardRef}
-        layoutId={`diary-card-${entry.id}`}
+      
+      {/* ✅ [수정] motion.div -> div 변경, layoutId 제거, ref 제거 */}
+      <div 
         className={`relative z-10 shadow-sm rounded-hand-drawn p-[2px] bg-white`}
         style={{ background: styles.borderBackground }}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: "circOut" }}
       >
         <div className="relative w-full h-full bg-white rounded-hand-drawn overflow-hidden clip-radius-fix">
             <div 
@@ -329,9 +292,9 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ entry, optionHandle, repliySlideH
                         </div>
                     </div>
                 </div>
-              </div>
             </div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     );
   }
