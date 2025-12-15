@@ -4,7 +4,7 @@ import BlockedUsersNavigationBar from '@/app/components/domain/settings/layout/B
 
 export default function BlockedUsersPage() {
   return (
-    <div className="flex flex-col h-full bg-[var(--color-background)]">
+    <div className="flex flex-col h-full">
       {/* 1. 네비게이션 바 (flex-none) */}
       <BlockedUsersNavigationBar />
 

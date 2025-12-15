@@ -19,7 +19,7 @@ export default async function FriendRequestsPage() {
   const data = await getRequestData();
 
   return (
-    <div className="flex flex-col h-full bg-[var(--color-background)]">
+    <div className="flex flex-col h-full">
       {/* 1. 네비게이션 바 (flex-none) */}
       <RequestsNavigationBar />
 

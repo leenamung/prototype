@@ -7,7 +7,7 @@ import SkeletonProfileDiariesContent from '@/app/components/domain/profile/ui/sk
 
 export default function Loading() {
   return (
-    <div className="flex flex-col h-full bg-[var(--color-background)]">
+    <div className="flex flex-col h-full">
       {/* 헤더 스켈레톤 (flex-none) */}
       <SkeletonProfileNavigationBar />
       

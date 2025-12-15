@@ -23,7 +23,7 @@ export default async function FriendsPage() {
   const requestCount = data.receivedRequests.length;
 
   return (
-    <div className="flex flex-col h-full bg-[var(--color-background)]">
+    <div className="flex flex-col h-full">
       <FriendsNavigationBar requestCount={requestCount} />
 
       <div className="flex-1 overflow-y-auto">

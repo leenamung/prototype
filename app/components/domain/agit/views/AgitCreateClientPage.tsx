@@ -52,7 +52,7 @@ export default function AgitCreateClient() {
   const radioClassName = "appearance-none w-4 h-4 rounded-full border-2 border-[var(--color-border)] bg-[var(--color-component-bg)] checked:bg-[var(--color-primary)] checked:border-[var(--color-primary)] transition-colors mr-2 relative cursor-pointer after:content-[''] after:w-1.5 after:h-1.5 after:rounded-full after:bg-white after:absolute after:left-1/2 after:top-1/2 after:-translate-x-1/2 after:-translate-y-1/2 after:opacity-0 checked:after:opacity-100";
 
   return (
-    <div className="flex flex-col h-full bg-[var(--color-background)]">
+    <div className="flex flex-col h-full">
       {/* ❌ 기존 Header 제거됨 */}
       
       {/* ✅ pt-14 제거 (부모에서 처리) */}

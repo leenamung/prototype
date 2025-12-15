@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-// ✅ [수정] framer-motion 제거
+// motion 관련 import 없음
 import { DiaryEntry } from "@/app/data/diaryEntries";
 
 interface DiaryCardProps {
@@ -73,11 +73,15 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ entry, optionHandle, repliySlideH
 
   const styles = getGradientStyles();
 
+  // 🔥 [BackLayer]
+  // 1. inset-x-1: 가로 스크롤 방지
+  // 2. active:translate-y-[3px]: 터치 시 아래로 살짝 내려옴 (물리적 반응)
+  // 3. active:scale 제거
   const BackLayer = () => (
     <Link 
         href={`/diary/${entry.id}`} 
         scroll={false}
-        className="absolute inset-x-0 bottom-[-22px] h-full rounded-hand-drawn z-0 transform rotate-1 cursor-pointer border shadow-sm transition-transform active:scale-[0.99]"
+        className="absolute inset-x-1 bottom-[-22px] h-full rounded-hand-drawn z-0 transform rotate-1 cursor-pointer border shadow-sm transition-transform duration-200 active:translate-y-[3px]"
         style={{ 
             background: styles.borderBackground,
             opacity: 0.6,
@@ -85,7 +89,9 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ entry, optionHandle, repliySlideH
         }}
         aria-label="상세 페이지로 이동"
     >
-        <div className="absolute inset-0 rounded-hand-drawn opacity-60 noise-background mix-blend-multiply" />
+        <div className="absolute inset-0 rounded-hand-drawn opacity-60 mix-blend-multiply" />
+        
+        {/* UX Writing: 랜덤 문구 */}
         <div className="absolute bottom-[4px] right-5 flex items-center space-x-1.5 opacity-90">
             <span className="font-maru-buri text-[11px] text-[var(--text-main)] font-bold tracking-widest">
                 {backLayerText}
@@ -103,7 +109,6 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ entry, optionHandle, repliySlideH
       <div className="relative mb-10"> 
         <BackLayer />
         
-        {/* ✅ [수정] motion.div -> div 변경, layoutId 제거, ref 제거 */}
         <div
             className={`relative z-10 shadow-sm rounded-hand-drawn p-[2px] bg-white`} 
             style={{ background: styles.borderBackground }}
@@ -194,7 +199,6 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ entry, optionHandle, repliySlideH
     <div className="relative mb-10">
       <BackLayer />
       
-      {/* ✅ [수정] motion.div -> div 변경, layoutId 제거, ref 제거 */}
       <div 
         className={`relative z-10 shadow-sm rounded-hand-drawn p-[2px] bg-white`}
         style={{ background: styles.borderBackground }}
@@ -293,9 +297,9 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ entry, optionHandle, repliySlideH
                     </div>
                 </div>
             </div>
-          </div>
         </div>
       </div>
+    </div>
     );
   }
 

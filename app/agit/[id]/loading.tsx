@@ -12,7 +12,7 @@ export default function Loading() {
       <SkeletonAgitDetailNavigationBar />
 
       {/* 2. 콘텐츠 영역 (Flex Item, 남은 공간 채움, 내부 스크롤) */}
-      <div className="flex-1 overflow-y-auto bg-[var(--color-background)]">
+      <div className="flex-1 overflow-y-auto">
         <SkeletonAgitHeader />
         
         <SkeletonAgitListTabs />

@@ -4,7 +4,7 @@ import OnboardingNavigationBar from '@/app/components/domain/auth/layout/Onboard
 
 export default function OnboardingPage() {
   return (
-    <div className="flex flex-col h-full bg-[var(--color-background)]">
+    <div className="flex flex-col h-full">
       {/* 1. 네비게이션 바 */}
       <OnboardingNavigationBar />
 

@@ -12,7 +12,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
 
   return (
     // ✅ [핵심 변경] h-dvh(동적 뷰포트 높이)로 전체 화면을 잡고 flex-col 적용
-    <div className="flex flex-col h-dvh bg-[var(--color-background)]">
+    <div className="flex flex-col h-dvh">
       
       {/* ✅ [콘텐츠 영역] 
           - flex-1: 남은 공간을 모두 차지

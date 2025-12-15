@@ -268,7 +268,7 @@ export default function WriteClientPage() {
   }, [useLocation, currentLocation]);
 
   return (
-    <div className="flex flex-col h-full bg-[var(--color-background)]">
+    <div className="flex flex-col h-full">
       {/* 상태에 의존하는 헤더이므로 여기서 렌더링 */}
       <WriteNavigationBar
         onPublish={() => setIsSettingsModalOpen(true)}

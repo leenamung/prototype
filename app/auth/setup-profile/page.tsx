@@ -4,7 +4,7 @@ import SetupProfileNavigationBar from '@/app/components/domain/auth/layout/Setup
 
 export default function SetupProfilePage() {
   return (
-    <div className="flex flex-col h-full bg-[var(--color-background)]">
+    <div className="flex flex-col h-full">
       {/* 1. 네비게이션 바 */}
       <SetupProfileNavigationBar />
 

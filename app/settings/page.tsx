@@ -4,7 +4,7 @@ import SettingsNavigationBar from '@/app/components/domain/settings/layout/Setti
 
 export default function SettingsPage() {
   return (
-    <div className="flex flex-col h-full bg-[var(--color-background)]">
+    <div className="flex flex-col h-full">
       {/* 1. 설정 페이지 전용 네비게이션 바 (flex-none) */}
       <SettingsNavigationBar />
 

@@ -26,7 +26,7 @@ export default async function AgitDetailPage({ params }: AgitDetailPageProps) {
 
       {/* 콘텐츠 (flex-1 overflow-y-auto) */}
       {/* pt-14 제거 */}
-      <div className="flex-1 overflow-y-auto bg-[var(--color-background)]">
+      <div className="flex-1 overflow-y-auto">
         <AgitDetailClient agitData={agitData} />
       </div>
     </div>

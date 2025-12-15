@@ -13,7 +13,7 @@ export default async function ProfilePage() {
   const profileData = await getProfileData();
 
   return (
-    <div className="flex flex-col h-full bg-[var(--color-background)]">
+    <div className="flex flex-col h-full">
       {/* 1. 내 프로필 전용 네비게이션 바 (flex-none) */}
       <ProfileNavigationBar />
 

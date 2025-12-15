@@ -68,7 +68,7 @@ const ProfileEditClientPage = () => {
     const isSaveDisabled = !!nicknameError || !isDirty;
 
     return (
-        <div className="flex flex-col h-full bg-[var(--color-background)]">
+        <div className="flex flex-col h-full">
             {/* 네비게이션 바에 isSaveDisabled 상태 전달 */}
             <ProfileEditNavigationBar onSave={handleSave} isSaveDisabled={isSaveDisabled} />
 

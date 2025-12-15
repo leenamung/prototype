@@ -5,7 +5,7 @@ import SkeletonNavigationBar from '@/app/components/layout/ui/skeletons/Skeleton
 
 export default function Loading() {
   return (
-    <div className="flex flex-col h-full bg-[var(--color-background)]">
+    <div className="flex flex-col h-full">
       {/* 1. 네비게이션 바 스켈레톤 (flex-none) */}
       <SkeletonNavigationBar />
 

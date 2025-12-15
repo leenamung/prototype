@@ -30,7 +30,7 @@ export default async function AgitListPage() {
           - flex-1: 남은 공간 모두 차지
           - overflow-y-auto: 내용이 넘치면 이 영역 내부에서만 스크롤 발생
       */}
-      <div className="flex-1 overflow-y-auto bg-[var(--color-background)]">
+      <div className="flex-1 overflow-y-auto">
         <AgitClientPage myAgits={myAgits} exploreAgits={exploreAgitsData} />
       </div>
     </div>

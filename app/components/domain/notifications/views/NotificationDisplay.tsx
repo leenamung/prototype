@@ -12,7 +12,7 @@ export default function NotificationDisplay({ groupedNotifications }: Notificati
   const hasNotifications = Object.keys(groupedNotifications).length > 0;
 
   return (
-    <main className="bg-[var(--color-background)] min-h-full">
+    <main className="min-h-full">
       {hasNotifications ? (
         // ✅ [수정] pb-20 -> pb-4 (하단 탭바와 겹치지 않으므로 적당한 여백만 줌)
         <div className="pb-4">

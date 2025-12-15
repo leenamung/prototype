@@ -22,7 +22,7 @@ export default async function UserProfilePage({ params }: { params: Promise<{ us
   }
 
   return (
-    <div className="flex flex-col h-full bg-[var(--color-background)]">
+    <div className="flex flex-col h-full">
       {/* 1. 타인 프로필 전용 네비게이션 바 (flex-none) */}
       <UserProfileNavigationBar 
         userName={profileData.name}

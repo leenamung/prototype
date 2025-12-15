@@ -4,7 +4,7 @@ import SignUpNavigationBar from '@/app/components/domain/auth/layout/SignUpNavig
 
 export default function SignUpPage() {
   return (
-    <div className="flex flex-col h-full bg-[var(--color-background)]">
+    <div className="flex flex-col h-full">
       {/* 1. 네비게이션 바 */}
       <SignUpNavigationBar />
 
