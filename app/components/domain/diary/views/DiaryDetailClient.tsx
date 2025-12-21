@@ -7,6 +7,7 @@ import Link from 'next/link';
 import SlideFromBottomReply from '../../feed/features/Reply/SlideFromBottomReply';
 import DiaryDetailNavigationBar from '../layout/DiaryDetailNavigationBar';
 import FloatingOptionMenu from '../../common/FloatingOptionMenu';
+import { Emotion } from '@/app/data/emotionData';
 
 // ✨ [추가] 5가지 감정 데이터 정의
 const REACTIONS = [
@@ -288,7 +289,7 @@ const DiaryDetailClient = ({ diary, headerTitle }: DiaryDetailClientProps) => {
                         {/* 감정 태그 */}
                         {diary.selectedEmotions && diary.selectedEmotions.length > 0 && (
                             <div className="flex flex-wrap gap-2 mb-8">
-                            {diary.selectedEmotions.map((emotion: any) => (
+                            {diary.selectedEmotions.map((emotion: Emotion) => (
                                 <span 
                                 key={emotion.key}
                                 className="px-2.5 py-1 rounded-full text-[11px] font-medium border text-[var(--text-subtle)] bg-white/60 backdrop-blur-sm"
