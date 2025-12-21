@@ -23,10 +23,9 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children, modal,
+  children
 }: Readonly<{
   children: React.ReactNode;
-  modal: React.ReactNode;
 }>) {
   return (
     <html lang="ko" className={`${gowunDodum.variable} ${pacifico.variable}`}>
@@ -46,7 +45,6 @@ export default function RootLayout({
         <div className="noise-background" />
         <LayoutWrapper>
           {children}
-          {modal}
         </LayoutWrapper>
       </body>
     </html>
