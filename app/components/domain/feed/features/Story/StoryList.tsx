@@ -2,22 +2,35 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import StoryItem from "./StoryItem"; // 위에서 만든 StoryItem 컴포넌트
 
-// 샘플 데이터
-const sampleStories = [
-  { id: 1, userName: "김철수", userProfile: "https://i.pravatar.cc/150?img=1" },
-  { id: 2, userName: "박영희", userProfile: "https://i.pravatar.cc/150?img=2" },
-  { id: 3, userName: "이민준", userProfile: "https://i.pravatar.cc/150?img=3" },
-  { id: 4, userName: "이민준", userProfile: "https://i.pravatar.cc/150?img=4" },
-  { id: 5, userName: "이민준", userProfile: "https://i.pravatar.cc/150?img=5" },
-  { id: 6, userName: "이민준", userProfile: "https://i.pravatar.cc/150?img=6" },
-  { id: 7, userName: "이민준", userProfile: "https://i.pravatar.cc/150?img=7" },
-  { id: 8, userName: "이민준", userProfile: "https://i.pravatar.cc/150?img=8" },
-  { id: 9, userName: "이민준", userProfile: "https://i.pravatar.cc/150?img=9" },
-  { id: 10, userName: "이민준", userProfile: "https://i.pravatar.cc/150?img=10" },
-  { id: 11, userName: "이민준", userProfile: "https://i.pravatar.cc/150?img=11" },
-  { id: 12, userName: "이민준", userProfile: "https://i.pravatar.cc/150?img=12" },
-  { id: 13, userName: "이민준", userProfile: "https://i.pravatar.cc/150?img=13" },
-  { id: 14, userName: "이민준", userProfile: "https://i.pravatar.cc/150?img=14" },
+// ✨ [추가] StoryEmotion 타입 정의 (DiaryEntry와 유사하게 맞춤)
+export type StoryEmotion = {
+  key: string; // 'joy', 'sadness', 'anger', 'calm', 'anxiety' 등
+};
+
+// ✨ [수정] Story 인터페이스에 selectedEmotions 추가
+export interface Story {
+  id: number;
+  userName: string;
+  userProfile: string;
+  selectedEmotions: StoryEmotion[];
+}
+
+// ✨ [수정] 전달받은 감정 키워드(CSS 변수)에 맞춰 샘플 데이터 업데이트
+const sampleStories: Story[] = [
+  { id: 1, userName: "김철수", userProfile: "https://i.pravatar.cc/150?img=11", selectedEmotions: [{ key: 'happy' }] }, // 행복
+  { id: 2, userName: "박영희", userProfile: "https://i.pravatar.cc/150?img=5", selectedEmotions: [{ key: 'sad' }, { key: 'miss' }] }, // 슬픔 + 그리움
+  { id: 3, userName: "이민준", userProfile: "https://i.pravatar.cc/150?img=3", selectedEmotions: [{ key: 'anxious' }, { key: 'tired' }] }, // 불안 + 피곤
+  { id: 4, userName: "최유리", userProfile: "https://i.pravatar.cc/150?img=9", selectedEmotions: [{ key: 'joy' }, { key: 'excitement' }] }, // 기쁨 + 설렘
+  { id: 5, userName: "정수빈", userProfile: "https://i.pravatar.cc/150?img=12", selectedEmotions: [{ key: 'calm' }] }, // 평온
+  { id: 6, userName: "강호동", userProfile: "https://i.pravatar.cc/150?img=6", selectedEmotions: [] }, // 감정 없음 (기본)
+  { id: 7, userName: "유재석", userProfile: "https://i.pravatar.cc/150?img=7", selectedEmotions: [{ key: 'hope' }, { key: 'proud' }] }, // 희망 + 뿌듯
+  { id: 8, userName: "이광수", userProfile: "https://i.pravatar.cc/150?img=8", selectedEmotions: [{ key: 'love' }] }, // 사랑
+  { id: 9, userName: "송지효", userProfile: "https://i.pravatar.cc/150?img=4", selectedEmotions: [{ key: 'serene' }, { key: 'satisfied' }] }, // 고요 + 만족
+  { id: 10, userName: "김종국", userProfile: "https://i.pravatar.cc/150?img=10", selectedEmotions: [{ key: 'angry' }, { key: 'tired' }] }, // 화남 + 피곤
+  { id: 11, userName: "하동훈", userProfile: "https://i.pravatar.cc/150?img=13", selectedEmotions: [{ key: 'grateful' }] }, // 감사
+  { id: 12, userName: "양세찬", userProfile: "https://i.pravatar.cc/150?img=14", selectedEmotions: [{ key: 'lazy' }, { key: 'neutral' }] }, // 귀찮음 + 무표정
+  { id: 13, userName: "전소민", userProfile: "https://i.pravatar.cc/150?img=20", selectedEmotions: [{ key: 'excitement' }, { key: 'love' }] }, // 설렘 + 사랑
+  { id: 14, userName: "지석진", userProfile: "https://i.pravatar.cc/150?img=33", selectedEmotions: [{ key: 'lonely' }] }, // 외로움
 ];
 
 const StoryList: React.FC = () => {
@@ -83,7 +96,7 @@ const StoryList: React.FC = () => {
         className="flex px-2 space-x-2 overflow-x-auto scrollbar-hide"
       >
         {sampleStories.map((story) => (
-          <StoryItem key={story.id} {...story} />
+          <StoryItem key={story.id} story={story} />
         ))}
       </div>
 

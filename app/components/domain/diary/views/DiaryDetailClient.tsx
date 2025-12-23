@@ -295,7 +295,7 @@ const DiaryDetailClient = ({ diary, headerTitle }: DiaryDetailClientProps) => {
                                 className="px-2.5 py-1 rounded-full text-[11px] font-medium border text-[var(--text-subtle)] bg-white/60 backdrop-blur-sm"
                                 style={{ borderColor: `var(--emotion-${emotion.key}-border, var(--color-border))` }}
                                 >
-                                #{emotion.label || emotion.key}
+                                {emotion.label || emotion.key}
                                 </span>
                             ))}
                             </div>

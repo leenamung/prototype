@@ -1,40 +1,63 @@
-// components/StoryItem.tsx
 "use client";
-
 import Image from "next/image";
+import React from "react";
 
-interface StoryItemProps {
-  userProfile: string;
-  userName: string;
+interface StoryEmotion {
+  key: string;
 }
 
-const StoryItem: React.FC<StoryItemProps> = ({ userProfile, userName }) => {
-  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    // 이미지 로드 실패 시 대체 이미지 처리
-    const target = e.target as HTMLImageElement;
-    target.onerror = null;
-    target.src = "https://placehold.co/60x60/E2E8F0/A0AEC0?text=U";
+interface StoryProps {
+  story: {
+      id: number;
+      userName: string;
+      userProfile: string;
+      selectedEmotions: StoryEmotion[];
+  }
+}
+
+const StoryItem: React.FC<StoryProps> = ({ story }) => {
+  const { userName, userProfile, selectedEmotions } = story;
+
+  const getBorderGradientStyle = () => {
+    if (!selectedEmotions || selectedEmotions.length === 0) {
+      return { background: 'var(--color-border)' };
+    }
+
+    const borderColors = selectedEmotions.map(e => `var(--emotion-${e.key}-border)`);
+
+    if (borderColors.length === 1) {
+      return { background: borderColors[0] };
+    } else {
+      return { background: `linear-gradient(135deg, ${borderColors.join(', ')})` };
+    }
   };
 
+  const borderStyle = getBorderGradientStyle();
+
   return (
-    <div className="flex flex-col items-center flex-shrink-0 w-20">
-      {/* 1. 바깥 Div: 그라데이션 테두리 역할 */}
-      <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[var(--color-accent-yellow)] to-[var(--color-primary)] p-0.5">
-        <div className="w-full h-full bg-[var(--color-component-bg)] rounded-full p-[2px]">
-          <div className="w-full h-full overflow-hidden rounded-full">
-           <Image
+    // ✨ [수정] group 클래스 제거 및 active(클릭) 효과만 유지
+    <button className="flex flex-col items-center space-y-1.5 flex-shrink-0 active:opacity-80 transition-opacity">
+      <div
+        className="p-[2px] rounded-full relative"
+        style={borderStyle}
+      >
+        <div className="bg-white rounded-full p-[2px]">
+           <div className="w-16 h-16 relative rounded-full overflow-hidden">
+            <Image
               src={userProfile}
               alt={`${userName}의 스토리`}
-              className="object-cover w-full h-full"
-              onError={handleImageError}
-              width={64}
-              height={64}
+              fill
+              className="object-cover"
+              priority
             />
-          </div>
+           </div>
         </div>
       </div>
-      <p className="mt-1 text-xs text-center truncate w-full">{userName}</p>
-    </div>
+      
+      <span className="text-xs text-[var(--text-main)] font-medium truncate w-16 text-center">
+        {userName}
+      </span>
+    </button>
   );
 };
 
