@@ -1,14 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-// 컴포넌트 임포트
+// Components
 import WeatherSelectionModal, { WeatherOption, weatherOptions } from "@/app/components/domain/write/features/Options/WeatherSelectionModal";
 import { Emotion } from "@/app/data/emotionData";
-import SettingsSection from "@/app/components/domain/write/components/SettingsSection";
-import ExchangeDiaryOptions from "@/app/components/domain/write/features/Options/ExchangeDiaryOptions";
 import DatePickerModal from "@/app/components/domain/write/features/Options/DatePickerModal";
-import ToggleSwitch from "@/app/components/domain/common/ToggleSwitch";
-import LocationDisplay from "@/app/components/domain/write/features/Options/LocationDisplay";
 import DiaryTypeTabs, { DiaryType } from "@/app/components/domain/write/features/Options/DiaryTypeTabs";
 import WriteNavigationBar from "@/app/components/domain/write/layout/WriteNavigationBar";
 import TextEditorTab from "@/app/components/domain/write/features/Editor/TextEditorTab";
@@ -16,320 +12,185 @@ import PhotoUploadTab from "@/app/components/domain/write/features/Editor/PhotoU
 import VideoUploadTab from "@/app/components/domain/write/features/Editor/VideoUploadTab";
 import VoiceRecordTab from "@/app/components/domain/write/features/Editor/VoiceRecordTab";
 import EmotionSelector from "@/app/components/domain/write/features/Options/EmotionSelector";
+import MixedEmotionIcon from "@/app/components/domain/write/components/MixedEmotionIcon";
 
-// --- 타입 정의 ---
-type PrivacyOption = "private" | "friends" | "group" | "public" | "exchange";
-const privacyOptionsMap: Record<PrivacyOption, { text: string; icon: string }> =
-  {
-    private: { text: "비공개", icon: "ri-lock-line" },
-    friends: { text: "친구 공개", icon: "ri-user-shared-line" },
-    group: { text: "아지트 선택", icon: "ri-home-4-line" },
-    public: { text: "전체 공개", icon: "ri-earth-line" },
-    exchange: { text: "교환일기", icon: "ri-book-open-line" },
-  };
+// [NEW] 분리된 컴포넌트 임포트
+import PublishSettingsSheet, { PrivacyOption } from "@/app/components/domain/write/features/Publish/PublishSettingsSheet";
 
-// --- 설정 모달 컴포넌트 (내부 사용) ---
-interface PublishSettingsModalProps {
-  onClose: () => void;
-  onPublish: () => void;
-  diaryTitle: string;
-  onTitleChange: (title: string) => void;
-  privacy: PrivacyOption;
-  setPrivacy: (p: PrivacyOption) => void;
-  diaryDate: Date;
-  setDiaryDate: (d: Date) => void;
-  useLocation: boolean;
-  setUseLocation: (u: boolean) => void;
-  currentLocation: string | null;
-  selectedWeather: WeatherOption;
-  setSelectedWeather: (w: WeatherOption) => void;
-}
-
-const PublishSettingsModal: React.FC<PublishSettingsModalProps> = ({
-  onClose,
-  onPublish,
-  diaryTitle,
-  onTitleChange,
-  privacy,
-  setPrivacy,
-  diaryDate,
-  setDiaryDate,
-  useLocation,
-  setUseLocation,
-  currentLocation,
-  selectedWeather,
-  setSelectedWeather,
-}) => {
-  const MAX_TITLE_LENGTH = 50;
-
-  const [isPrivacyDropdownOpen, setIsPrivacyDropdownOpen] = useState(false);
-  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
-  const [isWeatherModalOpen, setIsWeatherModalOpen] = useState(false);
-
-  const formatDateDisplay = (date: Date): string => {
-    return `${date.getFullYear()}년 ${
-      date.getMonth() + 1
-    }월 ${date.getDate()}일`;
-  };
-
-  return (
-    <motion.div
-      className="fixed inset-0 bg-[var(--color-component-bg)] z-50 flex flex-col bottom-0"
-      initial={{ y: "100%" }}
-      animate={{ y: 0 }}
-      exit={{ y: "100%" }}
-      transition={{ type: "tween", ease: "easeInOut", duration: 0.4 }}
-    >
-      {/* 모달 상단 네비게이션 */}
-      <div className="flex-shrink-0 flex items-center justify-between p-4 border-b border-[var(--color-border)] h-16">
-        <button onClick={onClose} className="p-2 -ml-2 text-[var(--text-subtle)] hover:text-[var(--text-main)]">
-          <i className="ri-arrow-left-s-line ri-xl"></i>
-        </button>
-        <h2 className="font-semibold text-lg text-[var(--text-main)]">게시물 설정</h2>
-        <div className="w-8"></div>
-      </div>
-
-      {/* 모달 콘텐츠 */}
-      <div className="flex-grow overflow-y-auto p-5 space-y-5">
-        {/* 제목 입력 섹션 */}
-        <div className="bg-[var(--color-component-bg)] rounded-lg shadow-sm p-5 border border-[var(--color-border)]">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center">
-              <i className="ri-quill-pen-line ri-lg mr-3 text-[var(--text-subtle)] w-6 h-6 flex items-center justify-center"></i>
-              <span className="text-[var(--text-main)] text-sm font-medium">제목</span>
-            </div>
-            <span className="text-xs text-[var(--text-subtle)]">
-              {diaryTitle.length} / {MAX_TITLE_LENGTH}
-            </span>
-          </div>
-          <div className="mt-3">
-            <input 
-              type="text"
-              value={diaryTitle}
-              onChange={(e) => {
-                if (e.target.value.length <= MAX_TITLE_LENGTH) {
-                  onTitleChange(e.target.value);
-                }
-              }}
-              placeholder="제목 (선택 사항)"
-              className="w-full bg-[var(--color-subtle-bg)] text-base text-[var(--text-main)] placeholder:text-[var(--text-subtle)]/70 focus:outline-none p-3 rounded-lg border border-transparent focus:ring-2 focus:ring-[var(--color-primary)]/50 focus:border-[var(--color-primary-dark)] transition-all"
-            />
-          </div>
-        </div>
-
-        {/* 게시 공간 선택 */}
-        <SettingsSection iconClass="ri-send-plane-line" title="게시 공간">
-          <div className="relative">
-            <button
-              onClick={() => setIsPrivacyDropdownOpen(!isPrivacyDropdownOpen)}
-              className="flex items-center bg-[var(--color-subtle-bg)] px-3 py-1.5 rounded-full text-sm cursor-pointer hover:bg-[var(--color-border)]"
-            >
-              <i className={`${privacyOptionsMap[privacy].icon} ri-sm mr-1.5 text-[var(--text-subtle)]`}></i>
-              <span className="text-[var(--text-main)]">{privacyOptionsMap[privacy].text}</span>
-              <i className={`ri-arrow-down-s-line ml-1 text-[var(--text-subtle)] transition-transform ${isPrivacyDropdownOpen ? "rotate-180" : ""}`}></i>
-            </button>
-            {isPrivacyDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-44 bg-[var(--color-component-bg)] rounded-lg z-20 border border-[var(--color-border)] py-1 shadow-[0_4px_12px_rgba(0,0,0,0.05),_inset_0_0_0_1px_var(--color-inset-border)]">
-                <ul>
-                  {(Object.keys(privacyOptionsMap) as PrivacyOption[]).map((key) => (
-                      <li
-                        key={key}
-                        onClick={() => {
-                          setPrivacy(key);
-                          setIsPrivacyDropdownOpen(false);
-                        }}
-                        className="px-3 py-2 hover:bg-[var(--color-subtle-bg)] cursor-pointer flex items-center text-sm"
-                      >
-                        <i className={`${privacyOptionsMap[key].icon} ri-sm mr-2 text-[var(--text-subtle)]`}></i>
-                        <span className="text-[var(--text-main)]">{privacyOptionsMap[key].text}</span>
-                      </li>
-                    )
-                  )}
-                </ul>
-              </div>
-            )}
-          </div>
-        </SettingsSection>
-        {privacy === "exchange" && <ExchangeDiaryOptions />}
-
-        {/* 날짜 및 날씨 선택 */}
-        <SettingsSection iconClass="ri-calendar-line" title="날짜 및 날씨">
-          <div className="flex items-center space-x-2">
-            <button 
-              onClick={() => setIsWeatherModalOpen(true)}
-              className="flex items-center bg-[var(--color-subtle-bg)] px-3 py-1.5 rounded-full text-sm cursor-pointer hover:bg-[var(--color-border)] active:bg-[var(--color-border-dark)] transition-colors"
-            >
-                <i className={`${selectedWeather.icon} ri-sm mr-1.5 text-[var(--text-subtle)]`}></i>
-                <span className="text-[var(--text-main)]">{selectedWeather.label}</span>
-            </button>
-            <button 
-              onClick={() => setIsDatePickerOpen(true)} 
-              className="flex items-center bg-[var(--color-subtle-bg)] px-3 py-1.5 rounded-full text-sm cursor-pointer hover:bg-[var(--color-border)] active:bg-[var(--color-border-dark)] transition-colors"
-            >
-                <span className="text-[var(--text-main)]">{formatDateDisplay(diaryDate)}</span>
-            </button>
-          </div>
-        </SettingsSection>
-        
-        <WeatherSelectionModal isOpen={isWeatherModalOpen} onClose={() => setIsWeatherModalOpen(false)} onWeatherSelect={setSelectedWeather} />
-        <DatePickerModal
-          isOpen={isDatePickerOpen}
-          onClose={() => setIsDatePickerOpen(false)}
-          currentSelectedDate={diaryDate}
-          onDateSelect={setDiaryDate}
-        />
-
-        {/* 위치 정보 */}
-        <SettingsSection iconClass="ri-map-pin-line" title="위치 정보">
-          <ToggleSwitch
-            id="location-toggle-modal"
-            checked={useLocation}
-            onChange={setUseLocation}
-            ariaLabel="위치 정보 사용 여부"
-          />
-        </SettingsSection>
-        {useLocation && <LocationDisplay currentLocation={currentLocation} />}
-      </div>
-
-      {/* 모달 하단 발행하기 버튼 */}
-      <div className="flex-shrink-0 p-4 border-t border-[var(--color-border)]">
-        <button
-          onClick={onPublish}
-          className="w-full bg-[var(--color-primary)] text-[var(--text-on-primary)] py-3 rounded-lg font-semibold hover:opacity-90 active:bg-[var(--color-primary-darker)] active:border-[var(--color-primary-darker)] transition-all border border-[var(--color-primary-dark)]"
-        >
-          발행하기
-        </button>
-      </div>
-    </motion.div>
-  );
-};
-
-// --- 메인 클라이언트 컴포넌트 ---
 export default function WriteClientPage() {
-  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
-
+  // --- States ---
   const [activeTab, setActiveTab] = useState<DiaryType>("text");
+  
+  // Meta Data
+  const [diaryDate, setDiaryDate] = useState(new Date());
+  const [selectedWeather, setSelectedWeather] = useState<WeatherOption>(weatherOptions[0]);
+  const [privacy, setPrivacy] = useState<PrivacyOption>("public");
   const [diaryTitle, setDiaryTitle] = useState('');
-  const [diaryContent, setDiaryContent] = useState("");
+  const [useLocation, setUseLocation] = useState(false);
+  const [currentLocation, setCurrentLocation] = useState<string | null>(null);
 
+  // Content Data
+  const [diaryContent, setDiaryContent] = useState("");
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
-
-  const [privacy, setPrivacy] = useState<PrivacyOption>("private");
-  const [diaryDate, setDiaryDate] = useState(new Date());
-  const [useLocation, setUseLocation] = useState(false);
-  const [currentLocation, setCurrentLocation] = useState<string | null>(null);
-  const [selectedWeather, setSelectedWeather] = useState<WeatherOption>(weatherOptions[0]);
   const [selectedEmotions, setSelectedEmotions] = useState<Emotion[]>([]);
 
+  // Modals
+  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
+  const [isWeatherModalOpen, setIsWeatherModalOpen] = useState(false);
+  const [isSettingsSheetOpen, setIsSettingsSheetOpen] = useState(false);
+
+  useEffect(() => {
+    // 탭을 옮기면 기존에 선택/녹음했던 파일들은 날려줍니다.
+    setPhotoFile(null);
+    setVideoFile(null);
+    setAudioBlob(null);
+  }, [activeTab]);
+  
+  // --- Helpers ---
+  const formatDateDisplay = (date: Date) => `${date.getFullYear()}. ${date.getMonth() + 1}. ${date.getDate()}`;
+  
+  // [수정] 배경색 계산 로직 개선
+  const getGradientStyles = () => {
+    if (!selectedEmotions || selectedEmotions.length === 0) {
+      // [핵심 Fix] 'transparent' 대신 '#ffffff'(흰색)을 사용하여
+      // 0개 -> 1개 선택 시 색상이 부드럽게 섞이도록 수정 (번쩍임 방지)
+      return { borderBackground: 'var(--color-border)', textureBackground: '#ffffff' };
+    }
+    const borderColors = selectedEmotions.map(e => `var(--emotion-${e.key}-border, var(--color-border))`);
+    const borderGradient = borderColors.length > 1 ? `linear-gradient(135deg, ${borderColors.join(', ')})` : borderColors[0];
+    const textureColors = selectedEmotions.map(e => `var(--emotion-${e.key})`);
+    const textureGradient = textureColors.length > 1 ? `linear-gradient(135deg, ${textureColors.join(', ')})` : textureColors[0];
+    return { borderBackground: borderGradient, textureBackground: textureGradient };
+  };
+  
+  const styles = getGradientStyles();
+
+  const handleNextStep = () => setIsSettingsSheetOpen(true);
+  
   const handlePublish = () => {
-    console.log("--- 최종 발행 데이터 ---", {
-      type: activeTab,
-      content: diaryContent,
-      photoFile,
-      videoFile,
-      audioBlob,
-      privacy,
-      diaryDate,
-      useLocation,
-      currentLocation,
-      selectedWeather: selectedWeather.name,
-      selectedEmotions: selectedEmotions.map(e => e.label),
-    });
-    alert("일기가 발행되었습니다! (콘솔 로그 확인)");
-    setIsSettingsModalOpen(false);
+    setIsSettingsSheetOpen(false);
+    console.log("최종 발행 데이터:", { diaryTitle, privacy, useLocation, diaryContent });
+    alert("소중한 하루가 기록되었습니다.");
+    
+    // vercel 빌드를 위한 임시 선언 사용
+    setCurrentLocation(null);
+    console.log(photoFile?.size);
+    console.log(videoFile?.size);
+    console.log(audioBlob?.size);
   };
 
-  const isNextEnabled = (): boolean => {
-    switch (activeTab) {
+  const isContentReady = () => {
+      switch (activeTab) {
       case "text":
-        return diaryContent.trim() !== "";
+        return diaryContent.trim().length > 0;
       case "photo":
-        return photoFile !== null || diaryContent.trim() !== "";
+        return photoFile !== null;
       case "video":
-        return videoFile !== null || diaryContent.trim() !== "";
+        return videoFile !== null;
       case "voice":
-        return audioBlob !== null || diaryContent.trim() !== "";
+        return audioBlob !== null;
       default:
         return false;
     }
   };
 
-  useEffect(() => {
-    if (useLocation && !currentLocation) {
-      setTimeout(
-        () => setCurrentLocation("서울특별시 강남구 테헤란로 (예시)"),
-        500
-      );
-    } else if (!useLocation) {
-      setCurrentLocation(null);
-    }
-  }, [useLocation, currentLocation]);
-
   return (
-    <div className="flex flex-col h-full">
-      {/* 상태에 의존하는 헤더이므로 여기서 렌더링 */}
-      <WriteNavigationBar
-        onPublish={() => setIsSettingsModalOpen(true)}
-        isPublishDisabled={!isNextEnabled()}
+    <div className="flex flex-col h-full relative overflow-hidden bg-[var(--color-background)]">
+      <div className="noise-background fixed inset-0 z-0 pointer-events-none opacity-60" />
+
+      <WriteNavigationBar 
+        actionText={isSettingsSheetOpen ? "간직하기" : "마무리하기"}
+        onAction={isSettingsSheetOpen ? handlePublish : handleNextStep}
+        isActionDisabled={!isContentReady()}
+        onBack={isSettingsSheetOpen ? () => setIsSettingsSheetOpen(false) : undefined}
       />
 
-      <main className="flex-1 overflow-y-auto px-5 pb-10">
-        <DiaryTypeTabs activeTab={activeTab} onTabChange={setActiveTab} />
+      <main className="flex-1 overflow-y-auto px-4 py-6 relative z-10 scrollbar-hide">
+        {/* === Diary Card (Write Mode) === */}
+        {/* [수정] div -> motion.div 교체 & animate 속성 사용 */}
+        <motion.div 
+            className="relative w-full rounded-hand-drawn shadow-sm overflow-hidden min-h-[350px] flex flex-col mb-6"
+            // [핵심 Fix] style 대신 animate를 사용하여 Framer Motion이 색상 보간을 처리하게 함
+            animate={{ background: styles.borderBackground, padding: '2px' }}
+            transition={{ duration: 0.5 }}
+        >
+           <div className="relative w-full h-full bg-white rounded-hand-drawn overflow-hidden flex flex-col flex-1 clip-radius-fix">
+               {/* [수정] div -> motion.div 교체 & animate 속성 사용 */}
+               <motion.div 
+                  className="rubbed-pastel-layer absolute inset-0 z-0 opacity-70" 
+                  // [핵심 Fix] 여기서도 animate 사용. 
+                  // 0개일 때 '#ffffff' -> 1개일 때 'color'로 부드럽게 변함
+                  animate={{ background: styles.textureBackground }}
+                  transition={{ duration: 0.5 }}
+               />
+               
+               <div className="relative z-20 flex flex-col flex-1">
+                   {/* Card Header */}
+                   <div className="px-6 pt-6 pb-2 border-b border-[var(--color-border)]/30 border-dashed flex items-start justify-between">
+                        <div className="flex items-center gap-3 mt-1">
+                            <button onClick={() => setIsDatePickerOpen(true)} className="font-maru-buri text-[15px] font-bold text-[var(--text-main)] hover:text-[var(--color-primary-dark)] transition-colors flex items-center gap-1 active:scale-95">
+                                {formatDateDisplay(diaryDate)}
+                            </button>
+                            <span className="text-[var(--color-border)]/80">|</span>
+                            <button onClick={() => setIsWeatherModalOpen(true)} className="text-[var(--text-subtle)] hover:text-[var(--text-main)] transition-colors flex items-center gap-1 active:scale-95">
+                                <i className={`${selectedWeather.icon}`}></i>
+                            </button>
+                        </div>
+                        <div className="w-10 h-10 -mt-1 -mr-2">
+                             <AnimatePresence>
+                                {selectedEmotions.length > 0 && (
+                                    <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>
+                                        <MixedEmotionIcon colors={selectedEmotions.map(e => `var(--emotion-${e.key})`)} />
+                                    </motion.div>
+                                )}
+                             </AnimatePresence>
+                        </div>
+                   </div>
 
-        <div className="mb-6 min-h-[451px]">
-          {activeTab === "text" && (
-            <TextEditorTab
-              content={diaryContent}
-              onContentChange={setDiaryContent}
-            />
-          )}
-          {activeTab === "photo" && (
-            <PhotoUploadTab
-              content={diaryContent}
-              onContentChange={setDiaryContent}
-              onPhotoChange={setPhotoFile}
-            />
-          )}
-          {activeTab === "video" && (
-            <VideoUploadTab
-              content={diaryContent}
-              onContentChange={setDiaryContent}
-              onVideoChange={setVideoFile}
-            />
-          )}
-          {activeTab === "voice" && (
-            <VoiceRecordTab
-              content={diaryContent}
-              onContentChange={setDiaryContent}
-              onAudioRecordingChange={setAudioBlob}
-            />
-          )}
+                   {/* Card Body */}
+                   <div className="px-5 py-4 flex-1 flex flex-col">
+                        <div className="mb-2"><DiaryTypeTabs activeTab={activeTab} onTabChange={setActiveTab} /></div>
+                        <div className="flex-1 min-h-[12rem]">
+                            {activeTab === "text" && <TextEditorTab content={diaryContent} onContentChange={setDiaryContent} />}
+                            {activeTab === "photo" && <PhotoUploadTab content={diaryContent} onContentChange={setDiaryContent} onPhotoChange={setPhotoFile} />}
+                            {activeTab === "video" && <VideoUploadTab content={diaryContent} onContentChange={setDiaryContent} onVideoChange={setVideoFile} />}
+                            {activeTab === "voice" && <VoiceRecordTab content={diaryContent} onContentChange={setDiaryContent} onAudioRecordingChange={setAudioBlob} />}
+                        </div>
+                   </div>
+               </div>
+           </div>
+        </motion.div>
+        
+        {/* Emotion Palette */}
+        <div className="mb-10 px-2">
+          <EmotionSelector selectedEmotions={selectedEmotions} onEmotionChange={setSelectedEmotions} />
         </div>
-
-        <EmotionSelector selectedEmotions={selectedEmotions} onEmotionChange={setSelectedEmotions} />
       </main>
 
-      <AnimatePresence>
-        {isSettingsModalOpen && (
-          <PublishSettingsModal
-            onClose={() => setIsSettingsModalOpen(false)}
-            onPublish={() => handlePublish()}
-            diaryTitle={diaryTitle}
-            onTitleChange={setDiaryTitle}
-            privacy={privacy}
-            setPrivacy={setPrivacy}
-            diaryDate={diaryDate}
-            setDiaryDate={setDiaryDate}
-            useLocation={useLocation}
-            setUseLocation={setUseLocation}
-            currentLocation={currentLocation}
-            selectedWeather={selectedWeather}
-            setSelectedWeather={setSelectedWeather}
-          />
-        )}
-      </AnimatePresence>
+      {/* === [Separated Component] Publish Settings Sheet === */}
+      <PublishSettingsSheet
+        isOpen={isSettingsSheetOpen}
+        onClose={() => setIsSettingsSheetOpen(false)} // Dim 클릭 시 닫힘
+        // State Passing
+        diaryTitle={diaryTitle}
+        setDiaryTitle={setDiaryTitle}
+        privacy={privacy}
+        setPrivacy={setPrivacy}
+        useLocation={useLocation}
+        setUseLocation={setUseLocation}
+        currentLocation={currentLocation}
+        diaryDate={diaryDate}
+        selectedWeather={selectedWeather}
+        onDateClick={() => setIsDatePickerOpen(true)}
+        onWeatherClick={() => setIsWeatherModalOpen(true)}
+      />
+      
+      {/* Pickers */}
+      <WeatherSelectionModal isOpen={isWeatherModalOpen} onClose={() => setIsWeatherModalOpen(false)} onWeatherSelect={setSelectedWeather} />
+      <DatePickerModal isOpen={isDatePickerOpen} onClose={() => setIsDatePickerOpen(false)} currentSelectedDate={diaryDate} onDateSelect={setDiaryDate} />
+
     </div>
   );
 }
