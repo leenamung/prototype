@@ -14,6 +14,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ entry, optionHandle, repliySlideH
   const [isLiked, setIsLiked] = useState(entry.isInitiallyLiked || false);
   const [currentLikes, setCurrentLikes] = useState(entry.likes);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const contentRef = useRef<HTMLParagraphElement>(null);
   const [showReadMore, setShowReadMore] = useState(false);
@@ -37,6 +38,7 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ entry, optionHandle, repliySlideH
     setCurrentLikes(isLiked ? currentLikes - 1 : currentLikes + 1);
   };
   const toggleReadMore = () => setIsExpanded((prev) => !prev);
+  const toggleVideoPlay = () => setIsVideoPlaying(!isVideoPlaying);
   const toggleAudioPlay = () => setIsAudioPlaying(!isAudioPlaying);
 
   const getGradientStyles = () => {
@@ -160,13 +162,13 @@ const DiaryCard: React.FC<DiaryCardProps> = ({ entry, optionHandle, repliySlideH
                                     sizes="(max-width: 600px) 100vw, 600px"
                                 />
                                 <div className="absolute inset-0 flex items-center justify-center bg-black/20">
-                                    <Link 
-                                        href={`/diary/${entry.id}`} 
-                                        scroll={false} 
+                                    <button 
+                                        onClick={toggleVideoPlay}
                                         className="w-12 h-12 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full cursor-pointer active:scale-95 transition-transform shadow-lg"
+                                        aria-label={isVideoPlaying ? "비디오 일시정지" : "비디오 재생"}
                                     >
-                                        <i className="ri-play-fill ri-xl text-[var(--text-main)] ml-1"></i>
-                                    </Link>
+                                        <i className={`${isVideoPlaying ? "ri-pause-fill" : "ri-play-fill"} ri-xl text-[var(--text-main)] ml-`}></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>

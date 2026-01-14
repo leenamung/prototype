@@ -113,6 +113,7 @@ export default function WriteClientPage() {
         <motion.div 
             className="relative w-full rounded-hand-drawn shadow-sm overflow-hidden min-h-[350px] flex flex-col mb-6"
             // [핵심 Fix] style 대신 animate를 사용하여 Framer Motion이 색상 보간을 처리하게 함
+            initial={{ background: styles.borderBackground, padding: '2px' }}
             animate={{ background: styles.borderBackground, padding: '2px' }}
             transition={{ duration: 0.5 }}
         >
@@ -122,6 +123,7 @@ export default function WriteClientPage() {
                   className="rubbed-pastel-layer absolute inset-0 z-0 opacity-70" 
                   // [핵심 Fix] 여기서도 animate 사용. 
                   // 0개일 때 '#ffffff' -> 1개일 때 'color'로 부드럽게 변함
+                  initial={{ background: styles.textureBackground }}
                   animate={{ background: styles.textureBackground }}
                   transition={{ duration: 0.5 }}
                />
