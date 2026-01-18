@@ -1,16 +1,20 @@
+"use client";
 import React from 'react';
 
 const SkeletonAgitMainNavigationBar = () => {
   return (
-    <nav className="fixed top-0 w-full bg-white border-b border-gray-200 shadow-sm z-20 animate-pulse">
-      <div className="flex items-center justify-between px-4 py-3 h-14">
-        {/* 타이틀 스켈레톤 */}
-        <div className="h-6 w-16 bg-gray-200 rounded"></div>
-        {/* 오른쪽 아이콘 그룹 스켈레톤 */}
-        <div className="flex items-center space-x-4">
-          <div className="w-8 h-8 rounded-full bg-gray-200"></div>
-          <div className="w-8 h-8 rounded-full bg-gray-200"></div>
-        </div>
+    <nav className="fixed top-0 z-40 w-full bg-[var(--color-component-bg)]/95 border-b border-[var(--color-border)] h-14">
+      <div className="flex items-center justify-between px-4 h-full">
+        
+        {/* [Left Spacer] 실제 UI와 동일하게 좌측 여백 확보 */}
+        <div className="w-8"></div>
+
+        {/* [Center Title] 중앙 타이틀 스켈레톤 */}
+        <div className="w-24 h-6 bg-[var(--color-subtle-bg)] rounded-md animate-pulse"></div>
+
+        {/* [Right Action] 우측 아이콘(검색 등) 스켈레톤 */}
+        <div className="w-8 h-8"></div>
+      
       </div>
     </nav>
   );

@@ -27,6 +27,10 @@ export interface UserAgitSummary {
   name: string;
   memberCount: number;
   coverImage: string;
+  type: 'diary' | 'club';     // 📔 교환일기 vs 🎫 동호회/모임
+  statusMessage?: string;     // 행동 유도 메시지 (예: "내 차례에요!", "새 글 3개")
+  isUrgent?: boolean;         // 상단 노출 여부 (내 차례일 때 true)
+  isGhost?: boolean; // 👻 [NEW] 초대받은 상태 (수락 대기 중) 여부
 }
 
 // 2. 관계 상태 타입을 추가합니다. (예시)
@@ -120,11 +124,53 @@ export const sampleMyProfileData: UserProfileData = {
     },
   ],
   agits: [
-    { id: "a1", name: "책벌레들의 모임", memberCount: 28, coverImage: "https://readdy.ai/api/search-image?query=icon%2C%203D%20cartoon%2C%20book%20club%2C%20the%20icon%20should%20take%20up%2070%25%20of%20the%20frame%2C%20vibrant%20colors%20with%20soft%20gradients%2C%20minimalist%20design%2C%20smooth%20rounded%20shapes%2C%20subtle%20shading%2C%20no%20outlines%2C%20centered%20composition%2C%20isolated%20on%20white%20background%2C%20playful%20and%20friendly%20aesthetic&width=100&height=100&seq=agit1&orientation=squarish" },
-    { id: "a2", name: "일상 사진 공유방", memberCount: 45, coverImage: "https://readdy.ai/api/search-image?query=icon%2C%203D%20cartoon%2C%20camera%2C%20photography%2C%20the%20icon%20should%20take%20up%2070%25%20of%20the%20frame%2C%20vibrant%20colors%20with%20soft%20gradients%2C%20minimalist%20design%2C%20smooth%20rounded%20shapes%2C%20subtle%20shading%2C%20no%20outlines%2C%20centered%20composition%2C%20isolated%20on%20white%20background%2C%20playful%20and%20friendly%20aesthetic&width=100&height=100&seq=agit2&orientation=squarish" },
-    { id: "a3", name: "서울 카페 탐방", memberCount: 63, coverImage: "https://readdy.ai/api/search-image?query=icon%2C%203D%20cartoon%2C%20coffee%20cup%2C%20the%20icon%20should%20take%20up%2070%25%20of%20the%20frame%2C%20vibrant%20colors%20with%20soft%20gradients%2C%20minimalist%20design%2C%20smooth%20rounded%20shapes%2C%20subtle%20shading%2C%20no%20outlines%2C%20centered%20composition%2C%20isolated%20on%20white%20background%2C%20playful%20and%20friendly%20aesthetic&width=100&height=100&seq=agit3&orientation=squarish" },
-    { id: "a4", name: "주말 등산 모임", memberCount: 32, coverImage: "https://readdy.ai/api/search-image?query=icon%2C%203D%20cartoon%2C%20hiking%20boots%2C%20mountain%2C%20the%20icon%20should%20take%20up%2070%25%20of%20the%20frame%2C%20vibrant%20colors%20with%20soft%20gradients%2C%20minimalist%20design%2C%20smooth%20rounded%20shapes%2C%20subtle%20shading%2C%20no%20outlines%2C%20centered%20composition%2C%20isolated%20on%20white%20background%2C%20playful%20and%20friendly%20aesthetic&width=100&height=100&seq=agit4&orientation=squarish" },
-    { id: "a5", name: "영화 감상 일기", memberCount: 51, coverImage: "https://readdy.ai/api/search-image?query=icon%2C%203D%20cartoon%2C%20movie%20film%20reel%2C%20the%20icon%20should%20take%20up%2070%25%20of%20the%20frame%2C%20vibrant%20colors%20with%20soft%20gradients%2C%20minimalist%20design%2C%20smooth%20rounded%20shapes%2C%20subtle%20shading%2C%20no%20outlines%2C%20centered%20composition%2C%20isolated%20on%20white%20background%2C%20playful%20and%20friendly%20aesthetic&width=100&height=100&seq=agit5&orientation=squarish" },
+    { 
+      id: "ghost1", name: "민준님의 교환일기 초대", memberCount: 2, 
+      coverImage: "https://readdy.ai/api/search-image?query=envelope%20invitation%20icon%20minimal&width=100&height=100", 
+      type: 'diary', 
+      statusMessage: "민준님이 초대를 보냈어요 💌", 
+      isGhost: true 
+    },
+    { id: "a1", 
+      name: "우리들의 교환일기", 
+      memberCount: 4, 
+      coverImage: "https://readdy.ai/api/search-image?query=icon%2C%203D%20cartoon%2C%20book%20club%2C%20the%20icon%20should%20take%20up%2070%25%20of%20the%20frame%2C%20vibrant%20colors%20with%20soft%20gradients%2C%20minimalist%20design%2C%20smooth%20rounded%20shapes%2C%20subtle%20shading%2C%20no%20outlines%2C%20centered%20composition%2C%20isolated%20on%20white%20background%2C%20playful%20and%20friendly%20aesthetic&width=100&height=100&seq=agit1&orientation=squarish",
+      type: 'diary', 
+      statusMessage: "내 차례에요! 답장을 기다려요 ✍️", 
+      isUrgent: true
+    },
+    { id: "a2", 
+      name: "일상 사진 공유방", 
+      memberCount: 45, 
+      coverImage: "https://readdy.ai/api/search-image?query=icon%2C%203D%20cartoon%2C%20camera%2C%20photography%2C%20the%20icon%20should%20take%20up%2070%25%20of%20the%20frame%2C%20vibrant%20colors%20with%20soft%20gradients%2C%20minimalist%20design%2C%20smooth%20rounded%20shapes%2C%20subtle%20shading%2C%20no%20outlines%2C%20centered%20composition%2C%20isolated%20on%20white%20background%2C%20playful%20and%20friendly%20aesthetic&width=100&height=100&seq=agit2&orientation=squarish", 
+      type: 'club', 
+      statusMessage: "새로운 독서 토론 글이 올라왔어요 🔥",
+      isUrgent: false
+    },
+    { id: "a3", 
+      name: "서울 카페 탐방", 
+      memberCount: 63, 
+      coverImage: "https://readdy.ai/api/search-image?query=icon%2C%203D%20cartoon%2C%20coffee%20cup%2C%20the%20icon%20should%20take%20up%2070%25%20of%20the%20frame%2C%20vibrant%20colors%20with%20soft%20gradients%2C%20minimalist%20design%2C%20smooth%20rounded%20shapes%2C%20subtle%20shading%2C%20no%20outlines%2C%20centered%20composition%2C%20isolated%20on%20white%20background%2C%20playful%20and%20friendly%20aesthetic&width=100&height=100&seq=agit3&orientation=squarish", 
+      type: 'diary', 
+      statusMessage: "민준님이 작성 중입니다...", 
+      isUrgent: false
+    },
+    { id: "a4", 
+      name: "주말 등산 모임", 
+      memberCount: 32, 
+      coverImage: "https://readdy.ai/api/search-image?query=icon%2C%203D%20cartoon%2C%20hiking%20boots%2C%20mountain%2C%20the%20icon%20should%20take%20up%2070%25%20of%20the%20frame%2C%20vibrant%20colors%20with%20soft%20gradients%2C%20minimalist%20design%2C%20smooth%20rounded%20shapes%2C%20subtle%20shading%2C%20no%20outlines%2C%20centered%20composition%2C%20isolated%20on%20white%20background%2C%20playful%20and%20friendly%20aesthetic&width=100&height=100&seq=agit4&orientation=squarish", 
+      type: 'club', 
+      // statusMessage가 없으면 일반 상태
+      isUrgent: false
+    },
+    { id: "a5", 
+      name: "영화 감상 일기", 
+      memberCount: 51, 
+      coverImage: "https://readdy.ai/api/search-image?query=icon%2C%203D%20cartoon%2C%20movie%20film%20reel%2C%20the%20icon%20should%20take%20up%2070%25%20of%20the%20frame%2C%20vibrant%20colors%20with%20soft%20gradients%2C%20minimalist%20design%2C%20smooth%20rounded%20shapes%2C%20subtle%20shading%2C%20no%20outlines%2C%20centered%20composition%2C%20isolated%20on%20white%20background%2C%20playful%20and%20friendly%20aesthetic&width=100&height=100&seq=agit5&orientation=squarish", 
+      type: 'club', 
+      statusMessage: "이번 주 산행 공지 📢",
+      isUrgent: false
+    },
   ],
 };
 
@@ -162,8 +208,18 @@ export const sampleFriendProfileData: UserProfileData = {
     },
   ],
   agits: [
-    { id: "a3", name: "서울 카페 탐방", memberCount: 63, coverImage: "https://readdy.ai/api/search-image?query=icon%2C%203D%20cartoon%2C%20coffee%20cup%2C%20the%20icon%20should%20take%20up%2070%25%20of%20the%20frame%2C%20vibrant%20colors%20with%20soft%20gradients%2C%20minimalist%20design%2C%20smooth%20rounded%20shapes%2C%20subtle%20shading%2C%20no%20outlines%2C%20centered%20composition%2C%20isolated%20on%20white%20background%2C%20playful%20and%20friendly%20aesthetic&width=100&height=100&seq=agit3&orientation=squarish" },
-    { id: "a6", name: "함께 성장하는 코딩 스터디", memberCount: 78, coverImage: "https://readdy.ai/api/search-image?query=icon%2C%203D%20cartoon%2C%20laptop%2C%20coding%2C%20the%20icon%20should%20take%20up%2070%25%20of%20the%20frame%2C%20vibrant%20colors%20with%20soft%20gradients%2C%20minimalist%20design%2C%20smooth%20rounded%20shapes%2C%20subtle%20shading%2C%20no%20outlines%2C%20centered%20composition%2C%20isolated%20on%20white%20background%2C%20playful%20and%20friendly%20aesthetic&width=100&height=100&seq=agit6&orientation=squarish"},
+    { id: "a3", 
+      name: "서울 카페 탐방", 
+      memberCount: 63, 
+      coverImage: "https://readdy.ai/api/search-image?query=icon%2C%203D%20cartoon%2C%20coffee%20cup%2C%20the%20icon%20should%20take%20up%2070%25%20of%20the%20frame%2C%20vibrant%20colors%20with%20soft%20gradients%2C%20minimalist%20design%2C%20smooth%20rounded%20shapes%2C%20subtle%20shading%2C%20no%20outlines%2C%20centered%20composition%2C%20isolated%20on%20white%20background%2C%20playful%20and%20friendly%20aesthetic&width=100&height=100&seq=agit3&orientation=squarish", 
+      type: "club"
+    },
+    { id: "a6", 
+      name: "함께 성장하는 코딩 스터디", 
+      memberCount: 78, 
+      coverImage: "https://readdy.ai/api/search-image?query=icon%2C%203D%20cartoon%2C%20laptop%2C%20coding%2C%20the%20icon%20should%20take%20up%2070%25%20of%20the%20frame%2C%20vibrant%20colors%20with%20soft%20gradients%2C%20minimalist%20design%2C%20smooth%20rounded%20shapes%2C%20subtle%20shading%2C%20no%20outlines%2C%20centered%20composition%2C%20isolated%20on%20white%20background%2C%20playful%20and%20friendly%20aesthetic&width=100&height=100&seq=agit6&orientation=squarish",
+      type: "club"
+    },
   ],
   mutualFriendIds: ['f3'], // 가정: 김하늘과 박민준은 'f3(이민준)'을 공통 친구로 둠
   mutualAgitIds: ['a3'], // 가정: 김하늘과 박민준은 'a3(서울 카페 탐방)' 아지트에 함께 소속됨
@@ -198,7 +254,12 @@ export const sampleNonFriendProfileData: UserProfileData = {
     },
   ],
   agits: [
-    { id: "a7", name: "주말 맛집 탐험대", memberCount: 102, coverImage: "https://readdy.ai/api/search-image?query=icon%2C%203D%20cartoon%2C%20dining%2C%20food%2C%20the%20icon%20should%20take%20up%2070%25%20of%20the%20frame%2C%20vibrant%20colors%20with%20soft%20gradients%2C%20minimalist%20design%2C%20smooth%20rounded%20shapes%2C%20subtle%20shading%2C%20no%20outlines%2C%20centered%20composition%2C%20isolated%20on%20white%20background%2C%20playful%20and%20friendly%20aesthetic&width=100&height=100&seq=agit7&orientation=squarish"},
+    { id: "a7", 
+      name: "주말 맛집 탐험대", 
+      memberCount: 102, 
+      coverImage: "https://readdy.ai/api/search-image?query=icon%2C%203D%20cartoon%2C%20dining%2C%20food%2C%20the%20icon%20should%20take%20up%2070%25%20of%20the%20frame%2C%20vibrant%20colors%20with%20soft%20gradients%2C%20minimalist%20design%2C%20smooth%20rounded%20shapes%2C%20subtle%20shading%2C%20no%20outlines%2C%20centered%20composition%2C%20isolated%20on%20white%20background%2C%20playful%20and%20friendly%20aesthetic&width=100&height=100&seq=agit7&orientation=squarish",
+      type: "club"
+    },
   ],
   mutualFriendIds: [], // 공통 친구 없음
   mutualAgitIds: [], // 공통 아지트 없음

@@ -1,16 +1,23 @@
+"use client";
 import React from 'react';
 
 const SkeletonAgitListTabs = () => {
   return (
-    <div className="bg-white sticky top-14 z-10 border-b border-gray-200 animate-pulse">
-      <div className="flex px-4 h-12">
-        {/* 2개의 탭을 뼈대 UI로 표현합니다. */}
-        <div className="py-3 px-2 mr-6 flex items-center">
-          <div className="h-4 w-20 bg-gray-200 rounded"></div>
+    <div className="sticky top-14 z-30 w-full bg-[var(--color-background)] border-b border-[var(--color-border)]">
+      <div className="flex w-full">
+        
+        {/* Tab 1: 나의 아지트 */}
+        <div className="flex-1 flex flex-col items-center justify-center h-[48px] px-1 relative">
+          <div className="w-20 h-4 bg-[var(--color-subtle-bg)] rounded-sm animate-pulse mb-1"></div>
+          {/* Active Indicator Placeholder */}
+          <div className="absolute bottom-0 w-full h-[2px] bg-[var(--color-subtle-bg)]/50 animate-pulse"></div>
         </div>
-        <div className="py-3 px-2 mr-6 flex items-center">
-          <div className="h-4 w-12 bg-gray-200 rounded"></div>
+
+        {/* Tab 2: 아지트 탐색 */}
+        <div className="flex-1 flex flex-col items-center justify-center h-[48px] px-1 relative">
+           <div className="w-20 h-4 bg-[var(--color-subtle-bg)]/60 rounded-sm animate-pulse mb-1"></div>
         </div>
+
       </div>
     </div>
   );

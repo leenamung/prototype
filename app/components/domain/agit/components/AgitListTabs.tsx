@@ -10,26 +10,34 @@ interface AgitListTabsProps {
 
 const AgitListTabs: React.FC<AgitListTabsProps> = ({ activeTab, onTabChange }) => {
   const tabs: { key: AgitListTabKey; label: string }[] = [
-    { key: 'myAgits', label: '소속 아지트' },
-    { key: 'explore', label: '탐색' },
+    { key: 'myAgits', label: '나의 아지트' },
+    { key: 'explore', label: '아지트 탐색' },
   ];
 
   return (
-    <div className="bg-[var(--color-component-bg)] sticky z-10 border-b border-[var(--color-border)]">
-      <div className="flex px-4">
-        {tabs.map((tab) => (
-          <button
-            key={tab.key}
-            onClick={() => onTabChange(tab.key)}
-            className={`py-3 px-2 mr-6 text-sm font-medium transition-colors duration-150 active:opacity-75
-                        ${activeTab === tab.key 
-                            ? 'text-[var(--text-main)] border-b-2 border-[var(--color-primary)]'
-                            : 'text-[var(--text-subtle)] border-b-2 border-transparent hover:text-[var(--text-main)] hover:border-[var(--color-border)]'
-                        }`}
-          >
-            {tab.label}
-          </button>
-        ))}
+    <div className="sticky top-0 z-30 py-3 pl-4 bg-[var(--color-background)]/95 backdrop-blur-sm">
+      <div className="flex space-x-2">
+        {tabs.map((tab) => {
+          const isActive = activeTab === tab.key;
+          return (
+            <button
+              key={tab.key}
+              onClick={() => onTabChange(tab.key)}
+              // [수정] hover 효과 전면 제거 (모바일 우선)
+              // active:scale-95로 터치 시 눌리는 피드백만 제공
+              className={`
+                px-4 py-2 rounded-full text-sm font-bold font-gowun-dodum transition-all duration-200 border
+                active:scale-95
+                ${isActive 
+                  ? 'bg-[var(--color-primary)] text-white border-[var(--color-primary)] shadow-sm' 
+                  : 'bg-white text-[var(--text-subtle)] border-[var(--color-border)]'
+                }
+              `}
+            >
+              {tab.label}
+            </button>
+          );
+        })}
       </div>
     </div>
   );

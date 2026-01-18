@@ -45,6 +45,20 @@
 
   /* 기타 설정 */
   --rounded-button: 8px;
+
+  /* 아지트 색상 */
+  /* 교환일기 */
+  --agit-diary-primary: var(--agit-diary-primary);
+  --agit-diary-spine: var(--agit-diary-spine);
+  --agit-diary-bg: var(--agit-diary-bg);
+  --agit-diary-tag-bg: var(--agit-diary-tag-bg);
+  --agit-diary-tag-text: var(--agit-diary-tag-text);
+  /* 모임 */
+  --agit-club-primary: var(--agit-club-primary);
+  --agit-club-border: var(--agit-club-border);
+  --agit-club-bg: var(--agit-club-bg);
+  --agit-club-tag-bg: var(--agit-club-tag-bg);
+  --agit-club-tag-text: var(--agit-club-tag-text);
 }
 
 /* 2. 실제 CSS 변수 정의 (:root) */
@@ -107,6 +121,21 @@
 
   /* [NEW] 유일하게 추가: 줄 노트 패턴 (에디터 전용) */
   --pattern-ruled-line: linear-gradient(transparent 95%, #EAE3DA 96%);
+
+  /* [NEW] 아지트 아이덴티티 컬러 (파스텔 톤 매핑) */
+  /* 📔 교환일기: 따뜻한 기록의 감성 (Primary Apricot 계열) */
+  --agit-diary-primary: var(--color-primary);
+  --agit-diary-spine: var(--color-primary-darker);  /* 책등: 진한 살구색 */
+  --agit-diary-bg: #FFFAF0;                         /* 배경: 크림색 종이 */
+  --agit-diary-tag-bg: #FFF0E6;                     /* 태그 배경: 연한 살구 */
+  --agit-diary-tag-text: #B45A3C;                   /* 태그 글자: 가독성 있는 브라운-오렌지 */
+
+  /* 🎫 모임: 열린 소통의 감성 (Serene Periwinkle 계열) */
+  --agit-club-primary: var(--emotion-serene-border); /* #7986CB */
+  --agit-club-border: var(--emotion-serene-border); /* 테두리/점선: 차분한 파스텔 블루 */
+  --agit-club-bg: #F8FAFF;                          /* 배경: 아주 연한 쿨톤 화이트 */
+  --agit-club-tag-bg: #EEF2FF;                      /* 태그 배경: 연한 라벤더 */
+  --agit-club-tag-text: var(--emotion-serene-border); /* 태그 글자 */
 }
 
 /* --- 전역 스타일 --- */
