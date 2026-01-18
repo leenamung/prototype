@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useMemo } from 'react';
-import { useRouter } from 'next/navigation';
 import AgitListTabs, { AgitListTabKey } from '../components/AgitListTabs';
 import { UserAgitSummary } from '@/app/data/profileSampleData';
 import ProfileAgitListItem from '../../common/AgitListItem';
@@ -13,7 +12,6 @@ interface AgitClientPageProps {
 
 export default function AgitClientPage({ myAgits, exploreAgits }: AgitClientPageProps) {
   const [activeTab, setActiveTab] = useState<AgitListTabKey>('myAgits');
-  const router = useRouter();
 
   // [Smart Stream 로직] 리스트 정렬 및 필터링
   const { ghosts, activeList } = useMemo(() => {
