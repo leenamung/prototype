@@ -235,6 +235,24 @@ body {
   background-attachment: local; /* 스크롤 시 배경도 이동 */
 }
 
+/* 1. [Diary] 따뜻한 크림 종이 질감 */
+.bg-texture-cream {
+  background-color: var(--agit-diary-bg);
+  background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+  background-blend-mode: multiply;
+}
+
+/* 2. [Club] 시원한 캔버스 종이 질감 (NEW) */
+/* 흰색/파란색 네비게이션과 어울리는 은은한 텍스처 */
+.bg-texture-cool {
+  background-color: var(--agit-club-bg); /* 연한 파스텔 블루 */
+  /* 미세한 캔버스 질감 이미지 (예시) */
+  background-image: url('https://www.transparenttextures.com/patterns/snow.png'); 
+  /* snow 패턴은 아주 미세한 노이즈 느낌을 줍니다 */
+  background-blend-mode: multiply;
+  opacity: 1;
+}
+
 /* 캘린더 감정 점 스타일 */
 .calendar-day { aspect-ratio: 1/1; position: relative; }
 .calendar-day.has-diary::after { content: ''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 5px; height: 5px; border-radius: 50%;}

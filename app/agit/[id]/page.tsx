@@ -1,34 +1,29 @@
-import AgitDetailClient from '@/app/components/domain/agit/views/AgitDetailClientPage';
-import { sampleAgitData } from '@/app/data/agitSampleData';
-import AgitDetailNavigationBar from '@/app/components/domain/agit/layout/AgitDetailNavigationBar';
+"use client";
 
-async function getAgitData(id: string) {
-  console.log("요청된 아지트 ID:", id);
-  await new Promise(resolve => setTimeout(resolve, 2000));
-  return sampleAgitData;
-}
+import React from 'react';
+import { useSearchParams } from 'next/navigation';
+import AgitDetailLayout from '@/app/components/domain/agit/features/Detail/AgitDetailLayout';
+import DiaryHeader from '@/app/components/domain/agit/features/Detail/DiaryHeader';
+import ClubHeader from '@/app/components/domain/agit/features/Detail/ClubHeader';
+import AgitPostList from '@/app/components/domain/agit/features/Detail/AgitPostList';
 
-interface AgitDetailPageProps {
-  params: Promise<{ id: string }>;
-}
+export default function AgitDetailPage({ params }: { params:  {id: string} }) {
+  const searchParams = useSearchParams();
 
-export default async function AgitDetailPage({ params }: AgitDetailPageProps) {
-  const { id } = await params;
+  const { id } =  params;
   
-  const agitData = await getAgitData(id);
+
+  const type = (searchParams.get('type') as 'diary' | 'club') || 'diary'; 
+  const title = type === 'diary' ? '우리의 비밀 일기장' : '강남 독서 모임';
 
   return (
-    <div className="flex flex-col h-full">
-       {/* 헤더 (flex-none) */}
-      <AgitDetailNavigationBar 
-        agitName={agitData.name} 
-      />
+    // [수정] agitId={params.id} 전달
+    <AgitDetailLayout title={title} type={type} agitId={id}>
+      
+      {type === 'diary' ? <DiaryHeader /> : <ClubHeader />}
+      
+      <AgitPostList type={type} />
 
-      {/* 콘텐츠 (flex-1 overflow-y-auto) */}
-      {/* pt-14 제거 */}
-      <div className="flex-1 overflow-y-auto">
-        <AgitDetailClient agitData={agitData} />
-      </div>
-    </div>
+    </AgitDetailLayout>
   );
 }
